@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Container API
+  description: An API for managing containers in OS1 platform
+servers:
+  - url: http://localhost:3000/v1
+paths:
+  /containers/{id}:
+    get:
+      summary: Retrieve a container by ID
+      operationId: getContainerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Container'
+        404:
+          description: Container not found
+components:
+  schemas:
+    Container:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the container
+        name:
+          type: string
+          description: The name of the container
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time that the container was created          
+  
