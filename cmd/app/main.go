@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
-	api "github.com/os1-logistics/container-reference-app/api/v1/server"
+	api "github.com/os1-logistics/container-reference-app/api/v1"
 )
 
 func main() {

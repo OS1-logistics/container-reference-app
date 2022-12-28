@@ -6,10 +6,23 @@ package api
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/deepmap/oapi-codegen/pkg/runtime"
 	"github.com/gin-gonic/gin"
 )
+
+// Container defines model for Container.
+type Container struct {
+	// CreatedAt The date and time that the container was created
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+
+	// Id The unique identifier for the container
+	Id *string `json:"id,omitempty"`
+
+	// Name The name of the container
+	Name *string `json:"name,omitempty"`
+}
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
