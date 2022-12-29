@@ -1,12 +1,14 @@
 .PHONY: openapi
 openapi-codegen:
-	oapi-codegen -generate types -o api/v1/types/openapi.types.gen.go -package api api/openapi-spec/v1/api__v1_openapi.yaml
-	oapi-codegen -generate gin -o api/v1/server/openapi.server.gen.go -package api api/openapi-spec/v1/api__v1_openapi.yaml	
-	
+	oapi-codegen -package api -generate gin,types -o api/v1/openapi.gen.go api/openapi-spec/api__v1_openapi.yaml
+	openapi-generator generate -g go -i internal/pkg/clients/openapi-spec/api__v2_containerapi.yaml -o internal/pkg/clients/container -p packageName=container_client -p enumClassPrefix=true --skip-validate-spec
+
 .PHONY: install
 install:
+	@brew install openapi-generator
 	@go install github.com/deepmap/oapi-codegen/cmd/oapi-codegen@latest
 	@go install github.com/swaggo/swag/cmd/swag@v1.7.8
+	@go get -d -v ./...
 
 .PHONY: swagger
 swagger:
@@ -15,4 +17,5 @@ swagger:
 .PHONY: build
 build:
 	@go mod tidy
+	@go get -d -v ./...
 	@go build -v ./...
