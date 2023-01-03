@@ -1,0 +1,5107 @@
+openapi: 3.0.3
+info:
+  title: Authentication And Authorization (AAA) Service
+  description: This swagger documentation provides all AAA API details. AAA service provides authentication and authorization capabilities for users.
+  license:
+    name: AAA
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: https://{tenantSubdomain}.fxtrt.io/core/api/
+    variables:
+      tenantSubdomain:
+        default: delhivery.dev
+        description: Subdomain assigned to the Tenant
+paths:
+  /v1/aaa/alias:
+    get:
+      tags:
+        - GET tenant id
+      operationId: getTenantIdAlias
+      summary: Get tenant Id mapped to current tenant hostname alias.
+      description:  "Get tenant Id mapped to current tenant hostname alias. e.g. Hostname is delhivery.dev.fxtrt.io, Then this API will return tenantId mapped to this hostname part i.e. delhivery"
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/AuthenticationToken"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessTenantIdResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/apps:
+    post:
+      tags:
+        - App Management
+      operationId: createApp
+      summary: Create an app.
+      description: Create an app. Secret is encrypted using aes-256-ctr algorithm.
+      requestBody:
+        $ref: "#/components/requestBodies/AppCreateRequest"
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessAppSecretCreateResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - App Management
+      operationId: getApps
+      summary: Get all app specific information.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessAppsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/apps/{appId}":
+    put:
+      tags:
+        - App Management
+      operationId: updateApp
+      summary: Update the app.
+      requestBody:
+        $ref: "#/components/requestBodies/AppUpdateRequest"
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/appIdPathParam"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessAppIdResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - App Management
+      operationId: getApp
+      summary: Get app specific information.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/appIdPathParam"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessAppResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/apps/{appId}/app-roles":
+    put:
+      tags:
+        - App Management
+      operationId: assignRoleToTheApp
+      summary: Assign specified roles to the apps..
+      description: Assign specified roles to apps types.In case of backend/internal apps, client credentials grant can be used to generate token for these roles. For web/mobile apps, token generated will intersection of user and app roles. 
+      requestBody:
+        $ref: "#/components/requestBodies/AppRoleUpdateRequest"
+      parameters:
+        - $ref: "#/components/parameters/appIdPathParam"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - App Management
+      operationId: getAllAppRoles
+      summary: Get all roles of the apps.
+      description: Get all roles of apps.  
+      parameters:
+        - $ref: "#/components/parameters/appIdPathParam"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessAppRolesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/apps/{appId}/rotate-secret":
+    post:
+      tags:
+        - App Management
+      operationId: rotateAppSecret
+      summary: Rotate the secret of the app. Applicable for backend and internal app. After rotating secret old secret becomes invalid, so apps/services need to be restarted with new secret that are using that old secret.Secret is encrypted using aes-256-ctr algorithm.
+      description: Rotate the secret of internal/backend apps types so that client credentials grant can be used to generate token for these roles using new client secret. After rotating secret old secret becomes invalid, so apps/services need to be restarted with new secret that are using that old secret.Secret is encrypted using aes-256-ctr algorithm.
+      # requestBody:
+      #   $ref: "#/components/requestBodies/RotateAppSecretRequest"
+      parameters:
+        - $ref: "#/components/parameters/appIdPathParam"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessAppSecretCreateResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  
+  "/v1/aaa/apps/{appId}/roles":
+    post:
+      tags:
+        - Role Management
+      operationId: createAppRole
+      summary: Create App Role
+      description: This endpoint creates an App Role. Role is a generic representation of a set of permissions or resources of a specific app or service.
+      requestBody:
+        $ref: "#/components/requestBodies/RoleCreateRequest"
+      parameters:
+        - $ref: "#/components/parameters/appIdPathParam"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - Role Management
+      operationId: getAllRoles
+      summary: Get all Roles
+      description: This endpoint retrieves details of all created Roles.
+      parameters:
+        - $ref: "#/components/parameters/appIdPathParam"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessRolesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  # "/v2/aaa/apps/{appId}/roles":
+  #   get:
+  #     tags:
+  #       - Role Management
+  #     operationId: getAllRolesES
+  #     summary: Get all roles.
+  #     parameters:
+  #       - $ref: "#/components/parameters/appIdPathParam"
+  #       - $ref: "#/components/parameters/RequestId"
+  #       - $ref: "#/components/parameters/AccessToken"
+  #       - $ref: "#/components/parameters/UserInfo"
+  #       - $ref: "#/components/parameters/TenantId"
+  #       - $ref: "#/components/parameters/PageSize"
+  #       - $ref: "#/components/parameters/PageOffset"
+  #       - $ref: "#/components/parameters/SortKey"
+  #       - $ref: "#/components/parameters/Query"
+  #       - $ref: "#/components/parameters/SelectFields"
+  #       - $ref: "#/components/parameters/OrderBy"
+  #     responses:
+  #       "200":
+  #         $ref: "#/components/responses/SuccessRolesResponseV2"
+  #       "400":
+  #         $ref: "#/components/responses/BadRequestErrorResponse"
+  #       "401":
+  #         $ref: "#/components/responses/UnauthorizedErrorResponse"
+  #       "403":
+  #         $ref: "#/components/responses/ForbiddenErrorResponse"
+  #       "404":
+  #         $ref: "#/components/responses/NotFoundErrorResponse"
+  #       "503":
+  #         $ref: "#/components/responses/ServiceUnavailableErrorResponse"   
+  "/v1/aaa/apps/{appId}/roles/{roleId}":
+    put:
+      tags:
+        - Role Management
+      operationId: updateGlobalRole
+      summary: Update a Role
+      description: This endpoint updates an existing Role.
+      requestBody:
+        $ref: "#/components/requestBodies/RoleUpdateRequest"
+      parameters:
+        - $ref: "#/components/parameters/appIdPathParam"
+        - $ref: "#/components/parameters/roleIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - Role Management
+      operationId: getRoleDetails
+      summary: Get specific role information.
+      parameters:
+        - $ref: "#/components/parameters/appIdPathParam"
+        - $ref: "#/components/parameters/roleIdPathReq"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessRoleResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/users:
+    post:
+      tags:
+        - User Management
+      operationId: createUser
+      summary: Create User
+      description: This endpoint creates a new User. In case a user with the email/mobileNumber already exists, it returns id of the user in additionalInfo section of error.
+      requestBody:
+        $ref: "#/components/requestBodies/UserCreateRequest"
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessUserCreateResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - User Management
+      operationId: getAllUsers
+      summary: Get all Users
+      description: This endpoint retrieves details of all the existing Users.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessUsersResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  # /v2/aaa/users:
+  #   get:
+  #     tags:
+  #       - User Management
+  #     operationId: getAllUsersES
+  #     summary: Get all users information of tenant.
+  #     parameters:
+  #       - $ref: "#/components/parameters/RequestId"
+  #       - $ref: "#/components/parameters/AccessToken"
+  #       - $ref: "#/components/parameters/UserInfo"
+  #       - $ref: "#/components/parameters/TenantId"
+  #       - $ref: "#/components/parameters/PageSize"
+  #       - $ref: "#/components/parameters/PageOffset"
+  #       - $ref: "#/components/parameters/SortKey"
+  #       - $ref: "#/components/parameters/Query"
+  #       - $ref: "#/components/parameters/SelectFields"
+  #       - $ref: "#/components/parameters/OrderBy"
+  #     responses:
+  #       "200":
+  #         $ref: "#/components/responses/SuccessUsersResponseV2"
+  #       "400":
+  #         $ref: "#/components/responses/BadRequestErrorResponse"
+  #       "401":
+  #         $ref: "#/components/responses/UnauthorizedErrorResponse"
+  #       "403":
+  #         $ref: "#/components/responses/ForbiddenErrorResponse"
+  #       "404":
+  #         $ref: "#/components/responses/NotFoundErrorResponse"
+  #       "503":
+  #         $ref: "#/components/responses/ServiceUnavailableErrorResponse"    
+  "/v1/aaa/users/{userId}":
+    put:
+      tags:
+        - User Management
+      operationId: updateUser
+      summary: Update User
+      description: This endpoint updates a User.
+      parameters:
+        - $ref: "#/components/parameters/userIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/UserUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - User Management
+      operationId: getUser
+      summary: Get User
+      description: This endpoint retrieves User information by User ID.
+      parameters:
+        - $ref: "#/components/parameters/userIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessUserResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/users/{userId}/roles":
+    #Disabled below call as we have deprecated this feature. Roles can be assigned by using groups only.
+    # put:
+    #   tags:
+    #     - User Management
+    #   operationId: updateUserRoles
+    #   summary: Assign/ remove roles to an user with given userId.
+    #   parameters:
+    #     - $ref: "#/components/parameters/userIdPathReq"
+    #     - $ref: "#/components/parameters/RequestId"
+    #     - $ref: "#/components/parameters/AccessToken"
+    #     - $ref: "#/components/parameters/TenantId"
+    #     - $ref: "#/components/parameters/UserInfo"
+    #   requestBody:
+    #     $ref: "#/components/requestBodies/RoleMappingRequest"
+    #   responses:
+    #     "200":
+    #       $ref: "#/components/responses/SuccessResponse"
+    #     "400":
+    #       $ref: "#/components/responses/ErrorResponse"
+    #     "401":
+    #       $ref: "#/components/responses/ErrorResponse"
+    #     "404":
+    #       $ref: "#/components/responses/ErrorResponse"
+    #     "503":
+    #       $ref: "#/components/responses/ErrorResponse"
+    get:
+      tags:
+        - User Management
+      operationId: getUserRoles
+      summary: Get User Roles
+      description: This endpoint retrieves Roles of a user by User ID.
+      parameters:
+        - $ref: "#/components/parameters/userIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessUserRoleMappingResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/users/{userId}/apps":
+    get:
+      tags:
+        - User Management
+      operationId: getUsersAssignedApps
+      summary: Get Apps assigned to User
+      description: This endpoint retrieves Apps assigned to a User by User ID.
+      parameters:
+        - $ref: "#/components/parameters/userIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessUserAppMappingResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/users/{userId}/deactivate":
+    post:
+      tags:
+        - User Management
+      operationId: deactivateUser
+      summary: Block a User
+      description: This endpoint is used to block or deactivate a User from a Tenant.
+      parameters:
+        - $ref: "#/components/parameters/userIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/users/activate:
+    post:
+      tags:
+        - User Management
+      operationId: activateUser
+      summary: Unblock a blocked User
+      description: This endpoint is used to unblock a blocked User from a Tenant. Email or primary mobile number needs to be provided for unblocking the User.
+      requestBody:
+        $ref: "#/components/requestBodies/UserEnableRequest"
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  # "/v1/aaa/users/{userId}/change-log":
+  #     get:
+  #       tags:
+  #       - Change Log
+  #       summary: Get the user change log
+  #       description: >
+  #           This api is used to fetch the change-log for user
+  #           | `from`(*query*) | Start time of the change log in UNIX epoch format. | integer($int64) | Required | |
+  #           | `Time duration`(*query*) | The number of days for which change log is to be returned. | integer | Optional | **Default value**: 1 |
+  #           | `limit`(*query*) | The number of items to return. | integer | Optional | **Default value**: 50 |
+  #           | `offset`(*query*) | The number of items to skip from the start. | integer | Optional | **Default value**: 0 |
+  #       operationId: getUserChangeLog
+  #       parameters:
+  #         - $ref: "#/components/parameters/RequestId"
+  #         - $ref: "#/components/parameters/TenantId"
+  #         - $ref: "#/components/parameters/AccessToken"
+  #         - $ref: "#/components/parameters/UserInfo"
+  #         - $ref: "#/components/parameters/userIdPathReq"
+  #         - $ref: "#/components/parameters/StartDateTime"
+  #         - $ref: "#/components/parameters/Duration"
+  #         - $ref: "#/components/parameters/PageSize"
+  #         - $ref: "#/components/parameters/PageOffset"
+  #       responses:
+  #         "200":
+  #           $ref: "#/components/responses/UserChangeLogResponse"
+  #         "400":
+  #           $ref: "#/components/responses/BadRequestErrorResponse"
+  #         "401":
+  #           $ref: "#/components/responses/UnauthorizedErrorResponse"
+  #         "403":
+  #           $ref: "#/components/responses/ForbiddenErrorResponse"
+  #         "404":
+  #           $ref: "#/components/responses/NotFoundErrorResponse"
+  #         "503":
+  #           $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  # "/v1/aaa/groups/{groupId}/change-log":
+  #     get:
+  #       tags:
+  #       - Change Log
+  #       summary: Get the group change log
+  #       description: >
+  #           This api is used to fetch the change-log for group
+  #           | `from`(*query*) | Start time of the change log in UNIX epoch format. | integer($int64) | Required | |
+  #           | `Time duration`(*query*) | The number of days for which change log is to be returned. | integer | Optional | **Default value**: 1 |
+  #           | `limit`(*query*) | The number of items to return. | integer | Optional | **Default value**: 50 |
+  #           | `offset`(*query*) | The number of items to skip from the start. | integer | Optional | **Default value**: 0 |
+  #       operationId: getGroupChangeLog
+  #       parameters:
+  #         - $ref: "#/components/parameters/RequestId"
+  #         - $ref: "#/components/parameters/TenantId"
+  #         - $ref: "#/components/parameters/AccessToken"
+  #         - $ref: "#/components/parameters/UserInfo"
+  #         - $ref: "#/components/parameters/groupIdPathReq"
+  #         - $ref: "#/components/parameters/StartDateTime"
+  #         - $ref: "#/components/parameters/Duration"
+  #         - $ref: "#/components/parameters/PageSize"
+  #         - $ref: "#/components/parameters/PageOffset"
+  #       responses:
+  #         "200":
+  #           $ref: "#/components/responses/GroupChangeLogResponse"
+  #         "400":
+  #           $ref: "#/components/responses/BadRequestErrorResponse"
+  #         "401":
+  #           $ref: "#/components/responses/UnauthorizedErrorResponse"
+  #         "403":
+  #           $ref: "#/components/responses/ForbiddenErrorResponse"
+  #         "404":
+  #           $ref: "#/components/responses/NotFoundErrorResponse"
+  #         "503":
+  #           $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+          
+  /v1/aaa/users/self:
+    get:
+      tags:
+        - User Management
+      operationId: getUserInfo
+      summary: Get the user info from access token
+      description: Get the user info from the access token specified.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessUserInfoResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/auth/request-otp:
+    post:
+      tags:
+        - Authentication
+      operationId: otpSendRequest
+      summary: Otp generate request to Grant Token using otp mode of authentication
+      description: Use this endpoint to directly request otp so that user can use it to authenticate successfully using verify-otp endpoint.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/TenantId"
+      requestBody:
+        $ref: "#/components/requestBodies/MobileAuthReqOtpRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessAuthenticationLoginResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/auth/verify-otp:
+    post:
+      tags:
+        - Authentication
+      operationId: otpVerification
+      summary: Otp verification to get the userId associated with that api.
+      description: Use this endpoint to directly to verify to otp and get userId in case of successful authentication 
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/TenantId"
+      requestBody:
+        $ref: "#/components/requestBodies/AuthReqOtpRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessVerifyOtpResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/auth/client-credentials:
+    post:
+      tags:
+        - Authentication
+      operationId: authClientCredentials
+      summary: Client credentials grant token
+      description: This endpoint request an Access Token by using the Client's credentials (Client ID and Client Secret). This is the OAuth 2.0 grant that server processes use to access an API.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/TenantIdOptional"
+      requestBody:
+        $ref: "#/components/requestBodies/ClientCredentialsRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessAuthorizationResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/apps/{appId}/resources":
+    post:
+      tags:
+        - Resource Management
+      operationId: createResource
+      summary: Create a resource
+      description: API is used to create a resource for an app. Based on resource we
+        can grant access to APIs
+      parameters:
+        - $ref: "#/components/parameters/appIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      requestBody:
+        $ref: "#/components/requestBodies/ResourceCreateRequest"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - Resource Management
+      operationId: getAllResources
+      summary: Get all resource's information
+      description: API is used to fetch information about all resources
+      parameters:
+        - $ref: "#/components/parameters/appIdPathReq"
+        # - $ref: "#/components/parameters/PageSize"
+        # - $ref: "#/components/parameters/PageOffset"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResourcesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/apps/{appId}/resources/{resourceId}":
+    put:
+      tags:
+        - Resource Management
+      operationId: UpdateResource
+      summary: Update resource information
+      description: API is used to update a resource
+      parameters:
+        - $ref: "#/components/parameters/appIdPathReq"
+        - $ref: "#/components/parameters/resourceIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      requestBody:
+        $ref: "#/components/requestBodies/ResourceUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - Resource Management
+      operationId: getResourceById
+      summary: Get resource information
+      description: API is used to fetch information about a resource
+      parameters:
+        - $ref: "#/components/parameters/appIdPathReq"
+        - $ref: "#/components/parameters/resourceIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResourceResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/apps/{appId}/permissions":
+    post:
+      tags:
+        - Permission Management
+      operationId: createPermission
+      summary: Create a permission
+      description: API is used to create a permission
+      parameters:
+        - $ref: "#/components/parameters/appIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/PermissionCreateRequest"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - Permission Management
+      operationId: getPermissions
+      summary: Get permission's information
+      description: API is used to fetch information about all permissions
+      parameters:
+        - $ref: "#/components/parameters/appIdPathReq"
+        # - $ref: "#/components/parameters/PageSize"
+        # - $ref: "#/components/parameters/PageOffset"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessPermissionsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/apps/{appId}/permissions/{permissionId}":
+    put:
+      tags:
+        - Permission Management
+      operationId: UpdatePermission
+      summary: Update permission information
+      description: API is used to update a permission
+      parameters:
+        - $ref: "#/components/parameters/appIdPathReq"
+        - $ref: "#/components/parameters/permissionIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/PermissionUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - Permission Management
+      operationId: getPermissionById
+      summary: Get permission information
+      description: API is used to fetch information about a permission
+      parameters:
+        - $ref: "#/components/parameters/appIdPathReq"
+        - $ref: "#/components/parameters/permissionIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessPermissionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/connection:
+    get:
+      tags:
+        - Connection Management
+      operationId: getAllConnections
+      summary: Get all Connections
+      description: This endpoint retrieves all Connections for a Tenant.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessConnectionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/connection/social:
+    post:
+      tags:
+        - Connection Management
+      operationId: createSocialConnection
+      summary: Create a Social Connection 
+      description: This endpoint creates a Social Connection
+      parameters:
+        - $ref: "#/components/parameters/connectionTypePathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/ConnectionCreateRequest"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/connection/social/{connectionId}":
+    get:
+      tags:
+        - Connection Management
+      operationId: get social connection
+      summary: Get Social Connection
+      description: This endpoint retrieves a Social Connection.
+      parameters:
+        - $ref: "#/components/parameters/connectionIdPathReq"
+        - $ref: "#/components/parameters/connectionTypePathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessConnectionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    put:
+      tags:
+        - Connection Management
+      operationId: update social connection
+      summary: Update Social Connection
+      description: This endpoint updates a Social Connection
+      parameters:
+        - $ref: "#/components/parameters/connectionIdPathReq"
+        - $ref: "#/components/parameters/connectionTypePathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/ConnectionUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/connection/saml:
+    post:
+      tags:
+        - Connection Management
+      operationId: createSamlConnection
+      summary: Create SAML Connection
+      description: This endpoint creates a SAML Connection.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/ConnectionSamlCreateRequest"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/connection/saml/{connectionId}":
+    get:
+      tags:
+        - Connection Management
+      operationId: get Saml Connection
+      summary: Get SAML Connection
+      description: This endpoint retrieves a SAML Connection.
+      parameters:
+        - $ref: "#/components/parameters/connectionIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessSamlConnectionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    put:
+      tags:
+        - Connection Management
+      operationId: update Saml Connection
+      summary: Update SAML Connection
+      description: This endpoint updates a SAML Connection.
+      parameters:
+        - $ref: "#/components/parameters/connectionIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/ConnectionSamlUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/connection/oidc/:
+    post:
+      tags:
+        - Connection Management
+      operationId: create OIDC connection
+      summary: Create OIDC client
+      description: This endpoint creates a new OIDC provider configuration.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/OIDCPostRequest"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/connection/oidc/{connectionId}:
+    put:
+      tags:
+        - Connection Management
+      operationId: putOIDCclient
+      summary: Update OIDC client
+      description: This API updates an OIDC provider configuration.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/connectionIdPathReq"
+      requestBody:
+        $ref: "#/components/requestBodies/OIDCUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - Connection Management
+      operationId: get OIDC connection
+      summary: Get OIDC connection
+      description: This endpoint retrieves OIDC connection details.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/connectionIdPathReq"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessOIDCResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/groups:
+    post:
+      tags:
+        - Group Management
+      operationId: createGroup
+      summary: Create Group
+      description: This endpoint creates a Group of Users and Roles.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/GroupCreateRequest"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - Group Management
+      operationId: getGroup
+      summary: Get all Group
+      description: This API retrieves the details of all Groups of Users and Roles.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessGroupsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  # /v2/aaa/groups:    
+  #   get:
+  #     tags:
+  #       - Group Management
+  #     operationId: getGroupES
+  #     summary: Get the details of a group of users and roles
+  #     description: API is used to get the details of a group of users and roles
+  #     parameters:
+  #       - $ref: "#/components/parameters/RequestId"
+  #       - $ref: "#/components/parameters/AccessToken"
+  #       - $ref: "#/components/parameters/UserInfo"
+  #       - $ref: "#/components/parameters/TenantId"
+  #       - $ref: "#/components/parameters/PageSize"
+  #       - $ref: "#/components/parameters/PageOffset"
+  #       - $ref: "#/components/parameters/SelectFields"
+  #       - $ref: "#/components/parameters/SortKey"
+  #       - $ref: "#/components/parameters/Query"
+  #       - $ref: "#/components/parameters/OrderBy"
+  #     responses:
+  #       "200":
+  #         $ref: "#/components/responses/SuccessGroupsResponseV2"
+  #       "400":
+  #         $ref: "#/components/responses/BadRequestErrorResponse"
+  #       "401":
+  #         $ref: "#/components/responses/UnauthorizedErrorResponse"
+  #       "403":
+  #         $ref: "#/components/responses/ForbiddenErrorResponse"
+  #       "404":
+  #         $ref: "#/components/responses/NotFoundErrorResponse"
+  #       "503":
+  #         $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/groups/{groupId}":
+    put:
+      tags:
+        - Group Management
+      operationId: updateGroup
+      summary: Update Group
+      description: This endpoint updates a Group of Users and Roles.
+      parameters:
+        - $ref: "#/components/parameters/groupIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/GroupUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - Group Management
+      operationId: getAllGroups
+      summary: Get Groups
+      description: This endpoint retrieves details of a Group of a Tenant by groupId.
+      parameters:
+        - $ref: "#/components/parameters/groupIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessGroupResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/groups/{groupId}/users":
+    put:
+      tags:
+        - Group Management
+      operationId: updateGroupUsersMapping
+      summary: Update roles mapping for a Group
+      description: 'This endpoint updates the User mapping for a Group membership. Default value: true. membership=true => Add specified Users to the Group; membership=false => remove specified Users from Group.'
+      parameters:
+        - $ref: "#/components/parameters/groupIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/GroupUsersMappingUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/groups/{groupId}/roles":
+    put:
+      tags:
+        - Group Management
+      operationId: updateGroupRolesMapping
+      summary: Update Roles mapping for a Group
+      description: 'This endpoint updates the Roles mapping for a Group membership. Default value: true. membership=true => Add specified Roles to the Group; membership=false => remove specified Roles from Group.'
+      parameters:
+        - $ref: "#/components/parameters/groupIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/GroupRolesMappingUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/tenants:
+    post:
+      tags:
+        - Tenant Management
+      operationId: createTenant
+      summary: Create a new tenant
+      description: API is used to create a tenant
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/TenantCreateRequest"
+      responses:
+        "201":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/tenants/{tenantId}":
+    put:
+      tags:
+        - Tenant Management
+      operationId: updateTenant
+      summary: Update a created tenant
+      description: API is used to create a tenant
+      parameters:
+        - $ref: "#/components/parameters/tenantIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      requestBody:
+        $ref: "#/components/requestBodies/TenantUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+    get:
+      tags:
+        - Tenant Management
+      operationId: getTenant
+      summary: Get tenant details
+      description: API is used to get a tenant's details
+      parameters:
+        - $ref: "#/components/parameters/tenantIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+      responses:
+        "200":
+          $ref: "#/components/responses/TenantResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/apps/upload:
+    post:
+      tags:
+        - App Management
+      operationId: automateCreation
+      summary: Automate creating resource,permission,roles
+      description: API is used to upload yaml to create resource,permission,roles and
+        assign roles. Only appId and rolesRequired section can be added to yaml if the app doesn't expose any protected endpoints, but requires access to other apps for its working.
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+      requestBody:
+        $ref: "#/components/requestBodies/FileUploadRequest"
+      responses:
+        "202":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/apps/upload/{statusId}":
+    get:
+      tags:
+        - App Management
+      operationId: getUploadStatus
+      summary: Get status of yaml upload
+      description: API is used to get current status of uploaded yaml
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/statusId"
+        - $ref: "#/components/parameters/TenantId"
+      responses:
+        "200":
+          $ref: "#/components/responses/FileStatusResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/sms/send:
+    post:
+      tags:
+        - SMS Gateway
+      operationId: sendOTP
+      summary: SMS gateway for sending OTP to the recipient mobile number. Tenant name for sms gateway will be picked from hostname.
+      description: API is used to send the OTP to the recipient mobile number. 
+      parameters:
+        - $ref: "#/components/parameters/AuthorizationHeader"
+      requestBody:
+        $ref: "#/components/requestBodies/SMSSendRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessStatusResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/admin/apps:
+    post:
+      tags:
+        - Admin Management
+      operationId: createAppM
+      summary: Create an app.
+      description: Create an app. If response doesn't return secretId (There was some issue in storing secret in SDS), then use '/rotate-secret' API to rotate secret and get the secretId.
+      requestBody:
+        $ref: "#/components/requestBodies/AppCreateRequest"
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/HmacAccessToken"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessAppSecretCreateResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /v1/aaa/admin/apps/upload:
+    post:
+      tags:
+        - Admin Management
+      operationId: automateCreationAdmin
+      summary: Automate creating resource,permission,roles
+      description: API is used to upload yaml to create resource,permission,roles and
+        assign roles
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/HmacAccessToken"
+      requestBody:
+        $ref: "#/components/requestBodies/FileUploadRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/admin/apps/{appId}":
+    put:
+      tags:
+        - Admin Management
+      operationId: updateAppAdmin
+      summary: Update the app.
+      requestBody:
+        $ref: "#/components/requestBodies/AppUpdateRequest"
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/appIdPathParam"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/HmacAccessToken"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessAppIdResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  "/v1/aaa/admin/users/{userId}/apps":
+    get:
+      tags:
+        - Admin Management
+      operationId: getUsersAssignedAppsAdmin
+      summary: Get apps assigned to user with given userId.
+      parameters:
+        - $ref: "#/components/parameters/userIdPathReq"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/UserInfo"
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/HmacAccessToken"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessUserAppMappingResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+components:
+  schemas:
+    EpochTimestamp:
+      description: Represents a date time as number of seconds elapsed since 00:00Hrs
+        of 1st January 1970 UTC.
+      type: integer
+      format: int64
+    Query:
+      type: object
+      properties:
+        match:
+          type: array
+          items:
+            type: object
+        multi_match:
+          type: array
+          items:
+            type: object
+        term:
+          type: array
+          items:
+            type: object
+        terms:
+          type: array
+          items:
+            type: object
+        range:
+          type: array
+          items:
+            type: object
+        regexp:
+          type: array
+          items:
+            type: object
+        exists:
+          type: array
+          items:
+            type: object
+        match_phrase:
+          type: array
+          items:
+            type: object
+        match_phrase_prefix:
+          type: array
+          items:
+            type: object
+        prefix:
+          type: array
+          items:
+            type: object
+        fuzzy:
+          type: array
+          items:
+            type: object
+    OrderBy:
+      description: ordering of data
+      type: string
+      default: desc
+      enum:
+        - desc
+        - asc
+    AppCore:
+      type: object
+      properties:
+        description:
+          description: Description of the application.
+          type: string
+          nullable: true
+          minLength: 0
+          maxLength: 50
+          pattern: ^([a-zA-Z])([a-zA-Z0-9,\s]*)$
+        isPrivateApp:
+          type: boolean
+          description: Set if app is private and can be allocated only to the Tenant specified in the field `privateTenantId`.
+          default: false
+        privateTenantId:
+          type: string
+          description: Will be ignored if `isPrivate` is false.
+          nullable: false
+        isActive:
+          type: boolean
+          description: When `isActive` = False OR `isDeleted` = False, the role will be ignored for granting permissions.
+        redirectUri:
+          type: array
+          minItems: 1
+          description: Array of allowed redirect URIs.
+          items:
+            type: string
+            description: Redirect URIs allowed.
+            example: http://localhost:8000/
+    App:
+      allOf:
+        - $ref: "#/components/schemas/AppCore"
+        - type: object
+          properties:
+            appId:
+              description: Unique ID of the App. Format of ID is platform:app:<appName>
+            appType:
+              description: Type of app.
+              type: string
+              enum:
+                - backend
+                - mobile
+                - web
+                - internal
+            appName:
+              type: string
+              description: Name of the app. Starts with alphabet and may contain hypen.
+              maxLength: 50
+              pattern: ^[a-zA-Z]+(-[a-zA-Z]+)*$
+            clientId:
+              type: string
+              description: '`clientId` of the app.'
+              nullable: false
+            secretId:
+              type: string
+              description: SDS ID where client secret is stored. Secrets are applicable for backend and internal apps only.
+              nullable: true
+          required:
+            - appName
+            - appType
+            - isPrivateApp
+            - isActive
+            - appId
+    TenantIdInfo:
+      type: object
+      additionalProperties: false
+      properties:
+        tenantId:
+          description: Tenant ID pertaining to the provided alias.
+          type: string
+        orgId:
+          description: Denotes the auth0 organization this platform Tenant belongs to.
+          type: string
+    AppInfo:
+      allOf:
+        - $ref: "#/components/schemas/App"
+        - type: object
+          properties:
+            isDeleted:
+              type: boolean
+              default: false
+    AppMutableData:
+      allOf:
+        - $ref: "#/components/schemas/AppCore"
+        - type: object
+          properties:
+            isDeleted:
+              type: boolean
+    OIDCPostRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        connectionName:
+          description: Alias of the OIDC provider.
+          type: string
+          minLength: 2
+          maxLength: 50
+          pattern: ^[a-zA-Z]+(-[a-zA-Z]+)*$
+        displayName:
+          description: Display name of the OIDC provider.
+          type: string
+          minLength: 2
+          maxLength: 50
+          pattern: ^[a-zA-Z ]*$
+        enabled:
+          description: The provider is enabled.
+          type: boolean
+        guiOrder:
+          description: Order of the provider in GUI.
+          type: number
+        userInfoUrl:
+          description: User info URL.
+          type: string
+          pattern: https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+        logoutUrl:
+          description: Log out URL.
+          type: string
+          pattern: https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+        authorizationUrl:
+          description: Authorization URL.
+          type: string
+          pattern: https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+        tokenUrl:
+          description: Token URL.
+          type: string
+          pattern: https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+        clientId:
+          description: Client identifier registered with identity provider.
+          type: string
+          minLength: 1
+        clientSecret:
+          description: Client secret.
+          type: string
+          minLength: 1
+        issuer:
+          description: Issuer of response.
+          type: string
+          minLength: 1
+        jwksUrl:
+          description: JWKS URL.
+          type: string
+          pattern: https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+      required:
+        - connectionName
+        - authorizationUrl
+        - tokenUrl
+        - clientId
+        - clientSecret
+    OIDCUpdateRequest:
+      type: object
+      additionalProperties: false
+      minProperties: 1
+      properties:
+        displayName:
+          description: Display name of the OIDC provider.
+          type: string
+          minLength: 2
+          maxLength: 50
+          pattern: ^[a-zA-Z ]*$
+        enabled:
+          description: When on the provider is enabled.
+          type: boolean
+        guiOrder:
+          description: Order of the provider in GUI.
+          type: number
+        userInfoUrl:
+          description: User info URL.
+          type: string
+          pattern: https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+        logoutUrl:
+          description: Log out URL.
+          type: string
+          pattern: https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+        authorizationUrl:
+          description: Authorization URL.
+          type: string
+          pattern: https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+        tokenUrl:
+          description: Token URL.
+          type: string
+          pattern: https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+        clientId:
+          description: Client identifier registered with identity provider.
+          type: string
+          minLength: 1
+        clientSecret:
+          description: Client secret.
+          type: string
+          minLength: 1
+        issuer:
+          description: Issuer of response.
+          type: string
+          minLength: 1
+        jwksUrl:
+          description: JWKS URL.
+          type: string
+          pattern: https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+    AppCreateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        appType:
+          description: Type of app.
+          type: string
+          enum:
+            - backend
+            - mobile
+            - web
+            - internal
+        appName:
+          type: string
+          description: Name of the app. Starts with alphabet. Only alphabets & hyphens allowed in the name.
+          maxLength: 50
+          pattern: ^[a-zA-Z]+(-[a-zA-Z]+)*$
+        description:
+          description: Description of the app.
+          type: string
+          minLength: 0
+          maxLength: 50
+          pattern: ^([a-zA-Z])([a-zA-Z0-9,\s-]*)$
+        isPrivateApp:
+          type: boolean
+          description: Set if app is private and can be allocated only to the Tenant specified in the field `privateTenantId`.
+        privateTenantId:
+          type: string
+          description: Will be ignored if `isPrivate` is false.
+          nullable: false
+          pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+        redirectUri:
+          type: array
+          minItems: 1
+          description: Array of redirect URIs allowed.
+          items:
+            type: string
+            description: Redirect URI allowed.
+            example: http://localhost:8000/
+        clientId:
+          type: string
+          description: '`clientId` of the app.'
+          nullable: false
+        clientSecret:
+          type: object
+          description: clientSecret of the app
+          nullable: false
+          properties:
+            iv:
+              type: string
+            encryptedText:
+              type: string
+      required:
+        - appName
+        - appType
+    AppUpdateRequest:
+      type: object
+      additionalProperties: false
+      minProperties: 1
+      properties:
+        description:
+          description: Description of the app.
+          type: string
+          nullable: true
+          maxLength: 50
+          pattern: ^([a-zA-Z])([a-zA-Z0-9,\s-]*)$
+        isActive:
+          type: boolean
+          description: When `isActive` = False, the app will be ignored for update.
+        isDeleted:
+          type: boolean
+          description: If app is not mapped to any other tenant, deleted the app.
+        redirectUri:
+          type: array
+          minItems: 1
+          description: Array of redirect URIs allowed.
+          items:
+            type: string
+            description: Redirect URI allowed.
+            example: http://localhost:8000/
+        clientId:
+          type: string
+          description: Client ID of the app.
+          nullable: false
+        clientSecret:
+          type: object
+          description: '`clientSecret` of the app.'
+          nullable: false
+          properties:
+            iv:
+              type: string
+            encryptedText:
+              type: string
+    Error:
+      description: Information of error occurred during operation.
+      type: object
+      properties:
+        code:
+          type: string
+          description: 12 digits long code that is assigned to each error. It contains service code, method code, and error code.
+        description:
+          type: string
+          description: Error description that provides summary of error.
+          minLength: 0
+          maxLength: 256
+        additionalInfo:
+          type: object
+          description: Additional information related to the error.
+    Request:
+      type: object
+      properties:
+        uri:
+          description: The API endpoint where the request was received.
+          type: string
+        method:
+          description: HTTP method requested on the API endpoint.
+          type: string
+          enum:
+            - POST
+            - GET
+            - PUT
+        queryString:
+          description: Query string received by the server.
+          type: string
+        body:
+          description: Request body data received by the server.
+          type: object
+    RoleBase:
+      type: object
+      properties:
+        roleId:
+          type: string
+          description: Unique ID assigned to each role at the time of creation.
+        roleName:
+          description: Name of  the role
+          type: string
+        description:
+          description: Description of the role (for example, role created for admin users).
+          type: string
+          nullable: false
+          minLength: 2
+          maxLength: 36
+          pattern: ^([a-zA-Z])([a-zA-Z0-9,\s]*)$
+        permissions:
+          type: array
+          description: Permissions attached with the role.
+          nullable: true
+          items:
+            type: string
+            description: Permission names
+        isActive:
+          type: boolean
+          description: When `isActive` = False OR `isDeleted` = False, the role will be ignored for granting permissions.
+        isDeleted:
+          type: boolean
+          description: Whether the role is deleted or not. When `isActive` = False OR `isDeleted` = False, the role will be ignored for granting permissions.
+        canGrantToUsers:
+          type: boolean
+          description: Boolean value indicates if this Role can be granted to user groups.
+        securityLevel:
+          type: string
+          description: Security level of the the role. Default is OPEN. Used to restrict the access level for the role.
+    AppRoleUpdateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        assign:
+          type: boolean
+          description: Boolean field to identify whether to assign or remove role. The
+            same action(assign or remove) will be applicable on all the roles.
+        roles:
+          description: List of roles to be added/removed from group.
+          type: array
+          example:
+            - Platform:Role:FaaS:FaaSAdmin
+            - Platform:Role:HQ:User
+          items:
+            type: string
+            nullable: false
+            description: Role Id
+            pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+          minItems: 1
+      required:
+        - roles
+        - assign
+    RotateAppSecretRequest:
+      type: object
+      additionalProperties: false
+    RoleCreateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        roleName:
+          type: string
+          description: Name of the role (each role should be assigned with a name).
+          maxLength: 50
+          pattern: ^[a-zA-Z]+(-[a-zA-Z]+)*$
+        description:
+          description: Description of the role, for example, role created for admin users.
+          type: string
+          nullable: false
+          minLength: 2
+          maxLength: 50
+          pattern: ^([a-zA-Z])([a-zA-Z0-9,\s-]*)$
+        securityLevel:
+          description: Security level of the the role. Default is OPEN. Used to restrict the access level for the role.
+          type: string
+          enum:
+            - SENSITIVE
+            - RESTRICTED
+            - OPEN
+        permissions:
+          type: array
+          description: Permissions attached with the role.
+          nullable: true
+          items:
+            type: string
+            description: Permission IDs.
+            pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+        canGrantToApps:
+          type: boolean
+          description: Boolean value indicates if the role can be granted to other apps/services.
+          default: false
+        canGrantToUsers:
+          type: boolean
+          description: Boolean value indicates if the Role can be granted to user groups.
+          default: true
+      required:
+        - roleName
+        - description
+    RoleUpdateRequest:
+      type: object
+      additionalProperties: false
+      minProperties: 1
+      properties:
+        description:
+          description: Description of the role (for example, role created for admin users).
+          type: string
+          nullable: false
+          minLength: 2
+          maxLength: 50
+          pattern: ^([a-zA-Z])([a-zA-Z0-9,\s-]*)$
+        assignPermissions:
+          type: boolean
+          description: When `assignPermissions` =true, permissions will be added to the role. When `assignPermissions`= false, provided permissions will be removed from role.
+        permissions:
+          type: array
+          description: Permissions attached with this role. It contains array of permission IDs.
+          nullable: true
+          items:
+            type: string
+            description: Permission IDs.
+            pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+        isActive:
+          type: boolean
+          description: When `isActive` = False, the role will be ignored for granting permissions.
+        isDeleted:
+          type: boolean
+          description: When `isDeleted` = true, the role will be deleted and can't be accessed.
+        canGrantToApps:
+          type: boolean
+          description: Boolean value indicates if the role can be granted to other apps or services.
+        canGrantToUsers:
+          type: boolean
+          description: Boolean value indicates if this Role can be granted to user groups.
+        securityLevel:
+          description: Security level of the the role. Default is OPEN. Used to restrict the access level for the role.
+          type: string
+          enum:
+            - SENSITIVE
+            - RESTRICTED
+            - OPEN
+    RoleMapping:
+      type: object
+      description: Role-mapping is used for the assignment of roles to a user.
+      properties:
+        id:
+          type: string
+          description: ID of the role.
+          nullable: false
+          minLength: 2
+          pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+      required:
+        - id
+    RoleMappingRequest:
+      type: object
+      properties:
+        assign:
+          type: boolean
+          description: Boolean field to identify whether to assign or remove role. The same action (assign or remove) will be applicable on all the roles.
+        roles:
+          description: List of roles to be added or removed from group.
+          type: array
+          items:
+            $ref: "#/components/schemas/RoleMapping"
+          minItems: 1
+      required:
+        - roles
+        - assign
+    UserRoleMappingResponse:
+      type: object
+      properties:
+        tenantId:
+          type: string
+          description: Tenant ID of the user.
+        roles:
+          type: array
+          items:
+            $ref: "#/components/schemas/RoleMapping"
+    UserAppMappingResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: ID of the user.
+          pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+        apps:
+          type: array
+          items:
+            type: string
+            description: App ID assigned to user.
+    AppRolesResponse:
+      type: object
+      properties:
+        appId:
+          type: string
+          description: App ID of the M2M app.
+          pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+        roles:
+          description: List of roles assigned to the app.
+          type: array
+          items:
+            type: string
+            description: Role IDs.
+            example: Platform:Role:FaaS:FaaSAdmin
+            pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+    SuccessAppRolesResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/AppRolesResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessUserRoleMappingResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/UserRoleMappingResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessUserAppMappingResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/UserAppMappingResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    UserCreateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        userId:
+          type: string
+          format: uuid
+          description: '`userId` in UUID format.'
+        email:
+          $ref: "#/components/schemas/Email"
+        primaryMobile:
+          $ref: "#/components/schemas/MobileNumber"
+        firstName:
+          type: string
+          description: First name of the user.
+          nullable: false
+          minLength: 1
+          maxLength: 36
+        middleName:
+          type: string
+          description: Middle name of the user.
+          nullable: true
+          minLength: 1
+          maxLength: 36
+        lastName:
+          type: string
+          description: Last name of the user.
+          nullable: false
+          minLength: 1
+          maxLength: 36
+        secondaryMobile:
+          $ref: "#/components/schemas/MobileNumber"
+        participantId:
+          type: string
+          description: ID of the participant.
+          nullable: true
+          minLength: 2
+          maxLength: 255
+        allowSocialAuth:
+          $ref: "#/components/schemas/SocialAuth"
+        allowSAMLAuth:
+          type: boolean
+          description: A boolean value that specifies whether SAML 2.0 Login is allowed.
+          nullable: true
+        samlConnector:
+          type: string
+          nullable: true
+        samlUserId:
+          type: string
+          nullable: true
+      example:
+        firstName: string
+        middleName: string
+        lastName: string
+        email: user@example.com
+        primaryMobile:
+          countryCode: '+91'
+          number: '1234567890'
+        secondaryMobile:
+          countryCode: '+91'
+          number: '1234567889'
+        participantId: string
+        allowSocialAuth:
+          google: true
+        allowSAMLAuth: true
+        samlConnector: string
+        samlUserId: string
+      anyOf:
+        - required:
+            - email
+#            - firstName
+        - required:
+            - primaryMobile
+#            - firstName
+#Documentation: Comment below required and uncomment above firstName fields, so that they are displayed properly as groups on documentation portal
+      required:
+         - firstName
+    UserUpdateRequest:
+      type: object
+      additionalProperties: false
+      minProperties: 1
+      properties:
+        firstName:
+          type: string
+          description: First Name of the user.
+          nullable: false
+          minLength: 1
+          maxLength: 36
+        middleName:
+          type: string
+          description: Middle name of the user.
+          nullable: true
+          minLength: 1
+          maxLength: 36
+        lastName:
+          type: string
+          description: Last name of the user.
+          nullable: true
+          minLength: 1
+          maxLength: 36
+        participantId:
+          type: string
+          description: The Participant Identifier of the user as generated by the Participant Service.
+          nullable: true
+          minLength: 2
+          maxLength: 255
+        secondaryMobile:
+          $ref: "#/components/schemas/MobileNumber"
+        primaryMobile:
+          $ref: "#/components/schemas/MobileNumber"
+        email:
+          $ref: "#/components/schemas/Email"
+        allowSocialAuth:
+          $ref: "#/components/schemas/SocialAuth"
+        allowSAMLAuth:
+          type: boolean
+          description: A Boolean value that specifies whether SAML Login is allowed.
+          nullable: true
+        samlConnector:
+          type: string
+          nullable: true
+        samlUserId:
+          type: string
+          nullable: true
+    UserEnableRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        email:
+          $ref: "#/components/schemas/Email"
+        mobile:
+          $ref: "#/components/schemas/MobileNumber"
+      oneOf:
+        - required:
+            - email
+        - required:
+            - mobile
+    UserResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique ID of user created at the time of creation.
+        email:
+          type: string
+          format: email
+          description: User email. Email is in masked format, it reveals first 2 characters of email masking remaining characters with asterisk. However, the domain part is not masked.
+        firstName:
+          type: string
+          description: First name of user.
+        middleName:
+          type: string
+          description: Middle name of user.
+        lastName:
+          type: string
+          description: Last name of user.
+        participantId:
+          type: string
+          description: The participant identifier of the user. There are no validations for this field.
+          nullable: true
+          minLength: 2
+          maxLength: 255
+        allowSocialAuth:
+          $ref: "#/components/schemas/SocialAuth"
+        allowSAMLAuth:
+          type: boolean
+          description: A Boolean value that specifies whether SAML 2.0 Login is allowed.
+          nullable: true
+        samlConnector:
+          type: string
+        samlUserId:
+          type: string
+        isActive:
+          type: boolean
+          description: Whether user is active or not.
+          default: true
+        primaryMobile:
+          $ref: "#/components/schemas/MobileNumber"
+        secondaryMobile:
+          $ref: "#/components/schemas/MobileNumber"
+        groups:
+          type: array
+          description: List of the group IDs user belong to.
+          items:
+            type: string
+            description: Group ID assigned to user.
+    MobileNumber:
+      type: object
+      properties:
+        countryCode:
+          type: string
+          description: Country code for mobile number.
+          nullable: false
+          pattern: ^\+(\d{1}\-)?(\d{1,3})$
+          maxLength: 4
+          minLength: 2
+        number:
+          type: string
+          description: Mobile number. In `Get` calls, mobile number is masked excluding last 4 digits of number.
+          nullable: false
+          pattern: ^[0-9]{4,14}$
+          maxLength: 10
+          minLength: 4
+      required:
+        - countryCode
+        - number
+    SocialAuth:
+      type: object
+      properties:
+        google:
+          type: boolean
+          description: A Boolean value that specifies whether Google Login is allowed.
+          nullable: true
+    Email:
+      description: Email of the user.
+      type: string
+      format: email
+      pattern: ^([a-zA-Z0-9_\.\+-]+)@([\da-zA-Z0-9_\.-]+)\.([a-zA-Z\.]{2,6})$
+      nullable: false
+      minLength: 1
+    IdentityLoginType:
+      description: Connection type for the user.
+      type: string
+      enum:
+        - google
+        - github
+        - saml
+    Meta: 
+      type: object
+      description: Metadata about the search result
+      properties:
+        totalElements:
+          type: integer
+          description: Total Number of elements matching the search criteria
+    AppSecretResponse:
+      type: object
+      properties:
+        appId:
+          type: string
+          description: Unique ID of the app.
+        clientId:
+          type: string
+          description: Unique client-id of the app as registered on keycloak
+        secret:
+          type: object
+          description: clientSecret of the app
+          nullable: false
+          properties:
+            iv:
+              type: string
+            encryptedText:
+              type: string
+    OIDCResponse:
+      type: object
+      properties:
+        connectionId:
+          description: Connection ID.
+          type: string
+        connectionName:
+          description: Alias of identity provider.
+          type: string
+        displayName:
+          description: Display name of the OIDC provider.
+          type: string
+        connectionType:
+          description: Type of connection.
+          type: string
+        enabled:
+          description: When on the provider is enabled.
+          type: boolean
+        authorizationUrl:
+          description: Authorization URL.
+          type: string
+        tokenUrl:
+          description: Token URL.
+          type: string
+        clientId:
+          description: Client identifier registered with identity provider.
+          type: string
+        userInfoUrl:
+          description: User info URL.
+          type: string
+        logoutUrl:
+          description: Logout URL.
+          type: string
+        guiOrder:
+          description: GUI order.
+          type: number
+        issuer:
+          description: Issuer of response.
+          type: string
+        jwksUrl:
+          description: JWKS URL.
+          type: string
+    AppDataResponse:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/AppCore"
+      properties:
+        id:
+          type: string
+          description: Unique app ID of the app.
+    RoleResponse:
+      allOf:
+        - type: object
+          properties:
+            canGrantToApps:
+              type: boolean
+              description: Boolean value indicates if the role can be granted to other apps or services.
+        - $ref: '#/components/schemas/RoleBase'
+    AppIdResponse:
+      type: object
+      properties:
+        appId:
+          type: string
+          description: Unique ID assigned to each role at the time of creation.
+    UserCreateResponseObject:
+      type: object
+      properties:
+        id:
+          type: string
+    UserCreateResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/UserCreateResponseObject"
+        request:
+          $ref: "#/components/schemas/Request"
+    UserChangeLogResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                totalElements:
+                  type: integer
+                  format: int64
+            log:
+              type: array
+              items:
+                $ref: "#/components/schemas/UserChange"
+        request:
+          $ref: "#/components/schemas/Request"
+    GroupChangeLogResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                totalElements:
+                  type: integer
+                  format: int64
+            log:
+              type: array
+              items:
+                $ref: "#/components/schemas/GroupChange"
+        request:
+          $ref: "#/components/schemas/Request"
+    UserChange:
+      description: user change information.
+      allOf:
+        - $ref: "#/components/schemas/BaseChange"
+        - type: object
+          required:
+            - cdc
+          properties:
+            cdc:
+              $ref: "#/components/schemas/UserResponse"
+    GroupChange:
+      description: user change information.
+      allOf:
+        - $ref: "#/components/schemas/BaseChange"
+        - type: object
+          required:
+            - cdc
+          properties:
+            cdc:
+              $ref: "#/components/schemas/GroupResponse"
+    BaseChange:
+      type: object
+      required:
+        - action
+        - actionTime
+        - actionBy
+        - channel
+      properties:
+        action:
+          $ref: "#/components/schemas/ChangeAction"
+        actionTime:
+          $ref: "#/components/schemas/EpochTimestamp"
+        actionBy:
+          $ref: "#/components/schemas/ActionBy"
+        channel:
+          type: string
+          minLength: 1
+          maxLength: 64
+    ChangeAction:
+      description: Action for data auditing
+      type: string
+      enum:
+        - CREATE
+        - UPDATE
+        - GET
+        - DELETE
+    ActionBy:
+      type: object
+    SuccessAppSecretCreateResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/AppSecretResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    OIDCGetResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/OIDCResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessAppResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/AppInfo"
+        request:
+          $ref: "#/components/schemas/Request"
+    TenantResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/Tenant"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessTenantIdResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/TenantIdInfo"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessAppsResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/AppInfo"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessRoleResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/RoleResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessAppIdResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/AppIdResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessRolesResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/RoleResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessRolesResponseV2:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: object
+          properties:
+            meta:
+              $ref: "#/components/schemas/Meta"
+            roles:
+              type: array
+              items:
+                $ref: "#/components/schemas/RoleResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        request:
+          $ref: "#/components/schemas/Request"
+    FileStatus:
+      type: object
+      description: Status of the file uploaded
+      properties:
+        tenantId:
+          type: string
+          description: Unique Id of tenant
+        statusId:
+          type: string
+          description: Id of the yaml upload
+        status:
+          type: string
+          description: Current status of uploaded file
+        reason:
+          type: array
+          items:
+            type: string
+    FileStatusResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/FileStatus"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessResponse:
+      allOf:
+        - $ref: "#/components/schemas/ErrorResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Unique ID of resource.
+            request:
+              $ref: "#/components/schemas/Request"
+    SuccessConnectionResponse:
+      allOf:
+        - $ref: "#/components/schemas/ErrorResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                connectionId:
+                  type: string
+                  description: Unique ID of connection.
+                connectionName:
+                  type: string
+                  description: Name of connection.
+                connectionType:
+                  type: string
+                  description: Type of the connection (Google, Github, etc.).
+            request:
+              $ref: "#/components/schemas/Request"
+    SuccessSamlConnectionResponse:
+      allOf:
+        - $ref: "#/components/schemas/ErrorResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                connectionId:
+                  type: string
+                  description: Unique ID of connection.
+                connectionName:
+                  type: string
+                  description: Name of connection.
+                displayName:
+                  type: string
+                  description: Display Name of the connection
+                connectionType:
+                  type: string
+                  description: Type of the connection (Google, Github, etc.).
+                signInEndpoint:
+                  type: string
+                  description: Sign In endpoint of connection
+                signOutEndpoint:
+                  type: string
+                  description: Sign Out Endpoint of connection
+                publicKeyCertificate:
+                  description: The certificate required for saml connection should be of x509Cert format
+                  type: string
+                entityId:
+                  description: The Entity ID that will be used to uniquely identify this SAML Service Provider
+                  type: string
+                redirectUri:
+                  description: The redirect uri to use when configuring the identity provider.
+                  type: string
+                metadataUri:
+                  description: The URL on which saml connection metadata is present
+                  type: string
+                guiOrder:
+                  description: GUI order of connection on Login page.
+                  type: string
+            request:
+              $ref: "#/components/schemas/Request"
+    SuccessUserResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/UserResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessUsersResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessUsersResponseV2:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: object
+          properties:
+            meta: 
+              $ref: "#/components/schemas/Meta"
+            users:
+              type: array
+              items:
+                $ref: "#/components/schemas/UserResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    MobileAuthReqOtpRequest:
+      additionalProperties: false
+      type: object
+      properties:
+        mobile:
+          $ref: "#/components/schemas/MobileNumber"
+        emailId:
+          type: string
+        mode:
+          type: string
+          enum:
+            - sms
+            - email
+          description: Can be only one of email or sms. If email is provided in this field then `emailId` key has to be present. If SMS is provided in this field then mobile object has to be present in the request payload.
+      anyOf:
+        - required:
+            - emailId
+        - required:
+            - mobile
+      required:
+        - mode
+    AuthReqOtpRequest:
+      additionalProperties: false
+      properties:
+        emailId:
+          $ref: "#/components/schemas/Email"
+        mobile:
+          description: Mobile object has to be present if mode is SMS.
+          properties:
+            countryCode:
+              type: string
+              description: Country code for mobile number.
+              nullable: false
+              maxLength: 4
+              minLength: 2
+            number:
+              type: string
+              description: Mobile number.
+              nullable: false
+              maxLength: 10
+              minLength: 4
+        otp:
+          type: string
+          description: Received OTP through mobile or email.
+        mode:
+          type: string
+          enum:
+            - sms
+            - email
+          description: Can be only one of email or sms. If email is provided in this field then `emailId` key has to be present. If SMS is provided in this field then mobile object has to be present in the request payload.
+      anyOf:
+        - required:
+            - emailId
+        - required:
+            - mobile
+      required:
+        - mode
+        - otp
+    AbacConfigRequest:
+      type: object
+      description: Setting for ABAC Configuration for a tenant.
+      additionalProperties: false
+      properties:
+        url:
+          type: string
+          description: url on which ABAC authorization requests will be sent.
+        contentType:
+          type: string
+          description: Content-type header of the request. Currently application/json, application/x-www-form-urlencoded are supported.
+        headers:
+          type: object
+          description: Headers required for sending the validation request.
+        isActive:
+          type: boolean
+          default: false
+          description: Whether the ABAC is enabled during authorization.
+    ClientCredentialsRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        clientId:
+          type: string
+          description: Your application's Client ID.
+          nullable: false
+        clientSecret:
+          type: string
+          description: Your application's Client Secret.
+          nullable: false
+        audience:
+          type: string
+          description: App ID for which you need token. Not required in keycloak API calls.
+          nullable: true
+      required:
+        - clientId
+        - clientSecret
+    SMSSendRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        recipient:
+          type: string
+        body:
+          type: string
+        sender:
+          type: string
+        req:
+          type: object
+          properties:
+            ip:
+              type: string
+            user-agent:
+              type: string
+      required:
+        - recipient
+        - body
+        - sender
+    SuccessStatusResponse:
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: Status message of the operation.
+            request:
+              $ref: "#/components/schemas/Request"
+    SuccessAbacResponse:
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+        - type: object
+          properties:
+            data:
+              $ref: "#/components/schemas/AbacConfigRequest"
+              
+            request:
+              $ref: "#/components/schemas/Request"
+    OTPAuthLoginRequest:
+      $ref: "#/components/schemas/MobileOTPAuthData"
+    EmailOTPAuthRequest:
+      $ref: "#/components/schemas/EmailPayload"
+    MobileOTPAuthData:
+      type: object
+      required:
+        - audience
+        - email
+        - credentials
+      properties:
+        mobile:
+          $ref: "#/components/schemas/MobileNumber"
+        otp:
+          type: string
+        audience:
+          type: string
+      example:
+        mobile:
+          countryCode: string
+          number: string
+        otp: string
+        audience: string
+    EmailPayload:
+      type: object
+      properties:
+        emailId:
+          $ref: "#/components/schemas/Email"
+        mobile:
+          description: Mobile object has to be present if mode is SMS.
+          properties:
+            countryCode:
+              type: string
+              description: Country code for mobile number.
+              nullable: false
+              maxLength: 4
+              minLength: 2
+            number:
+              type: string
+              description: Mobile number.
+              nullable: false
+              maxLength: 10
+              minLength: 4
+        otp:
+          description: The six digit number that the user may have received on their mobile or email.
+          type: string
+        audience:
+          description: The resource or API which needs to be authenticated using the OTP.
+          type: string
+        mode:
+          type: string
+          description: Can be only one of email or sms. If email is provided in this field then `emailId` key has to be present. If SMS is provided in this field then mobile object has to be present in the request payload.
+      required:
+        - otp
+        - audience
+    SuccessAuthenticationLoginResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: string
+          example: OTP sent successfully.
+          description: Data will contain 'OTp sent successfully' message when OTP is sent.
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessVerifyOtpResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: object
+          properties:
+            userId:
+              type: string
+              description: UserId of the user which is authenticated using email or mobile Number.
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessAuthorizationResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: object
+          properties:
+            accessToken:
+              type: string
+              description: Generated access token.
+            tokenType:
+              type: string
+              default: Bearer
+            expiresIn:
+              type: number
+              description: Expiry time in seconds.
+        request:
+          $ref: "#/components/schemas/Request"
+    OTPErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        request:
+          $ref: "#/components/schemas/Request"
+    PostErrorResponse:
+      allOf:
+        - $ref: "#/components/schemas/ErrorResponse"
+        - type: object
+          properties:
+            request:
+              $ref: "#/components/schemas/Request"
+    ResourceCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the entity exposed by this resource.
+          nullable: false
+          minLength: 2
+          maxLength: 50
+          pattern: ^[a-zA-Z]+(-[a-zA-Z]+)*$
+        description:
+          type: string
+          description: ' Description of the entity exposed by this resource.'
+          minLength: 2
+          maxLength: 50
+          pattern: ^([a-zA-Z])([a-zA-Z0-9,\s-]*)$
+        resourcePath:
+          type: string
+          nullable: false
+          description: URI for resource. Example "/core/api/v1/containers/**"
+        resourcePathFormatted:
+          type: string
+          nullable: true
+          description: Formatted resourcePath. Example "/core/api/v1/containers/{{containerId}}"
+        attributePath:
+          type: string
+          nullable: true
+          description: "JSON path in ValidateAPI response for requestParameter value. JSON path value will be matched with requestParameter value. This field will only be present in abac related resources."
+        requestParameter:
+          type: string
+          nullable: true
+          description: Request Path Param name for the attribute. It will save the name of the ABAC attribute.
+        allowedHttpMethods:
+          type: array
+          description: 'Scopes of resource: get, update, create.'
+          items:
+            type: string
+            enum:
+              - get
+              - put
+              - post
+              - delete
+              - patch
+          nullable: false
+      required:
+        - name
+        - resourcePath
+        - allowedHttpMethods
+    ResourceResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the entity exposed by this resource.
+        description:
+          type: string
+          description: Description of the entity exposed by this resource.
+        resourcePath:
+          type: string
+          description: List of URIs for resource. Example "/core/api/v1/containers/**"
+        allowedHttpMethods:
+          type: array
+          description: 'Scopes of resource: get, put, post, patch.'
+          items:
+            type: string
+        isActive:
+          type: string
+        resourceId:
+          type: string
+          description: Unique resource ID assigned to resource at the time of creation.
+    ResourcesResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/ResourceResponse"
+    ResourceUpdateRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the entity exposed by this resource.
+          minLength: 2
+          maxLength: 50
+          pattern: ^([a-zA-Z])([a-zA-Z0-9,\s-]*)$
+        resourcePath:
+          type: string
+          description: List of URIs for resource. Example "/core/api/v1/containers/**"
+        allowedHttpMethods:
+          type: array
+          description: Scopes of resource- get, put, post, patch, delete.
+          items:
+            type: string
+            enum:
+              - get
+              - put
+              - post
+              - delete
+              - patch
+        isActive:
+          type: boolean
+          description: When `isActive` = False, the resource will be ignored from updating, until is `isActive` = True.
+        isDeleted:
+          type: boolean
+          description: When `isDeleted` = True, the resource will be deleted and can't be accessed.
+        resourcePathFormatted:
+          type: string
+          nullable: true
+          description: Formatted resourcePath. Example "/core/api/v1/containers/{{containerId}}". If set null, ABAC policies will not be applied on this resource. 
+        attributePath:
+          type: string
+          nullable: true
+          description: "JSON path in ValidateAPI response for requestParameter value. JSON path value will be matched with requestParameter value. This field will only be present in abac related resources."
+        requestParameter:
+          type: string
+          nullable: true
+          description: Request Path Param name for the attribute. It will save the name of the ABAC attribute.
+    SuccessResourceResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/ResourceResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessResourcesResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/ResourcesResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    PermissionCreateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        action:
+          type: string
+          description: Named action that describes the operation permitted to be performed.
+          nullable: false
+          maxLength: 50
+          pattern: ^[a-zA-Z]+(-[a-zA-Z]+)*$
+        resourceId:
+          type: string
+          pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+        httpMethod:
+          type: string
+          enum:
+            - get
+            - put
+            - post
+            - delete
+            - patch
+        description:
+          type: string
+          description: Description of the permission.
+          nullable: false
+          minLength: 0
+          maxLength: 50
+          pattern: ^([a-zA-Z])([a-zA-Z0-9,\s-]*)$
+      required:
+        - action
+        - description
+        - resourceId
+        - httpMethod
+    PermissionResponse:
+      type: object
+      properties:
+        permissionId:
+          type: string
+          description: Unique ID for permission assigned at the time of creation.
+        action:
+          type: string
+          description: Named action that describes the operation permitted to be performed.
+          nullable: false
+          maxLength: 50
+          pattern: ^[a-zA-Z]+(-[a-zA-Z]+)*$
+        appId:
+          description: Unique ID of the app to which this permission belong. Format of ID is platform:app:<appName>.
+        resourceId:
+          type: string
+        httpMethod:
+          type: string
+          enum:
+            - get
+            - put
+            - post
+            - delete
+            - patch
+        description:
+          type: string
+          description: Description of the permission.
+          maxLength: 50
+        isActive:
+          type: boolean
+        isDeleted:
+          type: boolean
+    PermissionsResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/PermissionResponse"
+    PermissionUpdateRequest:
+      type: object
+      additionalProperties: false
+      minProperties: 1
+      properties:
+        description:
+          type: string
+          description: Name of the permission. Permission name is unique for application.
+          nullable: false
+          maxLength: 50
+          pattern: ^([a-zA-Z])([a-zA-Z0-9,\s-]*)$
+        isActive:
+          type: boolean
+          description: When `isActive` = False, the permision will be ignored from updating, until is `isActive` = True.
+        isDeleted:
+          type: boolean
+          description: When `isDeleted` = True, the permission will be deleted and can't be accessed.
+    SuccessPermissionResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/PermissionResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessPermissionsResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/PermissionsResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    AcceptedResponse:
+      allOf:
+        - $ref: "#/components/schemas/ErrorResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Unique ID of resource.
+            request:
+              $ref: "#/components/schemas/Request"
+    GetErrorResponse:
+      allOf:
+        - $ref: "#/components/schemas/ErrorResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Unique ID of resource.
+            request:
+              $ref: "#/components/schemas/Request"
+    PutErrorResponse:
+      allOf:
+        - $ref: "#/components/schemas/ErrorResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Unique ID of resource.
+            request:
+              $ref: "#/components/schemas/Request"
+    SuccessIdentityResponse:
+      allOf:
+        - $ref: "#/components/schemas/ErrorResponse"
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                loginUrl:
+                  type: string
+                  description: Login URL for the identity login flows.
+            request:
+              $ref: "#/components/schemas/Request"
+    SuccessUserInfoResponse:
+      allOf:
+        - $ref: "#/components/schemas/ErrorResponse"
+        - type: object
+          properties:
+            data:
+              $ref: "#/components/schemas/UserInfo"
+            request:
+              $ref: "#/components/schemas/Request"
+    UserInfo:
+      type: object
+      properties:
+        nickname:
+          type: string
+          description: User nick name. Its combination of first name and last name.
+        email:
+          type: string
+          format: email
+        mobileNumber:
+          $ref: "#/components/schemas/MobileNumber"
+        firstName:
+          type: string
+          description: First name of the user.
+        middleName:
+          type: string
+          description: Middle name of the user.
+        lastName:
+          type: string
+          description: Last Name of the user.
+        userId:
+          type: string
+          description: User ID of the user.
+        tenantId:
+          type: string
+          description: Tenant ID of the user.
+        participantId:
+          type: string
+          description: Participant ID of the user.
+    ConnectionCreateRequest:
+      type: object
+      properties:
+        connectionName:
+          type: string
+          description: Unique name of the connection.
+          minLength: 2
+          maxLength: 50
+          pattern: ^[a-zA-Z]+(-[a-zA-Z]+)*$
+        # enabledClients:
+        #   description: List of all clients for which the connection has to be enabled
+        #   type: array
+        #   items:
+        #     type: string
+        connectionClientId:
+          description: Client ID of the social application.
+          type: string
+        connectionClientSecret:
+          description: Client Secret of the social application.
+          type: string
+      required:
+        - connectionName
+        - connectionClientId
+        - connectionClientSecret
+    ConnectionUpdateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        # enabledClients:
+        #   description: List of all clients for which the connection has to be enabled
+        #   type: array
+        #   items:
+        #     type: string
+        connectionClientId:
+          description: Client ID of the social application.
+          type: string
+        connectionClientSecret:
+          description: Client Secret of the social application.
+          type: string
+    ConnectionSamlCreateRequest:
+      type: object
+      properties:
+        connectionName:
+          type: string
+          description: Unique name of the connection.
+          minLength: 2
+          maxLength: 50
+          pattern: ^[a-zA-Z]+(-[a-zA-Z]+)*$
+        displayName:
+          description: Display Name of the SAML provider
+          type: string
+          minLength: 2
+          maxLength: 50
+          pattern: ^[a-zA-Z]+([a-zA-Z0-9 ])*$
+        guiOrder:
+          description: order of the provider in gui
+          type: number
+        signInEndpoint:
+          description: Sign In endpoint of the SAML connection.
+          type: string
+        signOutEndpoint:
+          description: Sign Out endpoint of the SAML connection.
+          type: string
+        publicKeyCertificate:
+          description: The certificate required for Saml connection should be of x509Cert format.
+          type: string
+      required:
+        - connectionName
+        - publicKeyCertificate
+    ConnectionSamlUpdateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        displayName:
+          description: DisplayName of the Saml provider on login page
+          type: string
+          minLength: 2
+          maxLength: 50
+          pattern: ^[a-zA-Z]+([a-zA-Z0-9 ])*$
+        guiOrder:
+          description: Order of the provider in gui
+          type: number
+        signInEndpoint:
+          description: Sign In endpoint of the SAML connection.
+          type: string
+        signOutEndpoint:
+          description: Sign Out endpoint of the SAML connection.
+          type: string
+        publicKeyCertificate:
+          description: The certificate required for saml connection should be of x509Cert
+            format
+          type: string
+    IdentityLoginCredentials:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Client ID for the application.
+        connectionName:
+          type: string
+          description: Name of the connection.
+          minLength: 2
+          maxLength: 50
+          pattern: ^[a-zA-Z]+(-[a-zA-Z]+)*$
+        redirectUrl:
+          type: string
+          description: Redirect URL after success for login.
+        state:
+          type: string
+          description: Used for avoiding CSRF attacks.
+      required:
+        - clientId
+        - connectionName
+        - redirectUrl
+        - state
+    GroupCreateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Name of the group. Group name is unique for application.
+          minLength: 2
+          maxLength: 50
+          pattern: ^[a-zA-Z]+(-[a-zA-Z]+)*$
+        description:
+          type: string
+          minLength: 2
+          maxLength: 50
+    TenantUpdateRequest:
+      type: object
+      additionalProperties: false
+      minProperties: 1
+      properties:
+        id:
+          type: string
+          description: "Tenant UUID scope"
+        displayName:
+          type: string
+          description: Display name of the Tenant.
+          minLength: 2
+          maxLength: 50
+          pattern: ^([a-zA-Z])([a-zA-Z0-9\s-]*)$
+        enabled:
+          type: boolean
+          description: This parameter is used to make Tenant active or inactive.
+        metadata:
+          type: object
+          description: Metadata associated with the Tenant.
+        abacConfig: 
+          $ref: "#/components/schemas/AbacConfigRequest"
+    TenantCreateRequest:
+      required:
+        - name
+        - tenantId
+        - id
+      allOf:
+        - $ref: "#/components/schemas/Tenant"
+    Tenant:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Name of the Tenant.
+          minLength: 2
+          maxLength: 50
+          pattern: ^[a-zA-Z]+(-[a-zA-Z0-9]+)*$
+          example: "alpha"
+        tenantId:
+          type: string
+          description: tenant id of the tenant
+          minLength: 1
+          maxLength: 16
+          pattern: ^[a-z][a-z0-9]{1,15}$
+          example: "alpha"
+        id:
+          type: string
+          description: Tenant FPA Tenant UUID having format tenantId:uuid
+          example: "alpha:61f047b4-4ff8-41d6-bbaf-73e7aee92851"
+        displayName:
+          type: string
+          description: Display name of the Tenant.
+          minLength: 2
+          maxLength: 50
+          pattern: ^([a-zA-Z])([a-zA-Z0-9,\s-]*)$
+          example: "Alpha Ltd"
+        metadata:
+          type: object
+          description: Metadata associated with the Tenant.
+        enabled:
+          type: boolean
+          description: whether Tenant is enabled or not.
+        abacConfig:
+          $ref: "#/components/schemas/AbacConfigRequest"
+    GroupResponse:
+      type: object
+      properties:
+        groupId:
+          type: string
+          description: Unique ID for group assigned at the time of creation.
+        name:
+          type: string
+          description: Name of the group. Group name is unique for application.
+        description:
+          type: string
+          minLength: 2
+          maxLength: 50
+        users:
+          type: array
+          items:
+            type: string
+        roles:
+          type: array
+          items:
+            type: string
+        isActive:
+          type: boolean
+    GroupsResponse:
+        type: array
+        items:
+            $ref: "#/components/schemas/GroupResponse"
+    GroupsResponseV2:
+        type: array
+        items:
+            type: object
+            properties:
+              groupId:
+                type: string
+                description: Unique id for group assigned at the time of creation.
+              name:
+                type: string
+                description: Name of the group. Group name is unique for application.
+              description:
+                type: string
+                minLength: 2
+                maxLength: 50
+              roles:
+                type: array
+                items:
+                  type: string
+              isActive:
+                type: boolean        
+    GroupUpdateRequest:
+      type: object
+      additionalProperties: false
+      minProperties: 1
+      properties:
+        description:
+          type: string
+          maxLength: 50
+        users:
+          type: object
+          properties:
+            userIds:
+              type: array
+              items:
+                type: string
+              description: list of user IDs.
+            membership:
+              type: boolean
+              description: This is used for add/remove users membership of a group
+        isActive:
+          type: boolean
+          description: When `isActive` = False, the group will be ignored from updating until is `isActive` = True.
+        isDeleted:
+          type: boolean
+          description: When `isDeleted` = True, the group will be deleted and can't be accessed.
+    MultipartFileUploadRequest:
+      type: object
+      required:
+        - file
+        - callback
+      properties:
+        file:
+          type: string
+          format: binary
+        callback:
+          $ref: "#/components/schemas/Callback"
+    Callback:
+      description: URL to notify the outcome of the request.
+      type: string
+      pattern: https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+    GroupRolesMappingUpdateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        roles:
+          oneOf:
+            - type: array
+              minItems: 1
+              items:
+                type: string
+              description: List of role IDs.
+              pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+            - type: object
+              properties:
+                roleIds:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: string
+                  description: List of role IDs.
+                  pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+                membership:
+                  type: boolean
+                  default: true
+                  description: This is used to add or remove roles of a group.
+              required:
+                - roleIds
+        membership:
+          type: boolean
+          default: true
+          description: 'This is used to add or remove roles to a group. Default: true. membership=true => Add specified roles to the group; membership=false => remove specified roles from group.'
+      required:
+        - roles
+    GroupUsersMappingUpdateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        users:
+          type: array
+          minItems: 1
+          items:
+            type: string
+          description: List of user IDs.
+          pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+        membership:
+          type: boolean
+          default: true
+          description: 'This is used to add or remove users to a group Membership. Default value: true. membership=true => Add specified users to the group membership=false => remove specified users from group.'
+      required:
+        - users
+    SuccessGroupResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/GroupResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessGroupsResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          $ref: "#/components/schemas/GroupsResponse"
+        request:
+          $ref: "#/components/schemas/Request"
+    SuccessGroupsResponseV2:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        data:
+          type: object
+          properties:
+            meta:
+              $ref: "#/components/schemas/Meta"
+            groups:
+              $ref: "#/components/schemas/GroupsResponseV2"
+        request:
+          $ref: "#/components/schemas/Request"
+  parameters:
+    RequestId:
+      description: Unique request ID
+      in: header
+      name: X-COREOS-REQUEST-ID
+      schema:
+        type: string
+      required: true
+    Url:
+      description: Url
+      in: header
+      name: X-URL
+      schema:
+        type: string
+      required: true
+    HttpMethod:
+      description: Http Method
+      in: header
+      name: X-HTTP-METHOD
+      schema:
+        type: string
+        enum:
+          - get
+          - put
+          - post
+          - delete
+          - patch
+      required: true
+    TenantId:
+      description: Tenant ID
+      in: header
+      name: X-COREOS-TID
+      schema:
+        type: string
+      required: true
+    TenantIdOptional:
+      description: Tenant ID
+      in: header
+      name: X-COREOS-TID
+      schema:
+        type: string
+      required: false
+    UserInfo:
+      description: User info
+      in: header
+      name: X-COREOS-USERINFO
+      schema:
+        type: string
+    roleIdPathReq:
+      in: path
+      name: roleId
+      description: The App for which the permissions in the role belong.
+      schema:
+        type: string
+        description: The App for which the permissions in the role belong.
+        pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+      required: true
+    userIdPathReq:
+      in: path
+      name: userId
+      schema:
+        type: string
+        format: uuid
+      required: true
+    appIdPathParam:
+      in: path
+      name: appId
+      schema:
+        type: string
+        pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+      required: true
+    connectionIdPathReq:
+      in: path
+      name: connectionId
+      schema:
+        type: string
+        pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+      required: true
+    ClientId:
+      description: Client ID of the oAuth Application.
+      in: header
+      name: X-COREOS-CLIENT-ID
+      schema:
+        type: string
+      required: true
+    ClientSecret:
+      description: Client secret of the oAuth Application.
+      in: header
+      name: X-COREOS-CLIENT-SECRET
+      schema:
+        type: string
+      required: true
+    AccessToken:
+      description: Core-os access token
+      in: header
+      name: X-COREOS-ACCESS
+      schema:
+        type: string
+      required: true
+    AuthenticationToken:
+      description: Core-os authentication token.
+      in: header
+      name: X-COREOS-AUTH
+      schema:
+        type: string
+    AuthorizationHeader:
+      description: Bearer authorization access token.
+      in: header
+      name: Authorization
+      example: Bearer JWT_TOKEN
+      schema:
+        type: string
+      required: true
+    RefreshToken:
+      description: Core-os refresh token.
+      in: header
+      name: X-COREOS-REFRESH
+      schema:
+        type: string
+      required: true
+    resourceIdPathReq:
+      in: path
+      name: resourceId
+      schema:
+        type: string
+        pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+      required: true
+    appIdPathReq:
+      in: path
+      name: appId
+      schema:
+        type: string
+        pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+      required: true
+    permissionIdPathReq:
+      in: path
+      name: permissionId
+      schema:
+        type: string
+        pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+      required: true
+    connectionTypePathReq:
+      in: query
+      name: connectionType
+      schema:
+        type: string
+        enum:
+          - google-oauth2
+          - github
+      required: true
+    connectionTypeOtpPathReq:
+      in: path
+      name: connectionType
+      schema:
+        type: string
+        enum:
+          - sms
+          - email
+      required: true
+    groupIdPathReq:
+      in: path
+      name: groupId
+      schema:
+        type: string
+        pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+      required: true
+    tenantIdPathReq:
+      in: path
+      name: tenantId
+      schema:
+        type: string
+        pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+      required: true
+    statusId:
+      in: path
+      name: statusId
+      schema:
+        type: string
+      required: true
+    OrderBy:
+      description: fetching data in ascending(asc) or descending(desc) order.
+      name: sortBy
+      in: query
+      required: false
+      schema:
+        $ref: "#/components/schemas/OrderBy"
+    PageSize:
+      description: Number of items to return. Value should be between 1 to 100.
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 50
+    PageOffset:
+      description: Number of items to skip from start.
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    StartDateTime:
+      description: Start time of the change log in unix epoch format.
+      name: from
+      in: query
+      schema:
+        $ref: "#/components/schemas/EpochTimestamp"
+    Duration:
+      description: Number of days for which change log is to be returned.
+      name: timeDuration
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 31
+        default: 1
+    SortKey:
+      description: key to be used for sort data, sorting allow only number and string
+        type of values.
+      name: sortKey
+      in: query
+      schema:
+        type: string
+        minimum: 1
+        maximum: 128
+    SelectFields:
+      name: select
+      in: query
+      description: >
+        Specifies list of attributes to be included in response (id is always
+        included in response). If not specified, all attributes are included in
+        response.
+      schema:
+        type: array
+        items:
+          type: string
+    Query:
+      name: query
+      in: query
+      allowReserved: true
+      description: Query criteria. Refer following links for more details:<br/> -
+        [match](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)<br/>
+        -
+        [multi_match](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)<br/>
+        -
+        [term](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)<br/>
+        -
+        [terms](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)<br/>
+        -
+        [range](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)<br/>
+        -
+        [regexp](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)<br/>
+        -
+        [exists](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)<br/>
+        -
+        [fuzzy](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html)<br/>
+        -
+        [prefix](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html)<br/>
+        -
+        [wildcard](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)<br/>
+        -
+        [match_phrase](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html)<br/>
+        -
+        [match_phrase_prefix](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html)
+      schema:
+        $ref: "#/components/schemas/Query"
+    url:
+      description: URL that needs to be verified for access.
+      name: url
+      in: query
+      required: true
+      schema:
+        type: string
+    httpMethod:
+      name: httpMethod
+      in: query
+      required: true
+      description: HTTP method of the URL for which the access will be evaluated.
+      schema:
+        type: string
+        enum:
+          - get
+          - put
+          - post
+          - delete
+          - patch
+    HmacAccessToken:
+      description: core-os hmac code
+      in: header
+      name: X-AUTH-KEY
+      schema:
+        type: string
+      required: true
+  requestBodies:
+    AppCreateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AppCreateRequest"
+    AppUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AppUpdateRequest"
+    AppRoleUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AppRoleUpdateRequest"
+    RotateAppSecretRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RotateAppSecretRequest"
+    RoleCreateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RoleCreateRequest"
+    RoleUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RoleUpdateRequest"
+    RoleMappingRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RoleMappingRequest"
+    UserCreateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserCreateRequest"
+    UserUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserUpdateRequest"
+    UserEnableRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserEnableRequest"
+    AuthReqOtpRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthReqOtpRequest"
+    AbacConfigRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AbacConfigRequest"
+    ClientCredentialsRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ClientCredentialsRequest"
+    EmailAuthReqOtpRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthReqOtpRequest"
+    MobileAuthReqOtpRequest: 
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/MobileAuthReqOtpRequest"
+    MobileOTPAuthLoginRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OTPAuthLoginRequest"
+    EmailOTPAuthRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EmailOTPAuthRequest"
+    ResourceCreateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResourceCreateRequest"
+    ResourceUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResourceUpdateRequest"
+    PermissionCreateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PermissionCreateRequest"
+    PermissionUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PermissionUpdateRequest"
+    ConnectionCreateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ConnectionCreateRequest"
+    ConnectionUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ConnectionUpdateRequest"
+    ConnectionSamlCreateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ConnectionSamlCreateRequest"
+    ConnectionSamlUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ConnectionSamlUpdateRequest"
+    IdentityLoginCredentialsRequest:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/IdentityLoginCredentials"
+    GroupCreateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GroupCreateRequest"
+    TenantCreateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TenantCreateRequest"
+    TenantUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TenantUpdateRequest"
+    FileUploadRequest:
+      description: ""
+      content:
+        multipart/form-data:
+          schema:
+            $ref: "#/components/schemas/MultipartFileUploadRequest"
+    GroupUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GroupUpdateRequest"
+    GroupRolesMappingUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GroupRolesMappingUpdateRequest"
+    GroupUsersMappingUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GroupUsersMappingUpdateRequest"
+    SMSSendRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SMSSendRequest"
+    OIDCPostRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OIDCPostRequest"
+    OIDCUpdateRequest:
+      description: ""
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OIDCUpdateRequest"
+  responses:
+    SuccessAppIdResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessAppIdResponse"
+    ErrorResponse:
+      description: Error Occurred
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    BadRequestErrorResponse:
+      description: Bad request - The server is unable to process the request due to something that is perceived to be a client error.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnauthorizedErrorResponse:
+      description: Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that Tenant.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ForbiddenErrorResponse:
+      description: Forbidden - The client's identity is known to the server but it does not have access rights to the requested resource. Verify that you're using the correct client ID and client secret or grant the client the necessary roles to access the resource.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFoundErrorResponse:
+      description: Not found - The server can not find the requested resource.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServiceUnavailableErrorResponse:
+      description: Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    PutErrorResponse:
+      description: Error Occurred
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PutErrorResponse"
+    PostErrorResponse:
+      description: Error Occurred
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PostErrorResponse"
+    GetErrorResponse:
+      description: Error Occurred
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetErrorResponse"
+    SuccessStatusResponse:
+      description: OK - The request succeeded.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessStatusResponse"
+    SuccessAbacResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessAbacResponse"
+    FileStatusResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/FileStatusResponse"
+    UserChangeLogResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserChangeLogResponse"
+    GroupChangeLogResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GroupChangeLogResponse"
+    SuccessResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessResponse"
+    SuccessOIDCResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OIDCGetResponse"
+    SuccessConnectionResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessConnectionResponse"
+    SuccessSamlConnectionResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessSamlConnectionResponse"
+    AcceptedResponse:
+      description: ACCEPTED
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AcceptedResponse"
+    SuccessResourceResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessResourceResponse"
+    SuccessResourcesResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessResourcesResponse"
+    SuccessPermissionResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessPermissionResponse"
+    SuccessPermissionsResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessPermissionsResponse"
+    ResourceCreateRequest:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResourceCreateRequest"
+    ResourceUpdateRequest:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResourceUpdateRequest"
+    PermissionCreateRequest:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PermissionCreateRequest"
+    PermissionUpdateRequest:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PermissionUpdateRequest"
+    SuccessAppSecretCreateResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessAppSecretCreateResponse"
+    SuccessAppResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessAppResponse"
+    SuccessTenantIdResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessTenantIdResponse"
+    SuccessAppsResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessAppsResponse"
+    TenantResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TenantResponse"
+    SuccessRoleResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessRoleResponse"
+    SuccessRolesResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessRolesResponse"
+    SuccessRolesResponseV2:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessRolesResponseV2"
+    SuccessAppRolesResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessAppRolesResponse"
+    SuccessUserRoleMappingResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessUserRoleMappingResponse"
+    SuccessUserAppMappingResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessUserAppMappingResponse"
+    SuccessUserCreateResponse:
+      description: OK - The request succeeded.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserCreateResponse"
+    SuccessUserResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessUserResponse"
+    SuccessUsersResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessUsersResponse"
+    SuccessUsersResponseV2:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessUsersResponseV2"
+    SuccessAuthenticationLoginResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessAuthenticationLoginResponse"
+    SuccessVerifyOtpResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessVerifyOtpResponse"
+    SuccessIdentityResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+        X-COREOS-TID:
+          schema:
+            type: string
+          description: tenant-id
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessIdentityResponse"
+    SuccessAuthorizationResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessAuthorizationResponse"
+    ConnectionCreateRequest:
+      description: OK - The request succeeded.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ConnectionCreateRequest"
+    SuccessGroupResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessGroupResponse"
+    SuccessGroupsResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessGroupsResponse"
+    SuccessGroupsResponseV2:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessGroupsResponseV2"
+    SuccessUserInfoResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request ID that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessUserInfoResponse"
