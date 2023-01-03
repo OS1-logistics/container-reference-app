@@ -11,7 +11,7 @@ import (
 func main() {
 	glog.Info("Starting Server")
 	g := gin.Default()
-	s := api.Server{}
+	s := api.NewServerV1()
 	api.RegisterHandlers(g, s)
 	g.Run(fmt.Sprintf(":%d", 3000))
 }

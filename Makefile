@@ -7,7 +7,7 @@ openapi-codegen:
 install:
 	@brew install openapi-generator
 	@go install github.com/deepmap/oapi-codegen/cmd/oapi-codegen@latest
-	@go install github.com/swaggo/swag/cmd/swag@v1.7.8
+	@go install github.com/swaggo/swag/cmd/swag@latest
 	@go get -d -v ./...
 
 .PHONY: swagger
