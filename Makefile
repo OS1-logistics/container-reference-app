@@ -1,7 +1,7 @@
 .PHONY: openapi
 openapi-codegen:
 	oapi-codegen -package api -generate gin,types -o api/v1/openapi.gen.go api/openapi-spec/api__v1_openapi.yaml
-	openapi-generator generate -g go -i internal/pkg/clients/openapi-spec/api__v2_containerapi.yaml -o internal/pkg/clients/container -p packageName=container_client -p enumClassPrefix=true --skip-validate-spec
+#	openapi-generator generate -g go -i internal/pkg/clients/openapi-spec/api__v2_containerapi.yaml -o internal/pkg/clients/container -p packageName=container_client -p enumClassPrefix=true --skip-validate-spec
 
 .PHONY: install
 install:
