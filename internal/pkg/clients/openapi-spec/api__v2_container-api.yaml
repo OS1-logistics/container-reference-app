@@ -987,7 +987,7 @@ paths:
           $ref: '#/components/responses/NotFoundErrorResponse'
         '503':
           $ref: '#/components/responses/ServerErrorResponse'
-  /{containerId}:
+  /{containerTypeName}:
     post:
       tags:
         - Container
@@ -1035,7 +1035,7 @@ paths:
         - $ref: '#/components/parameters/TenantId'
         - $ref: '#/components/parameters/AccessToken'
         - $ref: '#/components/parameters/UserInfoToken'
-        - $ref: '#/components/parameters/ContainerTypePath'
+        - $ref: '#/components/parameters/ContainerTypeName'
         - $ref: '#/components/parameters/RequestingApp'
       requestBody:
         $ref: '#/components/requestBodies/ContainerCreateRequest'
@@ -1057,6 +1057,7 @@ paths:
           $ref: '#/components/responses/UnauthorizedErrorResponse'
         '503':
           $ref: '#/components/responses/ServerErrorResponse'
+  /{containerId}:
     get:
       tags:
         - Container
@@ -1759,39 +1760,6 @@ components:
         locId:
           type: string
           description: locationId of the event.
-    DestinationState:
-      description: Destination state for container state transition.
-      allOf:
-        - $ref: '#/components/schemas/ContainerDestinationState'
-        - $ref: '#/components/schemas/ContainerDestinationStateCallback'
-    ContainerDestinationState:
-      type: object
-      required:
-        - state
-      properties:
-        state:
-          type: string
-          description: Represents the main state to which we want to override the instance.
-        subState:
-          type: string
-          description: >-
-            Substate is optional, if not specified then will be populated by
-            default substate of that main state.
-    ContainerDestinationStateCallback:
-      type: object
-      properties:
-        callback:
-          type: object
-          properties:
-            url:
-              type: string
-              format: uri
-              example: https://delhivery.requestcatcher.com/
-            meta:
-              anyOf:
-                - type: string
-                - type: object
-                - type: array
     DataType:
       description: Field for the datatype of an attribute.
       type: string
@@ -2056,15 +2024,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Prefix'
-    ContainerTypeReadOnlyProperties:
-      description: Readonly properties of container type
-      type: object
-      required:
-        - id
-      properties:
-        id:
-          type: string
-          readOnly: true
     UniqueId:
       description: Unique ID.
       type: string
@@ -2395,15 +2354,6 @@ components:
           type: array
           items:
             type: string
-    ContainerEventSourceStatus:
-      type: object
-      properties:
-        status:
-          description: Status of the container creation.
-          type: string
-        failedReason:
-          description: reason of the failure of container creation.
-          type: string
     TerminalTTL:
       description: >-
         Specifies the time to live for a data entry in the database. Specified
@@ -2461,13 +2411,6 @@ components:
               type: array
               items:
                 type: string
-    StateMachineCallbackURL:
-      description: >-
-        Represents callback url, which can be called to get any info about state
-        transition of a container or its terminal ttl expiry.
-      type: string
-      pattern: >-
-        https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
     TrackingDetails:
       description: >-
         Field to represent tracking ID (such as AWB) for a container which is
@@ -2631,22 +2574,6 @@ components:
           maxLength: 32
         reasonCode:
           $ref: '#/components/schemas/ReasonCode'
-    Events:
-      description: Represents array of Events
-      type: object
-      required:
-        - event
-      properties:
-        event:
-          type: string
-          description: Represents name of the event for state transition
-          example: createdToOpened
-        eventType:
-          $ref: '#/components/schemas/EventType'
-        eventData:
-          type: array
-          items:
-            $ref: '#/components/schemas/EventDataItem'
     EventCode:
       description: >-
         Event Code of the format:E-yyy. E - Prefix indicating that this is an
@@ -2659,20 +2586,6 @@ components:
         reason code nnnn - 4 digit reason code string ranging from 0001 to 9999
       type: string
       pattern: ^(?!R-0000|^$)(R[-][0-9][0-9][0-9][0-9])
-    StateTTL:
-      description: Time to live associated with each state of a container.
-      type: object
-      required:
-        - time
-        - destination
-      properties:
-        time:
-          $ref: '#/components/schemas/TerminalTTL'
-        destination:
-          type: string
-          description: >-
-            Represents destination state to which this instance should be
-            transitioned to after ttl expiry.
     EventDataType:
       type: string
       enum:
@@ -2717,17 +2630,17 @@ components:
           type: string
           minLength: 1
           maxLength: 512
-        valueOneOf:
-          description: Enum of accepted values
-          type: array
-          items:
-            anyOf:
-              - type: number
-              - type: string
-              - items: {}
-                type: array
-              - type: boolean
-              - type: object
+        # valueOneOf:
+        #   description: Enum of accepted values
+        #   type: array
+        #   items:
+        #     anyOf:
+        #       - type: number
+        #       - type: string
+        #       - items: {}
+        #         type: array
+        #       - type: boolean
+        #       - type: object
           minItems: 1
           maxItems: 16
         required:
@@ -2784,11 +2697,6 @@ components:
       description: Rules defining the allowed container types as parent of a container type
       type: object
       minProperties: 1
-      anyOf:
-        - required:
-            - oneOf
-        - required:
-            - not
       properties:
         oneOf:
           description: List of container types allowed as parent of this container type
@@ -2898,14 +2806,14 @@ components:
           type: boolean
           default: false
           description: Access Parameter for the Attribute
-        defaultValue:
-          anyOf:
-            - type: number
-            - type: string
-            - items: {}
-              type: array
-            - type: boolean
-            - type: object
+        # defaultValue:
+        #   anyOf:
+        #     - type: number
+        #     - type: string
+        #     - items: {}
+        #       type: array
+        #     - type: boolean
+        #     - type: object
         validation:
           $ref: '#/components/schemas/AttributeValidation'
         
@@ -2948,14 +2856,14 @@ components:
           description: Access Parameter for the Attribute
         ownerAppId:
           type: string
-        defaultValue:
-          anyOf:
-            - type: number
-            - type: string
-            - items: {}
-              type: array
-            - type: boolean
-            - type: object
+        # defaultValue:
+        #   anyOf:
+        #     - type: number
+        #     - type: string
+        #     - items: {}
+        #       type: array
+        #     - type: boolean
+        #     - type: object
         validation:
           $ref: '#/components/schemas/AttributeValidation'
     AttributeValidation:
@@ -2974,20 +2882,20 @@ components:
             Field to specify the regex pattern that the value of an attribute
             MUST match.this validation alllowed only for string type of
             attributes.
-        valueOneOf:
-          type: array
-          items:
-            anyOf:
-              - type: number
-              - type: string
-              - items: {}
-                type: array
-              - type: boolean
-              - type: object
-          minItems: 1
-          description: >-
-            Field to specify enum values for an attribute. list of valueOneOf
-            should be homogeneous.
+        # valueOneOf:
+        #   type: array
+        #   items:
+        #     anyOf:
+        #       - type: number
+        #       - type: string
+        #       - items: {}
+        #         type: array
+        #       - type: boolean
+        #       - type: object
+        #   minItems: 1
+        #   description: >-
+        #     Field to specify enum values for an attribute. list of valueOneOf
+        #     should be homogeneous.
         required:
           type: boolean
           default: false
@@ -3110,6 +3018,8 @@ components:
                 - type: string
                 - type: object
                 - type: array
+                  items:
+                   type: object
     ParentId:
       type: object
       required:
@@ -3135,26 +3045,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/Event'
         - $ref: '#/components/schemas/EventCallback'
-    TenantUpdateRequest:
-      description: Optional attributes provided by tenants, that can be updated
-      type: object
-      required:
-        - terminalTTL
-      properties:
-        terminalTTL:
-          $ref: '#/components/schemas/TerminalTTL'
-        callback:
-          type: object
-          properties:
-            url:
-              type: string
-              format: uri
-              example: https://delhivery.requestcatcher.com/
-            meta:
-              anyOf:
-                - type: string
-                - type: object
-                - type: array
     StateMachineUpdateRequest:
       description: Update state machine config
       allOf:
@@ -3394,11 +3284,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ContainerType'
         - $ref: '#/components/schemas/ActionInfo'
-    CreationStatus:
-      description: Define the creation status of Container Type.
-      properties:
-        status:
-          $ref: '#/components/schemas/Status'
     ContainerTypesResponse:
       type: object
       properties:
@@ -3480,13 +3365,6 @@ components:
           $ref: '#/components/schemas/TrackingData'
         request:
           $ref: '#/components/schemas/Request'
-    Status:
-      description: Define the current status of Container Type.
-      type: string
-      enum:
-        - success
-        - failed
-        - inProgress
     CallbackStatus:
       description: status of execution of api.
       type: string
@@ -3603,15 +3481,6 @@ components:
           $ref: '#/components/schemas/ContainerState'
         request:
           $ref: '#/components/schemas/Request'
-    ContainerStateUpdateResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/Error'
-        data:
-          $ref: '#/components/schemas/ContainerChangeState'
-        request:
-          $ref: '#/components/schemas/Request'
     ChildContainerResponse:
       type: object
       properties:
@@ -3625,26 +3494,6 @@ components:
               $ref: '#/components/schemas/Child'
         request:
           $ref: '#/components/schemas/Request'
-    ContainerChangeState:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 123e4567-e89b-42d3-a456-556642440000
-        state:
-          $ref: '#/components/schemas/StateRepresentation'
-        callback:
-          type: object
-          properties:
-            url:
-              type: string
-              format: uri
-              example: https://delhivery.requestcatcher.com/
-            meta:
-              anyOf:
-                - type: string
-                - type: object
-                - type: array
     ContainerState:
       type: object
       properties:
@@ -3786,13 +3635,6 @@ components:
           properties:
             id:
               type: string
-    AttributeConfigRemove:
-      type: object
-      properties:
-        remove:
-          type: array
-          items:
-            type: string
     ContainerStateCallbackResponse:
       description: >-
         Represents callback url, which can be called to notify the status of API
@@ -4181,12 +4023,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ContainerTypesResponse'
-    ContainerStateUpdateResponse:
-      description: Container state update
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ContainerStateUpdateResponse'
     ChildContainerResponse:
       description: Containerization or decontainerization
       content:
@@ -4255,13 +4091,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/TenantCallbackResponse'
-    TenantUpdateRequest:
-      description: Updating core attributes of the tenant
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TenantUpdateRequest'
     CallbackRequest:
       required: true
       content:
@@ -4289,13 +4118,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AttributesConfigUpdateRequest'
-    StateUpdate:
-      description: destination state  and substate of container.
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DestinationState'
     StateMachineUpdateRequest:
       description: Update container type state machine
       required: true

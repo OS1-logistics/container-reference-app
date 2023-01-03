@@ -1,8 +1,13 @@
 .PHONY: openapi
 openapi-codegen:
 	oapi-codegen -package api -generate gin,types -o api/v1/openapi.gen.go api/openapi-spec/api__v1_openapi.yaml
-#	openapi-generator generate -g go -i internal/pkg/clients/openapi-spec/api__v2_containerapi.yaml -o internal/pkg/clients/container -p packageName=container_client -p enumClassPrefix=true --skip-validate-spec
+	openapi-generator generate -g go -i internal/pkg/clients/openapi-spec/api__v2_container-api.yaml -o internal/pkg/clients/container -p packageName=container_client -p enumClassPrefix=true --global-property skipFormModel=false
+	openapi-generator generate -g go -i internal/pkg/clients/openapi-spec/api__v1_aaa-api.yaml -o internal/pkg/clients/aaa -p packageName=aaa_client -p enumClassPrefix=true --global-property skipFormModel=false
+#	openapi-generator generate -g go -i internal/pkg/clients/openapi-spec/api__v1_aaa-api.yaml -o internal/pkg/clients/aaa -p packageName=aaa_client -p enumClassPrefix=true -p prependFormOrBodyParameters=true -p structPrefix=true -p useOneOfDiscriminatorLookup=true --global-property generateAliasAsModel=true
+#	openapi-generator generate -g go -i internal/pkg/clients/openapi-spec/api__v1_aaa-api.yaml -o internal/pkg/clients/aaa --additional-properties packageName=aaa_client --additional-properties enumClassPrefix=true --additional-properties prependFormOrBodyParameters=true --additional-properties structPrefix=true --additional-properties useOneOfDiscriminatorLookup=true  --global-property skipFormModel=false
 
+openapi-generator generate -g go -i internal/pkg/clients/openapi-spec/api__v1_aaa-api.yaml -o internal/pkg/clients/aaa --additional-properties packageName=aaa_client --additional-properties enumClassPrefix=true --additional-properties useOneOfDiscriminatorLookup=true  --global-property skipFormModel=false
+ 
 .PHONY: install
 install:
 	@brew install openapi-generator

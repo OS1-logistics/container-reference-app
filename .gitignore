@@ -22,3 +22,5 @@
 
 **/.openapi-generator/*
 
+local.env.bk
+

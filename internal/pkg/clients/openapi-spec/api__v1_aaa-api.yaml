@@ -2473,13 +2473,13 @@ components:
         allowSAMLAuth: true
         samlConnector: string
         samlUserId: string
-      anyOf:
-        - required:
-            - email
-#            - firstName
-        - required:
-            - primaryMobile
-#            - firstName
+#       anyOf:
+#         - required:
+#             - email
+# #            - firstName
+#         - required:
+#             - primaryMobile
+# #            - firstName
 #Documentation: Comment below required and uncomment above firstName fields, so that they are displayed properly as groups on documentation portal
       required:
          - firstName
@@ -2538,11 +2538,11 @@ components:
           $ref: "#/components/schemas/Email"
         mobile:
           $ref: "#/components/schemas/MobileNumber"
-      oneOf:
-        - required:
-            - email
-        - required:
-            - mobile
+      # oneOf:
+      #   - required:
+      #       - email
+      #   - required:
+      #       - mobile
     UserResponse:
       type: object
       properties:
@@ -3085,11 +3085,11 @@ components:
             - sms
             - email
           description: Can be only one of email or sms. If email is provided in this field then `emailId` key has to be present. If SMS is provided in this field then mobile object has to be present in the request payload.
-      anyOf:
-        - required:
-            - emailId
-        - required:
-            - mobile
+      # anyOf:
+      #   - required:
+      #       - emailId
+      #   - required:
+      #       - mobile
       required:
         - mode
     AuthReqOtpRequest:
@@ -3121,11 +3121,11 @@ components:
             - sms
             - email
           description: Can be only one of email or sms. If email is provided in this field then `emailId` key has to be present. If SMS is provided in this field then mobile object has to be present in the request payload.
-      anyOf:
-        - required:
-            - emailId
-        - required:
-            - mobile
+      # anyOf:
+      #   - required:
+      #       - emailId
+      #   - required:
+      #       - mobile
       required:
         - mode
         - otp
@@ -3936,35 +3936,35 @@ components:
       type: object
       additionalProperties: false
       properties:
-        roles:
-          oneOf:
-            - type: array
-              minItems: 1
-              items:
-                type: string
-              description: List of role IDs.
-              pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
-            - type: object
-              properties:
-                roleIds:
-                  type: array
-                  minItems: 1
-                  items:
-                    type: string
-                  description: List of role IDs.
-                  pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
-                membership:
-                  type: boolean
-                  default: true
-                  description: This is used to add or remove roles of a group.
-              required:
-                - roleIds
+        # roles:
+        #   oneOf:
+        #     - type: array
+        #       minItems: 1
+        #       items:
+        #         type: string
+        #       description: List of role IDs.
+        #       pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+        #     - type: object
+        #       properties:
+        #         roleIds:
+        #           type: array
+        #           minItems: 1
+        #           items:
+        #             type: string
+        #           description: List of role IDs.
+        #           pattern: ^([a-zA-Z])([-:a-zA-Z0-9]*)$
+        #         membership:
+        #           type: boolean
+        #           default: true
+        #           description: This is used to add or remove roles of a group.
+        #       required:
+        #         - roleIds
         membership:
           type: boolean
           default: true
           description: 'This is used to add or remove roles to a group. Default: true. membership=true => Add specified roles to the group; membership=false => remove specified roles from group.'
-      required:
-        - roles
+      # required:
+      #   - roles
     GroupUsersMappingUpdateRequest:
       type: object
       additionalProperties: false
