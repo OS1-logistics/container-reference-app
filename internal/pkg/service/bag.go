@@ -1,8 +1,7 @@
 package service
 
 import (
-	"fmt"
-
+	"github.com/golang/glog"
 	domain "github.com/os1-logistics/container-reference-app/internal/pkg/domain"
 	aaa "github.com/os1-logistics/container-reference-app/internal/pkg/domain/aaa"
 	container "github.com/os1-logistics/container-reference-app/internal/pkg/domain/container"
@@ -23,26 +22,6 @@ func NewBagService() BagService {
 	aaaClient := domain.NewAAAClient("alpha")
 
 	domain.GetToken("alpha")
-	// ctx := context.Background()
-	// ApiAuthClientCredentialsRequest := aaaClient.AuthenticationApi.AuthClientCredentials(ctx)
-
-	// ClientCredentialsRequest := aaa.ClientCredentialsRequest{
-	// 	ClientId:     "platform:app:ContainerReferenceApp-backend",
-	// 	ClientSecret: "****",
-	// 	Audience:     *aaa.NewNullableString(aaa.PtrString("container:reference:app")),
-	// }
-
-	// request := ApiAuthClientCredentialsRequest.ClientCredentialsRequest(ClientCredentialsRequest)
-	// request = request.XCOREOSREQUESTID("1234")
-	// request = request.XCOREOSTID("alpha")
-
-	// success, response, _ := aaaClient.AuthenticationApi.AuthClientCredentialsExecute(request)
-	// fmt.Println("=====================================")
-	// if response.StatusCode == 200 && success != nil {
-	// 	fmt.Println(success.Data.GetAccessToken())
-	// } else {
-	// 	fmt.Println("Unable to get token")
-	// }
 
 	return BagService{
 		aaaApiClient:       *aaaClient,
@@ -52,5 +31,5 @@ func NewBagService() BagService {
 
 func (s BagService) GetBags() {
 	domain.GetToken("alpha")
-	fmt.Println("invoked GetBags")
+	glog.Info("invoked GetBags")
 }

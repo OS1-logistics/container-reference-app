@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/golang/glog"
 	config "github.com/os1-logistics/container-reference-app/configs"
 	cache "github.com/os1-logistics/container-reference-app/internal/pkg/cache"
 	"github.com/os1-logistics/container-reference-app/internal/pkg/common"
@@ -21,8 +22,7 @@ func GetToken(tenantId string) (string, error) {
 	tenantTokenKey := fmt.Sprintf("%s:%s:os1:token", common.AppName, tenantId)
 	token, isPresent := cache.ServiceCache.Get(tenantTokenKey)
 	if isPresent && token != nil {
-		fmt.Println("Token found in cache")
-		//fmt.Println(token)
+		glog.Info("Token found in cache")
 		return token.(string), nil
 	}
 
@@ -43,9 +43,8 @@ func GetToken(tenantId string) (string, error) {
 
 	success, response, _ := aaaClient.AuthenticationApi.AuthClientCredentialsExecute(request)
 	var accessToken string
-	fmt.Println("Generating token for tenant: ", tenantId)
+	glog.Info("Generating token for tenant: ", tenantId)
 	if response.StatusCode == 200 && success != nil {
-		//fmt.Println(success.Data.GetAccessToken())
 		accessToken = success.Data.GetAccessToken()
 		// cache duration is 10 minutes less than the actual token expiry
 		duration := time.Duration(success.Data.GetExpiresIn()-600) * time.Second
@@ -53,7 +52,7 @@ func GetToken(tenantId string) (string, error) {
 		return accessToken, nil
 	}
 
-	fmt.Println("Unable to get token")
+	glog.Info("Unable to get token")
 
 	return "", errors.New("Unable to get token")
 }

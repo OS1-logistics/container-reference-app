@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/golang/glog"
 	"github.com/os1-logistics/container-reference-app/internal/pkg/domain"
 	containerdomain "github.com/os1-logistics/container-reference-app/internal/pkg/domain/container"
 )
@@ -21,7 +22,7 @@ func GetErrorResponse(inputBuff *io.ReadCloser) containerdomain.ErrorResponse {
 
 func Initialize(tenantId string) error {
 
-	fmt.Println("Initializing the application with container types")
+	glog.Info("Initializing the application with container types")
 
 	const shipmentOrderContainerTypeName = "ShipmentOrder"
 	const bagContainerTypeName = "Bag"
@@ -56,8 +57,8 @@ func Initialize(tenantId string) error {
 			containerTypeRequest = containerTypeRequest.ContainerTypeCreateRequest(ShipmentOrderContainerTypeCreateRequest)
 
 			_, response, err := containerClient.ContainerTypeApi.CreateContainerTypeExecute(containerTypeRequest)
-			fmt.Println("====================Create ShipmentOrder type=====================")
-			fmt.Println(response)
+			glog.Info("====================Create ShipmentOrder type=====================")
+			glog.Info(response)
 
 			if err != nil {
 				createErrResponse := GetErrorResponse(&getresponse1.Body)
@@ -69,7 +70,7 @@ func Initialize(tenantId string) error {
 		}
 	}
 
-	fmt.Println("====================ShipmentOrder Type Created Idempotently=====================")
+	glog.Info("====================ShipmentOrder Type Created Idempotently=====================")
 
 	getContainerTypeRequest2 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, bagContainerTypeName)
 	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSACCESS(token)
@@ -97,8 +98,8 @@ func Initialize(tenantId string) error {
 			containerTypeRequest = containerTypeRequest.ContainerTypeCreateRequest(BagContainerTypeCreateRequest)
 
 			_, response, err := containerClient.ContainerTypeApi.CreateContainerTypeExecute(containerTypeRequest)
-			fmt.Println("====================Create Bag type=====================")
-			fmt.Println(response)
+			glog.Info("====================Create Bag type=====================")
+			glog.Info(response)
 
 			if err != nil {
 				createErrResponse := GetErrorResponse(&getresponse2.Body)
@@ -111,6 +112,6 @@ func Initialize(tenantId string) error {
 			return fmt.Errorf("Error while getting container type Bag: %s", errResponse.Error.Description)
 		}
 	}
-	fmt.Println("====================Bag Type Created Idempotently=====================")
+	glog.Info("====================Bag Type Created Idempotently=====================")
 	return nil
 }

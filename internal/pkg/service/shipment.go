@@ -1,8 +1,7 @@
 package service
 
 import (
-	"fmt"
-
+	"github.com/golang/glog"
 	container "github.com/os1-logistics/container-reference-app/internal/pkg/domain/container"
 )
 
@@ -19,5 +18,5 @@ func NewShipmentService() ShipmentService {
 }
 
 func (s ShipmentService) GetShipments() {
-	fmt.Println("invoked GetShipments")
+	glog.Info("invoked GetShipments")
 }
