@@ -60,7 +60,7 @@ func NewEventsResponseWithDefaults() *EventsResponse {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *EventsResponse) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -70,15 +70,15 @@ func (o *EventsResponse) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventsResponse) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *EventsResponse) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -92,7 +92,7 @@ func (o *EventsResponse) SetDescription(v string) {
 
 // GetEventType returns the EventType field value if set, zero value otherwise.
 func (o *EventsResponse) GetEventType() EventType {
-	if o == nil || o.EventType == nil {
+	if o == nil || isNil(o.EventType) {
 		var ret EventType
 		return ret
 	}
@@ -102,15 +102,15 @@ func (o *EventsResponse) GetEventType() EventType {
 // GetEventTypeOk returns a tuple with the EventType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventsResponse) GetEventTypeOk() (*EventType, bool) {
-	if o == nil || o.EventType == nil {
-		return nil, false
+	if o == nil || isNil(o.EventType) {
+    return nil, false
 	}
 	return o.EventType, true
 }
 
 // HasEventType returns a boolean if a field has been set.
 func (o *EventsResponse) HasEventType() bool {
-	if o != nil && o.EventType != nil {
+	if o != nil && !isNil(o.EventType) {
 		return true
 	}
 
@@ -124,7 +124,7 @@ func (o *EventsResponse) SetEventType(v EventType) {
 
 // GetReasons returns the Reasons field value if set, zero value otherwise.
 func (o *EventsResponse) GetReasons() []ReasonMetaData {
-	if o == nil || o.Reasons == nil {
+	if o == nil || isNil(o.Reasons) {
 		var ret []ReasonMetaData
 		return ret
 	}
@@ -134,15 +134,15 @@ func (o *EventsResponse) GetReasons() []ReasonMetaData {
 // GetReasonsOk returns a tuple with the Reasons field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventsResponse) GetReasonsOk() ([]ReasonMetaData, bool) {
-	if o == nil || o.Reasons == nil {
-		return nil, false
+	if o == nil || isNil(o.Reasons) {
+    return nil, false
 	}
 	return o.Reasons, true
 }
 
 // HasReasons returns a boolean if a field has been set.
 func (o *EventsResponse) HasReasons() bool {
-	if o != nil && o.Reasons != nil {
+	if o != nil && !isNil(o.Reasons) {
 		return true
 	}
 
@@ -156,7 +156,7 @@ func (o *EventsResponse) SetReasons(v []ReasonMetaData) {
 
 // GetEntities returns the Entities field value if set, zero value otherwise.
 func (o *EventsResponse) GetEntities() []EntitiesMetaData {
-	if o == nil || o.Entities == nil {
+	if o == nil || isNil(o.Entities) {
 		var ret []EntitiesMetaData
 		return ret
 	}
@@ -166,15 +166,15 @@ func (o *EventsResponse) GetEntities() []EntitiesMetaData {
 // GetEntitiesOk returns a tuple with the Entities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventsResponse) GetEntitiesOk() ([]EntitiesMetaData, bool) {
-	if o == nil || o.Entities == nil {
-		return nil, false
+	if o == nil || isNil(o.Entities) {
+    return nil, false
 	}
 	return o.Entities, true
 }
 
 // HasEntities returns a boolean if a field has been set.
 func (o *EventsResponse) HasEntities() bool {
-	if o != nil && o.Entities != nil {
+	if o != nil && !isNil(o.Entities) {
 		return true
 	}
 
@@ -188,7 +188,7 @@ func (o *EventsResponse) SetEntities(v []EntitiesMetaData) {
 
 // GetIsSystemDefined returns the IsSystemDefined field value if set, zero value otherwise.
 func (o *EventsResponse) GetIsSystemDefined() bool {
-	if o == nil || o.IsSystemDefined == nil {
+	if o == nil || isNil(o.IsSystemDefined) {
 		var ret bool
 		return ret
 	}
@@ -198,15 +198,15 @@ func (o *EventsResponse) GetIsSystemDefined() bool {
 // GetIsSystemDefinedOk returns a tuple with the IsSystemDefined field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventsResponse) GetIsSystemDefinedOk() (*bool, bool) {
-	if o == nil || o.IsSystemDefined == nil {
-		return nil, false
+	if o == nil || isNil(o.IsSystemDefined) {
+    return nil, false
 	}
 	return o.IsSystemDefined, true
 }
 
 // HasIsSystemDefined returns a boolean if a field has been set.
 func (o *EventsResponse) HasIsSystemDefined() bool {
-	if o != nil && o.IsSystemDefined != nil {
+	if o != nil && !isNil(o.IsSystemDefined) {
 		return true
 	}
 
@@ -220,7 +220,7 @@ func (o *EventsResponse) SetIsSystemDefined(v bool) {
 
 // GetIsEnabled returns the IsEnabled field value if set, zero value otherwise.
 func (o *EventsResponse) GetIsEnabled() bool {
-	if o == nil || o.IsEnabled == nil {
+	if o == nil || isNil(o.IsEnabled) {
 		var ret bool
 		return ret
 	}
@@ -230,15 +230,15 @@ func (o *EventsResponse) GetIsEnabled() bool {
 // GetIsEnabledOk returns a tuple with the IsEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventsResponse) GetIsEnabledOk() (*bool, bool) {
-	if o == nil || o.IsEnabled == nil {
-		return nil, false
+	if o == nil || isNil(o.IsEnabled) {
+    return nil, false
 	}
 	return o.IsEnabled, true
 }
 
 // HasIsEnabled returns a boolean if a field has been set.
 func (o *EventsResponse) HasIsEnabled() bool {
-	if o != nil && o.IsEnabled != nil {
+	if o != nil && !isNil(o.IsEnabled) {
 		return true
 	}
 
@@ -252,7 +252,7 @@ func (o *EventsResponse) SetIsEnabled(v bool) {
 
 // GetDataValidations returns the DataValidations field value if set, zero value otherwise.
 func (o *EventsResponse) GetDataValidations() []EventDataItem {
-	if o == nil || o.DataValidations == nil {
+	if o == nil || isNil(o.DataValidations) {
 		var ret []EventDataItem
 		return ret
 	}
@@ -262,15 +262,15 @@ func (o *EventsResponse) GetDataValidations() []EventDataItem {
 // GetDataValidationsOk returns a tuple with the DataValidations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventsResponse) GetDataValidationsOk() ([]EventDataItem, bool) {
-	if o == nil || o.DataValidations == nil {
-		return nil, false
+	if o == nil || isNil(o.DataValidations) {
+    return nil, false
 	}
 	return o.DataValidations, true
 }
 
 // HasDataValidations returns a boolean if a field has been set.
 func (o *EventsResponse) HasDataValidations() bool {
-	if o != nil && o.DataValidations != nil {
+	if o != nil && !isNil(o.DataValidations) {
 		return true
 	}
 
@@ -284,7 +284,7 @@ func (o *EventsResponse) SetDataValidations(v []EventDataItem) {
 
 // GetEventCode returns the EventCode field value if set, zero value otherwise.
 func (o *EventsResponse) GetEventCode() string {
-	if o == nil || o.EventCode == nil {
+	if o == nil || isNil(o.EventCode) {
 		var ret string
 		return ret
 	}
@@ -294,15 +294,15 @@ func (o *EventsResponse) GetEventCode() string {
 // GetEventCodeOk returns a tuple with the EventCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventsResponse) GetEventCodeOk() (*string, bool) {
-	if o == nil || o.EventCode == nil {
-		return nil, false
+	if o == nil || isNil(o.EventCode) {
+    return nil, false
 	}
 	return o.EventCode, true
 }
 
 // HasEventCode returns a boolean if a field has been set.
 func (o *EventsResponse) HasEventCode() bool {
-	if o != nil && o.EventCode != nil {
+	if o != nil && !isNil(o.EventCode) {
 		return true
 	}
 
@@ -316,28 +316,28 @@ func (o *EventsResponse) SetEventCode(v string) {
 
 func (o EventsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.EventType != nil {
+	if !isNil(o.EventType) {
 		toSerialize["eventType"] = o.EventType
 	}
-	if o.Reasons != nil {
+	if !isNil(o.Reasons) {
 		toSerialize["reasons"] = o.Reasons
 	}
-	if o.Entities != nil {
+	if !isNil(o.Entities) {
 		toSerialize["entities"] = o.Entities
 	}
-	if o.IsSystemDefined != nil {
+	if !isNil(o.IsSystemDefined) {
 		toSerialize["isSystemDefined"] = o.IsSystemDefined
 	}
-	if o.IsEnabled != nil {
+	if !isNil(o.IsEnabled) {
 		toSerialize["isEnabled"] = o.IsEnabled
 	}
-	if o.DataValidations != nil {
+	if !isNil(o.DataValidations) {
 		toSerialize["dataValidations"] = o.DataValidations
 	}
-	if o.EventCode != nil {
+	if !isNil(o.EventCode) {
 		toSerialize["eventCode"] = o.EventCode
 	}
 	return json.Marshal(toSerialize)

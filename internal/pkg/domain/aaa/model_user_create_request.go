@@ -57,7 +57,7 @@ func NewUserCreateRequestWithDefaults() *UserCreateRequest {
 
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *UserCreateRequest) GetUserId() string {
-	if o == nil || o.UserId == nil {
+	if o == nil || isNil(o.UserId) {
 		var ret string
 		return ret
 	}
@@ -67,15 +67,15 @@ func (o *UserCreateRequest) GetUserId() string {
 // GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserCreateRequest) GetUserIdOk() (*string, bool) {
-	if o == nil || o.UserId == nil {
-		return nil, false
+	if o == nil || isNil(o.UserId) {
+    return nil, false
 	}
 	return o.UserId, true
 }
 
 // HasUserId returns a boolean if a field has been set.
 func (o *UserCreateRequest) HasUserId() bool {
-	if o != nil && o.UserId != nil {
+	if o != nil && !isNil(o.UserId) {
 		return true
 	}
 
@@ -89,7 +89,7 @@ func (o *UserCreateRequest) SetUserId(v string) {
 
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *UserCreateRequest) GetEmail() string {
-	if o == nil || o.Email == nil {
+	if o == nil || isNil(o.Email) {
 		var ret string
 		return ret
 	}
@@ -99,15 +99,15 @@ func (o *UserCreateRequest) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserCreateRequest) GetEmailOk() (*string, bool) {
-	if o == nil || o.Email == nil {
-		return nil, false
+	if o == nil || isNil(o.Email) {
+    return nil, false
 	}
 	return o.Email, true
 }
 
 // HasEmail returns a boolean if a field has been set.
 func (o *UserCreateRequest) HasEmail() bool {
-	if o != nil && o.Email != nil {
+	if o != nil && !isNil(o.Email) {
 		return true
 	}
 
@@ -121,7 +121,7 @@ func (o *UserCreateRequest) SetEmail(v string) {
 
 // GetPrimaryMobile returns the PrimaryMobile field value if set, zero value otherwise.
 func (o *UserCreateRequest) GetPrimaryMobile() MobileNumber {
-	if o == nil || o.PrimaryMobile == nil {
+	if o == nil || isNil(o.PrimaryMobile) {
 		var ret MobileNumber
 		return ret
 	}
@@ -131,15 +131,15 @@ func (o *UserCreateRequest) GetPrimaryMobile() MobileNumber {
 // GetPrimaryMobileOk returns a tuple with the PrimaryMobile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserCreateRequest) GetPrimaryMobileOk() (*MobileNumber, bool) {
-	if o == nil || o.PrimaryMobile == nil {
-		return nil, false
+	if o == nil || isNil(o.PrimaryMobile) {
+    return nil, false
 	}
 	return o.PrimaryMobile, true
 }
 
 // HasPrimaryMobile returns a boolean if a field has been set.
 func (o *UserCreateRequest) HasPrimaryMobile() bool {
-	if o != nil && o.PrimaryMobile != nil {
+	if o != nil && !isNil(o.PrimaryMobile) {
 		return true
 	}
 
@@ -165,7 +165,7 @@ func (o *UserCreateRequest) GetFirstName() string {
 // and a boolean to check if the value has been set.
 func (o *UserCreateRequest) GetFirstNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.FirstName, true
 }
@@ -177,7 +177,7 @@ func (o *UserCreateRequest) SetFirstName(v string) {
 
 // GetMiddleName returns the MiddleName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserCreateRequest) GetMiddleName() string {
-	if o == nil || o.MiddleName.Get() == nil {
+	if o == nil || isNil(o.MiddleName.Get()) {
 		var ret string
 		return ret
 	}
@@ -189,7 +189,7 @@ func (o *UserCreateRequest) GetMiddleName() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UserCreateRequest) GetMiddleNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.MiddleName.Get(), o.MiddleName.IsSet()
 }
@@ -219,7 +219,7 @@ func (o *UserCreateRequest) UnsetMiddleName() {
 
 // GetLastName returns the LastName field value if set, zero value otherwise.
 func (o *UserCreateRequest) GetLastName() string {
-	if o == nil || o.LastName == nil {
+	if o == nil || isNil(o.LastName) {
 		var ret string
 		return ret
 	}
@@ -229,15 +229,15 @@ func (o *UserCreateRequest) GetLastName() string {
 // GetLastNameOk returns a tuple with the LastName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserCreateRequest) GetLastNameOk() (*string, bool) {
-	if o == nil || o.LastName == nil {
-		return nil, false
+	if o == nil || isNil(o.LastName) {
+    return nil, false
 	}
 	return o.LastName, true
 }
 
 // HasLastName returns a boolean if a field has been set.
 func (o *UserCreateRequest) HasLastName() bool {
-	if o != nil && o.LastName != nil {
+	if o != nil && !isNil(o.LastName) {
 		return true
 	}
 
@@ -251,7 +251,7 @@ func (o *UserCreateRequest) SetLastName(v string) {
 
 // GetSecondaryMobile returns the SecondaryMobile field value if set, zero value otherwise.
 func (o *UserCreateRequest) GetSecondaryMobile() MobileNumber {
-	if o == nil || o.SecondaryMobile == nil {
+	if o == nil || isNil(o.SecondaryMobile) {
 		var ret MobileNumber
 		return ret
 	}
@@ -261,15 +261,15 @@ func (o *UserCreateRequest) GetSecondaryMobile() MobileNumber {
 // GetSecondaryMobileOk returns a tuple with the SecondaryMobile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserCreateRequest) GetSecondaryMobileOk() (*MobileNumber, bool) {
-	if o == nil || o.SecondaryMobile == nil {
-		return nil, false
+	if o == nil || isNil(o.SecondaryMobile) {
+    return nil, false
 	}
 	return o.SecondaryMobile, true
 }
 
 // HasSecondaryMobile returns a boolean if a field has been set.
 func (o *UserCreateRequest) HasSecondaryMobile() bool {
-	if o != nil && o.SecondaryMobile != nil {
+	if o != nil && !isNil(o.SecondaryMobile) {
 		return true
 	}
 
@@ -283,7 +283,7 @@ func (o *UserCreateRequest) SetSecondaryMobile(v MobileNumber) {
 
 // GetParticipantId returns the ParticipantId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserCreateRequest) GetParticipantId() string {
-	if o == nil || o.ParticipantId.Get() == nil {
+	if o == nil || isNil(o.ParticipantId.Get()) {
 		var ret string
 		return ret
 	}
@@ -295,7 +295,7 @@ func (o *UserCreateRequest) GetParticipantId() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UserCreateRequest) GetParticipantIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.ParticipantId.Get(), o.ParticipantId.IsSet()
 }
@@ -325,7 +325,7 @@ func (o *UserCreateRequest) UnsetParticipantId() {
 
 // GetAllowSocialAuth returns the AllowSocialAuth field value if set, zero value otherwise.
 func (o *UserCreateRequest) GetAllowSocialAuth() SocialAuth {
-	if o == nil || o.AllowSocialAuth == nil {
+	if o == nil || isNil(o.AllowSocialAuth) {
 		var ret SocialAuth
 		return ret
 	}
@@ -335,15 +335,15 @@ func (o *UserCreateRequest) GetAllowSocialAuth() SocialAuth {
 // GetAllowSocialAuthOk returns a tuple with the AllowSocialAuth field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserCreateRequest) GetAllowSocialAuthOk() (*SocialAuth, bool) {
-	if o == nil || o.AllowSocialAuth == nil {
-		return nil, false
+	if o == nil || isNil(o.AllowSocialAuth) {
+    return nil, false
 	}
 	return o.AllowSocialAuth, true
 }
 
 // HasAllowSocialAuth returns a boolean if a field has been set.
 func (o *UserCreateRequest) HasAllowSocialAuth() bool {
-	if o != nil && o.AllowSocialAuth != nil {
+	if o != nil && !isNil(o.AllowSocialAuth) {
 		return true
 	}
 
@@ -357,7 +357,7 @@ func (o *UserCreateRequest) SetAllowSocialAuth(v SocialAuth) {
 
 // GetAllowSAMLAuth returns the AllowSAMLAuth field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserCreateRequest) GetAllowSAMLAuth() bool {
-	if o == nil || o.AllowSAMLAuth.Get() == nil {
+	if o == nil || isNil(o.AllowSAMLAuth.Get()) {
 		var ret bool
 		return ret
 	}
@@ -369,7 +369,7 @@ func (o *UserCreateRequest) GetAllowSAMLAuth() bool {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UserCreateRequest) GetAllowSAMLAuthOk() (*bool, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.AllowSAMLAuth.Get(), o.AllowSAMLAuth.IsSet()
 }
@@ -399,7 +399,7 @@ func (o *UserCreateRequest) UnsetAllowSAMLAuth() {
 
 // GetSamlConnector returns the SamlConnector field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserCreateRequest) GetSamlConnector() string {
-	if o == nil || o.SamlConnector.Get() == nil {
+	if o == nil || isNil(o.SamlConnector.Get()) {
 		var ret string
 		return ret
 	}
@@ -411,7 +411,7 @@ func (o *UserCreateRequest) GetSamlConnector() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UserCreateRequest) GetSamlConnectorOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.SamlConnector.Get(), o.SamlConnector.IsSet()
 }
@@ -441,7 +441,7 @@ func (o *UserCreateRequest) UnsetSamlConnector() {
 
 // GetSamlUserId returns the SamlUserId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserCreateRequest) GetSamlUserId() string {
-	if o == nil || o.SamlUserId.Get() == nil {
+	if o == nil || isNil(o.SamlUserId.Get()) {
 		var ret string
 		return ret
 	}
@@ -453,7 +453,7 @@ func (o *UserCreateRequest) GetSamlUserId() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UserCreateRequest) GetSamlUserIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.SamlUserId.Get(), o.SamlUserId.IsSet()
 }
@@ -483,13 +483,13 @@ func (o *UserCreateRequest) UnsetSamlUserId() {
 
 func (o UserCreateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.UserId != nil {
+	if !isNil(o.UserId) {
 		toSerialize["userId"] = o.UserId
 	}
-	if o.Email != nil {
+	if !isNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
-	if o.PrimaryMobile != nil {
+	if !isNil(o.PrimaryMobile) {
 		toSerialize["primaryMobile"] = o.PrimaryMobile
 	}
 	if true {
@@ -498,16 +498,16 @@ func (o UserCreateRequest) MarshalJSON() ([]byte, error) {
 	if o.MiddleName.IsSet() {
 		toSerialize["middleName"] = o.MiddleName.Get()
 	}
-	if o.LastName != nil {
+	if !isNil(o.LastName) {
 		toSerialize["lastName"] = o.LastName
 	}
-	if o.SecondaryMobile != nil {
+	if !isNil(o.SecondaryMobile) {
 		toSerialize["secondaryMobile"] = o.SecondaryMobile
 	}
 	if o.ParticipantId.IsSet() {
 		toSerialize["participantId"] = o.ParticipantId.Get()
 	}
-	if o.AllowSocialAuth != nil {
+	if !isNil(o.AllowSocialAuth) {
 		toSerialize["allowSocialAuth"] = o.AllowSocialAuth
 	}
 	if o.AllowSAMLAuth.IsSet() {

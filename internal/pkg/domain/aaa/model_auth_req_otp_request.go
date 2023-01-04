@@ -46,7 +46,7 @@ func NewAuthReqOtpRequestWithDefaults() *AuthReqOtpRequest {
 
 // GetEmailId returns the EmailId field value if set, zero value otherwise.
 func (o *AuthReqOtpRequest) GetEmailId() string {
-	if o == nil || o.EmailId == nil {
+	if o == nil || isNil(o.EmailId) {
 		var ret string
 		return ret
 	}
@@ -56,15 +56,15 @@ func (o *AuthReqOtpRequest) GetEmailId() string {
 // GetEmailIdOk returns a tuple with the EmailId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AuthReqOtpRequest) GetEmailIdOk() (*string, bool) {
-	if o == nil || o.EmailId == nil {
-		return nil, false
+	if o == nil || isNil(o.EmailId) {
+    return nil, false
 	}
 	return o.EmailId, true
 }
 
 // HasEmailId returns a boolean if a field has been set.
 func (o *AuthReqOtpRequest) HasEmailId() bool {
-	if o != nil && o.EmailId != nil {
+	if o != nil && !isNil(o.EmailId) {
 		return true
 	}
 
@@ -78,7 +78,7 @@ func (o *AuthReqOtpRequest) SetEmailId(v string) {
 
 // GetMobile returns the Mobile field value if set, zero value otherwise.
 func (o *AuthReqOtpRequest) GetMobile() AuthReqOtpRequestMobile {
-	if o == nil || o.Mobile == nil {
+	if o == nil || isNil(o.Mobile) {
 		var ret AuthReqOtpRequestMobile
 		return ret
 	}
@@ -88,15 +88,15 @@ func (o *AuthReqOtpRequest) GetMobile() AuthReqOtpRequestMobile {
 // GetMobileOk returns a tuple with the Mobile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AuthReqOtpRequest) GetMobileOk() (*AuthReqOtpRequestMobile, bool) {
-	if o == nil || o.Mobile == nil {
-		return nil, false
+	if o == nil || isNil(o.Mobile) {
+    return nil, false
 	}
 	return o.Mobile, true
 }
 
 // HasMobile returns a boolean if a field has been set.
 func (o *AuthReqOtpRequest) HasMobile() bool {
-	if o != nil && o.Mobile != nil {
+	if o != nil && !isNil(o.Mobile) {
 		return true
 	}
 
@@ -122,7 +122,7 @@ func (o *AuthReqOtpRequest) GetOtp() string {
 // and a boolean to check if the value has been set.
 func (o *AuthReqOtpRequest) GetOtpOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Otp, true
 }
@@ -146,7 +146,7 @@ func (o *AuthReqOtpRequest) GetMode() string {
 // and a boolean to check if the value has been set.
 func (o *AuthReqOtpRequest) GetModeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Mode, true
 }
@@ -158,10 +158,10 @@ func (o *AuthReqOtpRequest) SetMode(v string) {
 
 func (o AuthReqOtpRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.EmailId != nil {
+	if !isNil(o.EmailId) {
 		toSerialize["emailId"] = o.EmailId
 	}
-	if o.Mobile != nil {
+	if !isNil(o.Mobile) {
 		toSerialize["mobile"] = o.Mobile
 	}
 	if true {

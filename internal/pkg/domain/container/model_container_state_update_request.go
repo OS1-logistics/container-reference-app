@@ -69,7 +69,7 @@ func (o *ContainerStateUpdateRequest) GetEventCode() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerStateUpdateRequest) GetEventCodeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.EventCode, true
 }
@@ -81,7 +81,7 @@ func (o *ContainerStateUpdateRequest) SetEventCode(v string) {
 
 // GetReasonCode returns the ReasonCode field value if set, zero value otherwise.
 func (o *ContainerStateUpdateRequest) GetReasonCode() string {
-	if o == nil || o.ReasonCode == nil {
+	if o == nil || isNil(o.ReasonCode) {
 		var ret string
 		return ret
 	}
@@ -91,15 +91,15 @@ func (o *ContainerStateUpdateRequest) GetReasonCode() string {
 // GetReasonCodeOk returns a tuple with the ReasonCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateUpdateRequest) GetReasonCodeOk() (*string, bool) {
-	if o == nil || o.ReasonCode == nil {
-		return nil, false
+	if o == nil || isNil(o.ReasonCode) {
+    return nil, false
 	}
 	return o.ReasonCode, true
 }
 
 // HasReasonCode returns a boolean if a field has been set.
 func (o *ContainerStateUpdateRequest) HasReasonCode() bool {
-	if o != nil && o.ReasonCode != nil {
+	if o != nil && !isNil(o.ReasonCode) {
 		return true
 	}
 
@@ -125,7 +125,7 @@ func (o *ContainerStateUpdateRequest) GetTimestamp() int32 {
 // and a boolean to check if the value has been set.
 func (o *ContainerStateUpdateRequest) GetTimestampOk() (*int32, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Timestamp, true
 }
@@ -137,7 +137,7 @@ func (o *ContainerStateUpdateRequest) SetTimestamp(v int32) {
 
 // GetPropagate returns the Propagate field value if set, zero value otherwise.
 func (o *ContainerStateUpdateRequest) GetPropagate() bool {
-	if o == nil || o.Propagate == nil {
+	if o == nil || isNil(o.Propagate) {
 		var ret bool
 		return ret
 	}
@@ -147,15 +147,15 @@ func (o *ContainerStateUpdateRequest) GetPropagate() bool {
 // GetPropagateOk returns a tuple with the Propagate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateUpdateRequest) GetPropagateOk() (*bool, bool) {
-	if o == nil || o.Propagate == nil {
-		return nil, false
+	if o == nil || isNil(o.Propagate) {
+    return nil, false
 	}
 	return o.Propagate, true
 }
 
 // HasPropagate returns a boolean if a field has been set.
 func (o *ContainerStateUpdateRequest) HasPropagate() bool {
-	if o != nil && o.Propagate != nil {
+	if o != nil && !isNil(o.Propagate) {
 		return true
 	}
 
@@ -181,7 +181,7 @@ func (o *ContainerStateUpdateRequest) GetData() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *ContainerStateUpdateRequest) GetDataOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return nil, false
+    return map[string]interface{}{}, false
 	}
 	return o.Data, true
 }
@@ -205,7 +205,7 @@ func (o *ContainerStateUpdateRequest) GetSource() EventSource {
 // and a boolean to check if the value has been set.
 func (o *ContainerStateUpdateRequest) GetSourceOk() (*EventSource, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Source, true
 }
@@ -217,7 +217,7 @@ func (o *ContainerStateUpdateRequest) SetSource(v EventSource) {
 
 // GetCallback returns the Callback field value if set, zero value otherwise.
 func (o *ContainerStateUpdateRequest) GetCallback() ContainerTypeUpdateRequestCallback {
-	if o == nil || o.Callback == nil {
+	if o == nil || isNil(o.Callback) {
 		var ret ContainerTypeUpdateRequestCallback
 		return ret
 	}
@@ -227,15 +227,15 @@ func (o *ContainerStateUpdateRequest) GetCallback() ContainerTypeUpdateRequestCa
 // GetCallbackOk returns a tuple with the Callback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateUpdateRequest) GetCallbackOk() (*ContainerTypeUpdateRequestCallback, bool) {
-	if o == nil || o.Callback == nil {
-		return nil, false
+	if o == nil || isNil(o.Callback) {
+    return nil, false
 	}
 	return o.Callback, true
 }
 
 // HasCallback returns a boolean if a field has been set.
 func (o *ContainerStateUpdateRequest) HasCallback() bool {
-	if o != nil && o.Callback != nil {
+	if o != nil && !isNil(o.Callback) {
 		return true
 	}
 
@@ -252,13 +252,13 @@ func (o ContainerStateUpdateRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["eventCode"] = o.EventCode
 	}
-	if o.ReasonCode != nil {
+	if !isNil(o.ReasonCode) {
 		toSerialize["reasonCode"] = o.ReasonCode
 	}
 	if true {
 		toSerialize["timestamp"] = o.Timestamp
 	}
-	if o.Propagate != nil {
+	if !isNil(o.Propagate) {
 		toSerialize["propagate"] = o.Propagate
 	}
 	if true {
@@ -267,7 +267,7 @@ func (o ContainerStateUpdateRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["source"] = o.Source
 	}
-	if o.Callback != nil {
+	if !isNil(o.Callback) {
 		toSerialize["callback"] = o.Callback
 	}
 	return json.Marshal(toSerialize)

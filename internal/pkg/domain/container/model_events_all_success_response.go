@@ -38,7 +38,7 @@ func NewEventsAllSuccessResponseWithDefaults() *EventsAllSuccessResponse {
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *EventsAllSuccessResponse) GetData() []EventsResponse {
-	if o == nil || o.Data == nil {
+	if o == nil || isNil(o.Data) {
 		var ret []EventsResponse
 		return ret
 	}
@@ -48,15 +48,15 @@ func (o *EventsAllSuccessResponse) GetData() []EventsResponse {
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventsAllSuccessResponse) GetDataOk() ([]EventsResponse, bool) {
-	if o == nil || o.Data == nil {
-		return nil, false
+	if o == nil || isNil(o.Data) {
+    return nil, false
 	}
 	return o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
 func (o *EventsAllSuccessResponse) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !isNil(o.Data) {
 		return true
 	}
 
@@ -70,7 +70,7 @@ func (o *EventsAllSuccessResponse) SetData(v []EventsResponse) {
 
 func (o EventsAllSuccessResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Data != nil {
+	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
 	return json.Marshal(toSerialize)

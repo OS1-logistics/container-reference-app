@@ -57,7 +57,7 @@ func (o *Item) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *Item) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -69,7 +69,7 @@ func (o *Item) SetName(v string) {
 
 // GetCode returns the Code field value if set, zero value otherwise.
 func (o *Item) GetCode() string {
-	if o == nil || o.Code == nil {
+	if o == nil || isNil(o.Code) {
 		var ret string
 		return ret
 	}
@@ -79,15 +79,15 @@ func (o *Item) GetCode() string {
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Item) GetCodeOk() (*string, bool) {
-	if o == nil || o.Code == nil {
-		return nil, false
+	if o == nil || isNil(o.Code) {
+    return nil, false
 	}
 	return o.Code, true
 }
 
 // HasCode returns a boolean if a field has been set.
 func (o *Item) HasCode() bool {
-	if o != nil && o.Code != nil {
+	if o != nil && !isNil(o.Code) {
 		return true
 	}
 
@@ -113,7 +113,7 @@ func (o *Item) GetCost() Cost {
 // and a boolean to check if the value has been set.
 func (o *Item) GetCostOk() (*Cost, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Cost, true
 }
@@ -125,7 +125,7 @@ func (o *Item) SetCost(v Cost) {
 
 // GetQuantity returns the Quantity field value if set, zero value otherwise.
 func (o *Item) GetQuantity() Quantity {
-	if o == nil || o.Quantity == nil {
+	if o == nil || isNil(o.Quantity) {
 		var ret Quantity
 		return ret
 	}
@@ -135,15 +135,15 @@ func (o *Item) GetQuantity() Quantity {
 // GetQuantityOk returns a tuple with the Quantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Item) GetQuantityOk() (*Quantity, bool) {
-	if o == nil || o.Quantity == nil {
-		return nil, false
+	if o == nil || isNil(o.Quantity) {
+    return nil, false
 	}
 	return o.Quantity, true
 }
 
 // HasQuantity returns a boolean if a field has been set.
 func (o *Item) HasQuantity() bool {
-	if o != nil && o.Quantity != nil {
+	if o != nil && !isNil(o.Quantity) {
 		return true
 	}
 
@@ -160,13 +160,13 @@ func (o Item) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.Code != nil {
+	if !isNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}
 	if true {
 		toSerialize["cost"] = o.Cost
 	}
-	if o.Quantity != nil {
+	if !isNil(o.Quantity) {
 		toSerialize["quantity"] = o.Quantity
 	}
 	return json.Marshal(toSerialize)

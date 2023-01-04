@@ -39,7 +39,7 @@ func NewCallbackWithDefaults() *Callback {
 
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *Callback) GetUrl() string {
-	if o == nil || o.Url == nil {
+	if o == nil || isNil(o.Url) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *Callback) GetUrl() string {
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Callback) GetUrlOk() (*string, bool) {
-	if o == nil || o.Url == nil {
-		return nil, false
+	if o == nil || isNil(o.Url) {
+    return nil, false
 	}
 	return o.Url, true
 }
 
 // HasUrl returns a boolean if a field has been set.
 func (o *Callback) HasUrl() bool {
-	if o != nil && o.Url != nil {
+	if o != nil && !isNil(o.Url) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *Callback) SetUrl(v string) {
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
 func (o *Callback) GetMeta() map[string]interface{} {
-	if o == nil || o.Meta == nil {
+	if o == nil || isNil(o.Meta) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *Callback) GetMeta() map[string]interface{} {
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Callback) GetMetaOk() (map[string]interface{}, bool) {
-	if o == nil || o.Meta == nil {
-		return nil, false
+	if o == nil || isNil(o.Meta) {
+    return map[string]interface{}{}, false
 	}
 	return o.Meta, true
 }
 
 // HasMeta returns a boolean if a field has been set.
 func (o *Callback) HasMeta() bool {
-	if o != nil && o.Meta != nil {
+	if o != nil && !isNil(o.Meta) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *Callback) SetMeta(v map[string]interface{}) {
 
 func (o Callback) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Url != nil {
+	if !isNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
-	if o.Meta != nil {
+	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
 	return json.Marshal(toSerialize)

@@ -46,7 +46,7 @@ func NewValidationWithDefaults() *Validation {
 
 // GetRange returns the Range field value if set, zero value otherwise.
 func (o *Validation) GetRange() Range {
-	if o == nil || o.Range == nil {
+	if o == nil || isNil(o.Range) {
 		var ret Range
 		return ret
 	}
@@ -56,15 +56,15 @@ func (o *Validation) GetRange() Range {
 // GetRangeOk returns a tuple with the Range field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Validation) GetRangeOk() (*Range, bool) {
-	if o == nil || o.Range == nil {
-		return nil, false
+	if o == nil || isNil(o.Range) {
+    return nil, false
 	}
 	return o.Range, true
 }
 
 // HasRange returns a boolean if a field has been set.
 func (o *Validation) HasRange() bool {
-	if o != nil && o.Range != nil {
+	if o != nil && !isNil(o.Range) {
 		return true
 	}
 
@@ -78,7 +78,7 @@ func (o *Validation) SetRange(v Range) {
 
 // GetRegex returns the Regex field value if set, zero value otherwise.
 func (o *Validation) GetRegex() string {
-	if o == nil || o.Regex == nil {
+	if o == nil || isNil(o.Regex) {
 		var ret string
 		return ret
 	}
@@ -88,15 +88,15 @@ func (o *Validation) GetRegex() string {
 // GetRegexOk returns a tuple with the Regex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Validation) GetRegexOk() (*string, bool) {
-	if o == nil || o.Regex == nil {
-		return nil, false
+	if o == nil || isNil(o.Regex) {
+    return nil, false
 	}
 	return o.Regex, true
 }
 
 // HasRegex returns a boolean if a field has been set.
 func (o *Validation) HasRegex() bool {
-	if o != nil && o.Regex != nil {
+	if o != nil && !isNil(o.Regex) {
 		return true
 	}
 
@@ -110,7 +110,7 @@ func (o *Validation) SetRegex(v string) {
 
 // GetRequired returns the Required field value if set, zero value otherwise.
 func (o *Validation) GetRequired() bool {
-	if o == nil || o.Required == nil {
+	if o == nil || isNil(o.Required) {
 		var ret bool
 		return ret
 	}
@@ -120,15 +120,15 @@ func (o *Validation) GetRequired() bool {
 // GetRequiredOk returns a tuple with the Required field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Validation) GetRequiredOk() (*bool, bool) {
-	if o == nil || o.Required == nil {
-		return nil, false
+	if o == nil || isNil(o.Required) {
+    return nil, false
 	}
 	return o.Required, true
 }
 
 // HasRequired returns a boolean if a field has been set.
 func (o *Validation) HasRequired() bool {
-	if o != nil && o.Required != nil {
+	if o != nil && !isNil(o.Required) {
 		return true
 	}
 
@@ -142,13 +142,13 @@ func (o *Validation) SetRequired(v bool) {
 
 func (o Validation) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Range != nil {
+	if !isNil(o.Range) {
 		toSerialize["range"] = o.Range
 	}
-	if o.Regex != nil {
+	if !isNil(o.Regex) {
 		toSerialize["regex"] = o.Regex
 	}
-	if o.Required != nil {
+	if !isNil(o.Required) {
 		toSerialize["required"] = o.Required
 	}
 	return json.Marshal(toSerialize)

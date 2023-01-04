@@ -39,7 +39,7 @@ func NewContainerStateResponseWithDefaults() *ContainerStateResponse {
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *ContainerStateResponse) GetData() ContainerState {
-	if o == nil || o.Data == nil {
+	if o == nil || isNil(o.Data) {
 		var ret ContainerState
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *ContainerStateResponse) GetData() ContainerState {
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateResponse) GetDataOk() (*ContainerState, bool) {
-	if o == nil || o.Data == nil {
-		return nil, false
+	if o == nil || isNil(o.Data) {
+    return nil, false
 	}
 	return o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
 func (o *ContainerStateResponse) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !isNil(o.Data) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *ContainerStateResponse) SetData(v ContainerState) {
 
 // GetRequest returns the Request field value if set, zero value otherwise.
 func (o *ContainerStateResponse) GetRequest() Request {
-	if o == nil || o.Request == nil {
+	if o == nil || isNil(o.Request) {
 		var ret Request
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *ContainerStateResponse) GetRequest() Request {
 // GetRequestOk returns a tuple with the Request field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateResponse) GetRequestOk() (*Request, bool) {
-	if o == nil || o.Request == nil {
-		return nil, false
+	if o == nil || isNil(o.Request) {
+    return nil, false
 	}
 	return o.Request, true
 }
 
 // HasRequest returns a boolean if a field has been set.
 func (o *ContainerStateResponse) HasRequest() bool {
-	if o != nil && o.Request != nil {
+	if o != nil && !isNil(o.Request) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *ContainerStateResponse) SetRequest(v Request) {
 
 func (o ContainerStateResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Data != nil {
+	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
-	if o.Request != nil {
+	if !isNil(o.Request) {
 		toSerialize["request"] = o.Request
 	}
 	return json.Marshal(toSerialize)

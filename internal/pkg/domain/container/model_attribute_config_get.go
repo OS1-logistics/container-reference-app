@@ -65,7 +65,7 @@ func (o *AttributeConfigGet) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *AttributeConfigGet) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -89,7 +89,7 @@ func (o *AttributeConfigGet) GetDataType() DataType {
 // and a boolean to check if the value has been set.
 func (o *AttributeConfigGet) GetDataTypeOk() (*DataType, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.DataType, true
 }
@@ -101,7 +101,7 @@ func (o *AttributeConfigGet) SetDataType(v DataType) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *AttributeConfigGet) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -111,15 +111,15 @@ func (o *AttributeConfigGet) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AttributeConfigGet) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *AttributeConfigGet) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -133,7 +133,7 @@ func (o *AttributeConfigGet) SetDescription(v string) {
 
 // GetIndexed returns the Indexed field value if set, zero value otherwise.
 func (o *AttributeConfigGet) GetIndexed() bool {
-	if o == nil || o.Indexed == nil {
+	if o == nil || isNil(o.Indexed) {
 		var ret bool
 		return ret
 	}
@@ -143,15 +143,15 @@ func (o *AttributeConfigGet) GetIndexed() bool {
 // GetIndexedOk returns a tuple with the Indexed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AttributeConfigGet) GetIndexedOk() (*bool, bool) {
-	if o == nil || o.Indexed == nil {
-		return nil, false
+	if o == nil || isNil(o.Indexed) {
+    return nil, false
 	}
 	return o.Indexed, true
 }
 
 // HasIndexed returns a boolean if a field has been set.
 func (o *AttributeConfigGet) HasIndexed() bool {
-	if o != nil && o.Indexed != nil {
+	if o != nil && !isNil(o.Indexed) {
 		return true
 	}
 
@@ -165,7 +165,7 @@ func (o *AttributeConfigGet) SetIndexed(v bool) {
 
 // GetIsReadPublic returns the IsReadPublic field value if set, zero value otherwise.
 func (o *AttributeConfigGet) GetIsReadPublic() bool {
-	if o == nil || o.IsReadPublic == nil {
+	if o == nil || isNil(o.IsReadPublic) {
 		var ret bool
 		return ret
 	}
@@ -175,15 +175,15 @@ func (o *AttributeConfigGet) GetIsReadPublic() bool {
 // GetIsReadPublicOk returns a tuple with the IsReadPublic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AttributeConfigGet) GetIsReadPublicOk() (*bool, bool) {
-	if o == nil || o.IsReadPublic == nil {
-		return nil, false
+	if o == nil || isNil(o.IsReadPublic) {
+    return nil, false
 	}
 	return o.IsReadPublic, true
 }
 
 // HasIsReadPublic returns a boolean if a field has been set.
 func (o *AttributeConfigGet) HasIsReadPublic() bool {
-	if o != nil && o.IsReadPublic != nil {
+	if o != nil && !isNil(o.IsReadPublic) {
 		return true
 	}
 
@@ -197,7 +197,7 @@ func (o *AttributeConfigGet) SetIsReadPublic(v bool) {
 
 // GetOwnerAppId returns the OwnerAppId field value if set, zero value otherwise.
 func (o *AttributeConfigGet) GetOwnerAppId() string {
-	if o == nil || o.OwnerAppId == nil {
+	if o == nil || isNil(o.OwnerAppId) {
 		var ret string
 		return ret
 	}
@@ -207,15 +207,15 @@ func (o *AttributeConfigGet) GetOwnerAppId() string {
 // GetOwnerAppIdOk returns a tuple with the OwnerAppId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AttributeConfigGet) GetOwnerAppIdOk() (*string, bool) {
-	if o == nil || o.OwnerAppId == nil {
-		return nil, false
+	if o == nil || isNil(o.OwnerAppId) {
+    return nil, false
 	}
 	return o.OwnerAppId, true
 }
 
 // HasOwnerAppId returns a boolean if a field has been set.
 func (o *AttributeConfigGet) HasOwnerAppId() bool {
-	if o != nil && o.OwnerAppId != nil {
+	if o != nil && !isNil(o.OwnerAppId) {
 		return true
 	}
 
@@ -229,7 +229,7 @@ func (o *AttributeConfigGet) SetOwnerAppId(v string) {
 
 // GetValidation returns the Validation field value if set, zero value otherwise.
 func (o *AttributeConfigGet) GetValidation() AttributeValidation {
-	if o == nil || o.Validation == nil {
+	if o == nil || isNil(o.Validation) {
 		var ret AttributeValidation
 		return ret
 	}
@@ -239,15 +239,15 @@ func (o *AttributeConfigGet) GetValidation() AttributeValidation {
 // GetValidationOk returns a tuple with the Validation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AttributeConfigGet) GetValidationOk() (*AttributeValidation, bool) {
-	if o == nil || o.Validation == nil {
-		return nil, false
+	if o == nil || isNil(o.Validation) {
+    return nil, false
 	}
 	return o.Validation, true
 }
 
 // HasValidation returns a boolean if a field has been set.
 func (o *AttributeConfigGet) HasValidation() bool {
-	if o != nil && o.Validation != nil {
+	if o != nil && !isNil(o.Validation) {
 		return true
 	}
 
@@ -267,19 +267,19 @@ func (o AttributeConfigGet) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["dataType"] = o.DataType
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.Indexed != nil {
+	if !isNil(o.Indexed) {
 		toSerialize["indexed"] = o.Indexed
 	}
-	if o.IsReadPublic != nil {
+	if !isNil(o.IsReadPublic) {
 		toSerialize["isReadPublic"] = o.IsReadPublic
 	}
-	if o.OwnerAppId != nil {
+	if !isNil(o.OwnerAppId) {
 		toSerialize["ownerAppId"] = o.OwnerAppId
 	}
-	if o.Validation != nil {
+	if !isNil(o.Validation) {
 		toSerialize["validation"] = o.Validation
 	}
 	return json.Marshal(toSerialize)

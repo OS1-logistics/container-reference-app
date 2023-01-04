@@ -39,7 +39,7 @@ func NewSuccessStatusResponseAllOfWithDefaults() *SuccessStatusResponseAllOf {
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *SuccessStatusResponseAllOf) GetData() SuccessStatusResponseAllOfData {
-	if o == nil || o.Data == nil {
+	if o == nil || isNil(o.Data) {
 		var ret SuccessStatusResponseAllOfData
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *SuccessStatusResponseAllOf) GetData() SuccessStatusResponseAllOfData {
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessStatusResponseAllOf) GetDataOk() (*SuccessStatusResponseAllOfData, bool) {
-	if o == nil || o.Data == nil {
-		return nil, false
+	if o == nil || isNil(o.Data) {
+    return nil, false
 	}
 	return o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
 func (o *SuccessStatusResponseAllOf) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !isNil(o.Data) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *SuccessStatusResponseAllOf) SetData(v SuccessStatusResponseAllOfData) {
 
 // GetRequest returns the Request field value if set, zero value otherwise.
 func (o *SuccessStatusResponseAllOf) GetRequest() Request {
-	if o == nil || o.Request == nil {
+	if o == nil || isNil(o.Request) {
 		var ret Request
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *SuccessStatusResponseAllOf) GetRequest() Request {
 // GetRequestOk returns a tuple with the Request field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessStatusResponseAllOf) GetRequestOk() (*Request, bool) {
-	if o == nil || o.Request == nil {
-		return nil, false
+	if o == nil || isNil(o.Request) {
+    return nil, false
 	}
 	return o.Request, true
 }
 
 // HasRequest returns a boolean if a field has been set.
 func (o *SuccessStatusResponseAllOf) HasRequest() bool {
-	if o != nil && o.Request != nil {
+	if o != nil && !isNil(o.Request) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *SuccessStatusResponseAllOf) SetRequest(v Request) {
 
 func (o SuccessStatusResponseAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Data != nil {
+	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
-	if o.Request != nil {
+	if !isNil(o.Request) {
 		toSerialize["request"] = o.Request
 	}
 	return json.Marshal(toSerialize)

@@ -39,7 +39,7 @@ func NewSuccessIdentityResponseAllOfDataWithDefaults() *SuccessIdentityResponseA
 
 // GetLoginUrl returns the LoginUrl field value if set, zero value otherwise.
 func (o *SuccessIdentityResponseAllOfData) GetLoginUrl() string {
-	if o == nil || o.LoginUrl == nil {
+	if o == nil || isNil(o.LoginUrl) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *SuccessIdentityResponseAllOfData) GetLoginUrl() string {
 // GetLoginUrlOk returns a tuple with the LoginUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessIdentityResponseAllOfData) GetLoginUrlOk() (*string, bool) {
-	if o == nil || o.LoginUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.LoginUrl) {
+    return nil, false
 	}
 	return o.LoginUrl, true
 }
 
 // HasLoginUrl returns a boolean if a field has been set.
 func (o *SuccessIdentityResponseAllOfData) HasLoginUrl() bool {
-	if o != nil && o.LoginUrl != nil {
+	if o != nil && !isNil(o.LoginUrl) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *SuccessIdentityResponseAllOfData) SetLoginUrl(v string) {
 
 func (o SuccessIdentityResponseAllOfData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.LoginUrl != nil {
+	if !isNil(o.LoginUrl) {
 		toSerialize["loginUrl"] = o.LoginUrl
 	}
 	return json.Marshal(toSerialize)

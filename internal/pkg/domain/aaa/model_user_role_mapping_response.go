@@ -40,7 +40,7 @@ func NewUserRoleMappingResponseWithDefaults() *UserRoleMappingResponse {
 
 // GetTenantId returns the TenantId field value if set, zero value otherwise.
 func (o *UserRoleMappingResponse) GetTenantId() string {
-	if o == nil || o.TenantId == nil {
+	if o == nil || isNil(o.TenantId) {
 		var ret string
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *UserRoleMappingResponse) GetTenantId() string {
 // GetTenantIdOk returns a tuple with the TenantId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserRoleMappingResponse) GetTenantIdOk() (*string, bool) {
-	if o == nil || o.TenantId == nil {
-		return nil, false
+	if o == nil || isNil(o.TenantId) {
+    return nil, false
 	}
 	return o.TenantId, true
 }
 
 // HasTenantId returns a boolean if a field has been set.
 func (o *UserRoleMappingResponse) HasTenantId() bool {
-	if o != nil && o.TenantId != nil {
+	if o != nil && !isNil(o.TenantId) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *UserRoleMappingResponse) SetTenantId(v string) {
 
 // GetRoles returns the Roles field value if set, zero value otherwise.
 func (o *UserRoleMappingResponse) GetRoles() []RoleMapping {
-	if o == nil || o.Roles == nil {
+	if o == nil || isNil(o.Roles) {
 		var ret []RoleMapping
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *UserRoleMappingResponse) GetRoles() []RoleMapping {
 // GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserRoleMappingResponse) GetRolesOk() ([]RoleMapping, bool) {
-	if o == nil || o.Roles == nil {
-		return nil, false
+	if o == nil || isNil(o.Roles) {
+    return nil, false
 	}
 	return o.Roles, true
 }
 
 // HasRoles returns a boolean if a field has been set.
 func (o *UserRoleMappingResponse) HasRoles() bool {
-	if o != nil && o.Roles != nil {
+	if o != nil && !isNil(o.Roles) {
 		return true
 	}
 
@@ -104,10 +104,10 @@ func (o *UserRoleMappingResponse) SetRoles(v []RoleMapping) {
 
 func (o UserRoleMappingResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TenantId != nil {
+	if !isNil(o.TenantId) {
 		toSerialize["tenantId"] = o.TenantId
 	}
-	if o.Roles != nil {
+	if !isNil(o.Roles) {
 		toSerialize["roles"] = o.Roles
 	}
 	return json.Marshal(toSerialize)

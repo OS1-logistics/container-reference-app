@@ -40,7 +40,7 @@ func NewRangeQueryWithDefaults() *RangeQuery {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *RangeQuery) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || isNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *RangeQuery) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RangeQuery) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
-		return nil, false
+	if o == nil || isNil(o.Key) {
+    return nil, false
 	}
 	return o.Key, true
 }
 
 // HasKey returns a boolean if a field has been set.
 func (o *RangeQuery) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !isNil(o.Key) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *RangeQuery) SetKey(v string) {
 
 // GetRelation returns the Relation field value if set, zero value otherwise.
 func (o *RangeQuery) GetRelation() string {
-	if o == nil || o.Relation == nil {
+	if o == nil || isNil(o.Relation) {
 		var ret string
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *RangeQuery) GetRelation() string {
 // GetRelationOk returns a tuple with the Relation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RangeQuery) GetRelationOk() (*string, bool) {
-	if o == nil || o.Relation == nil {
-		return nil, false
+	if o == nil || isNil(o.Relation) {
+    return nil, false
 	}
 	return o.Relation, true
 }
 
 // HasRelation returns a boolean if a field has been set.
 func (o *RangeQuery) HasRelation() bool {
-	if o != nil && o.Relation != nil {
+	if o != nil && !isNil(o.Relation) {
 		return true
 	}
 
@@ -104,7 +104,7 @@ func (o *RangeQuery) SetRelation(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *RangeQuery) GetValue() string {
-	if o == nil || o.Value == nil {
+	if o == nil || isNil(o.Value) {
 		var ret string
 		return ret
 	}
@@ -114,15 +114,15 @@ func (o *RangeQuery) GetValue() string {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RangeQuery) GetValueOk() (*string, bool) {
-	if o == nil || o.Value == nil {
-		return nil, false
+	if o == nil || isNil(o.Value) {
+    return nil, false
 	}
 	return o.Value, true
 }
 
 // HasValue returns a boolean if a field has been set.
 func (o *RangeQuery) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !isNil(o.Value) {
 		return true
 	}
 
@@ -136,13 +136,13 @@ func (o *RangeQuery) SetValue(v string) {
 
 func (o RangeQuery) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Key != nil {
+	if !isNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
-	if o.Relation != nil {
+	if !isNil(o.Relation) {
 		toSerialize["relation"] = o.Relation
 	}
-	if o.Value != nil {
+	if !isNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
 	return json.Marshal(toSerialize)

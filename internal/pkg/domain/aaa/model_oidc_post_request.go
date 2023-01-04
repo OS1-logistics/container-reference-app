@@ -78,7 +78,7 @@ func (o *OIDCPostRequest) GetConnectionName() string {
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetConnectionNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ConnectionName, true
 }
@@ -90,7 +90,7 @@ func (o *OIDCPostRequest) SetConnectionName(v string) {
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *OIDCPostRequest) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+	if o == nil || isNil(o.DisplayName) {
 		var ret string
 		return ret
 	}
@@ -100,15 +100,15 @@ func (o *OIDCPostRequest) GetDisplayName() string {
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
-		return nil, false
+	if o == nil || isNil(o.DisplayName) {
+    return nil, false
 	}
 	return o.DisplayName, true
 }
 
 // HasDisplayName returns a boolean if a field has been set.
 func (o *OIDCPostRequest) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+	if o != nil && !isNil(o.DisplayName) {
 		return true
 	}
 
@@ -122,7 +122,7 @@ func (o *OIDCPostRequest) SetDisplayName(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *OIDCPostRequest) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || isNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -132,15 +132,15 @@ func (o *OIDCPostRequest) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
-		return nil, false
+	if o == nil || isNil(o.Enabled) {
+    return nil, false
 	}
 	return o.Enabled, true
 }
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *OIDCPostRequest) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !isNil(o.Enabled) {
 		return true
 	}
 
@@ -154,7 +154,7 @@ func (o *OIDCPostRequest) SetEnabled(v bool) {
 
 // GetGuiOrder returns the GuiOrder field value if set, zero value otherwise.
 func (o *OIDCPostRequest) GetGuiOrder() float32 {
-	if o == nil || o.GuiOrder == nil {
+	if o == nil || isNil(o.GuiOrder) {
 		var ret float32
 		return ret
 	}
@@ -164,15 +164,15 @@ func (o *OIDCPostRequest) GetGuiOrder() float32 {
 // GetGuiOrderOk returns a tuple with the GuiOrder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetGuiOrderOk() (*float32, bool) {
-	if o == nil || o.GuiOrder == nil {
-		return nil, false
+	if o == nil || isNil(o.GuiOrder) {
+    return nil, false
 	}
 	return o.GuiOrder, true
 }
 
 // HasGuiOrder returns a boolean if a field has been set.
 func (o *OIDCPostRequest) HasGuiOrder() bool {
-	if o != nil && o.GuiOrder != nil {
+	if o != nil && !isNil(o.GuiOrder) {
 		return true
 	}
 
@@ -186,7 +186,7 @@ func (o *OIDCPostRequest) SetGuiOrder(v float32) {
 
 // GetUserInfoUrl returns the UserInfoUrl field value if set, zero value otherwise.
 func (o *OIDCPostRequest) GetUserInfoUrl() string {
-	if o == nil || o.UserInfoUrl == nil {
+	if o == nil || isNil(o.UserInfoUrl) {
 		var ret string
 		return ret
 	}
@@ -196,15 +196,15 @@ func (o *OIDCPostRequest) GetUserInfoUrl() string {
 // GetUserInfoUrlOk returns a tuple with the UserInfoUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetUserInfoUrlOk() (*string, bool) {
-	if o == nil || o.UserInfoUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.UserInfoUrl) {
+    return nil, false
 	}
 	return o.UserInfoUrl, true
 }
 
 // HasUserInfoUrl returns a boolean if a field has been set.
 func (o *OIDCPostRequest) HasUserInfoUrl() bool {
-	if o != nil && o.UserInfoUrl != nil {
+	if o != nil && !isNil(o.UserInfoUrl) {
 		return true
 	}
 
@@ -218,7 +218,7 @@ func (o *OIDCPostRequest) SetUserInfoUrl(v string) {
 
 // GetLogoutUrl returns the LogoutUrl field value if set, zero value otherwise.
 func (o *OIDCPostRequest) GetLogoutUrl() string {
-	if o == nil || o.LogoutUrl == nil {
+	if o == nil || isNil(o.LogoutUrl) {
 		var ret string
 		return ret
 	}
@@ -228,15 +228,15 @@ func (o *OIDCPostRequest) GetLogoutUrl() string {
 // GetLogoutUrlOk returns a tuple with the LogoutUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetLogoutUrlOk() (*string, bool) {
-	if o == nil || o.LogoutUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.LogoutUrl) {
+    return nil, false
 	}
 	return o.LogoutUrl, true
 }
 
 // HasLogoutUrl returns a boolean if a field has been set.
 func (o *OIDCPostRequest) HasLogoutUrl() bool {
-	if o != nil && o.LogoutUrl != nil {
+	if o != nil && !isNil(o.LogoutUrl) {
 		return true
 	}
 
@@ -262,7 +262,7 @@ func (o *OIDCPostRequest) GetAuthorizationUrl() string {
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetAuthorizationUrlOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AuthorizationUrl, true
 }
@@ -286,7 +286,7 @@ func (o *OIDCPostRequest) GetTokenUrl() string {
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetTokenUrlOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.TokenUrl, true
 }
@@ -310,7 +310,7 @@ func (o *OIDCPostRequest) GetClientId() string {
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetClientIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ClientId, true
 }
@@ -334,7 +334,7 @@ func (o *OIDCPostRequest) GetClientSecret() string {
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetClientSecretOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ClientSecret, true
 }
@@ -346,7 +346,7 @@ func (o *OIDCPostRequest) SetClientSecret(v string) {
 
 // GetIssuer returns the Issuer field value if set, zero value otherwise.
 func (o *OIDCPostRequest) GetIssuer() string {
-	if o == nil || o.Issuer == nil {
+	if o == nil || isNil(o.Issuer) {
 		var ret string
 		return ret
 	}
@@ -356,15 +356,15 @@ func (o *OIDCPostRequest) GetIssuer() string {
 // GetIssuerOk returns a tuple with the Issuer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetIssuerOk() (*string, bool) {
-	if o == nil || o.Issuer == nil {
-		return nil, false
+	if o == nil || isNil(o.Issuer) {
+    return nil, false
 	}
 	return o.Issuer, true
 }
 
 // HasIssuer returns a boolean if a field has been set.
 func (o *OIDCPostRequest) HasIssuer() bool {
-	if o != nil && o.Issuer != nil {
+	if o != nil && !isNil(o.Issuer) {
 		return true
 	}
 
@@ -378,7 +378,7 @@ func (o *OIDCPostRequest) SetIssuer(v string) {
 
 // GetJwksUrl returns the JwksUrl field value if set, zero value otherwise.
 func (o *OIDCPostRequest) GetJwksUrl() string {
-	if o == nil || o.JwksUrl == nil {
+	if o == nil || isNil(o.JwksUrl) {
 		var ret string
 		return ret
 	}
@@ -388,15 +388,15 @@ func (o *OIDCPostRequest) GetJwksUrl() string {
 // GetJwksUrlOk returns a tuple with the JwksUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCPostRequest) GetJwksUrlOk() (*string, bool) {
-	if o == nil || o.JwksUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.JwksUrl) {
+    return nil, false
 	}
 	return o.JwksUrl, true
 }
 
 // HasJwksUrl returns a boolean if a field has been set.
 func (o *OIDCPostRequest) HasJwksUrl() bool {
-	if o != nil && o.JwksUrl != nil {
+	if o != nil && !isNil(o.JwksUrl) {
 		return true
 	}
 
@@ -413,19 +413,19 @@ func (o OIDCPostRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["connectionName"] = o.ConnectionName
 	}
-	if o.DisplayName != nil {
+	if !isNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	if o.Enabled != nil {
+	if !isNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if o.GuiOrder != nil {
+	if !isNil(o.GuiOrder) {
 		toSerialize["guiOrder"] = o.GuiOrder
 	}
-	if o.UserInfoUrl != nil {
+	if !isNil(o.UserInfoUrl) {
 		toSerialize["userInfoUrl"] = o.UserInfoUrl
 	}
-	if o.LogoutUrl != nil {
+	if !isNil(o.LogoutUrl) {
 		toSerialize["logoutUrl"] = o.LogoutUrl
 	}
 	if true {
@@ -440,10 +440,10 @@ func (o OIDCPostRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["clientSecret"] = o.ClientSecret
 	}
-	if o.Issuer != nil {
+	if !isNil(o.Issuer) {
 		toSerialize["issuer"] = o.Issuer
 	}
-	if o.JwksUrl != nil {
+	if !isNil(o.JwksUrl) {
 		toSerialize["jwksUrl"] = o.JwksUrl
 	}
 	return json.Marshal(toSerialize)

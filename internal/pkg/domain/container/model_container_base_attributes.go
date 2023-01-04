@@ -58,7 +58,7 @@ func (o *ContainerBaseAttributes) GetContainerType() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerBaseAttributes) GetContainerTypeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ContainerType, true
 }
@@ -70,7 +70,7 @@ func (o *ContainerBaseAttributes) SetContainerType(v string) {
 
 // GetIsReusable returns the IsReusable field value if set, zero value otherwise.
 func (o *ContainerBaseAttributes) GetIsReusable() bool {
-	if o == nil || o.IsReusable == nil {
+	if o == nil || isNil(o.IsReusable) {
 		var ret bool
 		return ret
 	}
@@ -80,15 +80,15 @@ func (o *ContainerBaseAttributes) GetIsReusable() bool {
 // GetIsReusableOk returns a tuple with the IsReusable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerBaseAttributes) GetIsReusableOk() (*bool, bool) {
-	if o == nil || o.IsReusable == nil {
-		return nil, false
+	if o == nil || isNil(o.IsReusable) {
+    return nil, false
 	}
 	return o.IsReusable, true
 }
 
 // HasIsReusable returns a boolean if a field has been set.
 func (o *ContainerBaseAttributes) HasIsReusable() bool {
-	if o != nil && o.IsReusable != nil {
+	if o != nil && !isNil(o.IsReusable) {
 		return true
 	}
 
@@ -105,7 +105,7 @@ func (o ContainerBaseAttributes) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["containerType"] = o.ContainerType
 	}
-	if o.IsReusable != nil {
+	if !isNil(o.IsReusable) {
 		toSerialize["isReusable"] = o.IsReusable
 	}
 	return json.Marshal(toSerialize)

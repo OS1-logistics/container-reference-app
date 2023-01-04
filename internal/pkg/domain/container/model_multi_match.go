@@ -39,7 +39,7 @@ func NewMultiMatchWithDefaults() *MultiMatch {
 
 // GetQuery returns the Query field value if set, zero value otherwise.
 func (o *MultiMatch) GetQuery() string {
-	if o == nil || o.Query == nil {
+	if o == nil || isNil(o.Query) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *MultiMatch) GetQuery() string {
 // GetQueryOk returns a tuple with the Query field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MultiMatch) GetQueryOk() (*string, bool) {
-	if o == nil || o.Query == nil {
-		return nil, false
+	if o == nil || isNil(o.Query) {
+    return nil, false
 	}
 	return o.Query, true
 }
 
 // HasQuery returns a boolean if a field has been set.
 func (o *MultiMatch) HasQuery() bool {
-	if o != nil && o.Query != nil {
+	if o != nil && !isNil(o.Query) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *MultiMatch) SetQuery(v string) {
 
 // GetFields returns the Fields field value if set, zero value otherwise.
 func (o *MultiMatch) GetFields() []string {
-	if o == nil || o.Fields == nil {
+	if o == nil || isNil(o.Fields) {
 		var ret []string
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *MultiMatch) GetFields() []string {
 // GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MultiMatch) GetFieldsOk() ([]string, bool) {
-	if o == nil || o.Fields == nil {
-		return nil, false
+	if o == nil || isNil(o.Fields) {
+    return nil, false
 	}
 	return o.Fields, true
 }
 
 // HasFields returns a boolean if a field has been set.
 func (o *MultiMatch) HasFields() bool {
-	if o != nil && o.Fields != nil {
+	if o != nil && !isNil(o.Fields) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *MultiMatch) SetFields(v []string) {
 
 func (o MultiMatch) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Query != nil {
+	if !isNil(o.Query) {
 		toSerialize["query"] = o.Query
 	}
-	if o.Fields != nil {
+	if !isNil(o.Fields) {
 		toSerialize["fields"] = o.Fields
 	}
 	return json.Marshal(toSerialize)

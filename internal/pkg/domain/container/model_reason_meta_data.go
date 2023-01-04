@@ -39,7 +39,7 @@ func NewReasonMetaDataWithDefaults() *ReasonMetaData {
 
 // GetReasonCode returns the ReasonCode field value if set, zero value otherwise.
 func (o *ReasonMetaData) GetReasonCode() string {
-	if o == nil || o.ReasonCode == nil {
+	if o == nil || isNil(o.ReasonCode) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *ReasonMetaData) GetReasonCode() string {
 // GetReasonCodeOk returns a tuple with the ReasonCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReasonMetaData) GetReasonCodeOk() (*string, bool) {
-	if o == nil || o.ReasonCode == nil {
-		return nil, false
+	if o == nil || isNil(o.ReasonCode) {
+    return nil, false
 	}
 	return o.ReasonCode, true
 }
 
 // HasReasonCode returns a boolean if a field has been set.
 func (o *ReasonMetaData) HasReasonCode() bool {
-	if o != nil && o.ReasonCode != nil {
+	if o != nil && !isNil(o.ReasonCode) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *ReasonMetaData) SetReasonCode(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ReasonMetaData) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *ReasonMetaData) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReasonMetaData) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ReasonMetaData) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *ReasonMetaData) SetDescription(v string) {
 
 func (o ReasonMetaData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ReasonCode != nil {
+	if !isNil(o.ReasonCode) {
 		toSerialize["reasonCode"] = o.ReasonCode
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
 	return json.Marshal(toSerialize)

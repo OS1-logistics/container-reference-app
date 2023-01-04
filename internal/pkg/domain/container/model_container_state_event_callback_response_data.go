@@ -41,7 +41,7 @@ func NewContainerStateEventCallbackResponseDataWithDefaults() *ContainerStateEve
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ContainerStateEventCallbackResponseData) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *ContainerStateEventCallbackResponseData) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateEventCallbackResponseData) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
+	if o == nil || isNil(o.Id) {
+    return nil, false
 	}
 	return o.Id, true
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *ContainerStateEventCallbackResponseData) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *ContainerStateEventCallbackResponseData) SetId(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *ContainerStateEventCallbackResponseData) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || isNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *ContainerStateEventCallbackResponseData) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateEventCallbackResponseData) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
-		return nil, false
+	if o == nil || isNil(o.State) {
+    return nil, false
 	}
 	return o.State, true
 }
 
 // HasState returns a boolean if a field has been set.
 func (o *ContainerStateEventCallbackResponseData) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !isNil(o.State) {
 		return true
 	}
 
@@ -105,7 +105,7 @@ func (o *ContainerStateEventCallbackResponseData) SetState(v string) {
 
 // GetEvent returns the Event field value if set, zero value otherwise.
 func (o *ContainerStateEventCallbackResponseData) GetEvent() ContainerStateEventCallbackResponseDataEvent {
-	if o == nil || o.Event == nil {
+	if o == nil || isNil(o.Event) {
 		var ret ContainerStateEventCallbackResponseDataEvent
 		return ret
 	}
@@ -115,15 +115,15 @@ func (o *ContainerStateEventCallbackResponseData) GetEvent() ContainerStateEvent
 // GetEventOk returns a tuple with the Event field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateEventCallbackResponseData) GetEventOk() (*ContainerStateEventCallbackResponseDataEvent, bool) {
-	if o == nil || o.Event == nil {
-		return nil, false
+	if o == nil || isNil(o.Event) {
+    return nil, false
 	}
 	return o.Event, true
 }
 
 // HasEvent returns a boolean if a field has been set.
 func (o *ContainerStateEventCallbackResponseData) HasEvent() bool {
-	if o != nil && o.Event != nil {
+	if o != nil && !isNil(o.Event) {
 		return true
 	}
 
@@ -137,13 +137,13 @@ func (o *ContainerStateEventCallbackResponseData) SetEvent(v ContainerStateEvent
 
 func (o ContainerStateEventCallbackResponseData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.State != nil {
+	if !isNil(o.State) {
 		toSerialize["state"] = o.State
 	}
-	if o.Event != nil {
+	if !isNil(o.Event) {
 		toSerialize["event"] = o.Event
 	}
 	return json.Marshal(toSerialize)

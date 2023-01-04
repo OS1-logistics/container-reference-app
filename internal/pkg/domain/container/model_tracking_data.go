@@ -39,7 +39,7 @@ func NewTrackingDataWithDefaults() *TrackingData {
 
 // GetTracking returns the Tracking field value if set, zero value otherwise.
 func (o *TrackingData) GetTracking() []ContainerEvents {
-	if o == nil || o.Tracking == nil {
+	if o == nil || isNil(o.Tracking) {
 		var ret []ContainerEvents
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *TrackingData) GetTracking() []ContainerEvents {
 // GetTrackingOk returns a tuple with the Tracking field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TrackingData) GetTrackingOk() ([]ContainerEvents, bool) {
-	if o == nil || o.Tracking == nil {
-		return nil, false
+	if o == nil || isNil(o.Tracking) {
+    return nil, false
 	}
 	return o.Tracking, true
 }
 
 // HasTracking returns a boolean if a field has been set.
 func (o *TrackingData) HasTracking() bool {
-	if o != nil && o.Tracking != nil {
+	if o != nil && !isNil(o.Tracking) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *TrackingData) SetTracking(v []ContainerEvents) {
 
 // GetPendingContainers returns the PendingContainers field value if set, zero value otherwise.
 func (o *TrackingData) GetPendingContainers() []string {
-	if o == nil || o.PendingContainers == nil {
+	if o == nil || isNil(o.PendingContainers) {
 		var ret []string
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *TrackingData) GetPendingContainers() []string {
 // GetPendingContainersOk returns a tuple with the PendingContainers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TrackingData) GetPendingContainersOk() ([]string, bool) {
-	if o == nil || o.PendingContainers == nil {
-		return nil, false
+	if o == nil || isNil(o.PendingContainers) {
+    return nil, false
 	}
 	return o.PendingContainers, true
 }
 
 // HasPendingContainers returns a boolean if a field has been set.
 func (o *TrackingData) HasPendingContainers() bool {
-	if o != nil && o.PendingContainers != nil {
+	if o != nil && !isNil(o.PendingContainers) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *TrackingData) SetPendingContainers(v []string) {
 
 func (o TrackingData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Tracking != nil {
+	if !isNil(o.Tracking) {
 		toSerialize["tracking"] = o.Tracking
 	}
-	if o.PendingContainers != nil {
+	if !isNil(o.PendingContainers) {
 		toSerialize["pendingContainers"] = o.PendingContainers
 	}
 	return json.Marshal(toSerialize)

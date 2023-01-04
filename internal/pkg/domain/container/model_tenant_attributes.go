@@ -39,7 +39,7 @@ func NewTenantAttributesWithDefaults() *TenantAttributes {
 
 // GetTerminalTTL returns the TerminalTTL field value if set, zero value otherwise.
 func (o *TenantAttributes) GetTerminalTTL() string {
-	if o == nil || o.TerminalTTL == nil {
+	if o == nil || isNil(o.TerminalTTL) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *TenantAttributes) GetTerminalTTL() string {
 // GetTerminalTTLOk returns a tuple with the TerminalTTL field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TenantAttributes) GetTerminalTTLOk() (*string, bool) {
-	if o == nil || o.TerminalTTL == nil {
-		return nil, false
+	if o == nil || isNil(o.TerminalTTL) {
+    return nil, false
 	}
 	return o.TerminalTTL, true
 }
 
 // HasTerminalTTL returns a boolean if a field has been set.
 func (o *TenantAttributes) HasTerminalTTL() bool {
-	if o != nil && o.TerminalTTL != nil {
+	if o != nil && !isNil(o.TerminalTTL) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *TenantAttributes) SetTerminalTTL(v string) {
 
 func (o TenantAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TerminalTTL != nil {
+	if !isNil(o.TerminalTTL) {
 		toSerialize["terminalTTL"] = o.TerminalTTL
 	}
 	return json.Marshal(toSerialize)

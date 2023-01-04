@@ -45,7 +45,7 @@ func NewRequestWithDefaults() *Request {
 
 // GetUri returns the Uri field value if set, zero value otherwise.
 func (o *Request) GetUri() string {
-	if o == nil || o.Uri == nil {
+	if o == nil || isNil(o.Uri) {
 		var ret string
 		return ret
 	}
@@ -55,15 +55,15 @@ func (o *Request) GetUri() string {
 // GetUriOk returns a tuple with the Uri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Request) GetUriOk() (*string, bool) {
-	if o == nil || o.Uri == nil {
-		return nil, false
+	if o == nil || isNil(o.Uri) {
+    return nil, false
 	}
 	return o.Uri, true
 }
 
 // HasUri returns a boolean if a field has been set.
 func (o *Request) HasUri() bool {
-	if o != nil && o.Uri != nil {
+	if o != nil && !isNil(o.Uri) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *Request) SetUri(v string) {
 
 // GetMethod returns the Method field value if set, zero value otherwise.
 func (o *Request) GetMethod() string {
-	if o == nil || o.Method == nil {
+	if o == nil || isNil(o.Method) {
 		var ret string
 		return ret
 	}
@@ -87,15 +87,15 @@ func (o *Request) GetMethod() string {
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Request) GetMethodOk() (*string, bool) {
-	if o == nil || o.Method == nil {
-		return nil, false
+	if o == nil || isNil(o.Method) {
+    return nil, false
 	}
 	return o.Method, true
 }
 
 // HasMethod returns a boolean if a field has been set.
 func (o *Request) HasMethod() bool {
-	if o != nil && o.Method != nil {
+	if o != nil && !isNil(o.Method) {
 		return true
 	}
 
@@ -109,7 +109,7 @@ func (o *Request) SetMethod(v string) {
 
 // GetQueryString returns the QueryString field value if set, zero value otherwise.
 func (o *Request) GetQueryString() string {
-	if o == nil || o.QueryString == nil {
+	if o == nil || isNil(o.QueryString) {
 		var ret string
 		return ret
 	}
@@ -119,15 +119,15 @@ func (o *Request) GetQueryString() string {
 // GetQueryStringOk returns a tuple with the QueryString field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Request) GetQueryStringOk() (*string, bool) {
-	if o == nil || o.QueryString == nil {
-		return nil, false
+	if o == nil || isNil(o.QueryString) {
+    return nil, false
 	}
 	return o.QueryString, true
 }
 
 // HasQueryString returns a boolean if a field has been set.
 func (o *Request) HasQueryString() bool {
-	if o != nil && o.QueryString != nil {
+	if o != nil && !isNil(o.QueryString) {
 		return true
 	}
 
@@ -141,7 +141,7 @@ func (o *Request) SetQueryString(v string) {
 
 // GetBody returns the Body field value if set, zero value otherwise.
 func (o *Request) GetBody() map[string]interface{} {
-	if o == nil || o.Body == nil {
+	if o == nil || isNil(o.Body) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -151,15 +151,15 @@ func (o *Request) GetBody() map[string]interface{} {
 // GetBodyOk returns a tuple with the Body field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Request) GetBodyOk() (map[string]interface{}, bool) {
-	if o == nil || o.Body == nil {
-		return nil, false
+	if o == nil || isNil(o.Body) {
+    return map[string]interface{}{}, false
 	}
 	return o.Body, true
 }
 
 // HasBody returns a boolean if a field has been set.
 func (o *Request) HasBody() bool {
-	if o != nil && o.Body != nil {
+	if o != nil && !isNil(o.Body) {
 		return true
 	}
 
@@ -173,16 +173,16 @@ func (o *Request) SetBody(v map[string]interface{}) {
 
 func (o Request) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Uri != nil {
+	if !isNil(o.Uri) {
 		toSerialize["uri"] = o.Uri
 	}
-	if o.Method != nil {
+	if !isNil(o.Method) {
 		toSerialize["method"] = o.Method
 	}
-	if o.QueryString != nil {
+	if !isNil(o.QueryString) {
 		toSerialize["queryString"] = o.QueryString
 	}
-	if o.Body != nil {
+	if !isNil(o.Body) {
 		toSerialize["body"] = o.Body
 	}
 	return json.Marshal(toSerialize)

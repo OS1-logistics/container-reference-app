@@ -55,7 +55,7 @@ func (o *ActionBy) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *ActionBy) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -67,7 +67,7 @@ func (o *ActionBy) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ActionBy) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -77,15 +77,15 @@ func (o *ActionBy) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ActionBy) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
+	if o == nil || isNil(o.Name) {
+    return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *ActionBy) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
@@ -99,7 +99,7 @@ func (o *ActionBy) SetName(v string) {
 
 // GetAppID returns the AppID field value if set, zero value otherwise.
 func (o *ActionBy) GetAppID() string {
-	if o == nil || o.AppID == nil {
+	if o == nil || isNil(o.AppID) {
 		var ret string
 		return ret
 	}
@@ -109,15 +109,15 @@ func (o *ActionBy) GetAppID() string {
 // GetAppIDOk returns a tuple with the AppID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ActionBy) GetAppIDOk() (*string, bool) {
-	if o == nil || o.AppID == nil {
-		return nil, false
+	if o == nil || isNil(o.AppID) {
+    return nil, false
 	}
 	return o.AppID, true
 }
 
 // HasAppID returns a boolean if a field has been set.
 func (o *ActionBy) HasAppID() bool {
-	if o != nil && o.AppID != nil {
+	if o != nil && !isNil(o.AppID) {
 		return true
 	}
 
@@ -134,10 +134,10 @@ func (o ActionBy) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["id"] = o.Id
 	}
-	if o.Name != nil {
+	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.AppID != nil {
+	if !isNil(o.AppID) {
 		toSerialize["appID"] = o.AppID
 	}
 	return json.Marshal(toSerialize)

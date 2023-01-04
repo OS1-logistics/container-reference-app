@@ -63,7 +63,7 @@ func (o *ContainerStateEventCallbackResponseDataEvent) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerStateEventCallbackResponseDataEvent) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -75,7 +75,7 @@ func (o *ContainerStateEventCallbackResponseDataEvent) SetName(v string) {
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *ContainerStateEventCallbackResponseDataEvent) GetTimestamp() int32 {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || isNil(o.Timestamp) {
 		var ret int32
 		return ret
 	}
@@ -85,15 +85,15 @@ func (o *ContainerStateEventCallbackResponseDataEvent) GetTimestamp() int32 {
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateEventCallbackResponseDataEvent) GetTimestampOk() (*int32, bool) {
-	if o == nil || o.Timestamp == nil {
-		return nil, false
+	if o == nil || isNil(o.Timestamp) {
+    return nil, false
 	}
 	return o.Timestamp, true
 }
 
 // HasTimestamp returns a boolean if a field has been set.
 func (o *ContainerStateEventCallbackResponseDataEvent) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
+	if o != nil && !isNil(o.Timestamp) {
 		return true
 	}
 
@@ -107,7 +107,7 @@ func (o *ContainerStateEventCallbackResponseDataEvent) SetTimestamp(v int32) {
 
 // GetPropagate returns the Propagate field value if set, zero value otherwise.
 func (o *ContainerStateEventCallbackResponseDataEvent) GetPropagate() bool {
-	if o == nil || o.Propagate == nil {
+	if o == nil || isNil(o.Propagate) {
 		var ret bool
 		return ret
 	}
@@ -117,15 +117,15 @@ func (o *ContainerStateEventCallbackResponseDataEvent) GetPropagate() bool {
 // GetPropagateOk returns a tuple with the Propagate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateEventCallbackResponseDataEvent) GetPropagateOk() (*bool, bool) {
-	if o == nil || o.Propagate == nil {
-		return nil, false
+	if o == nil || isNil(o.Propagate) {
+    return nil, false
 	}
 	return o.Propagate, true
 }
 
 // HasPropagate returns a boolean if a field has been set.
 func (o *ContainerStateEventCallbackResponseDataEvent) HasPropagate() bool {
-	if o != nil && o.Propagate != nil {
+	if o != nil && !isNil(o.Propagate) {
 		return true
 	}
 
@@ -139,7 +139,7 @@ func (o *ContainerStateEventCallbackResponseDataEvent) SetPropagate(v bool) {
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *ContainerStateEventCallbackResponseDataEvent) GetData() map[string]interface{} {
-	if o == nil || o.Data == nil {
+	if o == nil || isNil(o.Data) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -149,15 +149,15 @@ func (o *ContainerStateEventCallbackResponseDataEvent) GetData() map[string]inte
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateEventCallbackResponseDataEvent) GetDataOk() (map[string]interface{}, bool) {
-	if o == nil || o.Data == nil {
-		return nil, false
+	if o == nil || isNil(o.Data) {
+    return map[string]interface{}{}, false
 	}
 	return o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
 func (o *ContainerStateEventCallbackResponseDataEvent) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !isNil(o.Data) {
 		return true
 	}
 
@@ -171,7 +171,7 @@ func (o *ContainerStateEventCallbackResponseDataEvent) SetData(v map[string]inte
 
 // GetSource returns the Source field value if set, zero value otherwise.
 func (o *ContainerStateEventCallbackResponseDataEvent) GetSource() EventSource {
-	if o == nil || o.Source == nil {
+	if o == nil || isNil(o.Source) {
 		var ret EventSource
 		return ret
 	}
@@ -181,15 +181,15 @@ func (o *ContainerStateEventCallbackResponseDataEvent) GetSource() EventSource {
 // GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateEventCallbackResponseDataEvent) GetSourceOk() (*EventSource, bool) {
-	if o == nil || o.Source == nil {
-		return nil, false
+	if o == nil || isNil(o.Source) {
+    return nil, false
 	}
 	return o.Source, true
 }
 
 // HasSource returns a boolean if a field has been set.
 func (o *ContainerStateEventCallbackResponseDataEvent) HasSource() bool {
-	if o != nil && o.Source != nil {
+	if o != nil && !isNil(o.Source) {
 		return true
 	}
 
@@ -206,16 +206,16 @@ func (o ContainerStateEventCallbackResponseDataEvent) MarshalJSON() ([]byte, err
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.Timestamp != nil {
+	if !isNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
-	if o.Propagate != nil {
+	if !isNil(o.Propagate) {
 		toSerialize["propagate"] = o.Propagate
 	}
-	if o.Data != nil {
+	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
-	if o.Source != nil {
+	if !isNil(o.Source) {
 		toSerialize["source"] = o.Source
 	}
 	return json.Marshal(toSerialize)

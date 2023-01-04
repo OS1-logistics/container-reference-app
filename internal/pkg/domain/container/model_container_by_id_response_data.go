@@ -89,7 +89,7 @@ func (o *ContainerByIdResponseData) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -113,7 +113,7 @@ func (o *ContainerByIdResponseData) GetContainerType() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetContainerTypeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ContainerType, true
 }
@@ -125,7 +125,7 @@ func (o *ContainerByIdResponseData) SetContainerType(v string) {
 
 // GetIsReusable returns the IsReusable field value if set, zero value otherwise.
 func (o *ContainerByIdResponseData) GetIsReusable() bool {
-	if o == nil || o.IsReusable == nil {
+	if o == nil || isNil(o.IsReusable) {
 		var ret bool
 		return ret
 	}
@@ -135,15 +135,15 @@ func (o *ContainerByIdResponseData) GetIsReusable() bool {
 // GetIsReusableOk returns a tuple with the IsReusable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetIsReusableOk() (*bool, bool) {
-	if o == nil || o.IsReusable == nil {
-		return nil, false
+	if o == nil || isNil(o.IsReusable) {
+    return nil, false
 	}
 	return o.IsReusable, true
 }
 
 // HasIsReusable returns a boolean if a field has been set.
 func (o *ContainerByIdResponseData) HasIsReusable() bool {
-	if o != nil && o.IsReusable != nil {
+	if o != nil && !isNil(o.IsReusable) {
 		return true
 	}
 
@@ -157,7 +157,7 @@ func (o *ContainerByIdResponseData) SetIsReusable(v bool) {
 
 // GetItems returns the Items field value if set, zero value otherwise.
 func (o *ContainerByIdResponseData) GetItems() []Item {
-	if o == nil || o.Items == nil {
+	if o == nil || isNil(o.Items) {
 		var ret []Item
 		return ret
 	}
@@ -167,15 +167,15 @@ func (o *ContainerByIdResponseData) GetItems() []Item {
 // GetItemsOk returns a tuple with the Items field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetItemsOk() ([]Item, bool) {
-	if o == nil || o.Items == nil {
-		return nil, false
+	if o == nil || isNil(o.Items) {
+    return nil, false
 	}
 	return o.Items, true
 }
 
 // HasItems returns a boolean if a field has been set.
 func (o *ContainerByIdResponseData) HasItems() bool {
-	if o != nil && o.Items != nil {
+	if o != nil && !isNil(o.Items) {
 		return true
 	}
 
@@ -189,7 +189,7 @@ func (o *ContainerByIdResponseData) SetItems(v []Item) {
 
 // GetTrackingDetails returns the TrackingDetails field value if set, zero value otherwise.
 func (o *ContainerByIdResponseData) GetTrackingDetails() []TrackingDetail {
-	if o == nil || o.TrackingDetails == nil {
+	if o == nil || isNil(o.TrackingDetails) {
 		var ret []TrackingDetail
 		return ret
 	}
@@ -199,15 +199,15 @@ func (o *ContainerByIdResponseData) GetTrackingDetails() []TrackingDetail {
 // GetTrackingDetailsOk returns a tuple with the TrackingDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetTrackingDetailsOk() ([]TrackingDetail, bool) {
-	if o == nil || o.TrackingDetails == nil {
-		return nil, false
+	if o == nil || isNil(o.TrackingDetails) {
+    return nil, false
 	}
 	return o.TrackingDetails, true
 }
 
 // HasTrackingDetails returns a boolean if a field has been set.
 func (o *ContainerByIdResponseData) HasTrackingDetails() bool {
-	if o != nil && o.TrackingDetails != nil {
+	if o != nil && !isNil(o.TrackingDetails) {
 		return true
 	}
 
@@ -221,7 +221,7 @@ func (o *ContainerByIdResponseData) SetTrackingDetails(v []TrackingDetail) {
 
 // GetParentId returns the ParentId field value if set, zero value otherwise.
 func (o *ContainerByIdResponseData) GetParentId() string {
-	if o == nil || o.ParentId == nil {
+	if o == nil || isNil(o.ParentId) {
 		var ret string
 		return ret
 	}
@@ -231,15 +231,15 @@ func (o *ContainerByIdResponseData) GetParentId() string {
 // GetParentIdOk returns a tuple with the ParentId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetParentIdOk() (*string, bool) {
-	if o == nil || o.ParentId == nil {
-		return nil, false
+	if o == nil || isNil(o.ParentId) {
+    return nil, false
 	}
 	return o.ParentId, true
 }
 
 // HasParentId returns a boolean if a field has been set.
 func (o *ContainerByIdResponseData) HasParentId() bool {
-	if o != nil && o.ParentId != nil {
+	if o != nil && !isNil(o.ParentId) {
 		return true
 	}
 
@@ -253,7 +253,7 @@ func (o *ContainerByIdResponseData) SetParentId(v string) {
 
 // GetAttributes returns the Attributes field value if set, zero value otherwise.
 func (o *ContainerByIdResponseData) GetAttributes() map[string]interface{} {
-	if o == nil || o.Attributes == nil {
+	if o == nil || isNil(o.Attributes) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -263,15 +263,15 @@ func (o *ContainerByIdResponseData) GetAttributes() map[string]interface{} {
 // GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetAttributesOk() (map[string]interface{}, bool) {
-	if o == nil || o.Attributes == nil {
-		return nil, false
+	if o == nil || isNil(o.Attributes) {
+    return map[string]interface{}{}, false
 	}
 	return o.Attributes, true
 }
 
 // HasAttributes returns a boolean if a field has been set.
 func (o *ContainerByIdResponseData) HasAttributes() bool {
-	if o != nil && o.Attributes != nil {
+	if o != nil && !isNil(o.Attributes) {
 		return true
 	}
 
@@ -285,7 +285,7 @@ func (o *ContainerByIdResponseData) SetAttributes(v map[string]interface{}) {
 
 // GetIsHazmat returns the IsHazmat field value if set, zero value otherwise.
 func (o *ContainerByIdResponseData) GetIsHazmat() bool {
-	if o == nil || o.IsHazmat == nil {
+	if o == nil || isNil(o.IsHazmat) {
 		var ret bool
 		return ret
 	}
@@ -295,15 +295,15 @@ func (o *ContainerByIdResponseData) GetIsHazmat() bool {
 // GetIsHazmatOk returns a tuple with the IsHazmat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetIsHazmatOk() (*bool, bool) {
-	if o == nil || o.IsHazmat == nil {
-		return nil, false
+	if o == nil || isNil(o.IsHazmat) {
+    return nil, false
 	}
 	return o.IsHazmat, true
 }
 
 // HasIsHazmat returns a boolean if a field has been set.
 func (o *ContainerByIdResponseData) HasIsHazmat() bool {
-	if o != nil && o.IsHazmat != nil {
+	if o != nil && !isNil(o.IsHazmat) {
 		return true
 	}
 
@@ -317,7 +317,7 @@ func (o *ContainerByIdResponseData) SetIsHazmat(v bool) {
 
 // GetIsContainerizable returns the IsContainerizable field value if set, zero value otherwise.
 func (o *ContainerByIdResponseData) GetIsContainerizable() bool {
-	if o == nil || o.IsContainerizable == nil {
+	if o == nil || isNil(o.IsContainerizable) {
 		var ret bool
 		return ret
 	}
@@ -327,15 +327,15 @@ func (o *ContainerByIdResponseData) GetIsContainerizable() bool {
 // GetIsContainerizableOk returns a tuple with the IsContainerizable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetIsContainerizableOk() (*bool, bool) {
-	if o == nil || o.IsContainerizable == nil {
-		return nil, false
+	if o == nil || isNil(o.IsContainerizable) {
+    return nil, false
 	}
 	return o.IsContainerizable, true
 }
 
 // HasIsContainerizable returns a boolean if a field has been set.
 func (o *ContainerByIdResponseData) HasIsContainerizable() bool {
-	if o != nil && o.IsContainerizable != nil {
+	if o != nil && !isNil(o.IsContainerizable) {
 		return true
 	}
 
@@ -361,7 +361,7 @@ func (o *ContainerByIdResponseData) GetCreatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetCreatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -385,7 +385,7 @@ func (o *ContainerByIdResponseData) GetCreatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetCreatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedBy, true
 }
@@ -409,7 +409,7 @@ func (o *ContainerByIdResponseData) GetUpdatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetUpdatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedAt, true
 }
@@ -433,7 +433,7 @@ func (o *ContainerByIdResponseData) GetUpdatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetUpdatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedBy, true
 }
@@ -445,7 +445,7 @@ func (o *ContainerByIdResponseData) SetUpdatedBy(v ActionBy) {
 
 // GetChildContainerIDs returns the ChildContainerIDs field value if set, zero value otherwise.
 func (o *ContainerByIdResponseData) GetChildContainerIDs() []string {
-	if o == nil || o.ChildContainerIDs == nil {
+	if o == nil || isNil(o.ChildContainerIDs) {
 		var ret []string
 		return ret
 	}
@@ -455,15 +455,15 @@ func (o *ContainerByIdResponseData) GetChildContainerIDs() []string {
 // GetChildContainerIDsOk returns a tuple with the ChildContainerIDs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerByIdResponseData) GetChildContainerIDsOk() ([]string, bool) {
-	if o == nil || o.ChildContainerIDs == nil {
-		return nil, false
+	if o == nil || isNil(o.ChildContainerIDs) {
+    return nil, false
 	}
 	return o.ChildContainerIDs, true
 }
 
 // HasChildContainerIDs returns a boolean if a field has been set.
 func (o *ContainerByIdResponseData) HasChildContainerIDs() bool {
-	if o != nil && o.ChildContainerIDs != nil {
+	if o != nil && !isNil(o.ChildContainerIDs) {
 		return true
 	}
 
@@ -483,25 +483,25 @@ func (o ContainerByIdResponseData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["containerType"] = o.ContainerType
 	}
-	if o.IsReusable != nil {
+	if !isNil(o.IsReusable) {
 		toSerialize["isReusable"] = o.IsReusable
 	}
-	if o.Items != nil {
+	if !isNil(o.Items) {
 		toSerialize["items"] = o.Items
 	}
-	if o.TrackingDetails != nil {
+	if !isNil(o.TrackingDetails) {
 		toSerialize["trackingDetails"] = o.TrackingDetails
 	}
-	if o.ParentId != nil {
+	if !isNil(o.ParentId) {
 		toSerialize["parentId"] = o.ParentId
 	}
-	if o.Attributes != nil {
+	if !isNil(o.Attributes) {
 		toSerialize["attributes"] = o.Attributes
 	}
-	if o.IsHazmat != nil {
+	if !isNil(o.IsHazmat) {
 		toSerialize["isHazmat"] = o.IsHazmat
 	}
-	if o.IsContainerizable != nil {
+	if !isNil(o.IsContainerizable) {
 		toSerialize["isContainerizable"] = o.IsContainerizable
 	}
 	if true {
@@ -516,7 +516,7 @@ func (o ContainerByIdResponseData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["updatedBy"] = o.UpdatedBy
 	}
-	if o.ChildContainerIDs != nil {
+	if !isNil(o.ChildContainerIDs) {
 		toSerialize["childContainerIDs"] = o.ChildContainerIDs
 	}
 	return json.Marshal(toSerialize)

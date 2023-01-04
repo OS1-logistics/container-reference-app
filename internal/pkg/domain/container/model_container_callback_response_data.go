@@ -38,7 +38,7 @@ func NewContainerCallbackResponseDataWithDefaults() *ContainerCallbackResponseDa
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ContainerCallbackResponseData) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -48,15 +48,15 @@ func (o *ContainerCallbackResponseData) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCallbackResponseData) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
+	if o == nil || isNil(o.Id) {
+    return nil, false
 	}
 	return o.Id, true
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *ContainerCallbackResponseData) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
@@ -70,7 +70,7 @@ func (o *ContainerCallbackResponseData) SetId(v string) {
 
 func (o ContainerCallbackResponseData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
 	return json.Marshal(toSerialize)

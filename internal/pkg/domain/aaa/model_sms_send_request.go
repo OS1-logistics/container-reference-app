@@ -56,7 +56,7 @@ func (o *SMSSendRequest) GetRecipient() string {
 // and a boolean to check if the value has been set.
 func (o *SMSSendRequest) GetRecipientOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Recipient, true
 }
@@ -80,7 +80,7 @@ func (o *SMSSendRequest) GetBody() string {
 // and a boolean to check if the value has been set.
 func (o *SMSSendRequest) GetBodyOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Body, true
 }
@@ -104,7 +104,7 @@ func (o *SMSSendRequest) GetSender() string {
 // and a boolean to check if the value has been set.
 func (o *SMSSendRequest) GetSenderOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Sender, true
 }
@@ -116,7 +116,7 @@ func (o *SMSSendRequest) SetSender(v string) {
 
 // GetReq returns the Req field value if set, zero value otherwise.
 func (o *SMSSendRequest) GetReq() SMSSendRequestReq {
-	if o == nil || o.Req == nil {
+	if o == nil || isNil(o.Req) {
 		var ret SMSSendRequestReq
 		return ret
 	}
@@ -126,15 +126,15 @@ func (o *SMSSendRequest) GetReq() SMSSendRequestReq {
 // GetReqOk returns a tuple with the Req field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SMSSendRequest) GetReqOk() (*SMSSendRequestReq, bool) {
-	if o == nil || o.Req == nil {
-		return nil, false
+	if o == nil || isNil(o.Req) {
+    return nil, false
 	}
 	return o.Req, true
 }
 
 // HasReq returns a boolean if a field has been set.
 func (o *SMSSendRequest) HasReq() bool {
-	if o != nil && o.Req != nil {
+	if o != nil && !isNil(o.Req) {
 		return true
 	}
 
@@ -157,7 +157,7 @@ func (o SMSSendRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["sender"] = o.Sender
 	}
-	if o.Req != nil {
+	if !isNil(o.Req) {
 		toSerialize["req"] = o.Req
 	}
 	return json.Marshal(toSerialize)

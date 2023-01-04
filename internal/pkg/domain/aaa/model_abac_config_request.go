@@ -49,7 +49,7 @@ func NewAbacConfigRequestWithDefaults() *AbacConfigRequest {
 
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *AbacConfigRequest) GetUrl() string {
-	if o == nil || o.Url == nil {
+	if o == nil || isNil(o.Url) {
 		var ret string
 		return ret
 	}
@@ -59,15 +59,15 @@ func (o *AbacConfigRequest) GetUrl() string {
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AbacConfigRequest) GetUrlOk() (*string, bool) {
-	if o == nil || o.Url == nil {
-		return nil, false
+	if o == nil || isNil(o.Url) {
+    return nil, false
 	}
 	return o.Url, true
 }
 
 // HasUrl returns a boolean if a field has been set.
 func (o *AbacConfigRequest) HasUrl() bool {
-	if o != nil && o.Url != nil {
+	if o != nil && !isNil(o.Url) {
 		return true
 	}
 
@@ -81,7 +81,7 @@ func (o *AbacConfigRequest) SetUrl(v string) {
 
 // GetContentType returns the ContentType field value if set, zero value otherwise.
 func (o *AbacConfigRequest) GetContentType() string {
-	if o == nil || o.ContentType == nil {
+	if o == nil || isNil(o.ContentType) {
 		var ret string
 		return ret
 	}
@@ -91,15 +91,15 @@ func (o *AbacConfigRequest) GetContentType() string {
 // GetContentTypeOk returns a tuple with the ContentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AbacConfigRequest) GetContentTypeOk() (*string, bool) {
-	if o == nil || o.ContentType == nil {
-		return nil, false
+	if o == nil || isNil(o.ContentType) {
+    return nil, false
 	}
 	return o.ContentType, true
 }
 
 // HasContentType returns a boolean if a field has been set.
 func (o *AbacConfigRequest) HasContentType() bool {
-	if o != nil && o.ContentType != nil {
+	if o != nil && !isNil(o.ContentType) {
 		return true
 	}
 
@@ -113,7 +113,7 @@ func (o *AbacConfigRequest) SetContentType(v string) {
 
 // GetHeaders returns the Headers field value if set, zero value otherwise.
 func (o *AbacConfigRequest) GetHeaders() map[string]interface{} {
-	if o == nil || o.Headers == nil {
+	if o == nil || isNil(o.Headers) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -123,15 +123,15 @@ func (o *AbacConfigRequest) GetHeaders() map[string]interface{} {
 // GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AbacConfigRequest) GetHeadersOk() (map[string]interface{}, bool) {
-	if o == nil || o.Headers == nil {
-		return nil, false
+	if o == nil || isNil(o.Headers) {
+    return map[string]interface{}{}, false
 	}
 	return o.Headers, true
 }
 
 // HasHeaders returns a boolean if a field has been set.
 func (o *AbacConfigRequest) HasHeaders() bool {
-	if o != nil && o.Headers != nil {
+	if o != nil && !isNil(o.Headers) {
 		return true
 	}
 
@@ -145,7 +145,7 @@ func (o *AbacConfigRequest) SetHeaders(v map[string]interface{}) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *AbacConfigRequest) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -155,15 +155,15 @@ func (o *AbacConfigRequest) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AbacConfigRequest) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *AbacConfigRequest) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -177,16 +177,16 @@ func (o *AbacConfigRequest) SetIsActive(v bool) {
 
 func (o AbacConfigRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Url != nil {
+	if !isNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
-	if o.ContentType != nil {
+	if !isNil(o.ContentType) {
 		toSerialize["contentType"] = o.ContentType
 	}
-	if o.Headers != nil {
+	if !isNil(o.Headers) {
 		toSerialize["headers"] = o.Headers
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
 	return json.Marshal(toSerialize)

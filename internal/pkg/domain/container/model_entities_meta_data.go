@@ -40,7 +40,7 @@ func NewEntitiesMetaDataWithDefaults() *EntitiesMetaData {
 
 // GetEntityCode returns the EntityCode field value if set, zero value otherwise.
 func (o *EntitiesMetaData) GetEntityCode() string {
-	if o == nil || o.EntityCode == nil {
+	if o == nil || isNil(o.EntityCode) {
 		var ret string
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *EntitiesMetaData) GetEntityCode() string {
 // GetEntityCodeOk returns a tuple with the EntityCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EntitiesMetaData) GetEntityCodeOk() (*string, bool) {
-	if o == nil || o.EntityCode == nil {
-		return nil, false
+	if o == nil || isNil(o.EntityCode) {
+    return nil, false
 	}
 	return o.EntityCode, true
 }
 
 // HasEntityCode returns a boolean if a field has been set.
 func (o *EntitiesMetaData) HasEntityCode() bool {
-	if o != nil && o.EntityCode != nil {
+	if o != nil && !isNil(o.EntityCode) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *EntitiesMetaData) SetEntityCode(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *EntitiesMetaData) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *EntitiesMetaData) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EntitiesMetaData) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *EntitiesMetaData) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -104,7 +104,7 @@ func (o *EntitiesMetaData) SetDescription(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *EntitiesMetaData) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -114,15 +114,15 @@ func (o *EntitiesMetaData) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EntitiesMetaData) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
+	if o == nil || isNil(o.Name) {
+    return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *EntitiesMetaData) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
@@ -136,13 +136,13 @@ func (o *EntitiesMetaData) SetName(v string) {
 
 func (o EntitiesMetaData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.EntityCode != nil {
+	if !isNil(o.EntityCode) {
 		toSerialize["entityCode"] = o.EntityCode
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.Name != nil {
+	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	return json.Marshal(toSerialize)

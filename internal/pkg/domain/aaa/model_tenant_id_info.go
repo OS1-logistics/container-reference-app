@@ -41,7 +41,7 @@ func NewTenantIdInfoWithDefaults() *TenantIdInfo {
 
 // GetTenantId returns the TenantId field value if set, zero value otherwise.
 func (o *TenantIdInfo) GetTenantId() string {
-	if o == nil || o.TenantId == nil {
+	if o == nil || isNil(o.TenantId) {
 		var ret string
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *TenantIdInfo) GetTenantId() string {
 // GetTenantIdOk returns a tuple with the TenantId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TenantIdInfo) GetTenantIdOk() (*string, bool) {
-	if o == nil || o.TenantId == nil {
-		return nil, false
+	if o == nil || isNil(o.TenantId) {
+    return nil, false
 	}
 	return o.TenantId, true
 }
 
 // HasTenantId returns a boolean if a field has been set.
 func (o *TenantIdInfo) HasTenantId() bool {
-	if o != nil && o.TenantId != nil {
+	if o != nil && !isNil(o.TenantId) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *TenantIdInfo) SetTenantId(v string) {
 
 // GetOrgId returns the OrgId field value if set, zero value otherwise.
 func (o *TenantIdInfo) GetOrgId() string {
-	if o == nil || o.OrgId == nil {
+	if o == nil || isNil(o.OrgId) {
 		var ret string
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *TenantIdInfo) GetOrgId() string {
 // GetOrgIdOk returns a tuple with the OrgId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TenantIdInfo) GetOrgIdOk() (*string, bool) {
-	if o == nil || o.OrgId == nil {
-		return nil, false
+	if o == nil || isNil(o.OrgId) {
+    return nil, false
 	}
 	return o.OrgId, true
 }
 
 // HasOrgId returns a boolean if a field has been set.
 func (o *TenantIdInfo) HasOrgId() bool {
-	if o != nil && o.OrgId != nil {
+	if o != nil && !isNil(o.OrgId) {
 		return true
 	}
 
@@ -105,10 +105,10 @@ func (o *TenantIdInfo) SetOrgId(v string) {
 
 func (o TenantIdInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TenantId != nil {
+	if !isNil(o.TenantId) {
 		toSerialize["tenantId"] = o.TenantId
 	}
-	if o.OrgId != nil {
+	if !isNil(o.OrgId) {
 		toSerialize["orgId"] = o.OrgId
 	}
 	return json.Marshal(toSerialize)

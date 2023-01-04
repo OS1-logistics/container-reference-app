@@ -55,7 +55,7 @@ func (o *RoleMappingRequest) GetAssign() bool {
 // and a boolean to check if the value has been set.
 func (o *RoleMappingRequest) GetAssignOk() (*bool, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Assign, true
 }
@@ -79,7 +79,7 @@ func (o *RoleMappingRequest) GetRoles() []RoleMapping {
 // and a boolean to check if the value has been set.
 func (o *RoleMappingRequest) GetRolesOk() ([]RoleMapping, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Roles, true
 }

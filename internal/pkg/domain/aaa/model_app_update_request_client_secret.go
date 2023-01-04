@@ -39,7 +39,7 @@ func NewAppUpdateRequestClientSecretWithDefaults() *AppUpdateRequestClientSecret
 
 // GetIv returns the Iv field value if set, zero value otherwise.
 func (o *AppUpdateRequestClientSecret) GetIv() string {
-	if o == nil || o.Iv == nil {
+	if o == nil || isNil(o.Iv) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *AppUpdateRequestClientSecret) GetIv() string {
 // GetIvOk returns a tuple with the Iv field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppUpdateRequestClientSecret) GetIvOk() (*string, bool) {
-	if o == nil || o.Iv == nil {
-		return nil, false
+	if o == nil || isNil(o.Iv) {
+    return nil, false
 	}
 	return o.Iv, true
 }
 
 // HasIv returns a boolean if a field has been set.
 func (o *AppUpdateRequestClientSecret) HasIv() bool {
-	if o != nil && o.Iv != nil {
+	if o != nil && !isNil(o.Iv) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *AppUpdateRequestClientSecret) SetIv(v string) {
 
 // GetEncryptedText returns the EncryptedText field value if set, zero value otherwise.
 func (o *AppUpdateRequestClientSecret) GetEncryptedText() string {
-	if o == nil || o.EncryptedText == nil {
+	if o == nil || isNil(o.EncryptedText) {
 		var ret string
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *AppUpdateRequestClientSecret) GetEncryptedText() string {
 // GetEncryptedTextOk returns a tuple with the EncryptedText field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppUpdateRequestClientSecret) GetEncryptedTextOk() (*string, bool) {
-	if o == nil || o.EncryptedText == nil {
-		return nil, false
+	if o == nil || isNil(o.EncryptedText) {
+    return nil, false
 	}
 	return o.EncryptedText, true
 }
 
 // HasEncryptedText returns a boolean if a field has been set.
 func (o *AppUpdateRequestClientSecret) HasEncryptedText() bool {
-	if o != nil && o.EncryptedText != nil {
+	if o != nil && !isNil(o.EncryptedText) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *AppUpdateRequestClientSecret) SetEncryptedText(v string) {
 
 func (o AppUpdateRequestClientSecret) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Iv != nil {
+	if !isNil(o.Iv) {
 		toSerialize["iv"] = o.Iv
 	}
-	if o.EncryptedText != nil {
+	if !isNil(o.EncryptedText) {
 		toSerialize["encryptedText"] = o.EncryptedText
 	}
 	return json.Marshal(toSerialize)

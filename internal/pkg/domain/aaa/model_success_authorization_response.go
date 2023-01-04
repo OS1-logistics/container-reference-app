@@ -40,7 +40,7 @@ func NewSuccessAuthorizationResponseWithDefaults() *SuccessAuthorizationResponse
 
 // GetError returns the Error field value if set, zero value otherwise.
 func (o *SuccessAuthorizationResponse) GetError() Error {
-	if o == nil || o.Error == nil {
+	if o == nil || isNil(o.Error) {
 		var ret Error
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *SuccessAuthorizationResponse) GetError() Error {
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessAuthorizationResponse) GetErrorOk() (*Error, bool) {
-	if o == nil || o.Error == nil {
-		return nil, false
+	if o == nil || isNil(o.Error) {
+    return nil, false
 	}
 	return o.Error, true
 }
 
 // HasError returns a boolean if a field has been set.
 func (o *SuccessAuthorizationResponse) HasError() bool {
-	if o != nil && o.Error != nil {
+	if o != nil && !isNil(o.Error) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *SuccessAuthorizationResponse) SetError(v Error) {
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *SuccessAuthorizationResponse) GetData() SuccessAuthorizationResponseData {
-	if o == nil || o.Data == nil {
+	if o == nil || isNil(o.Data) {
 		var ret SuccessAuthorizationResponseData
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *SuccessAuthorizationResponse) GetData() SuccessAuthorizationResponseDat
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessAuthorizationResponse) GetDataOk() (*SuccessAuthorizationResponseData, bool) {
-	if o == nil || o.Data == nil {
-		return nil, false
+	if o == nil || isNil(o.Data) {
+    return nil, false
 	}
 	return o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
 func (o *SuccessAuthorizationResponse) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !isNil(o.Data) {
 		return true
 	}
 
@@ -104,7 +104,7 @@ func (o *SuccessAuthorizationResponse) SetData(v SuccessAuthorizationResponseDat
 
 // GetRequest returns the Request field value if set, zero value otherwise.
 func (o *SuccessAuthorizationResponse) GetRequest() Request {
-	if o == nil || o.Request == nil {
+	if o == nil || isNil(o.Request) {
 		var ret Request
 		return ret
 	}
@@ -114,15 +114,15 @@ func (o *SuccessAuthorizationResponse) GetRequest() Request {
 // GetRequestOk returns a tuple with the Request field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessAuthorizationResponse) GetRequestOk() (*Request, bool) {
-	if o == nil || o.Request == nil {
-		return nil, false
+	if o == nil || isNil(o.Request) {
+    return nil, false
 	}
 	return o.Request, true
 }
 
 // HasRequest returns a boolean if a field has been set.
 func (o *SuccessAuthorizationResponse) HasRequest() bool {
-	if o != nil && o.Request != nil {
+	if o != nil && !isNil(o.Request) {
 		return true
 	}
 
@@ -136,13 +136,13 @@ func (o *SuccessAuthorizationResponse) SetRequest(v Request) {
 
 func (o SuccessAuthorizationResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Error != nil {
+	if !isNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
-	if o.Data != nil {
+	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
-	if o.Request != nil {
+	if !isNil(o.Request) {
 		toSerialize["request"] = o.Request
 	}
 	return json.Marshal(toSerialize)

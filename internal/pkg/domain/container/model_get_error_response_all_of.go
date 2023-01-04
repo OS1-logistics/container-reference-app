@@ -38,7 +38,7 @@ func NewGetErrorResponseAllOfWithDefaults() *GetErrorResponseAllOf {
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *GetErrorResponseAllOf) GetData() GetErrorResponseAllOfData {
-	if o == nil || o.Data == nil {
+	if o == nil || isNil(o.Data) {
 		var ret GetErrorResponseAllOfData
 		return ret
 	}
@@ -48,15 +48,15 @@ func (o *GetErrorResponseAllOf) GetData() GetErrorResponseAllOfData {
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetErrorResponseAllOf) GetDataOk() (*GetErrorResponseAllOfData, bool) {
-	if o == nil || o.Data == nil {
-		return nil, false
+	if o == nil || isNil(o.Data) {
+    return nil, false
 	}
 	return o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
 func (o *GetErrorResponseAllOf) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !isNil(o.Data) {
 		return true
 	}
 
@@ -70,7 +70,7 @@ func (o *GetErrorResponseAllOf) SetData(v GetErrorResponseAllOfData) {
 
 func (o GetErrorResponseAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Data != nil {
+	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
 	return json.Marshal(toSerialize)

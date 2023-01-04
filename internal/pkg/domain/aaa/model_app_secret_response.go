@@ -42,7 +42,7 @@ func NewAppSecretResponseWithDefaults() *AppSecretResponse {
 
 // GetAppId returns the AppId field value if set, zero value otherwise.
 func (o *AppSecretResponse) GetAppId() string {
-	if o == nil || o.AppId == nil {
+	if o == nil || isNil(o.AppId) {
 		var ret string
 		return ret
 	}
@@ -52,15 +52,15 @@ func (o *AppSecretResponse) GetAppId() string {
 // GetAppIdOk returns a tuple with the AppId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppSecretResponse) GetAppIdOk() (*string, bool) {
-	if o == nil || o.AppId == nil {
-		return nil, false
+	if o == nil || isNil(o.AppId) {
+    return nil, false
 	}
 	return o.AppId, true
 }
 
 // HasAppId returns a boolean if a field has been set.
 func (o *AppSecretResponse) HasAppId() bool {
-	if o != nil && o.AppId != nil {
+	if o != nil && !isNil(o.AppId) {
 		return true
 	}
 
@@ -74,7 +74,7 @@ func (o *AppSecretResponse) SetAppId(v string) {
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
 func (o *AppSecretResponse) GetClientId() string {
-	if o == nil || o.ClientId == nil {
+	if o == nil || isNil(o.ClientId) {
 		var ret string
 		return ret
 	}
@@ -84,15 +84,15 @@ func (o *AppSecretResponse) GetClientId() string {
 // GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppSecretResponse) GetClientIdOk() (*string, bool) {
-	if o == nil || o.ClientId == nil {
-		return nil, false
+	if o == nil || isNil(o.ClientId) {
+    return nil, false
 	}
 	return o.ClientId, true
 }
 
 // HasClientId returns a boolean if a field has been set.
 func (o *AppSecretResponse) HasClientId() bool {
-	if o != nil && o.ClientId != nil {
+	if o != nil && !isNil(o.ClientId) {
 		return true
 	}
 
@@ -106,7 +106,7 @@ func (o *AppSecretResponse) SetClientId(v string) {
 
 // GetSecret returns the Secret field value if set, zero value otherwise.
 func (o *AppSecretResponse) GetSecret() AppCreateRequestClientSecret {
-	if o == nil || o.Secret == nil {
+	if o == nil || isNil(o.Secret) {
 		var ret AppCreateRequestClientSecret
 		return ret
 	}
@@ -116,15 +116,15 @@ func (o *AppSecretResponse) GetSecret() AppCreateRequestClientSecret {
 // GetSecretOk returns a tuple with the Secret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppSecretResponse) GetSecretOk() (*AppCreateRequestClientSecret, bool) {
-	if o == nil || o.Secret == nil {
-		return nil, false
+	if o == nil || isNil(o.Secret) {
+    return nil, false
 	}
 	return o.Secret, true
 }
 
 // HasSecret returns a boolean if a field has been set.
 func (o *AppSecretResponse) HasSecret() bool {
-	if o != nil && o.Secret != nil {
+	if o != nil && !isNil(o.Secret) {
 		return true
 	}
 
@@ -138,13 +138,13 @@ func (o *AppSecretResponse) SetSecret(v AppCreateRequestClientSecret) {
 
 func (o AppSecretResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.AppId != nil {
+	if !isNil(o.AppId) {
 		toSerialize["appId"] = o.AppId
 	}
-	if o.ClientId != nil {
+	if !isNil(o.ClientId) {
 		toSerialize["clientId"] = o.ClientId
 	}
-	if o.Secret != nil {
+	if !isNil(o.Secret) {
 		toSerialize["secret"] = o.Secret
 	}
 	return json.Marshal(toSerialize)

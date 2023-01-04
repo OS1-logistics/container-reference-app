@@ -44,7 +44,7 @@ func NewBaseCallbackResponseWithDefaults() *BaseCallbackResponse {
 
 // GetTenantId returns the TenantId field value if set, zero value otherwise.
 func (o *BaseCallbackResponse) GetTenantId() string {
-	if o == nil || o.TenantId == nil {
+	if o == nil || isNil(o.TenantId) {
 		var ret string
 		return ret
 	}
@@ -54,15 +54,15 @@ func (o *BaseCallbackResponse) GetTenantId() string {
 // GetTenantIdOk returns a tuple with the TenantId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BaseCallbackResponse) GetTenantIdOk() (*string, bool) {
-	if o == nil || o.TenantId == nil {
-		return nil, false
+	if o == nil || isNil(o.TenantId) {
+    return nil, false
 	}
 	return o.TenantId, true
 }
 
 // HasTenantId returns a boolean if a field has been set.
 func (o *BaseCallbackResponse) HasTenantId() bool {
-	if o != nil && o.TenantId != nil {
+	if o != nil && !isNil(o.TenantId) {
 		return true
 	}
 
@@ -76,7 +76,7 @@ func (o *BaseCallbackResponse) SetTenantId(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *BaseCallbackResponse) GetStatus() CallbackStatus {
-	if o == nil || o.Status == nil {
+	if o == nil || isNil(o.Status) {
 		var ret CallbackStatus
 		return ret
 	}
@@ -86,15 +86,15 @@ func (o *BaseCallbackResponse) GetStatus() CallbackStatus {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BaseCallbackResponse) GetStatusOk() (*CallbackStatus, bool) {
-	if o == nil || o.Status == nil {
-		return nil, false
+	if o == nil || isNil(o.Status) {
+    return nil, false
 	}
 	return o.Status, true
 }
 
 // HasStatus returns a boolean if a field has been set.
 func (o *BaseCallbackResponse) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !isNil(o.Status) {
 		return true
 	}
 
@@ -108,7 +108,7 @@ func (o *BaseCallbackResponse) SetStatus(v CallbackStatus) {
 
 // GetReason returns the Reason field value if set, zero value otherwise.
 func (o *BaseCallbackResponse) GetReason() string {
-	if o == nil || o.Reason == nil {
+	if o == nil || isNil(o.Reason) {
 		var ret string
 		return ret
 	}
@@ -118,15 +118,15 @@ func (o *BaseCallbackResponse) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BaseCallbackResponse) GetReasonOk() (*string, bool) {
-	if o == nil || o.Reason == nil {
-		return nil, false
+	if o == nil || isNil(o.Reason) {
+    return nil, false
 	}
 	return o.Reason, true
 }
 
 // HasReason returns a boolean if a field has been set.
 func (o *BaseCallbackResponse) HasReason() bool {
-	if o != nil && o.Reason != nil {
+	if o != nil && !isNil(o.Reason) {
 		return true
 	}
 
@@ -140,7 +140,7 @@ func (o *BaseCallbackResponse) SetReason(v string) {
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *BaseCallbackResponse) GetData() map[string]interface{} {
-	if o == nil || o.Data == nil {
+	if o == nil || isNil(o.Data) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -150,15 +150,15 @@ func (o *BaseCallbackResponse) GetData() map[string]interface{} {
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BaseCallbackResponse) GetDataOk() (map[string]interface{}, bool) {
-	if o == nil || o.Data == nil {
-		return nil, false
+	if o == nil || isNil(o.Data) {
+    return map[string]interface{}{}, false
 	}
 	return o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
 func (o *BaseCallbackResponse) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !isNil(o.Data) {
 		return true
 	}
 
@@ -172,16 +172,16 @@ func (o *BaseCallbackResponse) SetData(v map[string]interface{}) {
 
 func (o BaseCallbackResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TenantId != nil {
+	if !isNil(o.TenantId) {
 		toSerialize["tenantId"] = o.TenantId
 	}
-	if o.Status != nil {
+	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if o.Reason != nil {
+	if !isNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
-	if o.Data != nil {
+	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
 	return json.Marshal(toSerialize)

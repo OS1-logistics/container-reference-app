@@ -39,7 +39,7 @@ func NewSuccessSamlConnectionResponseAllOfWithDefaults() *SuccessSamlConnectionR
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOf) GetData() SuccessSamlConnectionResponseAllOfData {
-	if o == nil || o.Data == nil {
+	if o == nil || isNil(o.Data) {
 		var ret SuccessSamlConnectionResponseAllOfData
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *SuccessSamlConnectionResponseAllOf) GetData() SuccessSamlConnectionResp
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOf) GetDataOk() (*SuccessSamlConnectionResponseAllOfData, bool) {
-	if o == nil || o.Data == nil {
-		return nil, false
+	if o == nil || isNil(o.Data) {
+    return nil, false
 	}
 	return o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOf) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !isNil(o.Data) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *SuccessSamlConnectionResponseAllOf) SetData(v SuccessSamlConnectionResp
 
 // GetRequest returns the Request field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOf) GetRequest() Request {
-	if o == nil || o.Request == nil {
+	if o == nil || isNil(o.Request) {
 		var ret Request
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *SuccessSamlConnectionResponseAllOf) GetRequest() Request {
 // GetRequestOk returns a tuple with the Request field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOf) GetRequestOk() (*Request, bool) {
-	if o == nil || o.Request == nil {
-		return nil, false
+	if o == nil || isNil(o.Request) {
+    return nil, false
 	}
 	return o.Request, true
 }
 
 // HasRequest returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOf) HasRequest() bool {
-	if o != nil && o.Request != nil {
+	if o != nil && !isNil(o.Request) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *SuccessSamlConnectionResponseAllOf) SetRequest(v Request) {
 
 func (o SuccessSamlConnectionResponseAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Data != nil {
+	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
-	if o.Request != nil {
+	if !isNil(o.Request) {
 		toSerialize["request"] = o.Request
 	}
 	return json.Marshal(toSerialize)

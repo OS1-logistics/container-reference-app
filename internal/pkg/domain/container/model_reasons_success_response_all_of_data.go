@@ -47,7 +47,7 @@ func NewReasonsSuccessResponseAllOfDataWithDefaults() *ReasonsSuccessResponseAll
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ReasonsSuccessResponseAllOfData) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -57,15 +57,15 @@ func (o *ReasonsSuccessResponseAllOfData) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReasonsSuccessResponseAllOfData) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ReasonsSuccessResponseAllOfData) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -79,7 +79,7 @@ func (o *ReasonsSuccessResponseAllOfData) SetDescription(v string) {
 
 // GetIsEnabled returns the IsEnabled field value if set, zero value otherwise.
 func (o *ReasonsSuccessResponseAllOfData) GetIsEnabled() bool {
-	if o == nil || o.IsEnabled == nil {
+	if o == nil || isNil(o.IsEnabled) {
 		var ret bool
 		return ret
 	}
@@ -89,15 +89,15 @@ func (o *ReasonsSuccessResponseAllOfData) GetIsEnabled() bool {
 // GetIsEnabledOk returns a tuple with the IsEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReasonsSuccessResponseAllOfData) GetIsEnabledOk() (*bool, bool) {
-	if o == nil || o.IsEnabled == nil {
-		return nil, false
+	if o == nil || isNil(o.IsEnabled) {
+    return nil, false
 	}
 	return o.IsEnabled, true
 }
 
 // HasIsEnabled returns a boolean if a field has been set.
 func (o *ReasonsSuccessResponseAllOfData) HasIsEnabled() bool {
-	if o != nil && o.IsEnabled != nil {
+	if o != nil && !isNil(o.IsEnabled) {
 		return true
 	}
 
@@ -111,7 +111,7 @@ func (o *ReasonsSuccessResponseAllOfData) SetIsEnabled(v bool) {
 
 // GetReasonCode returns the ReasonCode field value if set, zero value otherwise.
 func (o *ReasonsSuccessResponseAllOfData) GetReasonCode() string {
-	if o == nil || o.ReasonCode == nil {
+	if o == nil || isNil(o.ReasonCode) {
 		var ret string
 		return ret
 	}
@@ -121,15 +121,15 @@ func (o *ReasonsSuccessResponseAllOfData) GetReasonCode() string {
 // GetReasonCodeOk returns a tuple with the ReasonCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReasonsSuccessResponseAllOfData) GetReasonCodeOk() (*string, bool) {
-	if o == nil || o.ReasonCode == nil {
-		return nil, false
+	if o == nil || isNil(o.ReasonCode) {
+    return nil, false
 	}
 	return o.ReasonCode, true
 }
 
 // HasReasonCode returns a boolean if a field has been set.
 func (o *ReasonsSuccessResponseAllOfData) HasReasonCode() bool {
-	if o != nil && o.ReasonCode != nil {
+	if o != nil && !isNil(o.ReasonCode) {
 		return true
 	}
 
@@ -143,13 +143,13 @@ func (o *ReasonsSuccessResponseAllOfData) SetReasonCode(v string) {
 
 func (o ReasonsSuccessResponseAllOfData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.IsEnabled != nil {
+	if !isNil(o.IsEnabled) {
 		toSerialize["isEnabled"] = o.IsEnabled
 	}
-	if o.ReasonCode != nil {
+	if !isNil(o.ReasonCode) {
 		toSerialize["reasonCode"] = o.ReasonCode
 	}
 	return json.Marshal(toSerialize)

@@ -48,7 +48,7 @@ func NewAppUpdateRequestWithDefaults() *AppUpdateRequest {
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AppUpdateRequest) GetDescription() string {
-	if o == nil || o.Description.Get() == nil {
+	if o == nil || isNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
@@ -60,7 +60,7 @@ func (o *AppUpdateRequest) GetDescription() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AppUpdateRequest) GetDescriptionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Description.Get(), o.Description.IsSet()
 }
@@ -90,7 +90,7 @@ func (o *AppUpdateRequest) UnsetDescription() {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *AppUpdateRequest) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -100,15 +100,15 @@ func (o *AppUpdateRequest) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppUpdateRequest) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *AppUpdateRequest) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -122,7 +122,7 @@ func (o *AppUpdateRequest) SetIsActive(v bool) {
 
 // GetIsDeleted returns the IsDeleted field value if set, zero value otherwise.
 func (o *AppUpdateRequest) GetIsDeleted() bool {
-	if o == nil || o.IsDeleted == nil {
+	if o == nil || isNil(o.IsDeleted) {
 		var ret bool
 		return ret
 	}
@@ -132,15 +132,15 @@ func (o *AppUpdateRequest) GetIsDeleted() bool {
 // GetIsDeletedOk returns a tuple with the IsDeleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppUpdateRequest) GetIsDeletedOk() (*bool, bool) {
-	if o == nil || o.IsDeleted == nil {
-		return nil, false
+	if o == nil || isNil(o.IsDeleted) {
+    return nil, false
 	}
 	return o.IsDeleted, true
 }
 
 // HasIsDeleted returns a boolean if a field has been set.
 func (o *AppUpdateRequest) HasIsDeleted() bool {
-	if o != nil && o.IsDeleted != nil {
+	if o != nil && !isNil(o.IsDeleted) {
 		return true
 	}
 
@@ -154,7 +154,7 @@ func (o *AppUpdateRequest) SetIsDeleted(v bool) {
 
 // GetRedirectUri returns the RedirectUri field value if set, zero value otherwise.
 func (o *AppUpdateRequest) GetRedirectUri() []string {
-	if o == nil || o.RedirectUri == nil {
+	if o == nil || isNil(o.RedirectUri) {
 		var ret []string
 		return ret
 	}
@@ -164,15 +164,15 @@ func (o *AppUpdateRequest) GetRedirectUri() []string {
 // GetRedirectUriOk returns a tuple with the RedirectUri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppUpdateRequest) GetRedirectUriOk() ([]string, bool) {
-	if o == nil || o.RedirectUri == nil {
-		return nil, false
+	if o == nil || isNil(o.RedirectUri) {
+    return nil, false
 	}
 	return o.RedirectUri, true
 }
 
 // HasRedirectUri returns a boolean if a field has been set.
 func (o *AppUpdateRequest) HasRedirectUri() bool {
-	if o != nil && o.RedirectUri != nil {
+	if o != nil && !isNil(o.RedirectUri) {
 		return true
 	}
 
@@ -186,7 +186,7 @@ func (o *AppUpdateRequest) SetRedirectUri(v []string) {
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
 func (o *AppUpdateRequest) GetClientId() string {
-	if o == nil || o.ClientId == nil {
+	if o == nil || isNil(o.ClientId) {
 		var ret string
 		return ret
 	}
@@ -196,15 +196,15 @@ func (o *AppUpdateRequest) GetClientId() string {
 // GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppUpdateRequest) GetClientIdOk() (*string, bool) {
-	if o == nil || o.ClientId == nil {
-		return nil, false
+	if o == nil || isNil(o.ClientId) {
+    return nil, false
 	}
 	return o.ClientId, true
 }
 
 // HasClientId returns a boolean if a field has been set.
 func (o *AppUpdateRequest) HasClientId() bool {
-	if o != nil && o.ClientId != nil {
+	if o != nil && !isNil(o.ClientId) {
 		return true
 	}
 
@@ -218,7 +218,7 @@ func (o *AppUpdateRequest) SetClientId(v string) {
 
 // GetClientSecret returns the ClientSecret field value if set, zero value otherwise.
 func (o *AppUpdateRequest) GetClientSecret() AppUpdateRequestClientSecret {
-	if o == nil || o.ClientSecret == nil {
+	if o == nil || isNil(o.ClientSecret) {
 		var ret AppUpdateRequestClientSecret
 		return ret
 	}
@@ -228,15 +228,15 @@ func (o *AppUpdateRequest) GetClientSecret() AppUpdateRequestClientSecret {
 // GetClientSecretOk returns a tuple with the ClientSecret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppUpdateRequest) GetClientSecretOk() (*AppUpdateRequestClientSecret, bool) {
-	if o == nil || o.ClientSecret == nil {
-		return nil, false
+	if o == nil || isNil(o.ClientSecret) {
+    return nil, false
 	}
 	return o.ClientSecret, true
 }
 
 // HasClientSecret returns a boolean if a field has been set.
 func (o *AppUpdateRequest) HasClientSecret() bool {
-	if o != nil && o.ClientSecret != nil {
+	if o != nil && !isNil(o.ClientSecret) {
 		return true
 	}
 
@@ -253,19 +253,19 @@ func (o AppUpdateRequest) MarshalJSON() ([]byte, error) {
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.IsDeleted != nil {
+	if !isNil(o.IsDeleted) {
 		toSerialize["isDeleted"] = o.IsDeleted
 	}
-	if o.RedirectUri != nil {
+	if !isNil(o.RedirectUri) {
 		toSerialize["redirectUri"] = o.RedirectUri
 	}
-	if o.ClientId != nil {
+	if !isNil(o.ClientId) {
 		toSerialize["clientId"] = o.ClientId
 	}
-	if o.ClientSecret != nil {
+	if !isNil(o.ClientSecret) {
 		toSerialize["clientSecret"] = o.ClientSecret
 	}
 	return json.Marshal(toSerialize)

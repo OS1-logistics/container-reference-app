@@ -55,7 +55,7 @@ func NewQueryWithDefaults() *Query {
 
 // GetMatch returns the Match field value if set, zero value otherwise.
 func (o *Query) GetMatch() []Match {
-	if o == nil || o.Match == nil {
+	if o == nil || isNil(o.Match) {
 		var ret []Match
 		return ret
 	}
@@ -65,15 +65,15 @@ func (o *Query) GetMatch() []Match {
 // GetMatchOk returns a tuple with the Match field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetMatchOk() ([]Match, bool) {
-	if o == nil || o.Match == nil {
-		return nil, false
+	if o == nil || isNil(o.Match) {
+    return nil, false
 	}
 	return o.Match, true
 }
 
 // HasMatch returns a boolean if a field has been set.
 func (o *Query) HasMatch() bool {
-	if o != nil && o.Match != nil {
+	if o != nil && !isNil(o.Match) {
 		return true
 	}
 
@@ -87,7 +87,7 @@ func (o *Query) SetMatch(v []Match) {
 
 // GetMultiMatch returns the MultiMatch field value if set, zero value otherwise.
 func (o *Query) GetMultiMatch() []MultiMatch {
-	if o == nil || o.MultiMatch == nil {
+	if o == nil || isNil(o.MultiMatch) {
 		var ret []MultiMatch
 		return ret
 	}
@@ -97,15 +97,15 @@ func (o *Query) GetMultiMatch() []MultiMatch {
 // GetMultiMatchOk returns a tuple with the MultiMatch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetMultiMatchOk() ([]MultiMatch, bool) {
-	if o == nil || o.MultiMatch == nil {
-		return nil, false
+	if o == nil || isNil(o.MultiMatch) {
+    return nil, false
 	}
 	return o.MultiMatch, true
 }
 
 // HasMultiMatch returns a boolean if a field has been set.
 func (o *Query) HasMultiMatch() bool {
-	if o != nil && o.MultiMatch != nil {
+	if o != nil && !isNil(o.MultiMatch) {
 		return true
 	}
 
@@ -119,7 +119,7 @@ func (o *Query) SetMultiMatch(v []MultiMatch) {
 
 // GetTerm returns the Term field value if set, zero value otherwise.
 func (o *Query) GetTerm() []Term {
-	if o == nil || o.Term == nil {
+	if o == nil || isNil(o.Term) {
 		var ret []Term
 		return ret
 	}
@@ -129,15 +129,15 @@ func (o *Query) GetTerm() []Term {
 // GetTermOk returns a tuple with the Term field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetTermOk() ([]Term, bool) {
-	if o == nil || o.Term == nil {
-		return nil, false
+	if o == nil || isNil(o.Term) {
+    return nil, false
 	}
 	return o.Term, true
 }
 
 // HasTerm returns a boolean if a field has been set.
 func (o *Query) HasTerm() bool {
-	if o != nil && o.Term != nil {
+	if o != nil && !isNil(o.Term) {
 		return true
 	}
 
@@ -151,7 +151,7 @@ func (o *Query) SetTerm(v []Term) {
 
 // GetTerms returns the Terms field value if set, zero value otherwise.
 func (o *Query) GetTerms() []Terms {
-	if o == nil || o.Terms == nil {
+	if o == nil || isNil(o.Terms) {
 		var ret []Terms
 		return ret
 	}
@@ -161,15 +161,15 @@ func (o *Query) GetTerms() []Terms {
 // GetTermsOk returns a tuple with the Terms field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetTermsOk() ([]Terms, bool) {
-	if o == nil || o.Terms == nil {
-		return nil, false
+	if o == nil || isNil(o.Terms) {
+    return nil, false
 	}
 	return o.Terms, true
 }
 
 // HasTerms returns a boolean if a field has been set.
 func (o *Query) HasTerms() bool {
-	if o != nil && o.Terms != nil {
+	if o != nil && !isNil(o.Terms) {
 		return true
 	}
 
@@ -183,7 +183,7 @@ func (o *Query) SetTerms(v []Terms) {
 
 // GetRange returns the Range field value if set, zero value otherwise.
 func (o *Query) GetRange() []RangeQuery {
-	if o == nil || o.Range == nil {
+	if o == nil || isNil(o.Range) {
 		var ret []RangeQuery
 		return ret
 	}
@@ -193,15 +193,15 @@ func (o *Query) GetRange() []RangeQuery {
 // GetRangeOk returns a tuple with the Range field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetRangeOk() ([]RangeQuery, bool) {
-	if o == nil || o.Range == nil {
-		return nil, false
+	if o == nil || isNil(o.Range) {
+    return nil, false
 	}
 	return o.Range, true
 }
 
 // HasRange returns a boolean if a field has been set.
 func (o *Query) HasRange() bool {
-	if o != nil && o.Range != nil {
+	if o != nil && !isNil(o.Range) {
 		return true
 	}
 
@@ -215,7 +215,7 @@ func (o *Query) SetRange(v []RangeQuery) {
 
 // GetRegexp returns the Regexp field value if set, zero value otherwise.
 func (o *Query) GetRegexp() []Regex {
-	if o == nil || o.Regexp == nil {
+	if o == nil || isNil(o.Regexp) {
 		var ret []Regex
 		return ret
 	}
@@ -225,15 +225,15 @@ func (o *Query) GetRegexp() []Regex {
 // GetRegexpOk returns a tuple with the Regexp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetRegexpOk() ([]Regex, bool) {
-	if o == nil || o.Regexp == nil {
-		return nil, false
+	if o == nil || isNil(o.Regexp) {
+    return nil, false
 	}
 	return o.Regexp, true
 }
 
 // HasRegexp returns a boolean if a field has been set.
 func (o *Query) HasRegexp() bool {
-	if o != nil && o.Regexp != nil {
+	if o != nil && !isNil(o.Regexp) {
 		return true
 	}
 
@@ -247,7 +247,7 @@ func (o *Query) SetRegexp(v []Regex) {
 
 // GetExists returns the Exists field value if set, zero value otherwise.
 func (o *Query) GetExists() []Exists {
-	if o == nil || o.Exists == nil {
+	if o == nil || isNil(o.Exists) {
 		var ret []Exists
 		return ret
 	}
@@ -257,15 +257,15 @@ func (o *Query) GetExists() []Exists {
 // GetExistsOk returns a tuple with the Exists field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetExistsOk() ([]Exists, bool) {
-	if o == nil || o.Exists == nil {
-		return nil, false
+	if o == nil || isNil(o.Exists) {
+    return nil, false
 	}
 	return o.Exists, true
 }
 
 // HasExists returns a boolean if a field has been set.
 func (o *Query) HasExists() bool {
-	if o != nil && o.Exists != nil {
+	if o != nil && !isNil(o.Exists) {
 		return true
 	}
 
@@ -279,7 +279,7 @@ func (o *Query) SetExists(v []Exists) {
 
 // GetFuzzy returns the Fuzzy field value if set, zero value otherwise.
 func (o *Query) GetFuzzy() []Fuzzy {
-	if o == nil || o.Fuzzy == nil {
+	if o == nil || isNil(o.Fuzzy) {
 		var ret []Fuzzy
 		return ret
 	}
@@ -289,15 +289,15 @@ func (o *Query) GetFuzzy() []Fuzzy {
 // GetFuzzyOk returns a tuple with the Fuzzy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetFuzzyOk() ([]Fuzzy, bool) {
-	if o == nil || o.Fuzzy == nil {
-		return nil, false
+	if o == nil || isNil(o.Fuzzy) {
+    return nil, false
 	}
 	return o.Fuzzy, true
 }
 
 // HasFuzzy returns a boolean if a field has been set.
 func (o *Query) HasFuzzy() bool {
-	if o != nil && o.Fuzzy != nil {
+	if o != nil && !isNil(o.Fuzzy) {
 		return true
 	}
 
@@ -311,7 +311,7 @@ func (o *Query) SetFuzzy(v []Fuzzy) {
 
 // GetPrefix returns the Prefix field value if set, zero value otherwise.
 func (o *Query) GetPrefix() []Prefix {
-	if o == nil || o.Prefix == nil {
+	if o == nil || isNil(o.Prefix) {
 		var ret []Prefix
 		return ret
 	}
@@ -321,15 +321,15 @@ func (o *Query) GetPrefix() []Prefix {
 // GetPrefixOk returns a tuple with the Prefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetPrefixOk() ([]Prefix, bool) {
-	if o == nil || o.Prefix == nil {
-		return nil, false
+	if o == nil || isNil(o.Prefix) {
+    return nil, false
 	}
 	return o.Prefix, true
 }
 
 // HasPrefix returns a boolean if a field has been set.
 func (o *Query) HasPrefix() bool {
-	if o != nil && o.Prefix != nil {
+	if o != nil && !isNil(o.Prefix) {
 		return true
 	}
 
@@ -343,7 +343,7 @@ func (o *Query) SetPrefix(v []Prefix) {
 
 // GetWildcard returns the Wildcard field value if set, zero value otherwise.
 func (o *Query) GetWildcard() []Wildcard {
-	if o == nil || o.Wildcard == nil {
+	if o == nil || isNil(o.Wildcard) {
 		var ret []Wildcard
 		return ret
 	}
@@ -353,15 +353,15 @@ func (o *Query) GetWildcard() []Wildcard {
 // GetWildcardOk returns a tuple with the Wildcard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetWildcardOk() ([]Wildcard, bool) {
-	if o == nil || o.Wildcard == nil {
-		return nil, false
+	if o == nil || isNil(o.Wildcard) {
+    return nil, false
 	}
 	return o.Wildcard, true
 }
 
 // HasWildcard returns a boolean if a field has been set.
 func (o *Query) HasWildcard() bool {
-	if o != nil && o.Wildcard != nil {
+	if o != nil && !isNil(o.Wildcard) {
 		return true
 	}
 
@@ -375,7 +375,7 @@ func (o *Query) SetWildcard(v []Wildcard) {
 
 // GetMatchPhrase returns the MatchPhrase field value if set, zero value otherwise.
 func (o *Query) GetMatchPhrase() []MatchPhrase {
-	if o == nil || o.MatchPhrase == nil {
+	if o == nil || isNil(o.MatchPhrase) {
 		var ret []MatchPhrase
 		return ret
 	}
@@ -385,15 +385,15 @@ func (o *Query) GetMatchPhrase() []MatchPhrase {
 // GetMatchPhraseOk returns a tuple with the MatchPhrase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetMatchPhraseOk() ([]MatchPhrase, bool) {
-	if o == nil || o.MatchPhrase == nil {
-		return nil, false
+	if o == nil || isNil(o.MatchPhrase) {
+    return nil, false
 	}
 	return o.MatchPhrase, true
 }
 
 // HasMatchPhrase returns a boolean if a field has been set.
 func (o *Query) HasMatchPhrase() bool {
-	if o != nil && o.MatchPhrase != nil {
+	if o != nil && !isNil(o.MatchPhrase) {
 		return true
 	}
 
@@ -407,7 +407,7 @@ func (o *Query) SetMatchPhrase(v []MatchPhrase) {
 
 // GetMatchPhrasePrefix returns the MatchPhrasePrefix field value if set, zero value otherwise.
 func (o *Query) GetMatchPhrasePrefix() []MatchPhrasePrefix {
-	if o == nil || o.MatchPhrasePrefix == nil {
+	if o == nil || isNil(o.MatchPhrasePrefix) {
 		var ret []MatchPhrasePrefix
 		return ret
 	}
@@ -417,15 +417,15 @@ func (o *Query) GetMatchPhrasePrefix() []MatchPhrasePrefix {
 // GetMatchPhrasePrefixOk returns a tuple with the MatchPhrasePrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Query) GetMatchPhrasePrefixOk() ([]MatchPhrasePrefix, bool) {
-	if o == nil || o.MatchPhrasePrefix == nil {
-		return nil, false
+	if o == nil || isNil(o.MatchPhrasePrefix) {
+    return nil, false
 	}
 	return o.MatchPhrasePrefix, true
 }
 
 // HasMatchPhrasePrefix returns a boolean if a field has been set.
 func (o *Query) HasMatchPhrasePrefix() bool {
-	if o != nil && o.MatchPhrasePrefix != nil {
+	if o != nil && !isNil(o.MatchPhrasePrefix) {
 		return true
 	}
 
@@ -439,40 +439,40 @@ func (o *Query) SetMatchPhrasePrefix(v []MatchPhrasePrefix) {
 
 func (o Query) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Match != nil {
+	if !isNil(o.Match) {
 		toSerialize["match"] = o.Match
 	}
-	if o.MultiMatch != nil {
+	if !isNil(o.MultiMatch) {
 		toSerialize["multi_match"] = o.MultiMatch
 	}
-	if o.Term != nil {
+	if !isNil(o.Term) {
 		toSerialize["term"] = o.Term
 	}
-	if o.Terms != nil {
+	if !isNil(o.Terms) {
 		toSerialize["terms"] = o.Terms
 	}
-	if o.Range != nil {
+	if !isNil(o.Range) {
 		toSerialize["range"] = o.Range
 	}
-	if o.Regexp != nil {
+	if !isNil(o.Regexp) {
 		toSerialize["regexp"] = o.Regexp
 	}
-	if o.Exists != nil {
+	if !isNil(o.Exists) {
 		toSerialize["exists"] = o.Exists
 	}
-	if o.Fuzzy != nil {
+	if !isNil(o.Fuzzy) {
 		toSerialize["fuzzy"] = o.Fuzzy
 	}
-	if o.Prefix != nil {
+	if !isNil(o.Prefix) {
 		toSerialize["prefix"] = o.Prefix
 	}
-	if o.Wildcard != nil {
+	if !isNil(o.Wildcard) {
 		toSerialize["wildcard"] = o.Wildcard
 	}
-	if o.MatchPhrase != nil {
+	if !isNil(o.MatchPhrase) {
 		toSerialize["match_phrase"] = o.MatchPhrase
 	}
-	if o.MatchPhrasePrefix != nil {
+	if !isNil(o.MatchPhrasePrefix) {
 		toSerialize["match_phrase_prefix"] = o.MatchPhrasePrefix
 	}
 	return json.Marshal(toSerialize)

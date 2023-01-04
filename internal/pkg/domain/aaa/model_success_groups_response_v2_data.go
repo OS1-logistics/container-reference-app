@@ -39,7 +39,7 @@ func NewSuccessGroupsResponseV2DataWithDefaults() *SuccessGroupsResponseV2Data {
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
 func (o *SuccessGroupsResponseV2Data) GetMeta() Meta {
-	if o == nil || o.Meta == nil {
+	if o == nil || isNil(o.Meta) {
 		var ret Meta
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *SuccessGroupsResponseV2Data) GetMeta() Meta {
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessGroupsResponseV2Data) GetMetaOk() (*Meta, bool) {
-	if o == nil || o.Meta == nil {
-		return nil, false
+	if o == nil || isNil(o.Meta) {
+    return nil, false
 	}
 	return o.Meta, true
 }
 
 // HasMeta returns a boolean if a field has been set.
 func (o *SuccessGroupsResponseV2Data) HasMeta() bool {
-	if o != nil && o.Meta != nil {
+	if o != nil && !isNil(o.Meta) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *SuccessGroupsResponseV2Data) SetMeta(v Meta) {
 
 // GetGroups returns the Groups field value if set, zero value otherwise.
 func (o *SuccessGroupsResponseV2Data) GetGroups() []GroupsResponseV2Inner {
-	if o == nil || o.Groups == nil {
+	if o == nil || isNil(o.Groups) {
 		var ret []GroupsResponseV2Inner
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *SuccessGroupsResponseV2Data) GetGroups() []GroupsResponseV2Inner {
 // GetGroupsOk returns a tuple with the Groups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessGroupsResponseV2Data) GetGroupsOk() ([]GroupsResponseV2Inner, bool) {
-	if o == nil || o.Groups == nil {
-		return nil, false
+	if o == nil || isNil(o.Groups) {
+    return nil, false
 	}
 	return o.Groups, true
 }
 
 // HasGroups returns a boolean if a field has been set.
 func (o *SuccessGroupsResponseV2Data) HasGroups() bool {
-	if o != nil && o.Groups != nil {
+	if o != nil && !isNil(o.Groups) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *SuccessGroupsResponseV2Data) SetGroups(v []GroupsResponseV2Inner) {
 
 func (o SuccessGroupsResponseV2Data) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Meta != nil {
+	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
-	if o.Groups != nil {
+	if !isNil(o.Groups) {
 		toSerialize["groups"] = o.Groups
 	}
 	return json.Marshal(toSerialize)

@@ -58,7 +58,7 @@ func NewEventOrphanResponseWithDefaults() *EventOrphanResponse {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *EventOrphanResponse) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -68,15 +68,15 @@ func (o *EventOrphanResponse) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventOrphanResponse) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *EventOrphanResponse) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -90,7 +90,7 @@ func (o *EventOrphanResponse) SetDescription(v string) {
 
 // GetEventType returns the EventType field value if set, zero value otherwise.
 func (o *EventOrphanResponse) GetEventType() EventType {
-	if o == nil || o.EventType == nil {
+	if o == nil || isNil(o.EventType) {
 		var ret EventType
 		return ret
 	}
@@ -100,15 +100,15 @@ func (o *EventOrphanResponse) GetEventType() EventType {
 // GetEventTypeOk returns a tuple with the EventType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventOrphanResponse) GetEventTypeOk() (*EventType, bool) {
-	if o == nil || o.EventType == nil {
-		return nil, false
+	if o == nil || isNil(o.EventType) {
+    return nil, false
 	}
 	return o.EventType, true
 }
 
 // HasEventType returns a boolean if a field has been set.
 func (o *EventOrphanResponse) HasEventType() bool {
-	if o != nil && o.EventType != nil {
+	if o != nil && !isNil(o.EventType) {
 		return true
 	}
 
@@ -122,7 +122,7 @@ func (o *EventOrphanResponse) SetEventType(v EventType) {
 
 // GetValidCurrentStates returns the ValidCurrentStates field value if set, zero value otherwise.
 func (o *EventOrphanResponse) GetValidCurrentStates() []string {
-	if o == nil || o.ValidCurrentStates == nil {
+	if o == nil || isNil(o.ValidCurrentStates) {
 		var ret []string
 		return ret
 	}
@@ -132,15 +132,15 @@ func (o *EventOrphanResponse) GetValidCurrentStates() []string {
 // GetValidCurrentStatesOk returns a tuple with the ValidCurrentStates field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventOrphanResponse) GetValidCurrentStatesOk() ([]string, bool) {
-	if o == nil || o.ValidCurrentStates == nil {
-		return nil, false
+	if o == nil || isNil(o.ValidCurrentStates) {
+    return nil, false
 	}
 	return o.ValidCurrentStates, true
 }
 
 // HasValidCurrentStates returns a boolean if a field has been set.
 func (o *EventOrphanResponse) HasValidCurrentStates() bool {
-	if o != nil && o.ValidCurrentStates != nil {
+	if o != nil && !isNil(o.ValidCurrentStates) {
 		return true
 	}
 
@@ -154,7 +154,7 @@ func (o *EventOrphanResponse) SetValidCurrentStates(v []string) {
 
 // GetIsEnabled returns the IsEnabled field value if set, zero value otherwise.
 func (o *EventOrphanResponse) GetIsEnabled() bool {
-	if o == nil || o.IsEnabled == nil {
+	if o == nil || isNil(o.IsEnabled) {
 		var ret bool
 		return ret
 	}
@@ -164,15 +164,15 @@ func (o *EventOrphanResponse) GetIsEnabled() bool {
 // GetIsEnabledOk returns a tuple with the IsEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventOrphanResponse) GetIsEnabledOk() (*bool, bool) {
-	if o == nil || o.IsEnabled == nil {
-		return nil, false
+	if o == nil || isNil(o.IsEnabled) {
+    return nil, false
 	}
 	return o.IsEnabled, true
 }
 
 // HasIsEnabled returns a boolean if a field has been set.
 func (o *EventOrphanResponse) HasIsEnabled() bool {
-	if o != nil && o.IsEnabled != nil {
+	if o != nil && !isNil(o.IsEnabled) {
 		return true
 	}
 
@@ -186,7 +186,7 @@ func (o *EventOrphanResponse) SetIsEnabled(v bool) {
 
 // GetDataValidations returns the DataValidations field value if set, zero value otherwise.
 func (o *EventOrphanResponse) GetDataValidations() []EventDataItem {
-	if o == nil || o.DataValidations == nil {
+	if o == nil || isNil(o.DataValidations) {
 		var ret []EventDataItem
 		return ret
 	}
@@ -196,15 +196,15 @@ func (o *EventOrphanResponse) GetDataValidations() []EventDataItem {
 // GetDataValidationsOk returns a tuple with the DataValidations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventOrphanResponse) GetDataValidationsOk() ([]EventDataItem, bool) {
-	if o == nil || o.DataValidations == nil {
-		return nil, false
+	if o == nil || isNil(o.DataValidations) {
+    return nil, false
 	}
 	return o.DataValidations, true
 }
 
 // HasDataValidations returns a boolean if a field has been set.
 func (o *EventOrphanResponse) HasDataValidations() bool {
-	if o != nil && o.DataValidations != nil {
+	if o != nil && !isNil(o.DataValidations) {
 		return true
 	}
 
@@ -218,7 +218,7 @@ func (o *EventOrphanResponse) SetDataValidations(v []EventDataItem) {
 
 // GetEventCode returns the EventCode field value if set, zero value otherwise.
 func (o *EventOrphanResponse) GetEventCode() string {
-	if o == nil || o.EventCode == nil {
+	if o == nil || isNil(o.EventCode) {
 		var ret string
 		return ret
 	}
@@ -228,15 +228,15 @@ func (o *EventOrphanResponse) GetEventCode() string {
 // GetEventCodeOk returns a tuple with the EventCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventOrphanResponse) GetEventCodeOk() (*string, bool) {
-	if o == nil || o.EventCode == nil {
-		return nil, false
+	if o == nil || isNil(o.EventCode) {
+    return nil, false
 	}
 	return o.EventCode, true
 }
 
 // HasEventCode returns a boolean if a field has been set.
 func (o *EventOrphanResponse) HasEventCode() bool {
-	if o != nil && o.EventCode != nil {
+	if o != nil && !isNil(o.EventCode) {
 		return true
 	}
 
@@ -250,7 +250,7 @@ func (o *EventOrphanResponse) SetEventCode(v string) {
 
 // GetEnityCode returns the EnityCode field value if set, zero value otherwise.
 func (o *EventOrphanResponse) GetEnityCode() string {
-	if o == nil || o.EnityCode == nil {
+	if o == nil || isNil(o.EnityCode) {
 		var ret string
 		return ret
 	}
@@ -260,15 +260,15 @@ func (o *EventOrphanResponse) GetEnityCode() string {
 // GetEnityCodeOk returns a tuple with the EnityCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventOrphanResponse) GetEnityCodeOk() (*string, bool) {
-	if o == nil || o.EnityCode == nil {
-		return nil, false
+	if o == nil || isNil(o.EnityCode) {
+    return nil, false
 	}
 	return o.EnityCode, true
 }
 
 // HasEnityCode returns a boolean if a field has been set.
 func (o *EventOrphanResponse) HasEnityCode() bool {
-	if o != nil && o.EnityCode != nil {
+	if o != nil && !isNil(o.EnityCode) {
 		return true
 	}
 
@@ -282,25 +282,25 @@ func (o *EventOrphanResponse) SetEnityCode(v string) {
 
 func (o EventOrphanResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.EventType != nil {
+	if !isNil(o.EventType) {
 		toSerialize["eventType"] = o.EventType
 	}
-	if o.ValidCurrentStates != nil {
+	if !isNil(o.ValidCurrentStates) {
 		toSerialize["validCurrentStates"] = o.ValidCurrentStates
 	}
-	if o.IsEnabled != nil {
+	if !isNil(o.IsEnabled) {
 		toSerialize["isEnabled"] = o.IsEnabled
 	}
-	if o.DataValidations != nil {
+	if !isNil(o.DataValidations) {
 		toSerialize["dataValidations"] = o.DataValidations
 	}
-	if o.EventCode != nil {
+	if !isNil(o.EventCode) {
 		toSerialize["eventCode"] = o.EventCode
 	}
-	if o.EnityCode != nil {
+	if !isNil(o.EnityCode) {
 		toSerialize["enityCode"] = o.EnityCode
 	}
 	return json.Marshal(toSerialize)

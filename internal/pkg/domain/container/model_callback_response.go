@@ -55,7 +55,7 @@ func (o *CallbackResponse) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *CallbackResponse) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -79,7 +79,7 @@ func (o *CallbackResponse) GetStatus() string {
 // and a boolean to check if the value has been set.
 func (o *CallbackResponse) GetStatusOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Status, true
 }
@@ -91,7 +91,7 @@ func (o *CallbackResponse) SetStatus(v string) {
 
 // GetReason returns the Reason field value if set, zero value otherwise.
 func (o *CallbackResponse) GetReason() string {
-	if o == nil || o.Reason == nil {
+	if o == nil || isNil(o.Reason) {
 		var ret string
 		return ret
 	}
@@ -101,15 +101,15 @@ func (o *CallbackResponse) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CallbackResponse) GetReasonOk() (*string, bool) {
-	if o == nil || o.Reason == nil {
-		return nil, false
+	if o == nil || isNil(o.Reason) {
+    return nil, false
 	}
 	return o.Reason, true
 }
 
 // HasReason returns a boolean if a field has been set.
 func (o *CallbackResponse) HasReason() bool {
-	if o != nil && o.Reason != nil {
+	if o != nil && !isNil(o.Reason) {
 		return true
 	}
 
@@ -129,7 +129,7 @@ func (o CallbackResponse) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["status"] = o.Status
 	}
-	if o.Reason != nil {
+	if !isNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
 	return json.Marshal(toSerialize)

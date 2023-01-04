@@ -45,7 +45,7 @@ func NewGroupResponseWithDefaults() *GroupResponse {
 
 // GetGroupId returns the GroupId field value if set, zero value otherwise.
 func (o *GroupResponse) GetGroupId() string {
-	if o == nil || o.GroupId == nil {
+	if o == nil || isNil(o.GroupId) {
 		var ret string
 		return ret
 	}
@@ -55,15 +55,15 @@ func (o *GroupResponse) GetGroupId() string {
 // GetGroupIdOk returns a tuple with the GroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupResponse) GetGroupIdOk() (*string, bool) {
-	if o == nil || o.GroupId == nil {
-		return nil, false
+	if o == nil || isNil(o.GroupId) {
+    return nil, false
 	}
 	return o.GroupId, true
 }
 
 // HasGroupId returns a boolean if a field has been set.
 func (o *GroupResponse) HasGroupId() bool {
-	if o != nil && o.GroupId != nil {
+	if o != nil && !isNil(o.GroupId) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *GroupResponse) SetGroupId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *GroupResponse) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -87,15 +87,15 @@ func (o *GroupResponse) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupResponse) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
+	if o == nil || isNil(o.Name) {
+    return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *GroupResponse) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
@@ -109,7 +109,7 @@ func (o *GroupResponse) SetName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *GroupResponse) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -119,15 +119,15 @@ func (o *GroupResponse) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupResponse) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *GroupResponse) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -141,7 +141,7 @@ func (o *GroupResponse) SetDescription(v string) {
 
 // GetUsers returns the Users field value if set, zero value otherwise.
 func (o *GroupResponse) GetUsers() []string {
-	if o == nil || o.Users == nil {
+	if o == nil || isNil(o.Users) {
 		var ret []string
 		return ret
 	}
@@ -151,15 +151,15 @@ func (o *GroupResponse) GetUsers() []string {
 // GetUsersOk returns a tuple with the Users field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupResponse) GetUsersOk() ([]string, bool) {
-	if o == nil || o.Users == nil {
-		return nil, false
+	if o == nil || isNil(o.Users) {
+    return nil, false
 	}
 	return o.Users, true
 }
 
 // HasUsers returns a boolean if a field has been set.
 func (o *GroupResponse) HasUsers() bool {
-	if o != nil && o.Users != nil {
+	if o != nil && !isNil(o.Users) {
 		return true
 	}
 
@@ -173,7 +173,7 @@ func (o *GroupResponse) SetUsers(v []string) {
 
 // GetRoles returns the Roles field value if set, zero value otherwise.
 func (o *GroupResponse) GetRoles() []string {
-	if o == nil || o.Roles == nil {
+	if o == nil || isNil(o.Roles) {
 		var ret []string
 		return ret
 	}
@@ -183,15 +183,15 @@ func (o *GroupResponse) GetRoles() []string {
 // GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupResponse) GetRolesOk() ([]string, bool) {
-	if o == nil || o.Roles == nil {
-		return nil, false
+	if o == nil || isNil(o.Roles) {
+    return nil, false
 	}
 	return o.Roles, true
 }
 
 // HasRoles returns a boolean if a field has been set.
 func (o *GroupResponse) HasRoles() bool {
-	if o != nil && o.Roles != nil {
+	if o != nil && !isNil(o.Roles) {
 		return true
 	}
 
@@ -205,7 +205,7 @@ func (o *GroupResponse) SetRoles(v []string) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *GroupResponse) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -215,15 +215,15 @@ func (o *GroupResponse) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupResponse) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *GroupResponse) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -237,22 +237,22 @@ func (o *GroupResponse) SetIsActive(v bool) {
 
 func (o GroupResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.GroupId != nil {
+	if !isNil(o.GroupId) {
 		toSerialize["groupId"] = o.GroupId
 	}
-	if o.Name != nil {
+	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.Users != nil {
+	if !isNil(o.Users) {
 		toSerialize["users"] = o.Users
 	}
-	if o.Roles != nil {
+	if !isNil(o.Roles) {
 		toSerialize["roles"] = o.Roles
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
 	return json.Marshal(toSerialize)

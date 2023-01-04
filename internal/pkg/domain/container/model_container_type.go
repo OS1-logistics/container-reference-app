@@ -66,7 +66,7 @@ func (o *ContainerType) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerType) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -78,7 +78,7 @@ func (o *ContainerType) SetName(v string) {
 
 // GetIsLeaf returns the IsLeaf field value if set, zero value otherwise.
 func (o *ContainerType) GetIsLeaf() bool {
-	if o == nil || o.IsLeaf == nil {
+	if o == nil || isNil(o.IsLeaf) {
 		var ret bool
 		return ret
 	}
@@ -88,15 +88,15 @@ func (o *ContainerType) GetIsLeaf() bool {
 // GetIsLeafOk returns a tuple with the IsLeaf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerType) GetIsLeafOk() (*bool, bool) {
-	if o == nil || o.IsLeaf == nil {
-		return nil, false
+	if o == nil || isNil(o.IsLeaf) {
+    return nil, false
 	}
 	return o.IsLeaf, true
 }
 
 // HasIsLeaf returns a boolean if a field has been set.
 func (o *ContainerType) HasIsLeaf() bool {
-	if o != nil && o.IsLeaf != nil {
+	if o != nil && !isNil(o.IsLeaf) {
 		return true
 	}
 
@@ -110,7 +110,7 @@ func (o *ContainerType) SetIsLeaf(v bool) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *ContainerType) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -120,15 +120,15 @@ func (o *ContainerType) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerType) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *ContainerType) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -142,7 +142,7 @@ func (o *ContainerType) SetIsActive(v bool) {
 
 // GetAllowedParent returns the AllowedParent field value if set, zero value otherwise.
 func (o *ContainerType) GetAllowedParent() ContainerTypeAllowedParent {
-	if o == nil || o.AllowedParent == nil {
+	if o == nil || isNil(o.AllowedParent) {
 		var ret ContainerTypeAllowedParent
 		return ret
 	}
@@ -152,15 +152,15 @@ func (o *ContainerType) GetAllowedParent() ContainerTypeAllowedParent {
 // GetAllowedParentOk returns a tuple with the AllowedParent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerType) GetAllowedParentOk() (*ContainerTypeAllowedParent, bool) {
-	if o == nil || o.AllowedParent == nil {
-		return nil, false
+	if o == nil || isNil(o.AllowedParent) {
+    return nil, false
 	}
 	return o.AllowedParent, true
 }
 
 // HasAllowedParent returns a boolean if a field has been set.
 func (o *ContainerType) HasAllowedParent() bool {
-	if o != nil && o.AllowedParent != nil {
+	if o != nil && !isNil(o.AllowedParent) {
 		return true
 	}
 
@@ -174,7 +174,7 @@ func (o *ContainerType) SetAllowedParent(v ContainerTypeAllowedParent) {
 
 // GetOwnerAppId returns the OwnerAppId field value if set, zero value otherwise.
 func (o *ContainerType) GetOwnerAppId() string {
-	if o == nil || o.OwnerAppId == nil {
+	if o == nil || isNil(o.OwnerAppId) {
 		var ret string
 		return ret
 	}
@@ -184,15 +184,15 @@ func (o *ContainerType) GetOwnerAppId() string {
 // GetOwnerAppIdOk returns a tuple with the OwnerAppId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerType) GetOwnerAppIdOk() (*string, bool) {
-	if o == nil || o.OwnerAppId == nil {
-		return nil, false
+	if o == nil || isNil(o.OwnerAppId) {
+    return nil, false
 	}
 	return o.OwnerAppId, true
 }
 
 // HasOwnerAppId returns a boolean if a field has been set.
 func (o *ContainerType) HasOwnerAppId() bool {
-	if o != nil && o.OwnerAppId != nil {
+	if o != nil && !isNil(o.OwnerAppId) {
 		return true
 	}
 
@@ -209,16 +209,16 @@ func (o ContainerType) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.IsLeaf != nil {
+	if !isNil(o.IsLeaf) {
 		toSerialize["isLeaf"] = o.IsLeaf
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.AllowedParent != nil {
+	if !isNil(o.AllowedParent) {
 		toSerialize["allowedParent"] = o.AllowedParent
 	}
-	if o.OwnerAppId != nil {
+	if !isNil(o.OwnerAppId) {
 		toSerialize["ownerAppId"] = o.OwnerAppId
 	}
 	return json.Marshal(toSerialize)

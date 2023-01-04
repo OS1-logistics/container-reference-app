@@ -60,7 +60,7 @@ func (o *ContainerCreateAttributesTrackingDetailsInner) GetOperator() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateAttributesTrackingDetailsInner) GetOperatorOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Operator, true
 }
@@ -84,7 +84,7 @@ func (o *ContainerCreateAttributesTrackingDetailsInner) GetTrackingId() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateAttributesTrackingDetailsInner) GetTrackingIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.TrackingId, true
 }
@@ -96,7 +96,7 @@ func (o *ContainerCreateAttributesTrackingDetailsInner) SetTrackingId(v string) 
 
 // GetIsPrimary returns the IsPrimary field value if set, zero value otherwise.
 func (o *ContainerCreateAttributesTrackingDetailsInner) GetIsPrimary() bool {
-	if o == nil || o.IsPrimary == nil {
+	if o == nil || isNil(o.IsPrimary) {
 		var ret bool
 		return ret
 	}
@@ -106,15 +106,15 @@ func (o *ContainerCreateAttributesTrackingDetailsInner) GetIsPrimary() bool {
 // GetIsPrimaryOk returns a tuple with the IsPrimary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateAttributesTrackingDetailsInner) GetIsPrimaryOk() (*bool, bool) {
-	if o == nil || o.IsPrimary == nil {
-		return nil, false
+	if o == nil || isNil(o.IsPrimary) {
+    return nil, false
 	}
 	return o.IsPrimary, true
 }
 
 // HasIsPrimary returns a boolean if a field has been set.
 func (o *ContainerCreateAttributesTrackingDetailsInner) HasIsPrimary() bool {
-	if o != nil && o.IsPrimary != nil {
+	if o != nil && !isNil(o.IsPrimary) {
 		return true
 	}
 
@@ -134,7 +134,7 @@ func (o ContainerCreateAttributesTrackingDetailsInner) MarshalJSON() ([]byte, er
 	if true {
 		toSerialize["trackingId"] = o.TrackingId
 	}
-	if o.IsPrimary != nil {
+	if !isNil(o.IsPrimary) {
 		toSerialize["isPrimary"] = o.IsPrimary
 	}
 	return json.Marshal(toSerialize)

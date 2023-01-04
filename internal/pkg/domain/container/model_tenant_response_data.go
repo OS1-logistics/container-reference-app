@@ -48,7 +48,7 @@ func NewTenantResponseDataWithDefaults() *TenantResponseData {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *TenantResponseData) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -58,15 +58,15 @@ func (o *TenantResponseData) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TenantResponseData) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
+	if o == nil || isNil(o.Name) {
+    return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *TenantResponseData) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
@@ -80,7 +80,7 @@ func (o *TenantResponseData) SetName(v string) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *TenantResponseData) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -90,15 +90,15 @@ func (o *TenantResponseData) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TenantResponseData) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *TenantResponseData) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -112,7 +112,7 @@ func (o *TenantResponseData) SetIsActive(v bool) {
 
 // GetAttributes returns the Attributes field value if set, zero value otherwise.
 func (o *TenantResponseData) GetAttributes() TenantAttributes {
-	if o == nil || o.Attributes == nil {
+	if o == nil || isNil(o.Attributes) {
 		var ret TenantAttributes
 		return ret
 	}
@@ -122,15 +122,15 @@ func (o *TenantResponseData) GetAttributes() TenantAttributes {
 // GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TenantResponseData) GetAttributesOk() (*TenantAttributes, bool) {
-	if o == nil || o.Attributes == nil {
-		return nil, false
+	if o == nil || isNil(o.Attributes) {
+    return nil, false
 	}
 	return o.Attributes, true
 }
 
 // HasAttributes returns a boolean if a field has been set.
 func (o *TenantResponseData) HasAttributes() bool {
-	if o != nil && o.Attributes != nil {
+	if o != nil && !isNil(o.Attributes) {
 		return true
 	}
 
@@ -156,7 +156,7 @@ func (o *TenantResponseData) GetCreatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *TenantResponseData) GetCreatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -180,7 +180,7 @@ func (o *TenantResponseData) GetCreatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *TenantResponseData) GetCreatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedBy, true
 }
@@ -204,7 +204,7 @@ func (o *TenantResponseData) GetUpdatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *TenantResponseData) GetUpdatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedAt, true
 }
@@ -228,7 +228,7 @@ func (o *TenantResponseData) GetUpdatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *TenantResponseData) GetUpdatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedBy, true
 }
@@ -240,13 +240,13 @@ func (o *TenantResponseData) SetUpdatedBy(v ActionBy) {
 
 func (o TenantResponseData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Name != nil {
+	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.Attributes != nil {
+	if !isNil(o.Attributes) {
 		toSerialize["attributes"] = o.Attributes
 	}
 	if true {

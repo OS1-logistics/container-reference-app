@@ -10,19 +10,19 @@ servers:
         default: localhost:3000
         description: Subdomain assigned to the service
 paths:
-  /shipments:
+  /packages:
     parameters:
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
     post:
       tags:
-        - Shipments
-      summary: Create a new Shipment
+        - Packages
+      summary: Create a new Package
       description: |
-        **API to create a shipment in the tenant's network.**
-      operationId: createShipment
+        **API to create a package in the tenant's network.**
+      operationId: createPackage
       requestBody:
-        $ref: "#/components/requestBodies/ShipmentCreateRequest"
+        $ref: "#/components/requestBodies/PackageCreateRequest"
       responses:
         "201":
           $ref: "#/components/responses/CreatedResponse"
@@ -30,24 +30,24 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
     get:
       tags:
-        - Shipments
+        - Packages
       parameters:
         - $ref: "#/components/parameters/Status"
-      summary: Get list of current configured Shipments
+      summary: Get list of current configured Packages
       description: |
-        **API to get all shipments.**
-      operationId: getShipments
+        **API to get all packages.**
+      operationId: getPackages
       responses:
         "200":
-          $ref: "#/components/responses/GetShipmentsResponse"
+          $ref: "#/components/responses/GetPackagesResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
-  "/shipments/reopen/{shipmentId}":
-    description: Reopen a specific shipment
+  "/packages/reopen/{packageId}":
+    description: Reopen a specific package
     parameters:
       - in: path
-        name: shipmentId
-        description: Unique Id of Shipment
+        name: packageId
+        description: Unique Id of Package
         schema:
           type: string
         required: true
@@ -55,22 +55,22 @@ paths:
       - $ref: "#/components/parameters/TenantId"
     put:
       tags:
-        - Shipments
-      summary: Reopen a Discarded shipemnt
+        - Packages
+      summary: Reopen a Discarded package
       description: |
-        **API to reopen a shipment.**
-      operationId: reopenShipment
+        **API to reopen a package.**
+      operationId: reopenPackage
       responses:
         "200":
           $ref: "#/components/responses/CreatedResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
-  "/shipments/client/{shipmentId}":
-    description: Shipment specific client container Id
+  "/packages/client/{packageId}":
+    description: Package specific client container Id
     parameters:
       - in: path
-        name: shipmentId
-        description: Unique Id of Shipment
+        name: packageId
+        description: Unique Id of Package
         schema:
           type: string
         required: true
@@ -78,24 +78,24 @@ paths:
       - $ref: "#/components/parameters/TenantId"
     put:
       tags:
-        - Shipments
-      summary: Update properties of a configured shipment
+        - Packages
+      summary: Update properties of a configured package
       description: |
-        **API to update properties a configured shipment.**
-      operationId: updateShipmentbyClient
+        **API to update properties a configured package.**
+      operationId: updatePackagebyClient
       requestBody:
-        $ref: "#/components/requestBodies/ShipmentUpdateRequest"
+        $ref: "#/components/requestBodies/PackageUpdateRequest"
       responses:
         "200":
           $ref: "#/components/responses/CreatedResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
-  "/shipments/{shipmentId}":
-    description: Shipment specific Id
+  "/packages/{packageId}":
+    description: Package specific Id
     parameters:
       - in: path
-        name: shipmentId
-        description: Unique Id of Shipment
+        name: packageId
+        description: Unique Id of Package
         schema:
           type: string
         required: true
@@ -103,31 +103,31 @@ paths:
       - $ref: "#/components/parameters/TenantId"
     get:
       tags:
-        - Shipments
-      summary: Get properties of a configured Shipment
+        - Packages
+      summary: Get properties of a configured Package
       description: |
-        **API to get properties a configured Shipment.**
-      operationId: getShipment
+        **API to get properties a configured Package.**
+      operationId: getPackage
       responses:
         "200":
-          $ref: "#/components/responses/GetShipmentResponse"
+          $ref: "#/components/responses/GetPackageResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
     put:
       tags:
-        - Shipments
-      summary: Update properties of a configured shipment
+        - Packages
+      summary: Update properties of a configured package
       description: |
-        **API to update properties a configured shipment.**
-      operationId: updateShipment
+        **API to update properties a configured package.**
+      operationId: updatePackage
       requestBody:
-        $ref: "#/components/requestBodies/ShipmentUpdateRequest"
+        $ref: "#/components/requestBodies/PackageUpdateRequest"
       responses:
         "200":
           $ref: "#/components/responses/CreatedResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
-  "/shipments/containerize/{containerId}/":
+  "/packages/containerize/{containerId}/":
     parameters:
       - in: path
         name: containerId
@@ -139,9 +139,9 @@ paths:
       - $ref: "#/components/parameters/TenantId"
     put:
       tags:
-        - Shipments
-      description: Add or remove shipment from the bag
-      summary: Add or remove a shipment from the bag
+        - Packages
+      description: Add or remove package from the bag
+      summary: Add or remove a package from the bag
       operationId: containerize
       requestBody:
         $ref: "#/components/requestBodies/ContainerizationRequest"
@@ -150,11 +150,11 @@ paths:
           $ref: "#/components/responses/ChildContainerResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
-  "/shipments/{shipmentId}/state/":
+  "/packages/{packageId}/state/":
     parameters:
       - in: path
-        name: shipmentId
-        description: Unique Id of Shipment.
+        name: packageId
+        description: Unique Id of Package.
         schema:
           type: string
         required: true
@@ -162,20 +162,20 @@ paths:
       - $ref: "#/components/parameters/TenantId"
     get:
       tags:
-        - Shipment State
+        - Package State
       description: Get current state of the bag
       summary: Get current state of the bag
-      operationId: getShipmentState
+      operationId: getPackageState
       responses:
         "201":
           $ref: "#/components/responses/ContainerStateResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
-  "/shipments/{shipmentId}/transition/state/":
+  "/packages/{packageId}/transition/state/":
     parameters:
       - in: path
-        name: shipmentId
-        description: Unique Id of Shipment.
+        name: packageId
+        description: Unique Id of Package.
         schema:
           type: string
         required: true
@@ -183,10 +183,10 @@ paths:
       - $ref: "#/components/parameters/TenantId"
     put:
       tags:
-        - Shipment State
+        - Package State
       description: Update state of a bag
       summary: Seal(Close), Open or Discard a bag
-      operationId: updateShipmentState
+      operationId: updatePackageState
       requestBody:
         $ref: "#/components/requestBodies/ContainerStateUpdateRequest"
       responses:
@@ -194,17 +194,17 @@ paths:
           $ref: "#/components/responses/ContainerStateUpdateResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
-  /shipments/config/attributes:
+  /packages/config/attributes:
     get:
       summary: Get list of Attributes
       description: |
         **API to get list of all attributes of a resource.**
       tags:
-        - Shipments Attributes
+        - Packages Attributes
       parameters:
         - $ref: "#/components/parameters/PageSize"
         - $ref: "#/components/parameters/PageOffset"
-      operationId: getShipmentAttributes
+      operationId: getPackageAttributes
       responses:
         "200":
           $ref: "#/components/responses/AttributesResponse"
@@ -212,7 +212,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
     put:
       tags:
-        - Shipments Attributes
+        - Packages Attributes
       summary: Update details of a Attribute
       parameters:
         - $ref: "#/components/parameters/Type"
@@ -236,7 +236,7 @@ paths:
          **This is required.* <br />
          **Values Name, dataType, indexed cannot be changed via this route (permanent values)**
            <br><br>
-      operationId: updateShipmentAttribute
+      operationId: updatePackageAttribute
       requestBody:
         $ref: "#/components/requestBodies/AttributeUpdateRequest"
       responses:
@@ -244,14 +244,14 @@ paths:
           $ref: "#/components/responses/SuccessResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
-  /shipments/config/state-machine:
+  /packages/config/state-machine:
     get:
       tags:
-        - Shipments State Machine
+        - Packages State Machine
       summary: Get the current State Machine of a particular resource
       description: |
         **API to get the current State Machine of a particular resource.**
-      operationId: getShipmentStateTemplateConfig
+      operationId: getPackageStateTemplateConfig
       responses:
         "200":
           $ref: "#/components/responses/StateMachineConfigResponse"
@@ -259,7 +259,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
     put:
       tags:
-        - Shipments State Machine
+        - Packages State Machine
       summary: Update the State Machine of a particular resource
       description: >
         **API to update the State Machine of a resource.**
@@ -269,7 +269,7 @@ paths:
          |`state_config`* | State Machine of the resource. | string | validated against ptp service
          **This is required.*
            <br><br>
-      operationId: putShipmentStateTemplateConfig
+      operationId: putPackageStateTemplateConfig
       requestBody:
         $ref: "#/components/requestBodies/StateMachineUpdateRequest"
       responses:
@@ -526,7 +526,7 @@ paths:
       operationId: bagContainerization
       description: >
         Bagging config defines what destination bags can be created and what
-        shipments can be put into the bag.
+        packages can be put into the bag.
 
 
         **Request Body** : (Multipart/form-data) CSV Upload with the following format
@@ -549,9 +549,9 @@ paths:
 
         | `sot`*            | Speed of transport (service) between the two transit center  | string | |
 
-        | `productType`*      | Product type of the shipment  | string | enum ( p2p, h&s) |
+        | `productType`*      | Product type of the package  | string | enum ( p2p, h&s) |
 
-        | `shipmentStatus`*      | status of the shipment  | string |  |
+        | `packageStatus`*      | status of the package  | string |  |
 
         | `sortCode`*      | sort code of the bag  | string |  |
       requestBody:
@@ -656,7 +656,7 @@ components:
         productType:
           type: string
           example: p2p
-        shipmentStatus:
+        packageStatus:
           type: string
           example: UD-RT-PU
     BaggingConfigGetData:
@@ -721,7 +721,7 @@ components:
           example: 1257894000
         currentLocation:
           type: string
-          description: current location of the shipment
+          description: current location of the package
           example: facility:317221c7-831d-4fde-9ee4-13e7898c2485
         moveTogether:
           type: boolean
@@ -738,7 +738,7 @@ components:
         productType:
           type: string
           example: parcel
-        shipmentFlow:
+        packageFlow:
           type: string
           example: forward
         sot:
@@ -1146,31 +1146,31 @@ components:
         isPrimary:
           type: boolean
           example: false
-    ShipmentSystem:
+    PackageSystem:
       type: object
-      x-go-name: ShipmentSystemSchema
+      x-go-name: PackageSystemSchema
       properties:
         id:
           type: string
-          example: shipment:317221c7-831d-4fde-9ee4-13e7898c2485
+          example: package:317221c7-831d-4fde-9ee4-13e7898c2485
         updatedAt:
-          description: Timestamp of when the shipment was last updated. Represents a date
+          description: Timestamp of when the package was last updated. Represents a date
             time as number of seconds elapsed since 00:00Hrs of 1st January 1970
             UTC.
           type: integer
           example: 1257894000
         createdAt:
-          description: Timestamp of when the shipment was created. Represents a date time
+          description: Timestamp of when the package was created. Represents a date time
             as number of seconds elapsed since 00:00Hrs of 1st January 1970 UTC.
           type: integer
           example: 1257894000
         state:
           type: string
-          description: state of the shipment
+          description: state of the package
           example: closed:intransit
         currentLocation:
           type: string
-          description: current location of the shipment
+          description: current location of the package
           example: facility:317221c7-831d-4fde-9ee4-13e7898c2485
         moveTogether:
           type: boolean
@@ -1191,7 +1191,7 @@ components:
         productType:
           type: string
           example: parcel
-        shipmentFlow:
+        packageFlow:
           type: string
           example: forward
         sot:
@@ -1206,9 +1206,9 @@ components:
         attemptCount:
           type: number
           example: 1
-    ShipmentReadOnly:
+    PackageReadOnly:
       type: object
-      x-go-name: ShipmentReadOnlySchema
+      x-go-name: PackageReadOnlySchema
       properties:
         lsId:
           type: string
@@ -1227,7 +1227,7 @@ components:
           type: string
           example: Voltas AC
         dimensions:
-          description: Size of the shipment
+          description: Size of the package
           type: object
           properties:
             length:
@@ -1240,7 +1240,7 @@ components:
               type: number
               example: 70.8
             weight:
-              description: Dead weight of the shipment
+              description: Dead weight of the package
               type: number
               example: 0.3
         maxAttemptCount:
@@ -1266,9 +1266,9 @@ components:
         - description
         - maxAttemptCount
         - amount
-    ShipmentBase:
+    PackageBase:
       type: object
-      x-go-name: ShipmentBaseSchema
+      x-go-name: PackageBaseSchema
       properties:
         isHazmat:
           type: boolean
@@ -1280,32 +1280,32 @@ components:
           description: Defines whether container can be put into other containers or not.
           default: true
         attributes:
-          $ref: "#/components/schemas/ShipmentReadOnly"
-    ShipmentCore:
+          $ref: "#/components/schemas/PackageReadOnly"
+    PackageCore:
       type: object
-      x-go-name: ShipmentCoreSchema
+      x-go-name: PackageCoreSchema
       properties:
         trackingDetails:
           type: array
-          description: Status of the shipment
+          description: Status of the package
           items:
             $ref: "#/components/schemas/trackingDetail"
-    ShipmentCreateRequest:
+    PackageCreateRequest:
       type: object
-      x-go-name: ShipmentCreateRequestSchema
+      x-go-name: PackageCreateRequestSchema
       required:
         - attributes
       allOf:
-        - $ref: "#/components/schemas/ShipmentCore"
-        - $ref: "#/components/schemas/ShipmentBase"
-    ShipmentUpdateRequest:
+        - $ref: "#/components/schemas/PackageCore"
+        - $ref: "#/components/schemas/PackageBase"
+    PackageUpdateRequest:
       type: object
-      x-go-name: ShipmentUpdateRequestSchema
+      x-go-name: PackageUpdateRequestSchema
       properties:
         attributes:
           allOf:
-            - $ref: "#/components/schemas/ShipmentCore"
-            - $ref: "#/components/schemas/ShipmentBase"
+            - $ref: "#/components/schemas/PackageCore"
+            - $ref: "#/components/schemas/PackageBase"
         event: 
           allOf:
             - $ref: "#/components/schemas/Event"
@@ -1387,10 +1387,10 @@ components:
       schema:
         type: string
         enum:
-          - shipment
+          - package
           - bag
       required: false
-      example: shipment
+      example: package
     RequestId:
       description: Unique request Id
       in: header
@@ -1459,23 +1459,23 @@ components:
           schema:
             $ref: "#/components/schemas/BaggingConfigUploadRequest"
     BaggingConfigGetRequest:
-      description: Request Parameters for getting a bagging possiblity of a shipemnt
+      description: Request Parameters for getting a bagging possiblity of a package
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/BaggingConfigGetRequest"
-    ShipmentCreateRequest:
-      description: Request consisting config of a new shipment
+    PackageCreateRequest:
+      description: Request consisting config of a new package
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ShipmentCreateRequest"
-    ShipmentUpdateRequest:
+            $ref: "#/components/schemas/PackageCreateRequest"
+    PackageUpdateRequest:
       description: ContainerUpdateRequest
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/ShipmentUpdateRequest"
+            $ref: "#/components/schemas/PackageUpdateRequest"
   responses:
     CreatedResponse:
       description: Default Success Response
@@ -1560,7 +1560,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/StateMachineConfigResponse"
-    GetShipmentResponse:
+    GetPackageResponse:
       description: Get Container Response
       content:
         application/json:
@@ -1572,12 +1572,12 @@ components:
               data:
                 type: object
                 allOf:
-                  - $ref: "#/components/schemas/ShipmentCore"
-                  - $ref: "#/components/schemas/ShipmentBase"
+                  - $ref: "#/components/schemas/PackageCore"
+                  - $ref: "#/components/schemas/PackageBase"
               request:
                 $ref: "#/components/schemas/Request"
-    GetShipmentsResponse:
-      description: Get Shipments Response
+    GetPackagesResponse:
+      description: Get Packages Response
       content:
         application/json:
           schema:
@@ -1592,12 +1592,12 @@ components:
                     properties:
                       totalElements:
                         type: number
-                  shipments:
+                  packages:
                     type: array
                     items:
                       allOf:
-                        - $ref: "#/components/schemas/ShipmentCore"
-                        - $ref: "#/components/schemas/ShipmentBase"
+                        - $ref: "#/components/schemas/PackageCore"
+                        - $ref: "#/components/schemas/PackageBase"
               request:
                 $ref: "#/components/schemas/Request"
     BaggingConfigUploadResponse:

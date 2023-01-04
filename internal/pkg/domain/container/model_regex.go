@@ -39,7 +39,7 @@ func NewRegexWithDefaults() *Regex {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *Regex) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || isNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *Regex) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Regex) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
-		return nil, false
+	if o == nil || isNil(o.Key) {
+    return nil, false
 	}
 	return o.Key, true
 }
 
 // HasKey returns a boolean if a field has been set.
 func (o *Regex) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !isNil(o.Key) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *Regex) SetKey(v string) {
 
 // GetRegex returns the Regex field value if set, zero value otherwise.
 func (o *Regex) GetRegex() string {
-	if o == nil || o.Regex == nil {
+	if o == nil || isNil(o.Regex) {
 		var ret string
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *Regex) GetRegex() string {
 // GetRegexOk returns a tuple with the Regex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Regex) GetRegexOk() (*string, bool) {
-	if o == nil || o.Regex == nil {
-		return nil, false
+	if o == nil || isNil(o.Regex) {
+    return nil, false
 	}
 	return o.Regex, true
 }
 
 // HasRegex returns a boolean if a field has been set.
 func (o *Regex) HasRegex() bool {
-	if o != nil && o.Regex != nil {
+	if o != nil && !isNil(o.Regex) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *Regex) SetRegex(v string) {
 
 func (o Regex) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Key != nil {
+	if !isNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
-	if o.Regex != nil {
+	if !isNil(o.Regex) {
 		toSerialize["regex"] = o.Regex
 	}
 	return json.Marshal(toSerialize)

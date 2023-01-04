@@ -39,7 +39,7 @@ func NewAppIdResponseWithDefaults() *AppIdResponse {
 
 // GetAppId returns the AppId field value if set, zero value otherwise.
 func (o *AppIdResponse) GetAppId() string {
-	if o == nil || o.AppId == nil {
+	if o == nil || isNil(o.AppId) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *AppIdResponse) GetAppId() string {
 // GetAppIdOk returns a tuple with the AppId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppIdResponse) GetAppIdOk() (*string, bool) {
-	if o == nil || o.AppId == nil {
-		return nil, false
+	if o == nil || isNil(o.AppId) {
+    return nil, false
 	}
 	return o.AppId, true
 }
 
 // HasAppId returns a boolean if a field has been set.
 func (o *AppIdResponse) HasAppId() bool {
-	if o != nil && o.AppId != nil {
+	if o != nil && !isNil(o.AppId) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *AppIdResponse) SetAppId(v string) {
 
 func (o AppIdResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.AppId != nil {
+	if !isNil(o.AppId) {
 		toSerialize["appId"] = o.AppId
 	}
 	return json.Marshal(toSerialize)

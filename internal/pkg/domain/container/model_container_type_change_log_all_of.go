@@ -52,7 +52,7 @@ func (o *ContainerTypeChangeLogAllOf) GetCdc() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeChangeLogAllOf) GetCdcOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return nil, false
+    return map[string]interface{}{}, false
 	}
 	return o.Cdc, true
 }

@@ -63,8 +63,8 @@ func (o *AppAllOf) GetAppId() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AppAllOf) GetAppIdOk() (*interface{}, bool) {
-	if o == nil || o.AppId == nil {
-		return nil, false
+	if o == nil || isNil(o.AppId) {
+    return nil, false
 	}
 	return &o.AppId, true
 }
@@ -88,7 +88,7 @@ func (o *AppAllOf) GetAppType() string {
 // and a boolean to check if the value has been set.
 func (o *AppAllOf) GetAppTypeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AppType, true
 }
@@ -112,7 +112,7 @@ func (o *AppAllOf) GetAppName() string {
 // and a boolean to check if the value has been set.
 func (o *AppAllOf) GetAppNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AppName, true
 }
@@ -124,7 +124,7 @@ func (o *AppAllOf) SetAppName(v string) {
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
 func (o *AppAllOf) GetClientId() string {
-	if o == nil || o.ClientId == nil {
+	if o == nil || isNil(o.ClientId) {
 		var ret string
 		return ret
 	}
@@ -134,15 +134,15 @@ func (o *AppAllOf) GetClientId() string {
 // GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppAllOf) GetClientIdOk() (*string, bool) {
-	if o == nil || o.ClientId == nil {
-		return nil, false
+	if o == nil || isNil(o.ClientId) {
+    return nil, false
 	}
 	return o.ClientId, true
 }
 
 // HasClientId returns a boolean if a field has been set.
 func (o *AppAllOf) HasClientId() bool {
-	if o != nil && o.ClientId != nil {
+	if o != nil && !isNil(o.ClientId) {
 		return true
 	}
 
@@ -156,7 +156,7 @@ func (o *AppAllOf) SetClientId(v string) {
 
 // GetSecretId returns the SecretId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AppAllOf) GetSecretId() string {
-	if o == nil || o.SecretId.Get() == nil {
+	if o == nil || isNil(o.SecretId.Get()) {
 		var ret string
 		return ret
 	}
@@ -168,7 +168,7 @@ func (o *AppAllOf) GetSecretId() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AppAllOf) GetSecretIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.SecretId.Get(), o.SecretId.IsSet()
 }
@@ -207,7 +207,7 @@ func (o AppAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["appName"] = o.AppName
 	}
-	if o.ClientId != nil {
+	if !isNil(o.ClientId) {
 		toSerialize["clientId"] = o.ClientId
 	}
 	if o.SecretId.IsSet() {

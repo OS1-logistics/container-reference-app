@@ -71,7 +71,7 @@ func (o *RoleCreateRequest) GetRoleName() string {
 // and a boolean to check if the value has been set.
 func (o *RoleCreateRequest) GetRoleNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.RoleName, true
 }
@@ -95,7 +95,7 @@ func (o *RoleCreateRequest) GetDescription() string {
 // and a boolean to check if the value has been set.
 func (o *RoleCreateRequest) GetDescriptionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Description, true
 }
@@ -107,7 +107,7 @@ func (o *RoleCreateRequest) SetDescription(v string) {
 
 // GetSecurityLevel returns the SecurityLevel field value if set, zero value otherwise.
 func (o *RoleCreateRequest) GetSecurityLevel() string {
-	if o == nil || o.SecurityLevel == nil {
+	if o == nil || isNil(o.SecurityLevel) {
 		var ret string
 		return ret
 	}
@@ -117,15 +117,15 @@ func (o *RoleCreateRequest) GetSecurityLevel() string {
 // GetSecurityLevelOk returns a tuple with the SecurityLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleCreateRequest) GetSecurityLevelOk() (*string, bool) {
-	if o == nil || o.SecurityLevel == nil {
-		return nil, false
+	if o == nil || isNil(o.SecurityLevel) {
+    return nil, false
 	}
 	return o.SecurityLevel, true
 }
 
 // HasSecurityLevel returns a boolean if a field has been set.
 func (o *RoleCreateRequest) HasSecurityLevel() bool {
-	if o != nil && o.SecurityLevel != nil {
+	if o != nil && !isNil(o.SecurityLevel) {
 		return true
 	}
 
@@ -150,15 +150,15 @@ func (o *RoleCreateRequest) GetPermissions() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RoleCreateRequest) GetPermissionsOk() ([]string, bool) {
-	if o == nil || o.Permissions == nil {
-		return nil, false
+	if o == nil || isNil(o.Permissions) {
+    return nil, false
 	}
 	return o.Permissions, true
 }
 
 // HasPermissions returns a boolean if a field has been set.
 func (o *RoleCreateRequest) HasPermissions() bool {
-	if o != nil && o.Permissions != nil {
+	if o != nil && isNil(o.Permissions) {
 		return true
 	}
 
@@ -172,7 +172,7 @@ func (o *RoleCreateRequest) SetPermissions(v []string) {
 
 // GetCanGrantToApps returns the CanGrantToApps field value if set, zero value otherwise.
 func (o *RoleCreateRequest) GetCanGrantToApps() bool {
-	if o == nil || o.CanGrantToApps == nil {
+	if o == nil || isNil(o.CanGrantToApps) {
 		var ret bool
 		return ret
 	}
@@ -182,15 +182,15 @@ func (o *RoleCreateRequest) GetCanGrantToApps() bool {
 // GetCanGrantToAppsOk returns a tuple with the CanGrantToApps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleCreateRequest) GetCanGrantToAppsOk() (*bool, bool) {
-	if o == nil || o.CanGrantToApps == nil {
-		return nil, false
+	if o == nil || isNil(o.CanGrantToApps) {
+    return nil, false
 	}
 	return o.CanGrantToApps, true
 }
 
 // HasCanGrantToApps returns a boolean if a field has been set.
 func (o *RoleCreateRequest) HasCanGrantToApps() bool {
-	if o != nil && o.CanGrantToApps != nil {
+	if o != nil && !isNil(o.CanGrantToApps) {
 		return true
 	}
 
@@ -204,7 +204,7 @@ func (o *RoleCreateRequest) SetCanGrantToApps(v bool) {
 
 // GetCanGrantToUsers returns the CanGrantToUsers field value if set, zero value otherwise.
 func (o *RoleCreateRequest) GetCanGrantToUsers() bool {
-	if o == nil || o.CanGrantToUsers == nil {
+	if o == nil || isNil(o.CanGrantToUsers) {
 		var ret bool
 		return ret
 	}
@@ -214,15 +214,15 @@ func (o *RoleCreateRequest) GetCanGrantToUsers() bool {
 // GetCanGrantToUsersOk returns a tuple with the CanGrantToUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleCreateRequest) GetCanGrantToUsersOk() (*bool, bool) {
-	if o == nil || o.CanGrantToUsers == nil {
-		return nil, false
+	if o == nil || isNil(o.CanGrantToUsers) {
+    return nil, false
 	}
 	return o.CanGrantToUsers, true
 }
 
 // HasCanGrantToUsers returns a boolean if a field has been set.
 func (o *RoleCreateRequest) HasCanGrantToUsers() bool {
-	if o != nil && o.CanGrantToUsers != nil {
+	if o != nil && !isNil(o.CanGrantToUsers) {
 		return true
 	}
 
@@ -242,16 +242,16 @@ func (o RoleCreateRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["description"] = o.Description
 	}
-	if o.SecurityLevel != nil {
+	if !isNil(o.SecurityLevel) {
 		toSerialize["securityLevel"] = o.SecurityLevel
 	}
 	if o.Permissions != nil {
 		toSerialize["permissions"] = o.Permissions
 	}
-	if o.CanGrantToApps != nil {
+	if !isNil(o.CanGrantToApps) {
 		toSerialize["canGrantToApps"] = o.CanGrantToApps
 	}
-	if o.CanGrantToUsers != nil {
+	if !isNil(o.CanGrantToUsers) {
 		toSerialize["canGrantToUsers"] = o.CanGrantToUsers
 	}
 	return json.Marshal(toSerialize)

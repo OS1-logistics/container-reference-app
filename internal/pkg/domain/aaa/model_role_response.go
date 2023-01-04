@@ -55,7 +55,7 @@ func NewRoleResponseWithDefaults() *RoleResponse {
 
 // GetCanGrantToApps returns the CanGrantToApps field value if set, zero value otherwise.
 func (o *RoleResponse) GetCanGrantToApps() bool {
-	if o == nil || o.CanGrantToApps == nil {
+	if o == nil || isNil(o.CanGrantToApps) {
 		var ret bool
 		return ret
 	}
@@ -65,15 +65,15 @@ func (o *RoleResponse) GetCanGrantToApps() bool {
 // GetCanGrantToAppsOk returns a tuple with the CanGrantToApps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleResponse) GetCanGrantToAppsOk() (*bool, bool) {
-	if o == nil || o.CanGrantToApps == nil {
-		return nil, false
+	if o == nil || isNil(o.CanGrantToApps) {
+    return nil, false
 	}
 	return o.CanGrantToApps, true
 }
 
 // HasCanGrantToApps returns a boolean if a field has been set.
 func (o *RoleResponse) HasCanGrantToApps() bool {
-	if o != nil && o.CanGrantToApps != nil {
+	if o != nil && !isNil(o.CanGrantToApps) {
 		return true
 	}
 
@@ -87,7 +87,7 @@ func (o *RoleResponse) SetCanGrantToApps(v bool) {
 
 // GetRoleId returns the RoleId field value if set, zero value otherwise.
 func (o *RoleResponse) GetRoleId() string {
-	if o == nil || o.RoleId == nil {
+	if o == nil || isNil(o.RoleId) {
 		var ret string
 		return ret
 	}
@@ -97,15 +97,15 @@ func (o *RoleResponse) GetRoleId() string {
 // GetRoleIdOk returns a tuple with the RoleId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleResponse) GetRoleIdOk() (*string, bool) {
-	if o == nil || o.RoleId == nil {
-		return nil, false
+	if o == nil || isNil(o.RoleId) {
+    return nil, false
 	}
 	return o.RoleId, true
 }
 
 // HasRoleId returns a boolean if a field has been set.
 func (o *RoleResponse) HasRoleId() bool {
-	if o != nil && o.RoleId != nil {
+	if o != nil && !isNil(o.RoleId) {
 		return true
 	}
 
@@ -119,7 +119,7 @@ func (o *RoleResponse) SetRoleId(v string) {
 
 // GetRoleName returns the RoleName field value if set, zero value otherwise.
 func (o *RoleResponse) GetRoleName() string {
-	if o == nil || o.RoleName == nil {
+	if o == nil || isNil(o.RoleName) {
 		var ret string
 		return ret
 	}
@@ -129,15 +129,15 @@ func (o *RoleResponse) GetRoleName() string {
 // GetRoleNameOk returns a tuple with the RoleName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleResponse) GetRoleNameOk() (*string, bool) {
-	if o == nil || o.RoleName == nil {
-		return nil, false
+	if o == nil || isNil(o.RoleName) {
+    return nil, false
 	}
 	return o.RoleName, true
 }
 
 // HasRoleName returns a boolean if a field has been set.
 func (o *RoleResponse) HasRoleName() bool {
-	if o != nil && o.RoleName != nil {
+	if o != nil && !isNil(o.RoleName) {
 		return true
 	}
 
@@ -151,7 +151,7 @@ func (o *RoleResponse) SetRoleName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *RoleResponse) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -161,15 +161,15 @@ func (o *RoleResponse) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleResponse) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *RoleResponse) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -194,15 +194,15 @@ func (o *RoleResponse) GetPermissions() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RoleResponse) GetPermissionsOk() ([]string, bool) {
-	if o == nil || o.Permissions == nil {
-		return nil, false
+	if o == nil || isNil(o.Permissions) {
+    return nil, false
 	}
 	return o.Permissions, true
 }
 
 // HasPermissions returns a boolean if a field has been set.
 func (o *RoleResponse) HasPermissions() bool {
-	if o != nil && o.Permissions != nil {
+	if o != nil && isNil(o.Permissions) {
 		return true
 	}
 
@@ -216,7 +216,7 @@ func (o *RoleResponse) SetPermissions(v []string) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *RoleResponse) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -226,15 +226,15 @@ func (o *RoleResponse) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleResponse) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *RoleResponse) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -248,7 +248,7 @@ func (o *RoleResponse) SetIsActive(v bool) {
 
 // GetIsDeleted returns the IsDeleted field value if set, zero value otherwise.
 func (o *RoleResponse) GetIsDeleted() bool {
-	if o == nil || o.IsDeleted == nil {
+	if o == nil || isNil(o.IsDeleted) {
 		var ret bool
 		return ret
 	}
@@ -258,15 +258,15 @@ func (o *RoleResponse) GetIsDeleted() bool {
 // GetIsDeletedOk returns a tuple with the IsDeleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleResponse) GetIsDeletedOk() (*bool, bool) {
-	if o == nil || o.IsDeleted == nil {
-		return nil, false
+	if o == nil || isNil(o.IsDeleted) {
+    return nil, false
 	}
 	return o.IsDeleted, true
 }
 
 // HasIsDeleted returns a boolean if a field has been set.
 func (o *RoleResponse) HasIsDeleted() bool {
-	if o != nil && o.IsDeleted != nil {
+	if o != nil && !isNil(o.IsDeleted) {
 		return true
 	}
 
@@ -280,7 +280,7 @@ func (o *RoleResponse) SetIsDeleted(v bool) {
 
 // GetCanGrantToUsers returns the CanGrantToUsers field value if set, zero value otherwise.
 func (o *RoleResponse) GetCanGrantToUsers() bool {
-	if o == nil || o.CanGrantToUsers == nil {
+	if o == nil || isNil(o.CanGrantToUsers) {
 		var ret bool
 		return ret
 	}
@@ -290,15 +290,15 @@ func (o *RoleResponse) GetCanGrantToUsers() bool {
 // GetCanGrantToUsersOk returns a tuple with the CanGrantToUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleResponse) GetCanGrantToUsersOk() (*bool, bool) {
-	if o == nil || o.CanGrantToUsers == nil {
-		return nil, false
+	if o == nil || isNil(o.CanGrantToUsers) {
+    return nil, false
 	}
 	return o.CanGrantToUsers, true
 }
 
 // HasCanGrantToUsers returns a boolean if a field has been set.
 func (o *RoleResponse) HasCanGrantToUsers() bool {
-	if o != nil && o.CanGrantToUsers != nil {
+	if o != nil && !isNil(o.CanGrantToUsers) {
 		return true
 	}
 
@@ -312,7 +312,7 @@ func (o *RoleResponse) SetCanGrantToUsers(v bool) {
 
 // GetSecurityLevel returns the SecurityLevel field value if set, zero value otherwise.
 func (o *RoleResponse) GetSecurityLevel() string {
-	if o == nil || o.SecurityLevel == nil {
+	if o == nil || isNil(o.SecurityLevel) {
 		var ret string
 		return ret
 	}
@@ -322,15 +322,15 @@ func (o *RoleResponse) GetSecurityLevel() string {
 // GetSecurityLevelOk returns a tuple with the SecurityLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleResponse) GetSecurityLevelOk() (*string, bool) {
-	if o == nil || o.SecurityLevel == nil {
-		return nil, false
+	if o == nil || isNil(o.SecurityLevel) {
+    return nil, false
 	}
 	return o.SecurityLevel, true
 }
 
 // HasSecurityLevel returns a boolean if a field has been set.
 func (o *RoleResponse) HasSecurityLevel() bool {
-	if o != nil && o.SecurityLevel != nil {
+	if o != nil && !isNil(o.SecurityLevel) {
 		return true
 	}
 
@@ -344,31 +344,31 @@ func (o *RoleResponse) SetSecurityLevel(v string) {
 
 func (o RoleResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.CanGrantToApps != nil {
+	if !isNil(o.CanGrantToApps) {
 		toSerialize["canGrantToApps"] = o.CanGrantToApps
 	}
-	if o.RoleId != nil {
+	if !isNil(o.RoleId) {
 		toSerialize["roleId"] = o.RoleId
 	}
-	if o.RoleName != nil {
+	if !isNil(o.RoleName) {
 		toSerialize["roleName"] = o.RoleName
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
 	if o.Permissions != nil {
 		toSerialize["permissions"] = o.Permissions
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.IsDeleted != nil {
+	if !isNil(o.IsDeleted) {
 		toSerialize["isDeleted"] = o.IsDeleted
 	}
-	if o.CanGrantToUsers != nil {
+	if !isNil(o.CanGrantToUsers) {
 		toSerialize["canGrantToUsers"] = o.CanGrantToUsers
 	}
-	if o.SecurityLevel != nil {
+	if !isNil(o.SecurityLevel) {
 		toSerialize["securityLevel"] = o.SecurityLevel
 	}
 	return json.Marshal(toSerialize)

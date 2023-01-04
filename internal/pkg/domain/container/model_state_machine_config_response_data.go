@@ -49,7 +49,7 @@ func NewStateMachineConfigResponseDataWithDefaults() *StateMachineConfigResponse
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *StateMachineConfigResponseData) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -59,15 +59,15 @@ func (o *StateMachineConfigResponseData) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StateMachineConfigResponseData) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
+	if o == nil || isNil(o.Id) {
+    return nil, false
 	}
 	return o.Id, true
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *StateMachineConfigResponseData) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
@@ -81,7 +81,7 @@ func (o *StateMachineConfigResponseData) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StateMachineConfigResponseData) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -91,15 +91,15 @@ func (o *StateMachineConfigResponseData) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StateMachineConfigResponseData) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
+	if o == nil || isNil(o.Name) {
+    return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *StateMachineConfigResponseData) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
@@ -125,7 +125,7 @@ func (o *StateMachineConfigResponseData) GetStates() States {
 // and a boolean to check if the value has been set.
 func (o *StateMachineConfigResponseData) GetStatesOk() (*States, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.States, true
 }
@@ -149,7 +149,7 @@ func (o *StateMachineConfigResponseData) GetCreatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *StateMachineConfigResponseData) GetCreatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -173,7 +173,7 @@ func (o *StateMachineConfigResponseData) GetCreatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *StateMachineConfigResponseData) GetCreatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedBy, true
 }
@@ -197,7 +197,7 @@ func (o *StateMachineConfigResponseData) GetUpdatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *StateMachineConfigResponseData) GetUpdatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedAt, true
 }
@@ -221,7 +221,7 @@ func (o *StateMachineConfigResponseData) GetUpdatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *StateMachineConfigResponseData) GetUpdatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedBy, true
 }
@@ -233,10 +233,10 @@ func (o *StateMachineConfigResponseData) SetUpdatedBy(v ActionBy) {
 
 func (o StateMachineConfigResponseData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Name != nil {
+	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	if true {

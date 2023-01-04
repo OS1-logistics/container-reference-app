@@ -58,7 +58,7 @@ func (o *ReasonUpdateRequest) GetDescription() string {
 // and a boolean to check if the value has been set.
 func (o *ReasonUpdateRequest) GetDescriptionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Description, true
 }
@@ -70,7 +70,7 @@ func (o *ReasonUpdateRequest) SetDescription(v string) {
 
 // GetIsEnabled returns the IsEnabled field value if set, zero value otherwise.
 func (o *ReasonUpdateRequest) GetIsEnabled() bool {
-	if o == nil || o.IsEnabled == nil {
+	if o == nil || isNil(o.IsEnabled) {
 		var ret bool
 		return ret
 	}
@@ -80,15 +80,15 @@ func (o *ReasonUpdateRequest) GetIsEnabled() bool {
 // GetIsEnabledOk returns a tuple with the IsEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReasonUpdateRequest) GetIsEnabledOk() (*bool, bool) {
-	if o == nil || o.IsEnabled == nil {
-		return nil, false
+	if o == nil || isNil(o.IsEnabled) {
+    return nil, false
 	}
 	return o.IsEnabled, true
 }
 
 // HasIsEnabled returns a boolean if a field has been set.
 func (o *ReasonUpdateRequest) HasIsEnabled() bool {
-	if o != nil && o.IsEnabled != nil {
+	if o != nil && !isNil(o.IsEnabled) {
 		return true
 	}
 
@@ -105,7 +105,7 @@ func (o ReasonUpdateRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["description"] = o.Description
 	}
-	if o.IsEnabled != nil {
+	if !isNil(o.IsEnabled) {
 		toSerialize["isEnabled"] = o.IsEnabled
 	}
 	return json.Marshal(toSerialize)

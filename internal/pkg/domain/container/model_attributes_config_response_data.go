@@ -76,7 +76,7 @@ func (o *AttributesConfigResponseData) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigResponseData) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -88,7 +88,7 @@ func (o *AttributesConfigResponseData) SetName(v string) {
 
 // GetIsLeaf returns the IsLeaf field value if set, zero value otherwise.
 func (o *AttributesConfigResponseData) GetIsLeaf() bool {
-	if o == nil || o.IsLeaf == nil {
+	if o == nil || isNil(o.IsLeaf) {
 		var ret bool
 		return ret
 	}
@@ -98,15 +98,15 @@ func (o *AttributesConfigResponseData) GetIsLeaf() bool {
 // GetIsLeafOk returns a tuple with the IsLeaf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigResponseData) GetIsLeafOk() (*bool, bool) {
-	if o == nil || o.IsLeaf == nil {
-		return nil, false
+	if o == nil || isNil(o.IsLeaf) {
+    return nil, false
 	}
 	return o.IsLeaf, true
 }
 
 // HasIsLeaf returns a boolean if a field has been set.
 func (o *AttributesConfigResponseData) HasIsLeaf() bool {
-	if o != nil && o.IsLeaf != nil {
+	if o != nil && !isNil(o.IsLeaf) {
 		return true
 	}
 
@@ -120,7 +120,7 @@ func (o *AttributesConfigResponseData) SetIsLeaf(v bool) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *AttributesConfigResponseData) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -130,15 +130,15 @@ func (o *AttributesConfigResponseData) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigResponseData) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *AttributesConfigResponseData) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -152,7 +152,7 @@ func (o *AttributesConfigResponseData) SetIsActive(v bool) {
 
 // GetAllowedParent returns the AllowedParent field value if set, zero value otherwise.
 func (o *AttributesConfigResponseData) GetAllowedParent() ContainerTypeAllowedParent {
-	if o == nil || o.AllowedParent == nil {
+	if o == nil || isNil(o.AllowedParent) {
 		var ret ContainerTypeAllowedParent
 		return ret
 	}
@@ -162,15 +162,15 @@ func (o *AttributesConfigResponseData) GetAllowedParent() ContainerTypeAllowedPa
 // GetAllowedParentOk returns a tuple with the AllowedParent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigResponseData) GetAllowedParentOk() (*ContainerTypeAllowedParent, bool) {
-	if o == nil || o.AllowedParent == nil {
-		return nil, false
+	if o == nil || isNil(o.AllowedParent) {
+    return nil, false
 	}
 	return o.AllowedParent, true
 }
 
 // HasAllowedParent returns a boolean if a field has been set.
 func (o *AttributesConfigResponseData) HasAllowedParent() bool {
-	if o != nil && o.AllowedParent != nil {
+	if o != nil && !isNil(o.AllowedParent) {
 		return true
 	}
 
@@ -184,7 +184,7 @@ func (o *AttributesConfigResponseData) SetAllowedParent(v ContainerTypeAllowedPa
 
 // GetOwnerAppId returns the OwnerAppId field value if set, zero value otherwise.
 func (o *AttributesConfigResponseData) GetOwnerAppId() string {
-	if o == nil || o.OwnerAppId == nil {
+	if o == nil || isNil(o.OwnerAppId) {
 		var ret string
 		return ret
 	}
@@ -194,15 +194,15 @@ func (o *AttributesConfigResponseData) GetOwnerAppId() string {
 // GetOwnerAppIdOk returns a tuple with the OwnerAppId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigResponseData) GetOwnerAppIdOk() (*string, bool) {
-	if o == nil || o.OwnerAppId == nil {
-		return nil, false
+	if o == nil || isNil(o.OwnerAppId) {
+    return nil, false
 	}
 	return o.OwnerAppId, true
 }
 
 // HasOwnerAppId returns a boolean if a field has been set.
 func (o *AttributesConfigResponseData) HasOwnerAppId() bool {
-	if o != nil && o.OwnerAppId != nil {
+	if o != nil && !isNil(o.OwnerAppId) {
 		return true
 	}
 
@@ -228,7 +228,7 @@ func (o *AttributesConfigResponseData) GetAttributes() []AttributeConfigGet {
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigResponseData) GetAttributesOk() ([]AttributeConfigGet, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Attributes, true
 }
@@ -252,7 +252,7 @@ func (o *AttributesConfigResponseData) GetCreatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigResponseData) GetCreatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -276,7 +276,7 @@ func (o *AttributesConfigResponseData) GetCreatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigResponseData) GetCreatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedBy, true
 }
@@ -300,7 +300,7 @@ func (o *AttributesConfigResponseData) GetUpdatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigResponseData) GetUpdatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedAt, true
 }
@@ -324,7 +324,7 @@ func (o *AttributesConfigResponseData) GetUpdatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigResponseData) GetUpdatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedBy, true
 }
@@ -339,16 +339,16 @@ func (o AttributesConfigResponseData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.IsLeaf != nil {
+	if !isNil(o.IsLeaf) {
 		toSerialize["isLeaf"] = o.IsLeaf
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.AllowedParent != nil {
+	if !isNil(o.AllowedParent) {
 		toSerialize["allowedParent"] = o.AllowedParent
 	}
-	if o.OwnerAppId != nil {
+	if !isNil(o.OwnerAppId) {
 		toSerialize["ownerAppId"] = o.OwnerAppId
 	}
 	if true {

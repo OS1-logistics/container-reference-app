@@ -60,7 +60,7 @@ func (o *UserChange) GetAction() ChangeAction {
 // and a boolean to check if the value has been set.
 func (o *UserChange) GetActionOk() (*ChangeAction, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Action, true
 }
@@ -84,7 +84,7 @@ func (o *UserChange) GetActionTime() int64 {
 // and a boolean to check if the value has been set.
 func (o *UserChange) GetActionTimeOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ActionTime, true
 }
@@ -108,7 +108,7 @@ func (o *UserChange) GetActionBy() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *UserChange) GetActionByOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return nil, false
+    return map[string]interface{}{}, false
 	}
 	return o.ActionBy, true
 }
@@ -132,7 +132,7 @@ func (o *UserChange) GetChannel() string {
 // and a boolean to check if the value has been set.
 func (o *UserChange) GetChannelOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Channel, true
 }
@@ -156,7 +156,7 @@ func (o *UserChange) GetCdc() UserResponse {
 // and a boolean to check if the value has been set.
 func (o *UserChange) GetCdcOk() (*UserResponse, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Cdc, true
 }

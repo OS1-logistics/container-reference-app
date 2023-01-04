@@ -52,7 +52,7 @@ func NewAppMutableDataWithDefaults() *AppMutableData {
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AppMutableData) GetDescription() string {
-	if o == nil || o.Description.Get() == nil {
+	if o == nil || isNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
@@ -64,7 +64,7 @@ func (o *AppMutableData) GetDescription() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AppMutableData) GetDescriptionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Description.Get(), o.Description.IsSet()
 }
@@ -94,7 +94,7 @@ func (o *AppMutableData) UnsetDescription() {
 
 // GetIsPrivateApp returns the IsPrivateApp field value if set, zero value otherwise.
 func (o *AppMutableData) GetIsPrivateApp() bool {
-	if o == nil || o.IsPrivateApp == nil {
+	if o == nil || isNil(o.IsPrivateApp) {
 		var ret bool
 		return ret
 	}
@@ -104,15 +104,15 @@ func (o *AppMutableData) GetIsPrivateApp() bool {
 // GetIsPrivateAppOk returns a tuple with the IsPrivateApp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppMutableData) GetIsPrivateAppOk() (*bool, bool) {
-	if o == nil || o.IsPrivateApp == nil {
-		return nil, false
+	if o == nil || isNil(o.IsPrivateApp) {
+    return nil, false
 	}
 	return o.IsPrivateApp, true
 }
 
 // HasIsPrivateApp returns a boolean if a field has been set.
 func (o *AppMutableData) HasIsPrivateApp() bool {
-	if o != nil && o.IsPrivateApp != nil {
+	if o != nil && !isNil(o.IsPrivateApp) {
 		return true
 	}
 
@@ -126,7 +126,7 @@ func (o *AppMutableData) SetIsPrivateApp(v bool) {
 
 // GetPrivateTenantId returns the PrivateTenantId field value if set, zero value otherwise.
 func (o *AppMutableData) GetPrivateTenantId() string {
-	if o == nil || o.PrivateTenantId == nil {
+	if o == nil || isNil(o.PrivateTenantId) {
 		var ret string
 		return ret
 	}
@@ -136,15 +136,15 @@ func (o *AppMutableData) GetPrivateTenantId() string {
 // GetPrivateTenantIdOk returns a tuple with the PrivateTenantId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppMutableData) GetPrivateTenantIdOk() (*string, bool) {
-	if o == nil || o.PrivateTenantId == nil {
-		return nil, false
+	if o == nil || isNil(o.PrivateTenantId) {
+    return nil, false
 	}
 	return o.PrivateTenantId, true
 }
 
 // HasPrivateTenantId returns a boolean if a field has been set.
 func (o *AppMutableData) HasPrivateTenantId() bool {
-	if o != nil && o.PrivateTenantId != nil {
+	if o != nil && !isNil(o.PrivateTenantId) {
 		return true
 	}
 
@@ -158,7 +158,7 @@ func (o *AppMutableData) SetPrivateTenantId(v string) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *AppMutableData) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -168,15 +168,15 @@ func (o *AppMutableData) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppMutableData) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *AppMutableData) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -190,7 +190,7 @@ func (o *AppMutableData) SetIsActive(v bool) {
 
 // GetRedirectUri returns the RedirectUri field value if set, zero value otherwise.
 func (o *AppMutableData) GetRedirectUri() []string {
-	if o == nil || o.RedirectUri == nil {
+	if o == nil || isNil(o.RedirectUri) {
 		var ret []string
 		return ret
 	}
@@ -200,15 +200,15 @@ func (o *AppMutableData) GetRedirectUri() []string {
 // GetRedirectUriOk returns a tuple with the RedirectUri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppMutableData) GetRedirectUriOk() ([]string, bool) {
-	if o == nil || o.RedirectUri == nil {
-		return nil, false
+	if o == nil || isNil(o.RedirectUri) {
+    return nil, false
 	}
 	return o.RedirectUri, true
 }
 
 // HasRedirectUri returns a boolean if a field has been set.
 func (o *AppMutableData) HasRedirectUri() bool {
-	if o != nil && o.RedirectUri != nil {
+	if o != nil && !isNil(o.RedirectUri) {
 		return true
 	}
 
@@ -222,7 +222,7 @@ func (o *AppMutableData) SetRedirectUri(v []string) {
 
 // GetIsDeleted returns the IsDeleted field value if set, zero value otherwise.
 func (o *AppMutableData) GetIsDeleted() bool {
-	if o == nil || o.IsDeleted == nil {
+	if o == nil || isNil(o.IsDeleted) {
 		var ret bool
 		return ret
 	}
@@ -232,15 +232,15 @@ func (o *AppMutableData) GetIsDeleted() bool {
 // GetIsDeletedOk returns a tuple with the IsDeleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppMutableData) GetIsDeletedOk() (*bool, bool) {
-	if o == nil || o.IsDeleted == nil {
-		return nil, false
+	if o == nil || isNil(o.IsDeleted) {
+    return nil, false
 	}
 	return o.IsDeleted, true
 }
 
 // HasIsDeleted returns a boolean if a field has been set.
 func (o *AppMutableData) HasIsDeleted() bool {
-	if o != nil && o.IsDeleted != nil {
+	if o != nil && !isNil(o.IsDeleted) {
 		return true
 	}
 
@@ -257,19 +257,19 @@ func (o AppMutableData) MarshalJSON() ([]byte, error) {
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
-	if o.IsPrivateApp != nil {
+	if !isNil(o.IsPrivateApp) {
 		toSerialize["isPrivateApp"] = o.IsPrivateApp
 	}
-	if o.PrivateTenantId != nil {
+	if !isNil(o.PrivateTenantId) {
 		toSerialize["privateTenantId"] = o.PrivateTenantId
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.RedirectUri != nil {
+	if !isNil(o.RedirectUri) {
 		toSerialize["redirectUri"] = o.RedirectUri
 	}
-	if o.IsDeleted != nil {
+	if !isNil(o.IsDeleted) {
 		toSerialize["isDeleted"] = o.IsDeleted
 	}
 	return json.Marshal(toSerialize)

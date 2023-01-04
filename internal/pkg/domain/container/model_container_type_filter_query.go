@@ -49,7 +49,7 @@ func NewContainerTypeFilterQueryWithDefaults() *ContainerTypeFilterQuery {
 
 // GetMatch returns the Match field value if set, zero value otherwise.
 func (o *ContainerTypeFilterQuery) GetMatch() []Match {
-	if o == nil || o.Match == nil {
+	if o == nil || isNil(o.Match) {
 		var ret []Match
 		return ret
 	}
@@ -59,15 +59,15 @@ func (o *ContainerTypeFilterQuery) GetMatch() []Match {
 // GetMatchOk returns a tuple with the Match field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeFilterQuery) GetMatchOk() ([]Match, bool) {
-	if o == nil || o.Match == nil {
-		return nil, false
+	if o == nil || isNil(o.Match) {
+    return nil, false
 	}
 	return o.Match, true
 }
 
 // HasMatch returns a boolean if a field has been set.
 func (o *ContainerTypeFilterQuery) HasMatch() bool {
-	if o != nil && o.Match != nil {
+	if o != nil && !isNil(o.Match) {
 		return true
 	}
 
@@ -81,7 +81,7 @@ func (o *ContainerTypeFilterQuery) SetMatch(v []Match) {
 
 // GetTerm returns the Term field value if set, zero value otherwise.
 func (o *ContainerTypeFilterQuery) GetTerm() []Term {
-	if o == nil || o.Term == nil {
+	if o == nil || isNil(o.Term) {
 		var ret []Term
 		return ret
 	}
@@ -91,15 +91,15 @@ func (o *ContainerTypeFilterQuery) GetTerm() []Term {
 // GetTermOk returns a tuple with the Term field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeFilterQuery) GetTermOk() ([]Term, bool) {
-	if o == nil || o.Term == nil {
-		return nil, false
+	if o == nil || isNil(o.Term) {
+    return nil, false
 	}
 	return o.Term, true
 }
 
 // HasTerm returns a boolean if a field has been set.
 func (o *ContainerTypeFilterQuery) HasTerm() bool {
-	if o != nil && o.Term != nil {
+	if o != nil && !isNil(o.Term) {
 		return true
 	}
 
@@ -113,7 +113,7 @@ func (o *ContainerTypeFilterQuery) SetTerm(v []Term) {
 
 // GetTerms returns the Terms field value if set, zero value otherwise.
 func (o *ContainerTypeFilterQuery) GetTerms() []Terms {
-	if o == nil || o.Terms == nil {
+	if o == nil || isNil(o.Terms) {
 		var ret []Terms
 		return ret
 	}
@@ -123,15 +123,15 @@ func (o *ContainerTypeFilterQuery) GetTerms() []Terms {
 // GetTermsOk returns a tuple with the Terms field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeFilterQuery) GetTermsOk() ([]Terms, bool) {
-	if o == nil || o.Terms == nil {
-		return nil, false
+	if o == nil || isNil(o.Terms) {
+    return nil, false
 	}
 	return o.Terms, true
 }
 
 // HasTerms returns a boolean if a field has been set.
 func (o *ContainerTypeFilterQuery) HasTerms() bool {
-	if o != nil && o.Terms != nil {
+	if o != nil && !isNil(o.Terms) {
 		return true
 	}
 
@@ -145,7 +145,7 @@ func (o *ContainerTypeFilterQuery) SetTerms(v []Terms) {
 
 // GetRange returns the Range field value if set, zero value otherwise.
 func (o *ContainerTypeFilterQuery) GetRange() []RangeQuery {
-	if o == nil || o.Range == nil {
+	if o == nil || isNil(o.Range) {
 		var ret []RangeQuery
 		return ret
 	}
@@ -155,15 +155,15 @@ func (o *ContainerTypeFilterQuery) GetRange() []RangeQuery {
 // GetRangeOk returns a tuple with the Range field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeFilterQuery) GetRangeOk() ([]RangeQuery, bool) {
-	if o == nil || o.Range == nil {
-		return nil, false
+	if o == nil || isNil(o.Range) {
+    return nil, false
 	}
 	return o.Range, true
 }
 
 // HasRange returns a boolean if a field has been set.
 func (o *ContainerTypeFilterQuery) HasRange() bool {
-	if o != nil && o.Range != nil {
+	if o != nil && !isNil(o.Range) {
 		return true
 	}
 
@@ -177,7 +177,7 @@ func (o *ContainerTypeFilterQuery) SetRange(v []RangeQuery) {
 
 // GetRegexp returns the Regexp field value if set, zero value otherwise.
 func (o *ContainerTypeFilterQuery) GetRegexp() []Regex {
-	if o == nil || o.Regexp == nil {
+	if o == nil || isNil(o.Regexp) {
 		var ret []Regex
 		return ret
 	}
@@ -187,15 +187,15 @@ func (o *ContainerTypeFilterQuery) GetRegexp() []Regex {
 // GetRegexpOk returns a tuple with the Regexp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeFilterQuery) GetRegexpOk() ([]Regex, bool) {
-	if o == nil || o.Regexp == nil {
-		return nil, false
+	if o == nil || isNil(o.Regexp) {
+    return nil, false
 	}
 	return o.Regexp, true
 }
 
 // HasRegexp returns a boolean if a field has been set.
 func (o *ContainerTypeFilterQuery) HasRegexp() bool {
-	if o != nil && o.Regexp != nil {
+	if o != nil && !isNil(o.Regexp) {
 		return true
 	}
 
@@ -209,7 +209,7 @@ func (o *ContainerTypeFilterQuery) SetRegexp(v []Regex) {
 
 // GetExists returns the Exists field value if set, zero value otherwise.
 func (o *ContainerTypeFilterQuery) GetExists() []Exists {
-	if o == nil || o.Exists == nil {
+	if o == nil || isNil(o.Exists) {
 		var ret []Exists
 		return ret
 	}
@@ -219,15 +219,15 @@ func (o *ContainerTypeFilterQuery) GetExists() []Exists {
 // GetExistsOk returns a tuple with the Exists field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeFilterQuery) GetExistsOk() ([]Exists, bool) {
-	if o == nil || o.Exists == nil {
-		return nil, false
+	if o == nil || isNil(o.Exists) {
+    return nil, false
 	}
 	return o.Exists, true
 }
 
 // HasExists returns a boolean if a field has been set.
 func (o *ContainerTypeFilterQuery) HasExists() bool {
-	if o != nil && o.Exists != nil {
+	if o != nil && !isNil(o.Exists) {
 		return true
 	}
 
@@ -241,7 +241,7 @@ func (o *ContainerTypeFilterQuery) SetExists(v []Exists) {
 
 // GetPrefix returns the Prefix field value if set, zero value otherwise.
 func (o *ContainerTypeFilterQuery) GetPrefix() []Prefix {
-	if o == nil || o.Prefix == nil {
+	if o == nil || isNil(o.Prefix) {
 		var ret []Prefix
 		return ret
 	}
@@ -251,15 +251,15 @@ func (o *ContainerTypeFilterQuery) GetPrefix() []Prefix {
 // GetPrefixOk returns a tuple with the Prefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeFilterQuery) GetPrefixOk() ([]Prefix, bool) {
-	if o == nil || o.Prefix == nil {
-		return nil, false
+	if o == nil || isNil(o.Prefix) {
+    return nil, false
 	}
 	return o.Prefix, true
 }
 
 // HasPrefix returns a boolean if a field has been set.
 func (o *ContainerTypeFilterQuery) HasPrefix() bool {
-	if o != nil && o.Prefix != nil {
+	if o != nil && !isNil(o.Prefix) {
 		return true
 	}
 
@@ -273,25 +273,25 @@ func (o *ContainerTypeFilterQuery) SetPrefix(v []Prefix) {
 
 func (o ContainerTypeFilterQuery) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Match != nil {
+	if !isNil(o.Match) {
 		toSerialize["match"] = o.Match
 	}
-	if o.Term != nil {
+	if !isNil(o.Term) {
 		toSerialize["term"] = o.Term
 	}
-	if o.Terms != nil {
+	if !isNil(o.Terms) {
 		toSerialize["terms"] = o.Terms
 	}
-	if o.Range != nil {
+	if !isNil(o.Range) {
 		toSerialize["range"] = o.Range
 	}
-	if o.Regexp != nil {
+	if !isNil(o.Regexp) {
 		toSerialize["regexp"] = o.Regexp
 	}
-	if o.Exists != nil {
+	if !isNil(o.Exists) {
 		toSerialize["exists"] = o.Exists
 	}
-	if o.Prefix != nil {
+	if !isNil(o.Prefix) {
 		toSerialize["prefix"] = o.Prefix
 	}
 	return json.Marshal(toSerialize)

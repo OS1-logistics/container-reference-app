@@ -55,7 +55,7 @@ func (o *AppRoleUpdateRequest) GetAssign() bool {
 // and a boolean to check if the value has been set.
 func (o *AppRoleUpdateRequest) GetAssignOk() (*bool, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Assign, true
 }
@@ -79,7 +79,7 @@ func (o *AppRoleUpdateRequest) GetRoles() []string {
 // and a boolean to check if the value has been set.
 func (o *AppRoleUpdateRequest) GetRolesOk() ([]string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Roles, true
 }

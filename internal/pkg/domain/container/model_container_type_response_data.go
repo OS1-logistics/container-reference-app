@@ -74,7 +74,7 @@ func (o *ContainerTypeResponseData) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeResponseData) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -86,7 +86,7 @@ func (o *ContainerTypeResponseData) SetName(v string) {
 
 // GetIsLeaf returns the IsLeaf field value if set, zero value otherwise.
 func (o *ContainerTypeResponseData) GetIsLeaf() bool {
-	if o == nil || o.IsLeaf == nil {
+	if o == nil || isNil(o.IsLeaf) {
 		var ret bool
 		return ret
 	}
@@ -96,15 +96,15 @@ func (o *ContainerTypeResponseData) GetIsLeaf() bool {
 // GetIsLeafOk returns a tuple with the IsLeaf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeResponseData) GetIsLeafOk() (*bool, bool) {
-	if o == nil || o.IsLeaf == nil {
-		return nil, false
+	if o == nil || isNil(o.IsLeaf) {
+    return nil, false
 	}
 	return o.IsLeaf, true
 }
 
 // HasIsLeaf returns a boolean if a field has been set.
 func (o *ContainerTypeResponseData) HasIsLeaf() bool {
-	if o != nil && o.IsLeaf != nil {
+	if o != nil && !isNil(o.IsLeaf) {
 		return true
 	}
 
@@ -118,7 +118,7 @@ func (o *ContainerTypeResponseData) SetIsLeaf(v bool) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *ContainerTypeResponseData) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -128,15 +128,15 @@ func (o *ContainerTypeResponseData) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeResponseData) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *ContainerTypeResponseData) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -150,7 +150,7 @@ func (o *ContainerTypeResponseData) SetIsActive(v bool) {
 
 // GetAllowedParent returns the AllowedParent field value if set, zero value otherwise.
 func (o *ContainerTypeResponseData) GetAllowedParent() ContainerTypeAllowedParent {
-	if o == nil || o.AllowedParent == nil {
+	if o == nil || isNil(o.AllowedParent) {
 		var ret ContainerTypeAllowedParent
 		return ret
 	}
@@ -160,15 +160,15 @@ func (o *ContainerTypeResponseData) GetAllowedParent() ContainerTypeAllowedParen
 // GetAllowedParentOk returns a tuple with the AllowedParent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeResponseData) GetAllowedParentOk() (*ContainerTypeAllowedParent, bool) {
-	if o == nil || o.AllowedParent == nil {
-		return nil, false
+	if o == nil || isNil(o.AllowedParent) {
+    return nil, false
 	}
 	return o.AllowedParent, true
 }
 
 // HasAllowedParent returns a boolean if a field has been set.
 func (o *ContainerTypeResponseData) HasAllowedParent() bool {
-	if o != nil && o.AllowedParent != nil {
+	if o != nil && !isNil(o.AllowedParent) {
 		return true
 	}
 
@@ -182,7 +182,7 @@ func (o *ContainerTypeResponseData) SetAllowedParent(v ContainerTypeAllowedParen
 
 // GetOwnerAppId returns the OwnerAppId field value if set, zero value otherwise.
 func (o *ContainerTypeResponseData) GetOwnerAppId() string {
-	if o == nil || o.OwnerAppId == nil {
+	if o == nil || isNil(o.OwnerAppId) {
 		var ret string
 		return ret
 	}
@@ -192,15 +192,15 @@ func (o *ContainerTypeResponseData) GetOwnerAppId() string {
 // GetOwnerAppIdOk returns a tuple with the OwnerAppId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeResponseData) GetOwnerAppIdOk() (*string, bool) {
-	if o == nil || o.OwnerAppId == nil {
-		return nil, false
+	if o == nil || isNil(o.OwnerAppId) {
+    return nil, false
 	}
 	return o.OwnerAppId, true
 }
 
 // HasOwnerAppId returns a boolean if a field has been set.
 func (o *ContainerTypeResponseData) HasOwnerAppId() bool {
-	if o != nil && o.OwnerAppId != nil {
+	if o != nil && !isNil(o.OwnerAppId) {
 		return true
 	}
 
@@ -226,7 +226,7 @@ func (o *ContainerTypeResponseData) GetCreatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeResponseData) GetCreatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -250,7 +250,7 @@ func (o *ContainerTypeResponseData) GetCreatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeResponseData) GetCreatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedBy, true
 }
@@ -274,7 +274,7 @@ func (o *ContainerTypeResponseData) GetUpdatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeResponseData) GetUpdatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedAt, true
 }
@@ -298,7 +298,7 @@ func (o *ContainerTypeResponseData) GetUpdatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeResponseData) GetUpdatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedBy, true
 }
@@ -313,16 +313,16 @@ func (o ContainerTypeResponseData) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.IsLeaf != nil {
+	if !isNil(o.IsLeaf) {
 		toSerialize["isLeaf"] = o.IsLeaf
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.AllowedParent != nil {
+	if !isNil(o.AllowedParent) {
 		toSerialize["allowedParent"] = o.AllowedParent
 	}
-	if o.OwnerAppId != nil {
+	if !isNil(o.OwnerAppId) {
 		toSerialize["ownerAppId"] = o.OwnerAppId
 	}
 	if true {

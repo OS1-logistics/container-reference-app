@@ -41,7 +41,7 @@ func NewAuthReqOtpRequestMobileWithDefaults() *AuthReqOtpRequestMobile {
 
 // GetCountryCode returns the CountryCode field value if set, zero value otherwise.
 func (o *AuthReqOtpRequestMobile) GetCountryCode() string {
-	if o == nil || o.CountryCode == nil {
+	if o == nil || isNil(o.CountryCode) {
 		var ret string
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *AuthReqOtpRequestMobile) GetCountryCode() string {
 // GetCountryCodeOk returns a tuple with the CountryCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AuthReqOtpRequestMobile) GetCountryCodeOk() (*string, bool) {
-	if o == nil || o.CountryCode == nil {
-		return nil, false
+	if o == nil || isNil(o.CountryCode) {
+    return nil, false
 	}
 	return o.CountryCode, true
 }
 
 // HasCountryCode returns a boolean if a field has been set.
 func (o *AuthReqOtpRequestMobile) HasCountryCode() bool {
-	if o != nil && o.CountryCode != nil {
+	if o != nil && !isNil(o.CountryCode) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *AuthReqOtpRequestMobile) SetCountryCode(v string) {
 
 // GetNumber returns the Number field value if set, zero value otherwise.
 func (o *AuthReqOtpRequestMobile) GetNumber() string {
-	if o == nil || o.Number == nil {
+	if o == nil || isNil(o.Number) {
 		var ret string
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *AuthReqOtpRequestMobile) GetNumber() string {
 // GetNumberOk returns a tuple with the Number field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AuthReqOtpRequestMobile) GetNumberOk() (*string, bool) {
-	if o == nil || o.Number == nil {
-		return nil, false
+	if o == nil || isNil(o.Number) {
+    return nil, false
 	}
 	return o.Number, true
 }
 
 // HasNumber returns a boolean if a field has been set.
 func (o *AuthReqOtpRequestMobile) HasNumber() bool {
-	if o != nil && o.Number != nil {
+	if o != nil && !isNil(o.Number) {
 		return true
 	}
 
@@ -105,10 +105,10 @@ func (o *AuthReqOtpRequestMobile) SetNumber(v string) {
 
 func (o AuthReqOtpRequestMobile) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.CountryCode != nil {
+	if !isNil(o.CountryCode) {
 		toSerialize["countryCode"] = o.CountryCode
 	}
-	if o.Number != nil {
+	if !isNil(o.Number) {
 		toSerialize["number"] = o.Number
 	}
 	return json.Marshal(toSerialize)

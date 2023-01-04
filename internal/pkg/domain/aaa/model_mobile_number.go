@@ -55,7 +55,7 @@ func (o *MobileNumber) GetCountryCode() string {
 // and a boolean to check if the value has been set.
 func (o *MobileNumber) GetCountryCodeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CountryCode, true
 }
@@ -79,7 +79,7 @@ func (o *MobileNumber) GetNumber() string {
 // and a boolean to check if the value has been set.
 func (o *MobileNumber) GetNumberOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Number, true
 }

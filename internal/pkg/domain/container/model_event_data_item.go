@@ -54,7 +54,7 @@ func (o *EventDataItem) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *EventDataItem) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -66,7 +66,7 @@ func (o *EventDataItem) SetName(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *EventDataItem) GetType() EventDataType {
-	if o == nil || o.Type == nil {
+	if o == nil || isNil(o.Type) {
 		var ret EventDataType
 		return ret
 	}
@@ -76,15 +76,15 @@ func (o *EventDataItem) GetType() EventDataType {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventDataItem) GetTypeOk() (*EventDataType, bool) {
-	if o == nil || o.Type == nil {
-		return nil, false
+	if o == nil || isNil(o.Type) {
+    return nil, false
 	}
 	return o.Type, true
 }
 
 // HasType returns a boolean if a field has been set.
 func (o *EventDataItem) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !isNil(o.Type) {
 		return true
 	}
 
@@ -98,7 +98,7 @@ func (o *EventDataItem) SetType(v EventDataType) {
 
 // GetValidation returns the Validation field value if set, zero value otherwise.
 func (o *EventDataItem) GetValidation() EventDataValidation {
-	if o == nil || o.Validation == nil {
+	if o == nil || isNil(o.Validation) {
 		var ret EventDataValidation
 		return ret
 	}
@@ -108,15 +108,15 @@ func (o *EventDataItem) GetValidation() EventDataValidation {
 // GetValidationOk returns a tuple with the Validation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventDataItem) GetValidationOk() (*EventDataValidation, bool) {
-	if o == nil || o.Validation == nil {
-		return nil, false
+	if o == nil || isNil(o.Validation) {
+    return nil, false
 	}
 	return o.Validation, true
 }
 
 // HasValidation returns a boolean if a field has been set.
 func (o *EventDataItem) HasValidation() bool {
-	if o != nil && o.Validation != nil {
+	if o != nil && !isNil(o.Validation) {
 		return true
 	}
 
@@ -133,10 +133,10 @@ func (o EventDataItem) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.Type != nil {
+	if !isNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if o.Validation != nil {
+	if !isNil(o.Validation) {
 		toSerialize["validation"] = o.Validation
 	}
 	return json.Marshal(toSerialize)

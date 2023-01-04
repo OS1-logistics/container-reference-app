@@ -39,7 +39,7 @@ func NewContainerTypeBasicPropertiesWithDefaults() *ContainerTypeBasicProperties
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ContainerTypeBasicProperties) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *ContainerTypeBasicProperties) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeBasicProperties) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
+	if o == nil || isNil(o.Id) {
+    return nil, false
 	}
 	return o.Id, true
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *ContainerTypeBasicProperties) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *ContainerTypeBasicProperties) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ContainerTypeBasicProperties) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *ContainerTypeBasicProperties) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeBasicProperties) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
+	if o == nil || isNil(o.Name) {
+    return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *ContainerTypeBasicProperties) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *ContainerTypeBasicProperties) SetName(v string) {
 
 func (o ContainerTypeBasicProperties) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Name != nil {
+	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	return json.Marshal(toSerialize)

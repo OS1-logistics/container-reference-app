@@ -46,7 +46,7 @@ func NewSuccessAuthorizationResponseDataWithDefaults() *SuccessAuthorizationResp
 
 // GetAccessToken returns the AccessToken field value if set, zero value otherwise.
 func (o *SuccessAuthorizationResponseData) GetAccessToken() string {
-	if o == nil || o.AccessToken == nil {
+	if o == nil || isNil(o.AccessToken) {
 		var ret string
 		return ret
 	}
@@ -56,15 +56,15 @@ func (o *SuccessAuthorizationResponseData) GetAccessToken() string {
 // GetAccessTokenOk returns a tuple with the AccessToken field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessAuthorizationResponseData) GetAccessTokenOk() (*string, bool) {
-	if o == nil || o.AccessToken == nil {
-		return nil, false
+	if o == nil || isNil(o.AccessToken) {
+    return nil, false
 	}
 	return o.AccessToken, true
 }
 
 // HasAccessToken returns a boolean if a field has been set.
 func (o *SuccessAuthorizationResponseData) HasAccessToken() bool {
-	if o != nil && o.AccessToken != nil {
+	if o != nil && !isNil(o.AccessToken) {
 		return true
 	}
 
@@ -78,7 +78,7 @@ func (o *SuccessAuthorizationResponseData) SetAccessToken(v string) {
 
 // GetTokenType returns the TokenType field value if set, zero value otherwise.
 func (o *SuccessAuthorizationResponseData) GetTokenType() string {
-	if o == nil || o.TokenType == nil {
+	if o == nil || isNil(o.TokenType) {
 		var ret string
 		return ret
 	}
@@ -88,15 +88,15 @@ func (o *SuccessAuthorizationResponseData) GetTokenType() string {
 // GetTokenTypeOk returns a tuple with the TokenType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessAuthorizationResponseData) GetTokenTypeOk() (*string, bool) {
-	if o == nil || o.TokenType == nil {
-		return nil, false
+	if o == nil || isNil(o.TokenType) {
+    return nil, false
 	}
 	return o.TokenType, true
 }
 
 // HasTokenType returns a boolean if a field has been set.
 func (o *SuccessAuthorizationResponseData) HasTokenType() bool {
-	if o != nil && o.TokenType != nil {
+	if o != nil && !isNil(o.TokenType) {
 		return true
 	}
 
@@ -110,7 +110,7 @@ func (o *SuccessAuthorizationResponseData) SetTokenType(v string) {
 
 // GetExpiresIn returns the ExpiresIn field value if set, zero value otherwise.
 func (o *SuccessAuthorizationResponseData) GetExpiresIn() float32 {
-	if o == nil || o.ExpiresIn == nil {
+	if o == nil || isNil(o.ExpiresIn) {
 		var ret float32
 		return ret
 	}
@@ -120,15 +120,15 @@ func (o *SuccessAuthorizationResponseData) GetExpiresIn() float32 {
 // GetExpiresInOk returns a tuple with the ExpiresIn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessAuthorizationResponseData) GetExpiresInOk() (*float32, bool) {
-	if o == nil || o.ExpiresIn == nil {
-		return nil, false
+	if o == nil || isNil(o.ExpiresIn) {
+    return nil, false
 	}
 	return o.ExpiresIn, true
 }
 
 // HasExpiresIn returns a boolean if a field has been set.
 func (o *SuccessAuthorizationResponseData) HasExpiresIn() bool {
-	if o != nil && o.ExpiresIn != nil {
+	if o != nil && !isNil(o.ExpiresIn) {
 		return true
 	}
 
@@ -142,13 +142,13 @@ func (o *SuccessAuthorizationResponseData) SetExpiresIn(v float32) {
 
 func (o SuccessAuthorizationResponseData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.AccessToken != nil {
+	if !isNil(o.AccessToken) {
 		toSerialize["accessToken"] = o.AccessToken
 	}
-	if o.TokenType != nil {
+	if !isNil(o.TokenType) {
 		toSerialize["tokenType"] = o.TokenType
 	}
-	if o.ExpiresIn != nil {
+	if !isNil(o.ExpiresIn) {
 		toSerialize["expiresIn"] = o.ExpiresIn
 	}
 	return json.Marshal(toSerialize)

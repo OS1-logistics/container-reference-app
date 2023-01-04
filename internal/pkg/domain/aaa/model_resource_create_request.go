@@ -66,7 +66,7 @@ func (o *ResourceCreateRequest) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceCreateRequest) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -78,7 +78,7 @@ func (o *ResourceCreateRequest) SetName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ResourceCreateRequest) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -88,15 +88,15 @@ func (o *ResourceCreateRequest) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceCreateRequest) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ResourceCreateRequest) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -122,7 +122,7 @@ func (o *ResourceCreateRequest) GetResourcePath() string {
 // and a boolean to check if the value has been set.
 func (o *ResourceCreateRequest) GetResourcePathOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ResourcePath, true
 }
@@ -134,7 +134,7 @@ func (o *ResourceCreateRequest) SetResourcePath(v string) {
 
 // GetResourcePathFormatted returns the ResourcePathFormatted field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceCreateRequest) GetResourcePathFormatted() string {
-	if o == nil || o.ResourcePathFormatted.Get() == nil {
+	if o == nil || isNil(o.ResourcePathFormatted.Get()) {
 		var ret string
 		return ret
 	}
@@ -146,7 +146,7 @@ func (o *ResourceCreateRequest) GetResourcePathFormatted() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceCreateRequest) GetResourcePathFormattedOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.ResourcePathFormatted.Get(), o.ResourcePathFormatted.IsSet()
 }
@@ -176,7 +176,7 @@ func (o *ResourceCreateRequest) UnsetResourcePathFormatted() {
 
 // GetAttributePath returns the AttributePath field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceCreateRequest) GetAttributePath() string {
-	if o == nil || o.AttributePath.Get() == nil {
+	if o == nil || isNil(o.AttributePath.Get()) {
 		var ret string
 		return ret
 	}
@@ -188,7 +188,7 @@ func (o *ResourceCreateRequest) GetAttributePath() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceCreateRequest) GetAttributePathOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.AttributePath.Get(), o.AttributePath.IsSet()
 }
@@ -218,7 +218,7 @@ func (o *ResourceCreateRequest) UnsetAttributePath() {
 
 // GetRequestParameter returns the RequestParameter field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceCreateRequest) GetRequestParameter() string {
-	if o == nil || o.RequestParameter.Get() == nil {
+	if o == nil || isNil(o.RequestParameter.Get()) {
 		var ret string
 		return ret
 	}
@@ -230,7 +230,7 @@ func (o *ResourceCreateRequest) GetRequestParameter() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceCreateRequest) GetRequestParameterOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.RequestParameter.Get(), o.RequestParameter.IsSet()
 }
@@ -272,7 +272,7 @@ func (o *ResourceCreateRequest) GetAllowedHttpMethods() []string {
 // and a boolean to check if the value has been set.
 func (o *ResourceCreateRequest) GetAllowedHttpMethodsOk() ([]string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.AllowedHttpMethods, true
 }
@@ -287,7 +287,7 @@ func (o ResourceCreateRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
 	if true {

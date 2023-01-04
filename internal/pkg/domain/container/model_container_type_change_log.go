@@ -58,7 +58,7 @@ func (o *ContainerTypeChangeLog) GetAction() ChangeAction {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeChangeLog) GetActionOk() (*ChangeAction, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Action, true
 }
@@ -82,7 +82,7 @@ func (o *ContainerTypeChangeLog) GetActionTime() int64 {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeChangeLog) GetActionTimeOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ActionTime, true
 }
@@ -106,7 +106,7 @@ func (o *ContainerTypeChangeLog) GetActionBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeChangeLog) GetActionByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ActionBy, true
 }
@@ -130,7 +130,7 @@ func (o *ContainerTypeChangeLog) GetCdc() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeChangeLog) GetCdcOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return nil, false
+    return map[string]interface{}{}, false
 	}
 	return o.Cdc, true
 }

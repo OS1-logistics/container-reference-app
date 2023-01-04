@@ -59,7 +59,7 @@ func (o *CompletedState) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *CompletedState) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -83,7 +83,7 @@ func (o *CompletedState) GetDefaultSubstate() string {
 // and a boolean to check if the value has been set.
 func (o *CompletedState) GetDefaultSubstateOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.DefaultSubstate, true
 }
@@ -107,7 +107,7 @@ func (o *CompletedState) GetSubStates() []SubState {
 // and a boolean to check if the value has been set.
 func (o *CompletedState) GetSubStatesOk() ([]SubState, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.SubStates, true
 }
@@ -119,7 +119,7 @@ func (o *CompletedState) SetSubStates(v []SubState) {
 
 // GetTerminalStates returns the TerminalStates field value if set, zero value otherwise.
 func (o *CompletedState) GetTerminalStates() []string {
-	if o == nil || o.TerminalStates == nil {
+	if o == nil || isNil(o.TerminalStates) {
 		var ret []string
 		return ret
 	}
@@ -129,15 +129,15 @@ func (o *CompletedState) GetTerminalStates() []string {
 // GetTerminalStatesOk returns a tuple with the TerminalStates field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CompletedState) GetTerminalStatesOk() ([]string, bool) {
-	if o == nil || o.TerminalStates == nil {
-		return nil, false
+	if o == nil || isNil(o.TerminalStates) {
+    return nil, false
 	}
 	return o.TerminalStates, true
 }
 
 // HasTerminalStates returns a boolean if a field has been set.
 func (o *CompletedState) HasTerminalStates() bool {
-	if o != nil && o.TerminalStates != nil {
+	if o != nil && !isNil(o.TerminalStates) {
 		return true
 	}
 
@@ -160,7 +160,7 @@ func (o CompletedState) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["subStates"] = o.SubStates
 	}
-	if o.TerminalStates != nil {
+	if !isNil(o.TerminalStates) {
 		toSerialize["terminalStates"] = o.TerminalStates
 	}
 	return json.Marshal(toSerialize)

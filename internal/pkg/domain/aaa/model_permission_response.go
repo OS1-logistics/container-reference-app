@@ -49,7 +49,7 @@ func NewPermissionResponseWithDefaults() *PermissionResponse {
 
 // GetPermissionId returns the PermissionId field value if set, zero value otherwise.
 func (o *PermissionResponse) GetPermissionId() string {
-	if o == nil || o.PermissionId == nil {
+	if o == nil || isNil(o.PermissionId) {
 		var ret string
 		return ret
 	}
@@ -59,15 +59,15 @@ func (o *PermissionResponse) GetPermissionId() string {
 // GetPermissionIdOk returns a tuple with the PermissionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PermissionResponse) GetPermissionIdOk() (*string, bool) {
-	if o == nil || o.PermissionId == nil {
-		return nil, false
+	if o == nil || isNil(o.PermissionId) {
+    return nil, false
 	}
 	return o.PermissionId, true
 }
 
 // HasPermissionId returns a boolean if a field has been set.
 func (o *PermissionResponse) HasPermissionId() bool {
-	if o != nil && o.PermissionId != nil {
+	if o != nil && !isNil(o.PermissionId) {
 		return true
 	}
 
@@ -81,7 +81,7 @@ func (o *PermissionResponse) SetPermissionId(v string) {
 
 // GetAction returns the Action field value if set, zero value otherwise.
 func (o *PermissionResponse) GetAction() string {
-	if o == nil || o.Action == nil {
+	if o == nil || isNil(o.Action) {
 		var ret string
 		return ret
 	}
@@ -91,15 +91,15 @@ func (o *PermissionResponse) GetAction() string {
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PermissionResponse) GetActionOk() (*string, bool) {
-	if o == nil || o.Action == nil {
-		return nil, false
+	if o == nil || isNil(o.Action) {
+    return nil, false
 	}
 	return o.Action, true
 }
 
 // HasAction returns a boolean if a field has been set.
 func (o *PermissionResponse) HasAction() bool {
-	if o != nil && o.Action != nil {
+	if o != nil && !isNil(o.Action) {
 		return true
 	}
 
@@ -124,15 +124,15 @@ func (o *PermissionResponse) GetAppId() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PermissionResponse) GetAppIdOk() (*interface{}, bool) {
-	if o == nil || o.AppId == nil {
-		return nil, false
+	if o == nil || isNil(o.AppId) {
+    return nil, false
 	}
 	return &o.AppId, true
 }
 
 // HasAppId returns a boolean if a field has been set.
 func (o *PermissionResponse) HasAppId() bool {
-	if o != nil && o.AppId != nil {
+	if o != nil && isNil(o.AppId) {
 		return true
 	}
 
@@ -146,7 +146,7 @@ func (o *PermissionResponse) SetAppId(v interface{}) {
 
 // GetResourceId returns the ResourceId field value if set, zero value otherwise.
 func (o *PermissionResponse) GetResourceId() string {
-	if o == nil || o.ResourceId == nil {
+	if o == nil || isNil(o.ResourceId) {
 		var ret string
 		return ret
 	}
@@ -156,15 +156,15 @@ func (o *PermissionResponse) GetResourceId() string {
 // GetResourceIdOk returns a tuple with the ResourceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PermissionResponse) GetResourceIdOk() (*string, bool) {
-	if o == nil || o.ResourceId == nil {
-		return nil, false
+	if o == nil || isNil(o.ResourceId) {
+    return nil, false
 	}
 	return o.ResourceId, true
 }
 
 // HasResourceId returns a boolean if a field has been set.
 func (o *PermissionResponse) HasResourceId() bool {
-	if o != nil && o.ResourceId != nil {
+	if o != nil && !isNil(o.ResourceId) {
 		return true
 	}
 
@@ -178,7 +178,7 @@ func (o *PermissionResponse) SetResourceId(v string) {
 
 // GetHttpMethod returns the HttpMethod field value if set, zero value otherwise.
 func (o *PermissionResponse) GetHttpMethod() string {
-	if o == nil || o.HttpMethod == nil {
+	if o == nil || isNil(o.HttpMethod) {
 		var ret string
 		return ret
 	}
@@ -188,15 +188,15 @@ func (o *PermissionResponse) GetHttpMethod() string {
 // GetHttpMethodOk returns a tuple with the HttpMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PermissionResponse) GetHttpMethodOk() (*string, bool) {
-	if o == nil || o.HttpMethod == nil {
-		return nil, false
+	if o == nil || isNil(o.HttpMethod) {
+    return nil, false
 	}
 	return o.HttpMethod, true
 }
 
 // HasHttpMethod returns a boolean if a field has been set.
 func (o *PermissionResponse) HasHttpMethod() bool {
-	if o != nil && o.HttpMethod != nil {
+	if o != nil && !isNil(o.HttpMethod) {
 		return true
 	}
 
@@ -210,7 +210,7 @@ func (o *PermissionResponse) SetHttpMethod(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *PermissionResponse) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -220,15 +220,15 @@ func (o *PermissionResponse) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PermissionResponse) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *PermissionResponse) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -242,7 +242,7 @@ func (o *PermissionResponse) SetDescription(v string) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *PermissionResponse) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -252,15 +252,15 @@ func (o *PermissionResponse) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PermissionResponse) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *PermissionResponse) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -274,7 +274,7 @@ func (o *PermissionResponse) SetIsActive(v bool) {
 
 // GetIsDeleted returns the IsDeleted field value if set, zero value otherwise.
 func (o *PermissionResponse) GetIsDeleted() bool {
-	if o == nil || o.IsDeleted == nil {
+	if o == nil || isNil(o.IsDeleted) {
 		var ret bool
 		return ret
 	}
@@ -284,15 +284,15 @@ func (o *PermissionResponse) GetIsDeleted() bool {
 // GetIsDeletedOk returns a tuple with the IsDeleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PermissionResponse) GetIsDeletedOk() (*bool, bool) {
-	if o == nil || o.IsDeleted == nil {
-		return nil, false
+	if o == nil || isNil(o.IsDeleted) {
+    return nil, false
 	}
 	return o.IsDeleted, true
 }
 
 // HasIsDeleted returns a boolean if a field has been set.
 func (o *PermissionResponse) HasIsDeleted() bool {
-	if o != nil && o.IsDeleted != nil {
+	if o != nil && !isNil(o.IsDeleted) {
 		return true
 	}
 
@@ -306,28 +306,28 @@ func (o *PermissionResponse) SetIsDeleted(v bool) {
 
 func (o PermissionResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.PermissionId != nil {
+	if !isNil(o.PermissionId) {
 		toSerialize["permissionId"] = o.PermissionId
 	}
-	if o.Action != nil {
+	if !isNil(o.Action) {
 		toSerialize["action"] = o.Action
 	}
 	if o.AppId != nil {
 		toSerialize["appId"] = o.AppId
 	}
-	if o.ResourceId != nil {
+	if !isNil(o.ResourceId) {
 		toSerialize["resourceId"] = o.ResourceId
 	}
-	if o.HttpMethod != nil {
+	if !isNil(o.HttpMethod) {
 		toSerialize["httpMethod"] = o.HttpMethod
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.IsDeleted != nil {
+	if !isNil(o.IsDeleted) {
 		toSerialize["isDeleted"] = o.IsDeleted
 	}
 	return json.Marshal(toSerialize)

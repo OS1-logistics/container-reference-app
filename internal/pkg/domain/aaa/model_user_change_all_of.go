@@ -51,7 +51,7 @@ func (o *UserChangeAllOf) GetCdc() UserResponse {
 // and a boolean to check if the value has been set.
 func (o *UserChangeAllOf) GetCdcOk() (*UserResponse, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Cdc, true
 }

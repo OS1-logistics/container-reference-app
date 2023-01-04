@@ -1,8 +1,8 @@
 .PHONY: openapi
 openapi-codegen:
 	oapi-codegen -package api -generate gin,types -o api/v1/openapi.gen.go api/openapi-spec/api__v1_openapi.yaml
-	openapi-generator generate -g go -i internal/pkg/domain/openapi-spec/api__v2_container-api.yaml -o internal/pkg/domain/container -p packageName=containerdomain -p enumClassPrefix=true --global-property skipFormModel=false
-	openapi-generator generate -g go -i internal/pkg/domain/openapi-spec/api__v1_aaa-api.yaml -o internal/pkg/domain/aaa -p packageName=aaadomain -p enumClassPrefix=true --global-property skipFormModel=false
+	openapi-generator generate -g go -i internal/pkg/domain/openapi-spec/api__v2_container-api.yaml -o internal/pkg/domain/container -p packageName=containerdomain -p enumClassPrefix=true --global-property skipFormModel=false,modelDocs=false,apiTests=false,apiDocs=false
+	openapi-generator generate -g go -i internal/pkg/domain/openapi-spec/api__v1_aaa-api.yaml -o internal/pkg/domain/aaa -p packageName=aaadomain -p enumClassPrefix=true --global-property skipFormModel=false,modelTests=false,modelDocs=false,apiTests=false,apiDocs=false
  
 .PHONY: install
 install:

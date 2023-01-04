@@ -41,7 +41,7 @@ func NewBatchResponseSuccessWithDefaults() *BatchResponseSuccess {
 
 // GetRefID returns the RefID field value if set, zero value otherwise.
 func (o *BatchResponseSuccess) GetRefID() string {
-	if o == nil || o.RefID == nil {
+	if o == nil || isNil(o.RefID) {
 		var ret string
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *BatchResponseSuccess) GetRefID() string {
 // GetRefIDOk returns a tuple with the RefID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BatchResponseSuccess) GetRefIDOk() (*string, bool) {
-	if o == nil || o.RefID == nil {
-		return nil, false
+	if o == nil || isNil(o.RefID) {
+    return nil, false
 	}
 	return o.RefID, true
 }
 
 // HasRefID returns a boolean if a field has been set.
 func (o *BatchResponseSuccess) HasRefID() bool {
-	if o != nil && o.RefID != nil {
+	if o != nil && !isNil(o.RefID) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *BatchResponseSuccess) SetRefID(v string) {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *BatchResponseSuccess) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *BatchResponseSuccess) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BatchResponseSuccess) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
+	if o == nil || isNil(o.Id) {
+    return nil, false
 	}
 	return o.Id, true
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *BatchResponseSuccess) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
@@ -105,10 +105,10 @@ func (o *BatchResponseSuccess) SetId(v string) {
 
 func (o BatchResponseSuccess) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.RefID != nil {
+	if !isNil(o.RefID) {
 		toSerialize["refID"] = o.RefID
 	}
-	if o.Id != nil {
+	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
 	return json.Marshal(toSerialize)

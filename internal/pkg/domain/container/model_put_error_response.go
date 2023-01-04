@@ -39,7 +39,7 @@ func NewPutErrorResponseWithDefaults() *PutErrorResponse {
 
 // GetError returns the Error field value if set, zero value otherwise.
 func (o *PutErrorResponse) GetError() Error {
-	if o == nil || o.Error == nil {
+	if o == nil || isNil(o.Error) {
 		var ret Error
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *PutErrorResponse) GetError() Error {
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PutErrorResponse) GetErrorOk() (*Error, bool) {
-	if o == nil || o.Error == nil {
-		return nil, false
+	if o == nil || isNil(o.Error) {
+    return nil, false
 	}
 	return o.Error, true
 }
 
 // HasError returns a boolean if a field has been set.
 func (o *PutErrorResponse) HasError() bool {
-	if o != nil && o.Error != nil {
+	if o != nil && !isNil(o.Error) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *PutErrorResponse) SetError(v Error) {
 
 // GetRequest returns the Request field value if set, zero value otherwise.
 func (o *PutErrorResponse) GetRequest() Request {
-	if o == nil || o.Request == nil {
+	if o == nil || isNil(o.Request) {
 		var ret Request
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *PutErrorResponse) GetRequest() Request {
 // GetRequestOk returns a tuple with the Request field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PutErrorResponse) GetRequestOk() (*Request, bool) {
-	if o == nil || o.Request == nil {
-		return nil, false
+	if o == nil || isNil(o.Request) {
+    return nil, false
 	}
 	return o.Request, true
 }
 
 // HasRequest returns a boolean if a field has been set.
 func (o *PutErrorResponse) HasRequest() bool {
-	if o != nil && o.Request != nil {
+	if o != nil && !isNil(o.Request) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *PutErrorResponse) SetRequest(v Request) {
 
 func (o PutErrorResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Error != nil {
+	if !isNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
-	if o.Request != nil {
+	if !isNil(o.Request) {
 		toSerialize["request"] = o.Request
 	}
 	return json.Marshal(toSerialize)

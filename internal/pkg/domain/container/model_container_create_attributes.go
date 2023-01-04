@@ -61,7 +61,7 @@ func NewContainerCreateAttributesWithDefaults() *ContainerCreateAttributes {
 
 // GetTrackingDetails returns the TrackingDetails field value if set, zero value otherwise.
 func (o *ContainerCreateAttributes) GetTrackingDetails() []ContainerCreateAttributesTrackingDetailsInner {
-	if o == nil || o.TrackingDetails == nil {
+	if o == nil || isNil(o.TrackingDetails) {
 		var ret []ContainerCreateAttributesTrackingDetailsInner
 		return ret
 	}
@@ -71,15 +71,15 @@ func (o *ContainerCreateAttributes) GetTrackingDetails() []ContainerCreateAttrib
 // GetTrackingDetailsOk returns a tuple with the TrackingDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateAttributes) GetTrackingDetailsOk() ([]ContainerCreateAttributesTrackingDetailsInner, bool) {
-	if o == nil || o.TrackingDetails == nil {
-		return nil, false
+	if o == nil || isNil(o.TrackingDetails) {
+    return nil, false
 	}
 	return o.TrackingDetails, true
 }
 
 // HasTrackingDetails returns a boolean if a field has been set.
 func (o *ContainerCreateAttributes) HasTrackingDetails() bool {
-	if o != nil && o.TrackingDetails != nil {
+	if o != nil && !isNil(o.TrackingDetails) {
 		return true
 	}
 
@@ -93,7 +93,7 @@ func (o *ContainerCreateAttributes) SetTrackingDetails(v []ContainerCreateAttrib
 
 // GetAttributes returns the Attributes field value if set, zero value otherwise.
 func (o *ContainerCreateAttributes) GetAttributes() map[string]interface{} {
-	if o == nil || o.Attributes == nil {
+	if o == nil || isNil(o.Attributes) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -103,15 +103,15 @@ func (o *ContainerCreateAttributes) GetAttributes() map[string]interface{} {
 // GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateAttributes) GetAttributesOk() (map[string]interface{}, bool) {
-	if o == nil || o.Attributes == nil {
-		return nil, false
+	if o == nil || isNil(o.Attributes) {
+    return map[string]interface{}{}, false
 	}
 	return o.Attributes, true
 }
 
 // HasAttributes returns a boolean if a field has been set.
 func (o *ContainerCreateAttributes) HasAttributes() bool {
-	if o != nil && o.Attributes != nil {
+	if o != nil && !isNil(o.Attributes) {
 		return true
 	}
 
@@ -125,7 +125,7 @@ func (o *ContainerCreateAttributes) SetAttributes(v map[string]interface{}) {
 
 // GetItems returns the Items field value if set, zero value otherwise.
 func (o *ContainerCreateAttributes) GetItems() []Item {
-	if o == nil || o.Items == nil {
+	if o == nil || isNil(o.Items) {
 		var ret []Item
 		return ret
 	}
@@ -135,15 +135,15 @@ func (o *ContainerCreateAttributes) GetItems() []Item {
 // GetItemsOk returns a tuple with the Items field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateAttributes) GetItemsOk() ([]Item, bool) {
-	if o == nil || o.Items == nil {
-		return nil, false
+	if o == nil || isNil(o.Items) {
+    return nil, false
 	}
 	return o.Items, true
 }
 
 // HasItems returns a boolean if a field has been set.
 func (o *ContainerCreateAttributes) HasItems() bool {
-	if o != nil && o.Items != nil {
+	if o != nil && !isNil(o.Items) {
 		return true
 	}
 
@@ -157,7 +157,7 @@ func (o *ContainerCreateAttributes) SetItems(v []Item) {
 
 // GetIsHazmat returns the IsHazmat field value if set, zero value otherwise.
 func (o *ContainerCreateAttributes) GetIsHazmat() bool {
-	if o == nil || o.IsHazmat == nil {
+	if o == nil || isNil(o.IsHazmat) {
 		var ret bool
 		return ret
 	}
@@ -167,15 +167,15 @@ func (o *ContainerCreateAttributes) GetIsHazmat() bool {
 // GetIsHazmatOk returns a tuple with the IsHazmat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateAttributes) GetIsHazmatOk() (*bool, bool) {
-	if o == nil || o.IsHazmat == nil {
-		return nil, false
+	if o == nil || isNil(o.IsHazmat) {
+    return nil, false
 	}
 	return o.IsHazmat, true
 }
 
 // HasIsHazmat returns a boolean if a field has been set.
 func (o *ContainerCreateAttributes) HasIsHazmat() bool {
-	if o != nil && o.IsHazmat != nil {
+	if o != nil && !isNil(o.IsHazmat) {
 		return true
 	}
 
@@ -189,7 +189,7 @@ func (o *ContainerCreateAttributes) SetIsHazmat(v bool) {
 
 // GetIsContainerizable returns the IsContainerizable field value if set, zero value otherwise.
 func (o *ContainerCreateAttributes) GetIsContainerizable() bool {
-	if o == nil || o.IsContainerizable == nil {
+	if o == nil || isNil(o.IsContainerizable) {
 		var ret bool
 		return ret
 	}
@@ -199,15 +199,15 @@ func (o *ContainerCreateAttributes) GetIsContainerizable() bool {
 // GetIsContainerizableOk returns a tuple with the IsContainerizable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateAttributes) GetIsContainerizableOk() (*bool, bool) {
-	if o == nil || o.IsContainerizable == nil {
-		return nil, false
+	if o == nil || isNil(o.IsContainerizable) {
+    return nil, false
 	}
 	return o.IsContainerizable, true
 }
 
 // HasIsContainerizable returns a boolean if a field has been set.
 func (o *ContainerCreateAttributes) HasIsContainerizable() bool {
-	if o != nil && o.IsContainerizable != nil {
+	if o != nil && !isNil(o.IsContainerizable) {
 		return true
 	}
 
@@ -221,7 +221,7 @@ func (o *ContainerCreateAttributes) SetIsContainerizable(v bool) {
 
 // GetIsReusable returns the IsReusable field value if set, zero value otherwise.
 func (o *ContainerCreateAttributes) GetIsReusable() bool {
-	if o == nil || o.IsReusable == nil {
+	if o == nil || isNil(o.IsReusable) {
 		var ret bool
 		return ret
 	}
@@ -231,15 +231,15 @@ func (o *ContainerCreateAttributes) GetIsReusable() bool {
 // GetIsReusableOk returns a tuple with the IsReusable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateAttributes) GetIsReusableOk() (*bool, bool) {
-	if o == nil || o.IsReusable == nil {
-		return nil, false
+	if o == nil || isNil(o.IsReusable) {
+    return nil, false
 	}
 	return o.IsReusable, true
 }
 
 // HasIsReusable returns a boolean if a field has been set.
 func (o *ContainerCreateAttributes) HasIsReusable() bool {
-	if o != nil && o.IsReusable != nil {
+	if o != nil && !isNil(o.IsReusable) {
 		return true
 	}
 
@@ -253,22 +253,22 @@ func (o *ContainerCreateAttributes) SetIsReusable(v bool) {
 
 func (o ContainerCreateAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TrackingDetails != nil {
+	if !isNil(o.TrackingDetails) {
 		toSerialize["trackingDetails"] = o.TrackingDetails
 	}
-	if o.Attributes != nil {
+	if !isNil(o.Attributes) {
 		toSerialize["attributes"] = o.Attributes
 	}
-	if o.Items != nil {
+	if !isNil(o.Items) {
 		toSerialize["items"] = o.Items
 	}
-	if o.IsHazmat != nil {
+	if !isNil(o.IsHazmat) {
 		toSerialize["isHazmat"] = o.IsHazmat
 	}
-	if o.IsContainerizable != nil {
+	if !isNil(o.IsContainerizable) {
 		toSerialize["isContainerizable"] = o.IsContainerizable
 	}
-	if o.IsReusable != nil {
+	if !isNil(o.IsReusable) {
 		toSerialize["isReusable"] = o.IsReusable
 	}
 	return json.Marshal(toSerialize)

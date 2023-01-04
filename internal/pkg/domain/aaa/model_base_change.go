@@ -58,7 +58,7 @@ func (o *BaseChange) GetAction() ChangeAction {
 // and a boolean to check if the value has been set.
 func (o *BaseChange) GetActionOk() (*ChangeAction, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Action, true
 }
@@ -82,7 +82,7 @@ func (o *BaseChange) GetActionTime() int64 {
 // and a boolean to check if the value has been set.
 func (o *BaseChange) GetActionTimeOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ActionTime, true
 }
@@ -106,7 +106,7 @@ func (o *BaseChange) GetActionBy() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *BaseChange) GetActionByOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return nil, false
+    return map[string]interface{}{}, false
 	}
 	return o.ActionBy, true
 }
@@ -130,7 +130,7 @@ func (o *BaseChange) GetChannel() string {
 // and a boolean to check if the value has been set.
 func (o *BaseChange) GetChannelOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Channel, true
 }

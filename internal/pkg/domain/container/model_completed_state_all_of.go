@@ -39,7 +39,7 @@ func NewCompletedStateAllOfWithDefaults() *CompletedStateAllOf {
 
 // GetTerminalStates returns the TerminalStates field value if set, zero value otherwise.
 func (o *CompletedStateAllOf) GetTerminalStates() []string {
-	if o == nil || o.TerminalStates == nil {
+	if o == nil || isNil(o.TerminalStates) {
 		var ret []string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *CompletedStateAllOf) GetTerminalStates() []string {
 // GetTerminalStatesOk returns a tuple with the TerminalStates field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CompletedStateAllOf) GetTerminalStatesOk() ([]string, bool) {
-	if o == nil || o.TerminalStates == nil {
-		return nil, false
+	if o == nil || isNil(o.TerminalStates) {
+    return nil, false
 	}
 	return o.TerminalStates, true
 }
 
 // HasTerminalStates returns a boolean if a field has been set.
 func (o *CompletedStateAllOf) HasTerminalStates() bool {
-	if o != nil && o.TerminalStates != nil {
+	if o != nil && !isNil(o.TerminalStates) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *CompletedStateAllOf) SetTerminalStates(v []string) {
 
 func (o CompletedStateAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TerminalStates != nil {
+	if !isNil(o.TerminalStates) {
 		toSerialize["terminalStates"] = o.TerminalStates
 	}
 	return json.Marshal(toSerialize)

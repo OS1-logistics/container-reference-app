@@ -59,7 +59,7 @@ func (o *PermissionCreateRequest) GetAction() string {
 // and a boolean to check if the value has been set.
 func (o *PermissionCreateRequest) GetActionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Action, true
 }
@@ -83,7 +83,7 @@ func (o *PermissionCreateRequest) GetResourceId() string {
 // and a boolean to check if the value has been set.
 func (o *PermissionCreateRequest) GetResourceIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ResourceId, true
 }
@@ -107,7 +107,7 @@ func (o *PermissionCreateRequest) GetHttpMethod() string {
 // and a boolean to check if the value has been set.
 func (o *PermissionCreateRequest) GetHttpMethodOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.HttpMethod, true
 }
@@ -131,7 +131,7 @@ func (o *PermissionCreateRequest) GetDescription() string {
 // and a boolean to check if the value has been set.
 func (o *PermissionCreateRequest) GetDescriptionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Description, true
 }

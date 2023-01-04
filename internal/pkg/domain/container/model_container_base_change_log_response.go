@@ -57,7 +57,7 @@ func (o *ContainerBaseChangeLogResponse) GetAction() ChangeAction {
 // and a boolean to check if the value has been set.
 func (o *ContainerBaseChangeLogResponse) GetActionOk() (*ChangeAction, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Action, true
 }
@@ -81,7 +81,7 @@ func (o *ContainerBaseChangeLogResponse) GetActionTime() int64 {
 // and a boolean to check if the value has been set.
 func (o *ContainerBaseChangeLogResponse) GetActionTimeOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ActionTime, true
 }
@@ -105,7 +105,7 @@ func (o *ContainerBaseChangeLogResponse) GetActionBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *ContainerBaseChangeLogResponse) GetActionByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ActionBy, true
 }
@@ -129,7 +129,7 @@ func (o *ContainerBaseChangeLogResponse) GetCdc() ContainerCDC {
 // and a boolean to check if the value has been set.
 func (o *ContainerBaseChangeLogResponse) GetCdcOk() (*ContainerCDC, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Cdc, true
 }
