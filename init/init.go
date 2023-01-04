@@ -203,13 +203,11 @@ func Initialize(tenantId string) error {
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.AttributesConfigUpdateRequest(attributesConfigUpdateRequest)
 	_, r, e := containerClient.ContainerTypeAttributesConfigApi.UpdateAttributesConfigExecute(ApiUpdateAttributesConfigRequest)
 	if e != nil {
-		fmt.Println(">", e)
-		fmt.Println(">>", r)
-
+		glog.Error(e)
 	}
 
 	if r.StatusCode == 202 {
-		fmt.Println("Attributes updated accepted successfully")
+		fmt.Println("Package Attributes updated accepted successfully")
 	}
 
 	// Bag type
@@ -268,27 +266,118 @@ func Initialize(tenantId string) error {
 	attributesConfigUpdateRequest = containerdomain.AttributesConfigUpdateRequest{
 		Attributes: []containerdomain.AttributeConfig{
 			{
-				Name:        "ContainerName",
+				Name:        "containerName",
 				DataType:    containerdomain.DATATYPE_STRING,
-				Description: containerdomain.PtrString("Container Name"),
+				Description: containerdomain.PtrString("Container Name - package/ bag"),
+				Indexed:     containerdomain.PtrBool(true),
+				Validation: &containerdomain.AttributeValidation{
+					Regex:    containerdomain.PtrString("^package$"),
+					Required: containerdomain.PtrBool(true),
+				},
+			},
+			{
+				Name:        "containerType",
+				DataType:    containerdomain.DATATYPE_STRING,
+				Description: containerdomain.PtrString("Container Type - reusable/ non-reusable"),
+				Indexed:     containerdomain.PtrBool(true),
+				Validation: &containerdomain.AttributeValidation{
+					Regex:    containerdomain.PtrString("^non-reusable$"),
+					Required: containerdomain.PtrBool(true),
+				},
+			},
+			{
+				Name:        "leaf",
+				DataType:    containerdomain.DATATYPE_BOOLEAN,
+				Description: containerdomain.PtrString("Is this a leaf container or not"),
+				Indexed:     containerdomain.PtrBool(false),
+				Validation: &containerdomain.AttributeValidation{
+					Required: containerdomain.PtrBool(true),
+				},
+			},
+			{
+				Name:        "allowableContainers",
+				DataType:    containerdomain.DATATYPE_STRING,
+				Description: containerdomain.PtrString("Allowable containers - package/ bag"),
+				Indexed:     containerdomain.PtrBool(false),
+				Validation: &containerdomain.AttributeValidation{
+					Required: containerdomain.PtrBool(true),
+				},
+			},
+			{
+				Name:        "origin",
+				DataType:    containerdomain.DATATYPE_STRING,
+				Description: containerdomain.PtrString("Originating location of the container"),
+				Indexed:     containerdomain.PtrBool(false),
+				Validation: &containerdomain.AttributeValidation{
+					Required: containerdomain.PtrBool(true),
+				},
+			},
+			{
+				Name:        "destination",
+				DataType:    containerdomain.DATATYPE_STRING,
+				Description: containerdomain.PtrString("Destination location of the container"),
+				Indexed:     containerdomain.PtrBool(false),
+				Validation: &containerdomain.AttributeValidation{
+					Required: containerdomain.PtrBool(true),
+				},
+			},
+			{
+				Name:        "trackingId",
+				DataType:    containerdomain.DATATYPE_STRING,
+				Description: containerdomain.PtrString("Tracking/ Scannable IDs (can be list - Order ID, LS ID, Container ID)"),
 				Indexed:     containerdomain.PtrBool(true),
 				Validation: &containerdomain.AttributeValidation{
 					Required: containerdomain.PtrBool(true),
 				},
 			},
 			{
-				Name:        "ContainerType",
-				DataType:    containerdomain.DATATYPE_STRING,
-				Description: containerdomain.PtrString("Container Type"),
-				Indexed:     containerdomain.PtrBool(true),
+				Name:        "volume",
+				DataType:    containerdomain.DATATYPE_NUMBER,
+				Description: containerdomain.PtrString("Volume of the container"),
+				Indexed:     containerdomain.PtrBool(false),
 				Validation: &containerdomain.AttributeValidation{
-					Required: containerdomain.PtrBool(true),
+					Required: containerdomain.PtrBool(false),
+				},
+			},
+			{
+				Name:        "deadWeight",
+				DataType:    containerdomain.DATATYPE_NUMBER,
+				Description: containerdomain.PtrString("Dead weight of the container"),
+				Indexed:     containerdomain.PtrBool(false),
+				Validation: &containerdomain.AttributeValidation{
+					Required: containerdomain.PtrBool(false),
+				},
+			},
+			{
+				Name:        "packagesInsideTheBag",
+				DataType:    containerdomain.DATATYPE_ARRAY,
+				Description: containerdomain.PtrString("Packages inside the bag"),
+				Indexed:     containerdomain.PtrBool(false),
+				Validation: &containerdomain.AttributeValidation{
+					Required: containerdomain.PtrBool(false),
+				},
+			},
+			{
+				Name:        "nextTransitCenter",
+				DataType:    containerdomain.DATATYPE_STRING,
+				Description: containerdomain.PtrString("Next transit center"),
+				Indexed:     containerdomain.PtrBool(false),
+				Validation: &containerdomain.AttributeValidation{
+					Required: containerdomain.PtrBool(false),
 				},
 			},
 		},
 	}
 
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.AttributesConfigUpdateRequest(attributesConfigUpdateRequest)
+	_, r, e = containerClient.ContainerTypeAttributesConfigApi.UpdateAttributesConfigExecute(ApiUpdateAttributesConfigRequest)
+	if e != nil {
+		glog.Error(e)
+	}
+
+	if r.StatusCode == 202 {
+		fmt.Println("Bag Attributes updated accepted successfully")
+	}
 
 	return nil
 }
