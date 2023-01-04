@@ -1,0 +1,4454 @@
+openapi: 3.0.3
+info:
+  title: Container Service
+  description: '**API documentation for Container Service**'
+  version: 1.0.0
+servers:
+  - url: https://{tenantSubdomain}.io/core/api/v2/containers
+    variables:
+      tenantSubdomain:
+        default: delhivery.dev.fxtrt
+        description: Subdomain assigned to the tenant
+paths:
+  /container-types:
+    post:
+      description: >
+        **A container can be a bag or box or pallet etc. These different type of
+        containers are known as container-types.**
+        <br><br><mark>**Important**</mark>: <br><br>
+             - Container types once created cannot be deleted. <br>
+             - Once the Container type is created, its *name* and *isLeaf* property cannot be changed.
+             <br><br>
+            **Asynchronous API for creating a new *Container Type* by specifying the following parameters in the request body:**
+
+           | PARAMETER | DESCRIPTION | TYPE | VALIDATION |
+           | ---- | ---- | ----- | ---- |
+           | `name`* | A unique name that represents a container of this container type. | string | **pattern:** It should match a through z or A through Z, inclusive (range).<br>**minLength:** 3 **maxLength:** 64 |
+           | `isLeaf` | Defines whether this container-type will have actual physical items or not. Such types of containers are termed as leaf containers. | boolean | **default:** false |
+           | `allowedParent` | Rules defining the allowed container types as parent of a container type. |
+           | ㅤ↳`oneOf` | List of container types allowed as parent of this container type. | string | **minItems:** 1 **maxItems:** 16<br>**minLength:** 3 **maxLength:** 64 |
+           | ㅤ↳`not` | List of container types not allowed as parent of this container type. | string | **minItems:** 1 **maxItems:** 16<br>**minLength:** 3 **maxLength:** 64 |
+           | `callback` | Represents callback URL, which can be to notify status(success/failed) of API.| object | {url: "string", meta: {}} |
+           *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **202 - Accepted** |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong. (These are rare.) |
+      tags:
+        - Container Type
+      summary: ' Create a new container type'
+      operationId: createContainerType
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+      requestBody:
+        $ref: '#/components/requestBodies/ContainerTypeCreateRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '202':
+          $ref: '#/components/responses/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+    get:
+      tags:
+        - Container Type
+      summary: Fetch container type details based on the filters passed
+      description: >
+        **API to get the list of all container types and their basic details.**
+
+
+        <mark>**Important**</mark>: Core Attributes Configuration and State
+        Machine Configuration of container types are not included in the
+        response.
+
+        | HEADER/QUERY PARAMETER | DESCRIPTION | TYPE | VALIDATION |
+         | ---- | ---- | ----- | ---- |
+         | `X-COREOS-REQUEST-ID`*(header) | Unique request ID. | string |
+         | `X-COREOS-TID`*(header) | Tenant ID. | string |
+         | `X-COREOS-ACCESS`*(header) | Core-OS access token. | string |
+         | `limit`(query) | Number of items to return. | integer | **Default value:** 50 |
+         | `offset`(query) | The number of items to skip from the start. | integer | **Default value:** 0 |
+         | `select`(query) | Specifies the list of attributes to be included in the response. If not specified, all attributes are included in the response. | array[string] | **Available values:** name, isSystem, isActive, allowedOwner, ttl |
+         | `query`(query) | Query criteria. | object | Refer following links for more details:<br> <br> ㅤ1. [match](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html) <br> ㅤ2. [term](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)<br> ㅤ3. [terms](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)<br> ㅤ4. [range](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)<br> ㅤ5. [regexp](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)<br> ㅤ6. [exists](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)<br> ㅤ7. [prefix](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html) |
+         | `sortKey`(query) | Key to be used for sorting data. | string | **Default value:** createdAt |
+         | `sortBy`(query) | Fetching data in ascending (asc) or descending (desc) order. | string | **Default value:** desc<br>**Available values**: desc, asc |
+         *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **200 - OK** | Everything worked as expected. |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong. (These are rare.) |
+      operationId: getContainerTypes
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageOffset'
+        - $ref: '#/components/parameters/SelectFields'
+        - $ref: '#/components/parameters/ContainerTypeFilterQuery'
+        - $ref: '#/components/parameters/SortKey'
+        - $ref: '#/components/parameters/SortBy'
+      responses:
+        '200':
+          $ref: '#/components/responses/ContainerTypesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /container-types/{containerTypeName}:
+    get:
+      tags:
+        - Container Type
+      summary: Get container type deatils by containerTypeName
+      description: >
+        **API to get the details of a container type by containerTypeName.**
+
+        <mark>**Important**</mark>: Core Attributes Configuration and State
+        Machine Configuration of the container type are not included in the
+        response.
+         | HEADER/PATH | DESCRIPTION | TYPE |
+         | ---- | ---- | ----- |
+         | `X-COREOS-REQUEST-ID`*(header) | Unique request ID. | string |
+         | `X-COREOS-TID`*(header) | Tenant ID. | string |
+         | `X-COREOS-ACCESS`*(header) | Core-OS access token. | string |
+         | `containerTypeName`*(path) | Unique Name of the Container Type. | string |
+         *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **200 - OK** | Everything worked as expected. |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong. (These are rare.) |
+      operationId: getContainerTypeById
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerTypeName'
+      responses:
+        '200':
+          $ref: '#/components/responses/ContainerTypeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+    put:
+      tags:
+        - Container Type
+      summary: Update container type basic deatils
+      description: >
+        **API to update basic configuration of a container type specified by
+        ContainerTypeName.** <br><br><mark>**Important**</mark>: Core Attributes
+        Configuration and State Machine Configuration of the container type
+        cannot be updated using this API.
+
+        | PARAMETER | DESCRIPTION | TYPE | VALIDATION |
+           | ---- | ---- | ----- | ---- |
+           | `allowedParent`* | Rules defining the allowed/disallowed container types (singular name) as parent of a container type. |
+           | ㅤ↳`oneOf` | List of container types allowed as parent of this container type. | string | **minItems:** 1 **maxItems:** 16<br>**minLength:** 3 **maxLength:** 64 |
+           | ㅤ↳`not` | List of container types not allowed as parent of this container type. | string | **minItems:** 1 **maxItems:** 16<br>**minLength:** 3 **maxLength:** 64 |
+           | `callback` | Represents callback URL, which can be to notify status(success/failed) of API.| object | {url: "string", meta: {}} |
+           *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **202 - Accepted** |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong. (These are rare.) |
+      operationId: updateContainerType
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerTypeName'
+      requestBody:
+        $ref: '#/components/requestBodies/ContainerTypeUpdateRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '202':
+          $ref: '#/components/responses/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /container-types/{containerTypeName}/config/attributes:
+    get:
+      tags:
+        - Container Type - Attributes Config
+      summary: Get core attributes configurations of a container type
+      description: >
+        **API to get the list of core attributes and their configuration of a
+        container type specified by containerTypeName.**
+         | HEADER/PATH | DESCRIPTION | TYPE |
+         | ---- | ---- | ----- |
+         | `X-COREOS-REQUEST-ID`*(header) | Unique request ID. | string |
+         | `X-COREOS-TID`*(header) | Tenant ID. | string |
+         | `X-COREOS-ACCESS`*(header) | Core-OS access token. | string |
+         | `containerTypeName`*(path) | Unique ID of the Container Type. | string |
+         *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **200 - OK** | Everything worked as expected. |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong.. (These are rare.) |
+      operationId: getAttributesConfig
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/RequestingApp'
+        - $ref: '#/components/parameters/ContainerTypeName'
+      responses:
+        '200':
+          $ref: '#/components/responses/AttributesConfigResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+    put:
+      tags:
+        - Container Type - Attributes Config
+      summary: Update core attributes configurations for a Container type.
+      description: >
+        **API to update core attributes configuration of a container type
+        specified by containerTypeName.**<br><br>**The configuration includes:**
+
+         1. List of core attributes (names) - Data type of each core attribute.<br>
+         2. Validation of core attribute values, if required, for each core attribute.
+
+          <mark>**Important**</mark>:
+          - If the attribute is already defined for the container type- The validation rules will get updated for the attribute.
+          - If the attribute is not defined for the container type- It is added as a new core attribute for the container type.
+          - On successful execution of the API, all updates including change in data type will take effect immediately for the container type.
+
+          | PARAMETER | DESCRIPTION | TYPE | VALIDATION |
+           | ---- | ---- | ----- | ---- |
+           | `attributes`* |
+           | ㅤ↳`name`* | Name of the attribute to be updated. | string | **Example**: capacity<br>**minLength**: 3 **maxLength**: 64 |
+           | ㅤ↳`dataType`* | Field for the datatype of an attribute. | string | **Example**: integer<br>**Enum**: [string, number, boolean, object, array] |
+           | ㅤ↳`description` |Updated description of the attribute.|string  | **minLength**: 1 **maxLength**: 256|
+           | ㅤ↳`indexed` | Field to specify if the attribute is to be indexed. Filter or search operation on the basis of a custom attribute will be only allowed if this field is set as TRUE. | boolean | **Default**: false |
+           | `defaultValue` |
+           | ㅤ↳`validation` | Specifies all the validations to be performed on an attribute, when a container of this type is created/updated. |
+           | ㅤㅤㅤ↳`range` | Field to specify the range that the attribute value must lie. In case of "string" data type, range will be the length of string value. | number | **min**: The min value, inclusive.<br>**max**: The max value, inclusive. |
+           | ㅤㅤㅤ↳`regex` | Field to specify the regex pattern that the value of an attribute MUST match. | string | **minLength**: 1 **maxLength**: 512 |
+           | ㅤㅤㅤ↳`valueOneOf` | Field to specify enum values for an attribute. list of valueOneOf should be homogeneous. | Enum | **minItems**: 1 |
+           | ㅤㅤㅤ↳`required` | Field to specify if the value for the attribute is mandatory or not. If TRUE, the value MUST be provided. | boolean | **Default value**: false |
+           | `callback` | Represents callback URL, which can be to notify status(success/failed) of API.| object | {url: "string", meta: {}} |
+           *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **202 - Accepted** |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong. (These are rare.) |
+      operationId: updateAttributesConfig
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerTypeName'
+        - $ref: '#/components/parameters/RequestingApp'
+      requestBody:
+        $ref: '#/components/requestBodies/AttributesConfigUpdateRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '202':
+          $ref: '#/components/responses/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/PutErrorResponse'
+        '401':
+          $ref: '#/components/responses/PutErrorResponse'
+        '404':
+          $ref: '#/components/responses/PutErrorResponse'
+        '503':
+          $ref: '#/components/responses/PutErrorResponse'
+  /container-types/{containerTypeName}/config/state-machine:
+    get:
+      tags:
+        - Container Type - State Machine Config
+      summary: ' Get state machine configuration of container type'
+      description: >
+        **API to get the current state-machine configurtion (states, sub-states,
+        and state transition rules) of a container type specified by the
+        containerTypeName.**
+         | HEADER/PATH | DESCRIPTION | TYPE |
+         | ---- | ---- | ----- |
+         | `X-COREOS-REQUEST-ID`*(header) | Unique request ID. | string |
+         | `X-COREOS-TID`*(header) | Tenant ID. | string |
+         | `X-COREOS-ACCESS`*(header) | Core-OS access token. | string |
+         | `containerTypeName`*(path) | Unique Name of the Container Type. | string |
+         *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **200 - OK** | Everything worked as expected. |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong.. (These are rare.) |
+      operationId: getStateMachine
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerTypeName'
+      responses:
+        '200':
+          $ref: '#/components/responses/StateMachineConfigResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+    put:
+      tags:
+        - Container Type - State Machine Config
+      summary: ' Update state machine configuration of container type'
+      description: >
+        **This API is for updating the current state-machine configuration
+        (states, sub-states, and state transition rules) of a container type
+        specified by the containerTypeName.**
+
+          - **Events** - Represents array of Events. An event contains event name, event data,if any.
+            - **Event Name** - Represents name of the event for state transition.
+            - **Event data** - data expected with the event and validation, if any, for the event data.
+          - **States** List of main states with its substates and transitions.
+
+        <mark>**Important**</mark>: The state machine cannot be partially
+        updated. Moreover, for each non-terminal sub-state, at least one state
+        transition rule is expected.
+
+        | PARAMETER | DESCRIPTION | TYPE | VALIDATION |
+           | ---- | ---- | ----- | ---- |
+           | `events`* | Represents an array of Events. An event contains event name, event data, if any. |
+           | ㅤ↳`event`* | Represents name of the event for state transition. | string | **Example**: createdToOpened |
+           | ㅤ↳`eventType` | Specifies event is transitional or not. <br>**TRANSITIONAL**- Transitonal event is an event that upon invocation it will change the state of the container.<br>**NON_TRANSITIONAL**- Transitonal event is an event that upon invocation it will not change the state of the container. | string | **default**: TRANSITIONAL<br>**Enum**: [ TRANSITIONAL, NON_TRANSITIONAL ] |
+           | ㅤ↳`eventData` | Data expected with the event and validation, if any, for the event data. |
+           | ㅤㅤ↳`name`* | Name of validation keys of an event. | string | **minLength**: 1 **maxLength**: 32 |
+           | ㅤㅤ↳`type` | Event data type | string | **Enum**: [string, number, boolean, object, array] |
+           | ㅤㅤ↳`validation` | Validation rules for a string or number value. |
+           | ㅤㅤㅤ↳`range` | Field to specify the range that the attribute value must lie. In case of "string" data type, range will be the length of string value. |
+           | ㅤㅤㅤㅤ↳`min` | The min value, inclusive. | number |
+           | ㅤㅤㅤㅤ↳`max` | The max value, inclusive. | number |
+           | ㅤㅤㅤ↳`regex` | Regex that the data should match. | string | **minLength**: 1 **maxLength**: 512 |
+           | ㅤㅤㅤ↳`valueOneOf` | Enum of accepted values. | | **minItems**: 1 **maxItems**: 16 |
+           | ㅤㅤㅤ↳`required` | Specifies whether the value is required or optional. | boolean | **Default**: false |
+           | ㅤㅤㅤ↳`blocking` | Specifies whether we need to block the event transition in case the attribute validation is failed or not. | boolean | **Default**: true |
+           | `states`* | List of main states with its sub-states and transitions. |
+           | `created`* | State created. |
+           | ㅤ↳`name`* | Name of the state. | string |
+           | ㅤ↳`defaultSubstate`* | Represents default substate for this state. | string |
+           | ㅤ↳`substates`* | | | **minItems**: 1 |
+           | ㅤㅤ↳`name`* | Name of the sub-state. | string | **minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤ↳`transitions`* | Represents an array of transition rules for this substate. Transition Rule for this state. Contains events and the destination state. |
+           | ㅤㅤㅤ↳`event`* | Represents name of the event for state transition. | string | **minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤㅤ↳`destination`* | Name of the main state and its sub-state. | string | **Example**: created<br>**minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤ↳`ttl` | Time to live associated with each state of a container. |
+           | ㅤㅤㅤ↳`time`* | Time to live is associated with the state of a container. | string | **pattern**: Time string in days, hours, minutes, and seconds.<br>**minLength**: 2<br>**Example** - 30m, 1d 12h, 1d 12h 30m 45s etc.|
+           | ㅤㅤㅤ↳`destination`* | Represents destination state to which this instance should be transitioned to after ttl expiry. | string |
+           | ㅤㅤ↳`callback` | Represents callback URL, which can be called to get any info about state transition of a container or its terminal ttl expiry. | string | A valid URL. |
+           | `opened`* | It signifies readiness of container to begin containerization process.
+           | ㅤ↳`name`* | Name of the state. | string |
+           | ㅤ↳`defaultSubstate`* | Represents default substate for this state. | string |
+           | ㅤ↳`substates`* | | | **minItems**: 1 |
+           | ㅤㅤ↳`name`* | Name of the sub-state. | string | **minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤ↳`transitions`* | Represents an array of transition rules for this substate. Transition Rule for this state. Contains events and the destination state. |
+           | ㅤㅤㅤ↳`event`* | Represents name of the event for state transition. | string | **minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤㅤ↳`destination`* | Name of the main state and its sub-state. | string | **Example**: created<br>**minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤ↳`ttl` | Time to live associated with each state of a container. |
+           | ㅤㅤㅤ↳`time`* | Time to live is associated with the state of a container. | string | **pattern**: Time string in days, hours, minutes, and seconds.<br>**minLength**: 2<br>**Example** - 30m, 1d 12h, 1d 12h 30m 45s etc.|
+           | ㅤㅤㅤ↳`destination`* | Represents destination state to which this instance should be transitioned to after ttl expiry. | string |
+           | ㅤㅤ↳`callback` | Represents callback URL, which can be called to get any info about state transition of a container or its terminal ttl expiry. | string | A valid URL. |
+           | `closed`* | It signifies the termination of containerization process. |
+           | ㅤ↳`name`* | Name of the state. | string |
+           | ㅤ↳`defaultSubstate`* | Represents default substate for this state. | string |
+           | ㅤ↳`substates`* | | | **minItems**: 1 |
+           | ㅤㅤ↳`name`* | Name of the sub-state. | string | **minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤ↳`transitions`* | Represents an array of transition rules for this substate. Transition Rule for this state. Contains events and the destination state. |
+           | ㅤㅤㅤ↳`event`* | Represents name of the event for state transition. | string | **minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤㅤ↳`destination`* | Name of the main state and its sub-state. | string | **Example**: created<br>**minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤ↳`ttl` | Time to live associated with each state of a container. |
+           | ㅤㅤㅤ↳`time`* | Time to live is associated with the state of a container. | string | **pattern**: Time string in days, hours, minutes, and seconds.<br>**minLength**: 2<br>**Example** - 30m, 1d 12h, 1d 12h 30m 45s etc.|
+           | ㅤㅤㅤ↳`destination`* | Represents destination state to which this instance should be transitioned to after ttl expiry. | string |
+           | ㅤㅤ↳`callback` | Represents callback URL, which can be called to get any info about state transition of a container or its terminal ttl expiry. | string | A valid URL. |
+           | `completed`* | End of the lifecycle of a container. |
+           | ㅤ↳`name`* | Name of the state. | string |
+           | ㅤ↳`defaultSubstate`* | Represents default substate for this state. | string |
+           | ㅤ↳`substates`* | | | **minItems**: 1 |
+           | ㅤㅤ↳`name`* | Name of the sub-state. | string | **minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤ↳`transitions`* | Represents an array of transition rules for this substate. Transition Rule for this state. Contains events and the destination state. |
+           | ㅤㅤㅤ↳`event`* | Represents name of the event for state transition. | string | **minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤㅤ↳`destination`* | Name of the main state and its sub-state. | string | **Example**: created<br>**minLength**: 3 **maxLength**: 32 |
+           | ㅤㅤ↳`ttl` | Time to live associated with each state of a container. |
+           | ㅤㅤㅤ↳`time`* | Time to live is associated with the state of a container. | string | **pattern**: Time string in days, hours, minutes, and seconds.<br>**minLength**: 2<br>**Example** - 30m, 1d 12h, 1d 12h 30m 45s etc.|
+           | ㅤㅤㅤ↳`destination`* | Represents destination state to which this instance should be transitioned to after ttl expiry. | string |
+           | ㅤㅤ↳`callback` | Represents callback URL, which can be called to get any info about state transition of a container or its terminal ttl expiry. | string | A valid URL. |
+           | `terminalStates` | Terminal state. | sting |
+           | `terminalTTL`* | Specifies the time to live for a data entry in the database. Specified for a tenant. | string | **Default**: 30d **Example**: 10d5h3m0s <br>**minLength**: 2 **maxLength**: 12 |
+           | `callback` | Represents callback URL, which can be called to get any info about state transition of a container or its terminal ttl expiry. | string | A valid URL. |
+           *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **200 - OK** | Everything worked as expected. |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong.. (These are rare.) |
+      operationId: updateStateMachine
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerTypeName'
+      requestBody:
+        $ref: '#/components/requestBodies/StateMachineUpdateRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /config/state-machine/entities/{entityCode}:
+    put:
+      tags:
+        - Container Type - State Machine Config
+      summary: Update an Entity
+      description: >
+        **This API will update an entity. Events mentioned in the events list
+        will be replaced for the entity**
+
+         **HTTP Status Code Summary**
+           | Code | Description |
+           | --- | ---- |
+           | **200 - OK** | Everything worked as expected. |
+            | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+            | **401 - Unauthorized** | No valid API key provided. |
+            | **404 - Not Found** | The requested resource doesn't exist. |
+            | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: updateEntity
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/EntityCode'
+      requestBody:
+        $ref: '#/components/requestBodies/EntityUpdateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /config/state-machine/events:
+    get:
+      tags:
+        - Container Type - State Machine Config
+      summary: Get all events
+      description: |
+        **This API will get all event with given event details.**
+
+         **HTTP Status Code Summary**
+           | Code | Description |
+           | --- | ---- |
+           | **200 - OK** | Everything worked as expected. |
+            | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+            | **401 - Unauthorized** | No valid API key provided. |
+            | **404 - Not Found** | The requested resource doesn't exist. |
+            | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: getAllEvents
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageOffset'
+      responses:
+        '200':
+          $ref: '#/components/responses/EventsAllSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+    post:
+      tags:
+        - Container Type - State Machine Config
+      summary: Create events for a container-type
+      description: |
+        **This API is for create events based on given details.**
+
+         **HTTP Status Code Summary**
+         | Code | Description |
+         | --- | ---- |
+         | **200 - OK** | Everything worked as expected. |
+          | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+          | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: createEvents
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+      requestBody:
+        $ref: '#/components/requestBodies/StateMachineCreateEvent'
+      callbacks:
+        NotifyContainerTypeStateMachineConfigUpdateStatus:
+          '{$request.body#/callback.url}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /config/state-machine/events/{eventCode}:
+    put:
+      tags:
+        - Container Type - State Machine Config
+      summary: Update events for a container-type
+      description: |
+        **This API is for create events based on given details.**
+
+         **HTTP Status Code Summary**
+         | Code | Description |
+         | --- | ---- |
+         | **200 - OK** | Everything worked as expected. |
+          | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+          | **401 - Unauthorized** | No valid API key provided. |
+          | **404 - Not Found** | The requested resource doesn't exist.
+          | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: update event
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/EventCode'
+      requestBody:
+        $ref: '#/components/requestBodies/StateMachineUpdateEvent'
+      callbacks:
+        NotifyContainerTypeStateMachineConfigUpdateStatus:
+          '{$request.body#/callback.url}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+    get:
+      tags:
+        - Container Type - State Machine Config
+      summary: Get events for a container-type
+      description: |
+        **This API is for create events based on given details.**
+
+         **HTTP Status Code Summary**
+         | Code | Description |
+         | --- | ---- |
+         | **200 - OK** | Everything worked as expected. |
+          | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+          | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: get event
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/EventCode'
+      responses:
+        '200':
+          $ref: '#/components/responses/EventsSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /config/state-machine/events/orphan:
+    get:
+      tags:
+        - Container Type - State Machine Config
+      summary: >-
+        API to get list of orphan event codes (not associated with any reason
+        code).
+      description: |
+        **This API is for create events based on given details.**
+
+         **HTTP Status Code Summary**
+         | Code | Description |
+         | --- | ---- |
+         | **200 - OK** | Everything worked as expected. |
+          | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+          | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: getOrphanEvent
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+      responses:
+        '200':
+          $ref: '#/components/responses/EventsOrphanResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /config/state-machine/reasons:
+    post:
+      tags:
+        - Container Type - State Machine Config
+      summary: >-
+        API to get list of orphan event codes (not associated with any reason
+        code).
+      description: |
+        **This API is for create events based on given details.**
+
+         **HTTP Status Code Summary**
+         | Code | Description |
+         | --- | ---- |
+         | **200 - OK** | Everything worked as expected. |
+          | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+          | **401 - Unauthorized** | No valid API key provided. |
+          | **404 - Not Found** | The requested resource doesn't exist. |
+          | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: createReason
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+      requestBody:
+        $ref: '#/components/requestBodies/ReasonCreateRequest'
+      callbacks:
+        NotifyContainerTypeStateMachineConfigUpdateStatus:
+          '{$request.body#/callback.url}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+    get:
+      tags:
+        - Container Type - State Machine Config
+      summary: Get all reasons
+      description: |
+        **This API will get all reason.**
+
+         **HTTP Status Code Summary**
+           | Code | Description |
+           | --- | ---- |
+           | **200 - OK** | Everything worked as expected. |
+            | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+            | **401 - Unauthorized** | No valid API key provided. |
+            | **404 - Not Found** | The requested resource doesn't exist. |
+            | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: getAllReasons
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageOffset'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReasonsAllSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /config/state-machine/reasons/{reasonCode}:
+    put:
+      tags:
+        - Container Type - State Machine Config
+      summary: >-
+        API to get list of orphan event codes (not associated with any reason
+        code).
+      description: |
+        **This API is for create events based on given details.**
+
+         **HTTP Status Code Summary**
+         | Code | Description |
+         | --- | ---- |
+         | **200 - OK** | Everything worked as expected. |
+          | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+          | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: updateReason
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ReasonCode'
+      requestBody:
+        $ref: '#/components/requestBodies/ReasonUpdateRequest'
+      callbacks:
+        NotifyContainerTypeStateMachineConfigUpdateStatus:
+          '{$request.body#/callback.url}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+    get:
+      tags:
+        - Container Type - State Machine Config
+      summary: >-
+        API to get list of orphan event codes (not associated with any reason
+        code).
+      description: |
+        **This API is for create events based on given details.**
+
+         **HTTP Status Code Summary**
+         | Code | Description |
+         | --- | ---- |
+         | **200 - OK** | Everything worked as expected. |
+          | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+          | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: getReason
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ReasonCode'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReasonsSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /config/state-machine/reason/orphan:
+    get:
+      tags:
+        - Container Type - State Machine Config
+      summary: >-
+        API to get list of orphan event codes (not associated with any reason
+        code).
+      description: |
+        **This API is for create events based on given details.**
+
+         **HTTP Status Code Summary**
+         | Code | Description |
+         | --- | ---- |
+         | **200 - OK** | Everything worked as expected. |
+          | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+          | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: getOrphanReason
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReasonsOrphanResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /{containerType}/filter:
+    get:
+      tags:
+        - Container
+      summary: Fetch container details based on the filters passed.
+      description: >
+        **API to get information of all containers of container type based on
+        the filters specified.**
+         |  HEADER/QUERY PARAMETER   |   DESCRIPTION  |   TYPE    |  VALIDATION   |
+          |---  |---  |---  |---  |
+          |  `X-COREOS-REQUEST-ID`*(header)   |  Unique request ID.   |  string      |     |
+          |  `X-COREOS-TID `*(header)   |   Tenant ID.  |  string      |     |
+          | `X-COREOS-ACCESS`*(header) | Core-OS access token. | string  | 
+          |
+          | `limit`(query) | Number of items to return. | integer  | ㅤ**Default value**: 50 |
+          | `offset`(query) | The number of items to skip from start. | integer | ㅤ**Default value**: 0 |
+          | `select`(query) | Specifies the list of attributes to be included in the response. If not specified, all attributes are included in the response.| array[string] | ㅤ**Available values**: name, isSystem, <br>ㅤisActive, allowedOwner, ttl |
+          | `query`(query) | Query criteria. | object | ㅤRefer following links for more details:<br> <br> ㅤ1. [match](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html) <br> ㅤ2. [multi_match](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)<br> ㅤ3. [term](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)<br> ㅤ4. [terms](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)<br> ㅤ5. [range](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)<br> ㅤ6. [regexp](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)<br> ㅤ7. [exists](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)<br> ㅤ8. [fuzzy](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html)<br> ㅤ9. [prefix](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html)<br>  10. [wildcard](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)<br>  11. [match_phrase](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html)<br>  12. [match_phrase_prefix](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html) |
+          | `sortKey`(query) | Key to be used for sorting data. | string |  **Default value**: createdAt |
+          | `sortBy`(query) | Fetching data in ascending (asc) or descending (desc) order. | string | **Available values**: desc, asc<br>**Default value**: desc |
+          | `containerType`*(query) | Type of container. | string |
+          *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **200 - OK** | Everything worked as expected. |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong. (These are rare.) |
+      operationId: getContainers
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageOffset'
+        - $ref: '#/components/parameters/SelectFields'
+        - $ref: '#/components/parameters/Query'
+        - $ref: '#/components/parameters/SortKey'
+        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/ContainerType'
+      responses:
+        '200':
+          $ref: '#/components/responses/ContainersResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /{containerTypeName}:
+    post:
+      tags:
+        - Container
+      summary: Create a container
+      description: >
+        **API to create a new container of a particular containerType(given in
+        request):**
+
+          | PARAMETER | DESCRIPTION | TYPE | VALIDATION |
+          | ---- | ----- | ---- | --- |
+          | `containerType`* | Container type defined using container type configuration APIs. | string | **pattern**: It should match a through z or A through Z, inclusive (range).<br>**minLength**: 3 **maxLength**: 64<br>**Example**: bag |
+          | `trackingDetails` | Field to represent tracking ID (such as AWB) for a container which is usually pasted on the container and used for scanning it. There can be multiple tracking IDs for a container, owned by different operators and hence it will be stored as a list. |
+          | ㅤ↳`operator`* | Field to specify the owner of the tracking ID. | string | **minLength**: 3 **maxLength**: 64<br>**Example**: Delhivery |
+          | ㅤ↳`trackingId`* | | string | **minLength**: 1 **maxLength**: 128<br>**Example**: 132121232423232 |
+          | ㅤ↳`isPrimary` | It defines whether it is a primary tracking ID or not. If not defined we assume first tracking ID as primary tracking ID. | boolean | **Default**: false |
+          | `attributes` | A map to provide values for the attributes defined in Container-type configuration APIs. |
+          | `items` | List of items can be added into a container only if the container-type is a leaf. |
+          | ㅤ↳`name`* | Name of the item. | string | **minLength**: 3 **maxLength**: 128<br>**Example**: pant/shirt |
+          | ㅤ↳`code` | Code of the item. | string |  **minLength**: 3 **maxLength**: 128 |
+          | ㅤ↳`cost`* | Cost of the item. |
+          | ㅤㅤ↳`unit` | Represents unit price of the item. |
+          | ㅤㅤㅤ↳`amount` | The value of the amount; accurate to three decimal places. | number |
+          | ㅤㅤㅤ↳`currency` | Currency of the price of the item. | string |
+          | ㅤㅤ↳`total`* | Represents total price of the item. |
+          | ㅤㅤㅤ↳`amount` | The value of the amount; accurate to three decimal places. | number |
+          | ㅤㅤㅤ↳`currency` | Currency of the price of the item. | string |
+          | ㅤ↳`quantity` |
+          | ㅤㅤ↳`value` | A number quantifying measurement. | integer |
+          | ㅤㅤ↳`unit` | Unit for measurement. | string | **Enum**: [cm, m, l, ml, nos, g, kg, mm] |
+          | `isHazmat` | Represents whether this container can contain hazardous materials or not. | boolean | **Default**: false |
+          | `isContainerizable` | Defines whether container can be put into other containers or not. | boolean | **Default**: true |
+          | `callback` | Represents callback URL, which can be to notify status(success/failed) of API. | object | {url: "string", meta: "string"} |
+          *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **202 - Accepted** |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **503 - Server Error** | Something went wrong.. (These are rare.) |
+      operationId: createContainer
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerTypeName'
+        - $ref: '#/components/parameters/RequestingApp'
+      requestBody:
+        $ref: '#/components/requestBodies/ContainerCreateRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '202':
+          $ref: '#/components/responses/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /{containerId}:
+    get:
+      tags:
+        - Container
+      summary: Fetch details of container
+      description: >
+        **API to get information (base & core attribute values) of a container
+        specified by containerId.**
+         | HEADER/PATH/QUERY | DESCRIPTION | TYPE |
+         | ---- | ---- | ----- |
+         | `X-COREOS-REQUEST-ID`*(header) | Unique request ID. | string |
+         | `X-COREOS-TID`*(header) | Tenant ID. | string |
+         | `X-COREOS-ACCESS`*(header) | Core-OS access token. | string |
+         |
+         | `containerId`*(path) | Unique ID of Container. | string |
+         | `containerType`*(query) | Type of container. | string |
+         *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **200 - OK** | Everything worked as expected. |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong. (These are rare.) |
+      operationId: getContainerById
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerId'
+      responses:
+        '200':
+          $ref: '#/components/responses/ContainerResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+    put:
+      tags:
+        - Container
+      summary: Update attribute of Container
+      description: |
+        **API to update the attributes of container.**
+
+
+         | PARAMETER | DESCRIPTION | TYPE | VALIDATION |
+         | ---- | ---- | --- | --- |
+         | `trackingDetails` | Field to represent tracking ID (such as AWB) for a container which is usually pasted on the container and used for scanning it. There can be multiple tracking IDs for a container, owned by different operators and hence it will be stored as a list. |
+         | ㅤ↳`operator` | Field to specify the owner of the tracking ID. | string | **minLength**: 3 **maxLength**: 64<br>**Example**: Delhivery |
+         | ㅤ↳`trackingId`* | | string | **minLength**: 1 **maxLength**: 128<br>**Example**: 132121232423232 |
+          | ㅤ↳`isPrimary` | It defines whether it is a primary tracking id or not. If not defined we assume first tracking id as primary tracking id. | boolean | **Default**: false |
+          | `attributes` | A map to provide values for the attributes defined in Container-type configuration APIs. |
+          | `items` | List of items can be added into a container only if the container-type is a leaf. |
+          | ㅤ↳`name`* | Name of the item. | string | **minLength**: 3 **maxLength**: 128<br>**Example**: pant/shirt |
+          | ㅤ↳`code` | Code of the item. | string |  **minLength**: 3 **maxLength**: 128 |
+          | ㅤ↳`cost`* | Cost of the item. |
+          | ㅤㅤ↳`unit` | Represents unit price of the item. |
+          | ㅤㅤㅤ↳`amount` | The value of the amount; accurate to three decimal places. | number |
+          | ㅤㅤㅤ↳`currency` | Currency of the price of the item. | string |
+          | ㅤㅤ↳`total`* | Represents total price of the item. |
+          | ㅤㅤㅤ↳`amount` | The value of the amount; accurate to three decimal places. | number |
+          | ㅤㅤㅤ↳`currency` | Currency of the price of the item. | string |
+          | ㅤ↳`quantity` |
+          | ㅤㅤ↳`value` | A number quantifying measurement. | integer |
+          | ㅤㅤ↳`unit` | Unit for measurement. | string | **Enum**: [cm, m, l, ml, nos, g, kg, mm] |
+          | `callback` | Represents callback URL, which can be to notify status(success/failed) of API. | object | {url: "string", meta: "string"} |
+          *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **202 - Accepted** |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **503 - Server Error** | Something went wrong.. (These are rare.) |
+      operationId: updateContainerById
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerId'
+        - $ref: '#/components/parameters/RequestingApp'
+      requestBody:
+        $ref: '#/components/requestBodies/ContainerUpdateRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '202':
+          $ref: '#/components/responses/SuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /{containerId}/child:
+    put:
+      tags:
+        - Container
+      summary: containerization/decontainerization of the container
+      description: >
+        **Grouping together container into a container. The container that goes
+        inside another container is said to be containerized.**
+
+        - **containerId** - The child container ID that needs to be add in
+        parent container.
+
+        - **parentId** - The parent container ID that needs to be add as parent
+        of a container.
+                  
+        - **action** - field to represent action to be performed on the
+        container.
+
+
+         | PARAMETER | DESCRIPTION | TYPE | VALIDATION |
+         | --- | --- | --- | --- |
+         | `parentId`* | Field to represent container ID of the parent container. During the containerization process, this value is assigned to represent which container contains this container. | string | **Example**- box:9c9b1138-7cdd-11eb-9439-0242ac130002 |
+         | `action`* | field to represent action to be performed on the container.field to represent action to be performed on the container.
+         | `callback` | Represents callback URL, which can be to notify status(success/failed) of API. | string | A valid URL. |
+        *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **202 - Accepted** |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong.. (These are rare.) |
+      operationId: ContainerizeContainerById
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerId'
+      requestBody:
+        $ref: '#/components/requestBodies/ParentIdRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '202':
+          $ref: '#/components/responses/ChildContainerResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /tracking/{trackingId}:
+    get:
+      tags:
+        - Container
+      summary: Fetch details of container by trackingId
+      description: >
+        **Container is a physical entity which must have a
+        trackingId(scannableId, photoId, RFId) associated with
+        it.**<br><br>**This api will fetch all the details of container
+        specified by trackingId(scannableId, photoId, RFId).**
+         | HEADER/PATH/QUERY | DESCRIPTION | TYPE |
+         | ---- | ---- | ----- |
+         | `X-COREOS-REQUEST-ID`*(header) | Unique request ID. | string |
+         | `X-COREOS-TID`*(header) | Tenant ID. | string |
+         | `X-COREOS-ACCESS`*(header) | Core-OS access token. | string |
+         | `trackingId`*(path) | Tracking ID of container. | string|
+         *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **200 - OK** | Everything worked as expected. |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong.. (These are rare.) |
+      operationId: getContainerByTrackingId
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/TrackingId'
+      responses:
+        '200':
+          $ref: '#/components/responses/ContainerTrackingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /{containerId}/state:
+    get:
+      tags:
+        - Container State
+      summary: Get the current state of a container
+      description: |
+        **API to get the current state of a container.**
+
+         | HEADER/PATH | DESCRIPTION | TYPE |
+         | ---- | ---- | ----- |
+         | `X-COREOS-REQUEST-ID`*(header) | Unique request ID. | string |
+         | `X-COREOS-TID`*(header) | Tenant ID. | string |
+         | `X-COREOS-ACCESS`*(header) | Core-OS access token. | string |
+         
+         | `containerId`*(path) | Unique ID of Container. | string|
+         *This is required.
+           <br><br>
+           **HTTP Status Code Summary**
+           | Code | Description |
+           | ---- | ---------- |
+           | **200 - OK** | Everything worked as expected. |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+           | **401 - Unauthorized** | No valid API key provided. |
+           | **404 - Not Found** | The requested resource doesn't exist. |
+           | **503 - Server Error** | Something went wrong.. (These are rare.) |
+      operationId: getContainerState
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerId'
+      responses:
+        '200':
+          $ref: '#/components/responses/ContainerStateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /{containerId}/state/event:
+    put:
+      tags:
+        - Container State
+      summary: Apply event on the container.
+      description: >
+        **This API will apply an event to an instance. If the event is
+
+        transitionable, then the instance will transition to the particular
+
+        state. Otherwise it will remain in the existing state.**
+
+
+        | PARAMETER | DESCRIPTION | TYPE | VALIDATION |
+
+        | ---- | ---- | ----- | ---- |
+
+        | `name`* | Represents name of the event for state transition. | string
+        | **minLength**: 3 **maxLength**: 64 |
+
+        | `timestamp` | Represents the timestamp of the event occured. | integer
+        |
+
+        | `propagate` | Propagate flag indicates whether these events need to
+        propagate on child containers or not. | boolean | **Default**: false |
+
+        | `data` | Represents event data values, if any, for this event. |
+
+        | `source` | Represents the source which triggered the event. It can be
+        an app, a user or some location from where the event was triggered. |
+
+        | ㅤ↳`appId`* | Application ID which is responsible for calling this
+        event. | string | **minLength**: 1 **maxLength**: 64 |
+         | ㅤ↳`userId` | User ID which is responsible for calling this event. | string | **minLength**: 1 **maxLength**: 64 |
+         | ㅤ↳`locId` | LocationId of the event. | string |
+         | `callback` | Represents callback URL, which can be called to get any info about state change of a container and notify status(success/failed) of API. | string | A valid URL. |
+         *This is required.
+          <br><br>
+          **HTTP Status Code Summary**
+          | Code | Description |
+          | ---- | ---------- |
+          | **200 - OK** | Everything worked as expected. |
+          | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+          | **401 - Unauthorized** | No valid API key provided. |
+          | **404 - Not Found** | The requested resource doesn't exist. |
+          | **503 - Server Error** | Something went wrong.. (These are rare.) |
+      operationId: updateContainerState
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerId'
+      requestBody:
+        $ref: '#/components/requestBodies/ContainerStateUpdateRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerStateEventCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '200':
+          $ref: '#/components/responses/ContainerStateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /{containerType}/batch:
+    post:
+      tags:
+        - Container - Batch Processing
+      summary: Create container in batches
+      description: >
+        **API to create Container in batch via JSON payload for a container
+        type.**
+
+        | PARAMETER | DESCRIPTION | TYPE | VALIDATION |
+
+        | - | - | - | - |
+
+        | `payload` | Array of container creation request. | | **maxItems**:
+        1024 **minItems**: 1 |
+         | ㅤ↳`refID`* | Reference ID received for each container create request. | string |
+         | `trackingDetails` | Field to represent tracking ID (such as AWB) for a container which is usually pasted on the container and used for scanning it.<br>There can be multiple tracking IDs for a container, owned by different operators and hence it will be stored as a list. |
+         | ㅤㅤ↳`operator`* | Field to specify the owner of the tracking ID. | string | **minLength**: 3 **maxLength**: 64<br>**example**: Delhivery |
+         | ㅤㅤ↳`trackingId`* | Tracking ID. | string | **minLength**: 1 **maxLength**: 128<br>**example**: 132121232423232 |
+         | ㅤㅤ↳`isPrimary`* | It defines whether it is a primary tracking ID or not. If none of the tracking details is set as primary we assume first tracking ID as a primary tracking ID. | boolean | **default**: false |
+         | ㅤ↳`attributes` | A map to provide values for the attributes defined in Container-type configuration APIs. |
+         | ㅤ↳`items` | List of items can be added into a container only if the container-type is a leaf. |
+         | ㅤㅤ↳`name`* | Name of the item. | string | **minLength**: 3 **maxLength**: 128<br>**example**: pant/shirt |
+         | ㅤㅤ↳`code` | Code of the item. | string | **minLength**: 3 **maxLength**: 128 |
+         | ㅤㅤ↳`cost`* | cost of the item. |
+         | ㅤㅤㅤ↳`unit` | Represents unit price of the item.. |
+         | ㅤㅤㅤㅤ↳`amount` | The value of the amount accurate to three decimal places. | number |
+         | ㅤㅤㅤㅤ↳`currency` | Currency of the price of the item. | string |
+         | ㅤㅤㅤ↳`total`* | Represents total price of the item. |
+         | ㅤㅤㅤㅤ↳`amount` | The value of the amount accurate to three decimal places. | number |
+         | ㅤㅤㅤㅤ↳`currency` | Currency of the price of the item. | string |
+         | ㅤㅤ↳`quantity` |
+         | ㅤㅤㅤ↳`value` | A number quantifying measurement. | integer |
+         | ㅤㅤㅤ↳`unit` | Unit for measurement. | string | **​​Enum**: [ cm, m, l, ml, nos, g, kg, mm ] |
+         | ㅤ↳`isHazmat` | Represents whether this container can contain hazardous materials or not. | boolean | **default**: false |
+           | ㅤ↳`isContainerizable` | Defines whether containers can be put into other containers or not. | boolean | **default**: true |
+           | `callback` | Represents callback URL, which can be to notify status(success/failed) of API.| object | {url: "string", meta: {}} |
+           *This is required.
+
+           **HTTP Status Code Summary**
+
+          | Code | Description |
+              | --- | ---- |
+           | **202 - Accepted** | Everything worked as expected. |
+           | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+            | **401 - Unauthorized** | No valid API key provided. |
+            | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerType'
+        - $ref: '#/components/parameters/RequestingApp'
+      requestBody:
+        $ref: '#/components/requestBodies/ContainerCreateBatchRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerBatchCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '202':
+          $ref: '#/components/responses/BatchSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+    put:
+      tags:
+        - Container - Batch Processing
+      summary: Perform update operation on container in batches
+      description: |
+        **API to update Container in batch via JSON payload.**
+
+        | PARAMETER | DESCRIPTION | TYPE | VALIDATION |
+        | - | - | - | - |
+        | `payload` | Array of container update request. |
+         | ㅤ↳`containerId` | unique identifier of each container. | string |
+         | ㅤ↳`data` | Attributes that define a container and can be modified after container creation. |
+         | `trackingDetails` | Field to represent tracking ID (such as AWB) for a container which is usually pasted on the container and used for scanning it.<br>There can be multiple tracking IDs for a container, owned by different operators and hence it will be stored as a list. |
+           | ㅤㅤ↳`operator`* | Field to specify the owner of the tracking ID. | string | **minLength**: 3 **maxLength**: 64<br>**example**: Delhivery |
+           | ㅤㅤ↳`trackingId`* | Tracking ID. | string | **minLength**: 1 **maxLength**: 128<br>**example**: 132121232423232 |
+           | ㅤㅤ↳`isPrimary`* | It defines whether it is a primary tracking ID or not. If none of the tracking details is set as primary we assume first tracking ID as a primary tracking id. | boolean | **default**: false |
+           | ㅤ↳`attributes` | A map to provide values for the attributes defined in Container-type configuration APIs. |
+           | ㅤ↳`items` | List of items can be added into container only if container-type is a leaf. |
+             | ㅤㅤ↳`name`* | Name of the item. | string | **minLength**: 3 **maxLength**: 128<br>**example**: pant/shirt |
+             | ㅤㅤ↳`code` | Code of the item. | string | **minLength**: 3 **maxLength**: 128 |
+           | ㅤㅤ↳`cost`* | cost of the item. |
+           | ㅤㅤㅤ↳`unit` | Represents unit price of the item.. |
+           | ㅤㅤㅤㅤ↳`amount` | The value of the amount accurate to three decimal places. | number |
+           | ㅤㅤㅤㅤ↳`currency` | Currency of the price of the item. | string |
+           | ㅤㅤㅤ↳`total`* | Represents total price of the item. |
+           | ㅤㅤㅤㅤ↳`amount` | The value of the amount accurate to three decimal places. | number |
+           | ㅤㅤㅤㅤ↳`currency` | Currency of the price of the item. | string |
+           | ㅤㅤ↳`quantity` |
+           | ㅤㅤㅤ↳`value` | A number quantifying measurement. | integer |
+           | ㅤㅤㅤ↳`unit` | Unit for measurement. | string | ​​**Enum**: [ cm, m, l, ml, nos, g, kg, mm ] |
+           | ㅤㅤ↳`callback` | Represents callback URL, which can be to notify status(success/failed) of API. | string | A valid URL |
+           | `callback` | Represents callback URL, which can be to notify status(success/failed) of API.| object | {url: "string", meta: {}} |
+           *This is required.
+
+           **HTTP Status Code Summary**
+          | Code | Description |
+          | --- | ---- |
+            | **202 - Accepted** | Everything worked as expected. |
+            | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+            | **401 - Unauthorized** | No valid API key provided. |
+             | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerType'
+        - $ref: '#/components/parameters/RequestingApp'
+      requestBody:
+        $ref: '#/components/requestBodies/ContainerUpdateBatchRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerBatchCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '202':
+          $ref: '#/components/responses/BatchSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /{containerType}/batch/status:
+    get:
+      tags:
+        - Container - Batch Processing
+      summary: Get the status of batch  request
+      description: |
+        **API to get the status of batch request.**
+        | HEADER/PATH/QUERY | DESCRIPTION | TYPE |
+        | - | - | - |
+         | `X-COREOS-REQUEST-ID`*(header) | Unique Request ID. | string |
+         | `X-COREOS-TID`*(header) | Tenant ID. | string |
+         | `X-COREOS-ACCESS`*(header) | core-os access token. | string |
+         | `containerType`*(path) | Type of container. | string |
+         | `batchId`*(query) | Unique ID of batch request. | string |
+
+
+         *This is required.
+
+         **HTTP Status Code Summary**
+          | Code | Description |
+          | --- | ---- |
+            | **200 - Ok** | Everything worked as expected. |
+          | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+          | **401 - Unauthorized** | No valid API key provided. |
+         | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: getStatusOfBatchRequest
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerType'
+        - $ref: '#/components/parameters/BatchId'
+      responses:
+        '200':
+          $ref: '#/components/responses/ContainerBatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /{containerType}/batch/upload:
+    post:
+      tags:
+        - Container - Batch Processing
+      summary: Perform create operation on container via file upload
+      description: |
+        **API to create container in batch through CSV file upload.**
+
+        | PARAMETER | DESCRIPTION | TYPE | Example |
+         | - | - | - | - |
+         | `file`* || string($binary) |
+         | `callback` | Represents callback URL, which can be to notify status(success/failed) of API.| object | {url: "string", meta: {}} |
+
+         *This is required.
+
+         **HTTP Status Code Summary**
+          | Code | Description |
+          | --- | ---- |
+           | **202 - Accepted** | Everything worked as expected. |
+         | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+         | **401 - Unauthorized** | No valid API key provided. |
+         | **404 - Not Found** | The requested resource doesn't exist. |
+         | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: recordFileUploadCreateRequest
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerType'
+        - $ref: '#/components/parameters/RequestingApp'
+      requestBody:
+        $ref: '#/components/requestBodies/ContainerFileUploadRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerBatchCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '202':
+          $ref: '#/components/responses/BatchSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+    put:
+      tags:
+        - Container - Batch Processing
+      summary: Perform update operation on container via file upload
+      description: |
+        **API to update container in batch through CSV file upload.**
+        | PARAMETER | DESCRIPTION | TYPE | Example |
+         | - | - | - | - |
+         | `file`* || string($binary) |
+         | `callback` | Represents callback URL, which can be to notify status(success/failed) of API.| object | {url: "string", meta: {}} |
+
+         *This is required.
+
+         **HTTP Status Code Summary**
+          | Code | Description |
+          | --- | ---- |
+           | **202 - Accepted** | Everything worked as expected. |
+         | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+         | **401 - Unauthorized** | No valid API key provided. |
+         | **404 - Not Found** | The requested resource doesn't exist. |
+         | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: recordFileUploadUpdateRequest
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerType'
+        - $ref: '#/components/parameters/RequestingApp'
+      requestBody:
+        $ref: '#/components/requestBodies/ContainerFileUploadRequest'
+      callbacks:
+        NotifyContainersApiStatus:
+          '{$request.body#/callback}':
+            post:
+              requestBody:
+                $ref: '#/components/requestBodies/ContainerBatchCallbackRequest'
+              responses:
+                '200':
+                  description: received notification
+      responses:
+        '202':
+          $ref: '#/components/responses/BatchSuccessResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+  /{containerType}/batch/upload/status:
+    get:
+      tags:
+        - Container - Batch Processing
+      summary: Get the status of batch file request
+      description: |
+        **API to get the status of batch file request.**
+        | HEADER/PATH/QUERY | DESCRIPTION | TYPE |
+         | - | - | - |
+         | `X-COREOS-REQUEST-ID`*(header) | Unique Request ID. | string |
+         | `X-COREOS-TID`*(header) | Tenant ID. | string |
+         | `X-COREOS-ACCESS`*(header) | core-os access token. | string |
+         | `containerType`*(path) | Type of container. | string |
+         | `batchId`*(query) | Unique ID of batch request. | string |
+
+         *This is required.
+
+         **HTTP Status Code Summary**
+         | Code | Description |
+         | --- | ---- |
+         | **200 - OK** | Everything worked as expected. |
+         | **400 - Bad Request** | The request was unacceptable, often due to missing a required parameter. |
+         | **401 - Unauthorized** | No valid API key provided. |
+          | **503 - Server Errors** | Something went wrong on our end. (These are rare.) |
+      operationId: getStatusOfBatchUploadRequest
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+        - $ref: '#/components/parameters/TenantId'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/UserInfoToken'
+        - $ref: '#/components/parameters/ContainerType'
+        - $ref: '#/components/parameters/BatchId'
+      responses:
+        '200':
+          $ref: '#/components/responses/ContainerBatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestErrorResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '503':
+          $ref: '#/components/responses/ServerErrorResponse'
+components:
+  schemas:
+    Error:
+      description: Error Information
+      type: object
+      required:
+        - code
+        - description
+      properties:
+        code:
+          type: string
+          description: Error code
+        description:
+          type: string
+          description: Error description
+        additionalInfo:
+          type: object
+          description: Additional information related to the error
+    EventSource:
+      type: object
+      description: >-
+        Represents the source which triggered the event. It can be an app, a
+        user or some location from where the event was triggered.
+      required:
+        - appId
+      properties:
+        appId:
+          type: string
+          description: application ID which is responsible for calling this event.
+          minLength: 1
+          maxLength: 64
+        userId:
+          type: string
+          description: user ID which is responsible for calling this event.
+          minLength: 1
+          maxLength: 64
+        locId:
+          type: string
+          description: locationId of the event.
+    DataType:
+      description: Field for the datatype of an attribute.
+      type: string
+      example: integer
+      enum:
+        - string
+        - number
+        - boolean
+        - object
+        - array
+    SortKey:
+      description: key to be used for sorting
+      type: string
+      example: containerType
+      default: createdAt
+    SortBy:
+      description: ordering of data
+      type: string
+      default: desc
+      enum:
+        - desc
+        - asc
+    EventType:
+      description: |
+        Specifies event is transitional or not<br>
+           - TRANSITIONAL - Transitonal event is an event that upon invocation it will change the state of the                         container.<br>
+           - NON_TRANSITIONAL - Transitonal event is an event that upon invocation it will not change the state of the                     container.
+      type: string
+      default: TRANSITIONAL
+      enum:
+        - TRANSITIONAL
+        - NON_TRANSITIONAL
+    Child:
+      description: Specifies this request perform containerization or decontainerization.
+      type: string
+      enum:
+        - CONTAINERIZE
+        - DECONTAINERIZE
+    Method:
+      type: string
+      description: HTTP method requested on the API endpoint
+      enum:
+        - POST
+        - GET
+        - PUT
+    Match:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    MultiMatch:
+      type: object
+      properties:
+        query:
+          type: string
+        fields:
+          type: array
+          items:
+            type: string
+    Term:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    Fuzzy:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    Prefix:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    Wildcard:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    MatchPhrase:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    MatchPhrasePrefix:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    Exists:
+      type: object
+      properties:
+        key:
+          type: string
+    Terms:
+      type: object
+      properties:
+        key:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    RangeQuery:
+      type: object
+      properties:
+        key:
+          type: string
+        relation:
+          type: string
+        value:
+          type: string
+    Regex:
+      type: object
+      properties:
+        key:
+          type: string
+        regex:
+          type: string
+    Query:
+      type: object
+      properties:
+        match:
+          type: array
+          items:
+            $ref: '#/components/schemas/Match'
+          description: >-
+            The match query is the standard query for performing a full-text
+            search.
+        multi_match:
+          type: array
+          items:
+            $ref: '#/components/schemas/MultiMatch'
+          description: >-
+            The multi-match query builds on the match query allows multi-field
+            queries.
+        term:
+          type: array
+          items:
+            $ref: '#/components/schemas/Term'
+          description: >-
+            The Term query returns fields that contain an exact term in a
+            provided field.
+        terms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Terms'
+          description: >-
+            The Terms query returns field that contain one or more exact terms
+            in a provided field. The terms query is the same as the term query,
+            except you can search for multiple values.
+        range:
+          type: array
+          items:
+            $ref: '#/components/schemas/RangeQuery'
+          description: >-
+            The Range query returns fields that contain terms within a provided
+            range.
+        regexp:
+          type: array
+          items:
+            $ref: '#/components/schemas/Regex'
+          description: >-
+            The Regexp query returns fields that contain terms matching a
+            regular expression.
+        exists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Exists'
+        fuzzy:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fuzzy'
+        prefix:
+          type: array
+          items:
+            $ref: '#/components/schemas/Prefix'
+        wildcard:
+          type: array
+          items:
+            $ref: '#/components/schemas/Wildcard'
+        match_phrase:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchPhrase'
+        match_phrase_prefix:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchPhrasePrefix'
+    ReadOnlyAttributes:
+      description: ReadOnly attributes of a container.
+      type: object
+      required:
+        - id
+        - state
+      properties:
+        id:
+          type: string
+          readOnly: true
+    EntityCode:
+      description: Unique code of an entity.
+      type: string
+      pattern: ^(?!0000|^$)([0-9][0-9][0-9][0-9])$
+    ContainerTypeFilterQuery:
+      type: object
+      properties:
+        match:
+          type: array
+          items:
+            $ref: '#/components/schemas/Match'
+          description: >-
+            The match query is the standard query for performing a full-text
+            search.
+        term:
+          type: array
+          items:
+            $ref: '#/components/schemas/Term'
+          description: >-
+            The Term query returns fields that contain an exact term in a
+            provided field.
+        terms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Terms'
+          description: >-
+            The Terms query returns field that contain one or more exact terms
+            in a provided field. The terms query is the same as the term query,
+            except you can search for multiple values.
+        range:
+          type: array
+          items:
+            $ref: '#/components/schemas/RangeQuery'
+          description: >-
+            The Range query returns fields that contain terms within a provided
+            range.
+        regexp:
+          type: array
+          items:
+            $ref: '#/components/schemas/Regex'
+          description: >-
+            The Regexp query returns fields that contain terms matching a
+            regular expression.
+        exists:
+          type: array
+          items:
+            $ref: '#/components/schemas/Exists'
+        prefix:
+          type: array
+          items:
+            $ref: '#/components/schemas/Prefix'
+    UniqueId:
+      description: Unique ID.
+      type: string
+      minLength: 1
+      maxLength: 64
+    AppID:
+      description: App ID.
+      type: string
+    BatchId:
+      description: Unique UUID of a batch request.
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^batch:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+    EventCreateRequest:
+      type: object
+      required:
+        - description
+      properties:
+        description:
+          type: string
+          description: Short description of the event. Max length 64 characters.
+        eventType:
+          $ref: '#/components/schemas/EventType'
+        reasonCodes:
+          type: array
+          description: List of valid reason codes that can raise this event code
+          items:
+            type: string
+            example: R-nnnn
+        containerTypeNames:
+          type: array
+          description: List of containerTypeNames where this event can be applied
+          minItems: 1
+          maxItems: 999
+          items:
+            type: string
+        isEnabled:
+          description: >-
+            True - Event Code is valid & usable. False - Event Code is not
+            usable
+          type: boolean
+          default: true
+        dataValidations:
+          description: >-
+            Data expected along with the event and their respective validations,
+            if any.
+          type: array
+          items:
+            $ref: '#/components/schemas/EventDataItem'
+    EventUpdateRequest:
+      type: object
+      required:
+        - description
+      properties:
+        description:
+          type: string
+          description: Short description of the event. Max length 64 characters.
+        eventType:
+          $ref: '#/components/schemas/EventType'
+        reasonCodes:
+          type: array
+          description: List of valid reason codes that can raise this event code
+          items:
+            type: string
+            example: R-nnnn
+        containerTypeNames:
+          type: array
+          description: List of valid containerTypeNames where this event can be applied
+          minItems: 1
+          maxItems: 999
+          items:
+            type: string
+        isEnabled:
+          description: >-
+            True - Event Code is valid & usable. False - Event Code is not
+            usable
+          type: boolean
+          default: true
+        dataValidations:
+          description: >-
+            Data expected along with the event and their respective validations,
+            if any.
+          type: array
+          items:
+            $ref: '#/components/schemas/EventDataItem'
+    EventsSuccessResponse:
+      allOf:
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/EventsResponse'
+    EventsResponse:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Short description of the event. Max length 64 characters.
+        eventType:
+          $ref: '#/components/schemas/EventType'
+        reasons:
+          type: array
+          description: List of valid reason codes that can raise this event code
+          items:
+            $ref: '#/components/schemas/ReasonMetaData'
+        entities:
+          type: array
+          description: List of valid entities where this event can be applied
+          items:
+            $ref: '#/components/schemas/EntitiesMetaData'
+        isSystemDefined:
+          description: >-
+            True - If the event is system generated. False - If the event is
+            custom generated
+          type: boolean
+        isEnabled:
+          description: >-
+            True - Event Code is valid & usable. False - Event Code is not
+            usable
+          type: boolean
+          default: true
+        dataValidations:
+          description: >-
+            Data expected along with the event and their respective validations,
+            if any.
+          type: array
+          items:
+            $ref: '#/components/schemas/EventDataItem'
+        eventCode:
+          description: Event Code
+          type: string
+    ReasonMetaData:
+      properties:
+        reasonCode:
+          type: string
+        description:
+          type: string
+    EntitiesMetaData:
+      properties:
+        entityCode:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+    EventsOrphanResponse:
+      allOf:
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/EventOrphanResponse'
+    EventOrphanResponse:
+      type: object
+      properties:
+        description:
+          description: Short description of the event. Max length 64 characters.
+          type: string
+        eventType:
+          $ref: '#/components/schemas/EventType'
+        validCurrentStates:
+          type: array
+          description: >-
+            List of valid current states of the entity when this event code can
+            be applied.
+          items:
+            type: string
+        isEnabled:
+          description: >-
+            True - Event Code is valid & usable. False - Event Code is not
+            usable
+          type: boolean
+          default: true
+        dataValidations:
+          description: >-
+            Data expected along with the event and their respective validations,
+            if any.
+          type: array
+          items:
+            $ref: '#/components/schemas/EventDataItem'
+        eventCode:
+          description: event code.
+          type: string
+        enityCode:
+          description: Entity Code
+          type: string
+    ReasonCreateRequest:
+      description: Create reason
+      type: object
+      required:
+        - description
+      properties:
+        description:
+          description: Short description of the reason. Max length 64 characters.
+          type: string
+        isEnabled:
+          description: >-
+            True - Event Code is valid & usable. False - Event Code is not
+            usable
+          type: boolean
+          default: true
+    ReasonUpdateRequest:
+      description: Update reason
+      type: object
+      required:
+        - description
+      properties:
+        description:
+          description: Short description of the reason. Max length 64 characters.
+          type: string
+        isEnabled:
+          description: >-
+            True - Event Code is valid & usable. False - Event Code is not
+            usable
+          type: boolean
+          default: true
+    ReasonsSuccessResponse:
+      allOf:
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                description:
+                  description: Short description of the reason. Max length 64 characters.
+                  type: string
+                isEnabled:
+                  description: >-
+                    True - Event Code is valid & usable. False - Event Code is
+                    not usable
+                  type: boolean
+                  default: true
+                reasonCode:
+                  description: Reason Code
+                  type: string
+            request:
+              $ref: '#/components/schemas/Request'
+    ReasonsOrphanResponse:
+      allOf:
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/ReasonResponse'
+            request:
+              $ref: '#/components/schemas/Request'
+    ReasonResponse:
+      type: object
+      properties:
+        description:
+          description: Short description of the reason. Max length 64 characters.
+          type: string
+        isEnabled:
+          description: >-
+            True - Event Code is valid & usable. False - Event Code is not
+            usable
+          type: boolean
+        reasonCode:
+          description: reason Code
+          type: string
+    EntityStateValidationRequest:
+      description: Validate an entity state
+      type: object
+      required:
+        - reasonCode
+        - eventCode
+        - state
+      properties:
+        reasonCode:
+          description: reasonCode.
+          type: string
+        eventCode:
+          description: event code.
+          type: string
+        state:
+          description: given state.
+          type: string
+    EntityStateValidationResponse:
+      allOf:
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                valid:
+                  description: >-
+                    True - Event Code is valid & usable. False - Event Code is
+                    not usable
+                  type: boolean
+            request:
+              $ref: '#/components/schemas/Request'
+    ActionBy:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/UniqueId'
+        name:
+          type: string
+          maxLength: 256
+        appID:
+          $ref: '#/components/schemas/AppID'
+    ActionInfo:
+      type: object
+      required:
+        - createdAt
+        - createdBy
+        - updatedAt
+        - updatedBy
+      properties:
+        createdAt:
+          type: integer
+          format: int64
+        createdBy:
+          $ref: '#/components/schemas/ActionBy'
+        updatedAt:
+          type: integer
+          format: int64
+        updatedBy:
+          $ref: '#/components/schemas/ActionBy'
+    ChildContainers:
+      type: object
+      properties:
+        childContainerIDs:
+          type: array
+          items:
+            type: string
+    TerminalTTL:
+      description: >-
+        Specifies the time to live for a data entry in the database. Specified
+        for a tenant.
+      type: string
+      pattern: >-
+        ^(\d{0,2}(?:d\s*))?(\d{0,2}(?:h\s*))?(\d{0,2}(?:m\s*))?(\d{0,2}(?:s\s*))?$
+      minLength: 2
+      maxLength: 12
+      example: 10d5h3m0s
+    StateMachineConfig:
+      description: Container type state-machine configuration
+      type: object
+      required:
+        - states
+      properties:
+        states:
+          $ref: '#/components/schemas/States'
+    States:
+      type: object
+      required:
+        - created
+        - opened
+        - closed
+        - completed
+      properties:
+        created:
+          $ref: '#/components/schemas/CreatedState'
+        opened:
+          $ref: '#/components/schemas/OpenedState'
+        closed:
+          $ref: '#/components/schemas/ClosedState'
+        completed:
+          $ref: '#/components/schemas/CompletedState'
+    CreatedState:
+      description: Created State
+      allOf:
+        - $ref: '#/components/schemas/State'
+    OpenedState:
+      description: It's signifies readiness of container to begin containerization process.
+      allOf:
+        - $ref: '#/components/schemas/State'
+    ClosedState:
+      description: It's signifies the termination of containerization process.
+      allOf:
+        - $ref: '#/components/schemas/State'
+    CompletedState:
+      description: End of the lifecycle of a container.
+      allOf:
+        - $ref: '#/components/schemas/State'
+        - type: object
+          properties:
+            terminalStates:
+              description: terminal-state
+              type: array
+              items:
+                type: string
+    TrackingDetails:
+      description: >-
+        Field to represent tracking ID (such as AWB) for a container which is
+        usually pasted on the container and used for scanning it. There can be
+        multiple tracking IDs for a container, owned by different operators and
+        hence it will be stored as a list.
+      type: array
+      maxItems: 16
+      items:
+        $ref: '#/components/schemas/TrackingDetail'
+    TrackingDetail:
+      type: object
+      required:
+        - operator
+        - trackingId
+      properties:
+        operator:
+          description: Field to specify the owner of the tracking ID.
+          type: string
+          minLength: 3
+          maxLength: 64
+          example: Delhivery
+        trackingId:
+          type: string
+          minLength: 1
+          maxLength: 128
+          example: 132121232423232
+        isPrimary:
+          description: >-
+            it defines whether it is a primary tracking id or not. If not
+            defined we assume first tracking id as primary tracking id.
+          type: boolean
+          default: false
+        timestamp:
+          description: >-
+            Represents a date time as number of seconds elapsed since 00:00Hrs
+            of 1st January 1970 UTC.
+          type: integer
+          format: int64
+    Items:
+      description: >-
+        List of itmes can be added into container only if container-type is a
+        leaf.
+      type: array
+      items:
+        $ref: '#/components/schemas/Item'
+    Item:
+      type: object
+      required:
+        - name
+        - cost
+      properties:
+        name:
+          description: Name of the item.
+          type: string
+          minLength: 3
+          maxLength: 128
+          example: pant/shirt
+        code:
+          description: Code of the item.
+          type: string
+          minLength: 3
+          maxLength: 128
+        cost:
+          $ref: '#/components/schemas/cost'
+        quantity:
+          $ref: '#/components/schemas/quantity'
+    cost:
+      type: object
+      description: cost of the item.
+      required:
+        - total
+      properties:
+        unit:
+          description: Represents unit price of the item.
+          type: object
+          properties:
+            amount:
+              description: The value of amount accurate to three decimal places.
+              type: number
+            currency:
+              description: Currency of the price of the item.
+              type: string
+        total:
+          description: Represents total price of the item.
+          type: object
+          properties:
+            amount:
+              description: The value of amount accurate to three decimal places.
+              type: number
+            currency:
+              description: Currency of the price of the item.
+              type: string
+    quantity:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: A number quantifying measurement
+        unit:
+          $ref: '#/components/schemas/unit'
+    unit:
+      type: string
+      description: Unit for measuremnet.
+      enum:
+        - cm
+        - m
+        - l
+        - ml
+        - nos
+        - g
+        - kg
+        - mm
+    State:
+      type: object
+      required:
+        - defaultSubstate
+        - subStates
+        - name
+      properties:
+        name:
+          description: Name of the state
+          type: string
+        defaultSubstate:
+          description: Represents default substate for this state
+          type: string
+        subStates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubState'
+          minItems: 1
+    SubState:
+      type: object
+      required:
+        - name
+        - transitions
+      properties:
+        name:
+          description: Name of the sub-state
+          type: string
+          minLength: 3
+          maxLength: 32
+        transitions:
+          type: array
+          description: Represents array of transition rules for this substate
+          items:
+            $ref: '#/components/schemas/StateTransitionRule'
+    StateTransitionRule:
+      description: State Transition Rule
+      type: object
+      required:
+        - eventCode
+        - destination
+      properties:
+        eventCode:
+          $ref: '#/components/schemas/EventCode'
+        destination:
+          description: Name of the main state and its substate of destination state
+          type: string
+          minLength: 3
+          maxLength: 32
+        reasonCode:
+          $ref: '#/components/schemas/ReasonCode'
+    EventCode:
+      description: >-
+        Event Code of the format:E-yyy. E - Prefix indicating that this is an
+        event code.  yyy - 3 digit event code string ranging from 001 to 999
+      type: string
+      pattern: ^(?!E-000|^$)(E[-][0-9][0-9][0-9])
+    ReasonCode:
+      description: >-
+        Reason Code of the format:R-nnnn R - Prefix indicating that this is a
+        reason code nnnn - 4 digit reason code string ranging from 0001 to 9999
+      type: string
+      pattern: ^(?!R-0000|^$)(R[-][0-9][0-9][0-9][0-9])
+    EventDataType:
+      type: string
+      enum:
+        - string
+        - number
+        - boolean
+        - object
+        - array
+    EventDataItem:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of validation keys of an event.
+          minLength: 1
+          maxLength: 32
+        type:
+          $ref: '#/components/schemas/EventDataType'
+        validation:
+          $ref: '#/components/schemas/EventDataValidation'
+    EventDataValidation:
+      allOf:
+        - $ref: '#/components/schemas/Validation'
+        - type: object
+          properties:
+            blocking:
+              description: >-
+                Specifies whether we need to block the event transition in case
+                the attribute validation is failed or not.
+              type: boolean
+              default: true
+    Validation:
+      description: Validation rules for a string or number value
+      type: object
+      properties:
+        range:
+          $ref: '#/components/schemas/Range'
+        regex:
+          description: Regex that the data should match
+          type: string
+          minLength: 1
+          maxLength: 512
+        # valueOneOf:
+        #   description: Enum of accepted values
+        #   type: array
+        #   items:
+        #     anyOf:
+        #       - type: number
+        #       - type: string
+        #       - items: {}
+        #         type: array
+        #       - type: boolean
+        #       - type: object
+          minItems: 1
+          maxItems: 16
+        required:
+          description: Specifies whether the value is required or optional
+          type: boolean
+          default: false
+    ContainerTypeUpdateRequest:
+      description: Update container type configuration
+      type: object
+      required:
+        - allowedParent
+      properties:
+        allowedParent:
+          $ref: '#/components/schemas/ContainerTypeAllowedParent'
+        callback:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              example: https://delhivery.requestcatcher.com/
+            meta:
+              type: object
+    StateMachineConfigResponseData:
+      allOf:
+        - $ref: '#/components/schemas/ContainerTypeBasicProperties'
+        - $ref: '#/components/schemas/StateMachineConfig'
+        - $ref: '#/components/schemas/ActionInfo'
+    ContainerTypeBasicProperties:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          example: bag
+          pattern: ^[a-z]{1,16}$
+    ContainerTypeConfigResponse:
+      type: object
+      properties:
+        entityCode:
+          description: uniqueCode for each container type
+          type: string
+        id:
+          type: string
+      allOf:
+        - $ref: '#/components/schemas/ContainerType'
+        - $ref: '#/components/schemas/ActionInfo'
+        - $ref: '#/components/schemas/AttributesConfig'
+    ContainerType:
+      allOf:
+        - $ref: '#/components/schemas/BaseContainerType'
+    ContainerTypeAllowedParent:
+      description: Rules defining the allowed container types as parent of a container type
+      type: object
+      minProperties: 1
+      properties:
+        oneOf:
+          description: List of container types allowed as parent of this container type
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z]{1,16}$
+            minLength: 3
+            maxLength: 64
+          minItems: 1
+          maxItems: 16
+        not:
+          description: >-
+            List of container types *not* allowed as parent of this container
+            type
+          type: array
+          items:
+            type: string
+            pattern: ^[a-z]{1,16}$
+            minLength: 3
+            maxLength: 64
+          minItems: 1
+          maxItems: 16
+    StateMachineConfigResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/StateMachineConfigResponseData'
+        request:
+          $ref: '#/components/schemas/Request'
+    AttributesConfigResponseData:
+      allOf:
+        - $ref: '#/components/schemas/ContainerType'
+        - $ref: '#/components/schemas/AttributesConfigGet'
+        - $ref: '#/components/schemas/ActionInfo'
+    AttributesConfigResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AttributesConfigResponseData'
+        request:
+          $ref: '#/components/schemas/Request'
+    BaseContainerType:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          pattern: ^[a-z]{1,16}$
+          minLength: 3
+          maxLength: 64
+          example: bag
+          description: A unique name to represent type of a container.
+        isLeaf:
+          description: >-
+            Defines whether this container-type will have actual physical items
+            or not. Such type of containers is termed as leaf container.
+          type: boolean
+          default: false
+        isActive:
+          description: Define the particular container type is active or not.
+          type: boolean
+          default: false
+        allowedParent:
+          $ref: '#/components/schemas/ContainerTypeAllowedParent'
+        ownerAppId:
+          type: string
+    AttributesConfig:
+      type: object
+      required:
+        - attributes
+      properties:
+        attributes:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/AttributeConfig'
+    Description:
+      type: string
+      minLength: 1
+      maxLength: 256
+    AttributeConfig:
+      type: object
+      required:
+        - name
+        - dataType
+      properties:
+        name:
+          type: string
+          pattern: ^[a-zA-Z_]{1,32}$
+          example: capacity
+          minLength: 3
+          maxLength: 64
+          description: Field to define attribute name.
+        dataType:
+          $ref: '#/components/schemas/DataType'
+        description:
+          $ref: '#/components/schemas/Description'
+        indexed:
+          type: boolean
+          description: >-
+            Field to specify if the attribute is to be indexed. Filter or search
+            operation on basis of a custom attribute will be only allowed if
+            this field is set as TRUE.
+        isReadPublic:
+          type: boolean
+          default: false
+          description: Access Parameter for the Attribute
+        # defaultValue:
+        #   anyOf:
+        #     - type: number
+        #     - type: string
+        #     - items: {}
+        #       type: array
+        #     - type: boolean
+        #     - type: object
+        validation:
+          $ref: '#/components/schemas/AttributeValidation'
+        
+    AttributesConfigGet:
+      type: object
+      required:
+        - attributes
+      properties:
+        attributes:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/AttributeConfigGet'  
+    AttributeConfigGet:
+      type: object
+      required:
+        - name
+        - dataType
+      properties:
+        name:
+          type: string
+          pattern: ^[a-zA-Z_]{1,32}$
+          example: capacity
+          minLength: 3
+          maxLength: 64
+          description: Field to define attribute name.
+        dataType:
+          $ref: '#/components/schemas/DataType'
+        description:
+          $ref: '#/components/schemas/Description'
+        indexed:
+          type: boolean
+          description: >-
+            Field to specify if the attribute is to be indexed. Filter or search
+            operation on basis of a custom attribute will be only allowed if
+            this field is set as TRUE.
+        isReadPublic:
+          type: boolean
+          default: false
+          description: Access Parameter for the Attribute
+        ownerAppId:
+          type: string
+        # defaultValue:
+        #   anyOf:
+        #     - type: number
+        #     - type: string
+        #     - items: {}
+        #       type: array
+        #     - type: boolean
+        #     - type: object
+        validation:
+          $ref: '#/components/schemas/AttributeValidation'
+    AttributeValidation:
+      type: object
+      description: >-
+        Specifies all the validations to be performed on an attribute, when a
+        container of this type is created/updated.
+      properties:
+        range:
+          $ref: '#/components/schemas/Range'
+        regex:
+          type: string
+          minLength: 1
+          maxLength: 512
+          description: >-
+            Field to specify the regex pattern that the value of an attribute
+            MUST match.this validation alllowed only for string type of
+            attributes.
+        # valueOneOf:
+        #   type: array
+        #   items:
+        #     anyOf:
+        #       - type: number
+        #       - type: string
+        #       - items: {}
+        #         type: array
+        #       - type: boolean
+        #       - type: object
+        #   minItems: 1
+        #   description: >-
+        #     Field to specify enum values for an attribute. list of valueOneOf
+        #     should be homogeneous.
+        required:
+          type: boolean
+          default: false
+          description: >-
+            Field to specify if the value for the attribute is mandatory or not.
+            If TRUE, the value MUST be provided.
+    Range:
+      type: object
+      description: >-
+        Field to specify the range that the attribute value must lie. In case of
+        "string" datatype, range will be the length of string value. this
+        validation allowed only for string and number type of attributes.
+      properties:
+        min:
+          description: The min value, inclusive.
+          type: number
+        max:
+          description: The max value, inclusive.
+          type: number
+    Request:
+      type: object
+      required:
+        - uri
+      properties:
+        uri:
+          type: string
+          description: The API end point where the request was received.
+        method:
+          $ref: '#/components/schemas/Method'
+        queryString:
+          type: string
+          description: Query string received by the server
+        body:
+          type: object
+    BaseContainerTypeCreateRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          pattern: ^[a-zA-Z]{3,16}$
+          minLength: 3
+          maxLength: 64
+          example: bag
+          description: A unique name to represent type of a container.
+        isLeaf:
+          description: >-
+            Defines whether this container-type will have actual physical items
+            or not. Such type of containers is termed as leaf container.
+          type: boolean
+          default: false
+        allowedParent:
+          $ref: '#/components/schemas/ContainerTypeAllowedParent'
+    ContainerTypeCreateRequest:
+      description: Create new container type
+      allOf:
+        - $ref: '#/components/schemas/BaseContainerTypeCreateRequest'
+      properties:
+        callback:
+          $ref: '#/components/schemas/Callback'
+        entityCode:
+          $ref: '#/components/schemas/EntityCode'
+    AttributesConfigUpdateRequest:
+      allOf:
+        - $ref: '#/components/schemas/AttributesConfig'
+      properties:
+        callback:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              example: https://delhivery.requestcatcher.com/
+            meta:
+              type: object
+    ContainerCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/ContainerCreateAttributes'
+      properties:
+        callback:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              example: https://delhivery.requestcatcher.com/
+            meta:
+              type: object
+    ContainerCreateBatchRequest:
+      allOf:
+        - $ref: '#/components/schemas/ContainerBatchBaseAttributes'
+        - $ref: '#/components/schemas/ContainerCreateAttributes'
+    ContainerUpdateRequest:
+      allOf:
+        - $ref: '#/components/schemas/ContainerUpdateAttributes'
+      properties:
+        callback:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              example: https://delhivery.requestcatcher.com/
+            meta:
+              type: object
+    ParentIdRequest:
+      allOf:
+        - $ref: '#/components/schemas/ParentId'
+      properties:
+        callback:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              example: https://delhivery.requestcatcher.com/
+            meta:
+              anyOf:
+                - type: string
+                - type: object
+                - type: array
+                  items:
+                   type: object
+    ParentId:
+      type: object
+      required:
+        - parentId
+        - action
+      properties:
+        parentId:
+          type: string
+          example: box:9c9b1138-7cdd-11eb-9439-0242ac130002
+          description: >-
+            Field to represent container ID of the parent container. During the
+            containerization process, this value is assigned to represent which
+            container contains this container.
+        action:
+          type: string
+          enum:
+            - CONTAINERIZE
+            - DECONTAINERIZE
+          example: CONTAINERIZE
+          description: Field to represent action to be performed on the container.
+    ContainerStateUpdateRequest:
+      description: Event for container state transition.
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - $ref: '#/components/schemas/EventCallback'
+    StateMachineUpdateRequest:
+      description: Update state machine config
+      allOf:
+        - $ref: '#/components/schemas/StateMachineConfig'
+    ContainerBaseAttributes:
+      description: >-
+        Base attributes that defines a container. This attributes are set on
+        container creation and cannot be updated.
+      type: object
+      required:
+        - containerType
+      properties:
+        containerType:
+          type: string
+          pattern: ^[a-z]{1,16}$
+          minLength: 3
+          maxLength: 64
+          example: bag
+          description: Container type defined using container type configuration APIs.
+        isReusable:
+          description: Defines whether container is re-usable or not
+          type: boolean
+          default: false
+    ContainerBatchBaseAttributes:
+      description: >-
+        Base attributes that defines a container. This attributes are set on
+        container creation and cannot be updated.
+      type: object
+      required:
+        - refID
+      properties:
+        refID:
+          type: string
+          description: Reference Id received for each container create request
+    ContainerAttributes:
+      type: object
+      description: >-
+        Attributes that define a container and can be modified after container
+        creation.
+      properties:
+        items:
+          $ref: '#/components/schemas/Items'
+        trackingDetails:
+          $ref: '#/components/schemas/TrackingDetails'
+        parentId:
+          type: string
+          example: 123e4567-e89b-42d3-a456-556642440000
+          description: >-
+            Field to represent container ID of the parent container. During the
+            containization process, this value is assigned to represent which
+            container contains this container.
+        attributes:
+          type: object
+          description: >-
+            A map to provide values for the attributes defined in Container-type
+            configuration APIs.
+        isHazmat:
+          type: boolean
+          description: >-
+            Represents whether this container can contain hazardous materials or
+            not.
+          default: false
+        isContainerizable:
+          description: Defines whether container can be put into other containers or not
+          type: boolean
+          default: true
+    ContainerUpdateAttributes:
+      type: object
+      description: >-
+        Attributes that define a container and can be modified after container
+        creation.
+      properties:
+        trackingDetails:
+          description: >-
+            Field to represent tracking ID (such as AWB) for a container which
+            is usually pasted on the container and used for scanning it. There
+            can be multiple tracking IDs for a container, owned by different
+            operators and hence it will be stored as a list.
+          type: array
+          items:
+            type: object
+            required:
+              - operator
+              - trackingId
+            properties:
+              operator:
+                description: Field to specify the owner of the tracking ID.
+                type: string
+                minLength: 3
+                maxLength: 64
+                example: Delhivery
+              trackingId:
+                type: string
+                minLength: 1
+                maxLength: 128
+                example: 132121232423232
+              isPrimary:
+                description: >-
+                  it defines whether it is a primary tracking id or not. If not
+                  defined we assume first tracking id as primary tracking id.
+                type: boolean
+                default: false
+        attributes:
+          type: object
+          description: >-
+            A map to provide values for the attributes defined in Container-type
+            configuration APIs.
+        items:
+          $ref: '#/components/schemas/Items'
+    TrackingData:
+      type: object
+      properties:
+        tracking:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerEvents'
+        pendingContainers:
+          type: array
+          items:
+            type: string
+    ContainerEvents:
+      type: object
+      properties:
+        containerId:
+          type: array
+          items:
+            type: string
+    CallbackResponse:
+      type: object
+      required:
+        - id
+        - status
+      properties:
+        id:
+          $ref: '#/components/schemas/UniqueId'
+        status:
+          type: string
+          example: failed/success
+        reason:
+          type: string
+    ContainerCreateAttributes:
+      type: object
+      description: >-
+        Attributes that define a container and can be modified after container
+        creation.
+      properties:
+        trackingDetails:
+          description: >-
+            Field to represent tracking ID (such as AWB) for a container which
+            is usually pasted on the container and used for scanning it. There
+            can be multiple tracking IDs for a container, owned by different
+            operators and hence it will be stored as a list.
+          type: array
+          items:
+            type: object
+            required:
+              - operator
+              - trackingId
+            properties:
+              operator:
+                description: Field to specify the owner of the tracking ID.
+                type: string
+                minLength: 3
+                maxLength: 64
+                example: Delhivery
+              trackingId:
+                type: string
+                minLength: 1
+                maxLength: 128
+                example: 132121232423232
+              isPrimary:
+                description: >-
+                  It defines whether it is a primary tracking id or not. If non
+                  of tracking details is set as primary we assume first tracking
+                  id as a primary tracking id.
+                type: boolean
+                default: false
+        attributes:
+          type: object
+          description: >-
+            A map to provide values for the attributes defined in Container-type
+            configuration APIs.
+        items:
+          $ref: '#/components/schemas/Items'
+        isHazmat:
+          type: boolean
+          description: >-
+            Represents whether this container can contain hazardous materials or
+            not.
+          default: false
+        isContainerizable:
+          description: Defines whether container can be put into other containers or not
+          type: boolean
+          default: true
+        isReusable:
+          description: Defines whether container is re-usable or not
+          type: boolean
+          default: false
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        request:
+          $ref: '#/components/schemas/Request'
+    GetErrorResponse:
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: 123e4567-e89b-12d3-a456-426614174000
+    PostErrorResponse:
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+    PutErrorResponse:
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+    ContainerTypeResponse:
+      type: object
+      properties:
+        data:
+          allOf:
+            - $ref: '#/components/schemas/ContainerTypeMetaResponse'
+        request:
+          $ref: '#/components/schemas/Request'
+    ContainerTypeMetaResponse:
+      type: object
+      properties:
+        entityCode:
+          description: uniqueCode for each container type
+          type: string
+      allOf:
+        - $ref: '#/components/schemas/ContainerType'
+        - $ref: '#/components/schemas/ActionInfo'
+    ContainerTypesResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                totalElements:
+                  type: number
+            containerTypes:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContainerTypeConfigResponse'
+        request:
+          $ref: '#/components/schemas/Request'
+    ContainerResponseData:
+      allOf:
+        - $ref: '#/components/schemas/Container'
+        - $ref: '#/components/schemas/ActionInfo'
+    ContainerByIdResponseData:
+      allOf:
+        - $ref: '#/components/schemas/Container'
+        - $ref: '#/components/schemas/ActionInfo'
+        - $ref: '#/components/schemas/ChildContainers'
+    ContainersResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                totalElements:
+                  type: number
+            containers:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContainerResponseData'
+        request:
+          $ref: '#/components/schemas/Request'
+    ContainerResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ContainerByIdResponseData'
+        request:
+          $ref: '#/components/schemas/Request'
+    Container:
+      allOf:
+        - $ref: '#/components/schemas/ReadOnlyAttributes'
+        - $ref: '#/components/schemas/ContainerBaseAttributes'
+        - $ref: '#/components/schemas/ContainerAttributes'
+    ContainerChangeLogResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        data:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                totalElements:
+                  type: number
+            log:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContainerBaseChangeLogResponse'
+        request:
+          $ref: '#/components/schemas/Request'
+    ContainerTrackingResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/TrackingData'
+        request:
+          $ref: '#/components/schemas/Request'
+    CallbackStatus:
+      description: status of execution of api.
+      type: string
+      enum:
+        - success
+        - failed
+    ChangeAction:
+      description: Action for data auditing
+      type: string
+      enum:
+        - CREATE
+        - UPDATE
+        - GET
+        - DELETE
+    BaseChange:
+      type: object
+      required:
+        - action
+        - actionTime
+        - actionBy
+      properties:
+        action:
+          $ref: '#/components/schemas/ChangeAction'
+        actionTime:
+          type: integer
+          format: int64
+        actionBy:
+          $ref: '#/components/schemas/ActionBy'
+    ContainerTypeChangeLog:
+      description: Container type change information.
+      allOf:
+        - $ref: '#/components/schemas/BaseChange'
+        - type: object
+          required:
+            - cdc
+          properties:
+            cdc:
+              description: Container type change log data.
+              type: object
+    ContainerTypeChangeLogResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        data:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                totalElements:
+                  type: number
+            log:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContainerTypeChangeLog'
+        request:
+          $ref: '#/components/schemas/Request'
+    SuccessResponse:
+      allOf:
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Unique ID. Combination of entity name and UUID.
+                  minLength: 1
+                  maxLength: 128
+            request:
+              $ref: '#/components/schemas/Request'
+    ReasonsAllSuccessResponse:
+      allOf:
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/ReasonResponse'
+            request:
+              $ref: '#/components/schemas/Request'
+    EventsAllSuccessResponse:
+      allOf:
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/EventsResponse'
+    ContainerCDC:
+      description: Container CDC
+      allOf:
+        - $ref: '#/components/schemas/Container'
+        - type: object
+          required:
+            - event
+          properties:
+            event:
+              $ref: '#/components/schemas/Event'
+    ContainerBaseChangeLogResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseChange'
+        - type: object
+          required:
+            - cdc
+          properties:
+            cdc:
+              $ref: '#/components/schemas/ContainerCDC'
+    ContainerStateResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ContainerState'
+        request:
+          $ref: '#/components/schemas/Request'
+    ChildContainerResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              description: container id
+            operation:
+              $ref: '#/components/schemas/Child'
+        request:
+          $ref: '#/components/schemas/Request'
+    ContainerState:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 123e4567-e89b-42d3-a456-556642440000
+        state:
+          $ref: '#/components/schemas/StateRepresentation'
+        event:
+          $ref: '#/components/schemas/Event'
+        stateChange:
+          type: boolean
+          description: Describes if the state is changed.
+        terminalTtl:
+          type: integer
+          description: Describes terminal ttl if the state is a terminal state
+    StateRepresentation:
+      description: >-
+        Represents state of the container.The value will of the format
+        <state>:<substate>
+      type: string
+      minLength: 3
+      maxLength: 64
+      example: created:created
+    Event:
+      type: object
+      required:
+        - eventCode
+        - timestamp
+        - data
+        - source
+      properties:
+        eventCode:
+          $ref: '#/components/schemas/EventCode'
+        reasonCode:
+          $ref: '#/components/schemas/ReasonCode'
+        timestamp:
+          description: Represents the timestamp of the event occured.
+          type: integer
+        propagate:
+          type: boolean
+          default: false
+          description: >-
+            propagate flag indicate whether these events need to propogate on
+            child containers or not.
+        data:
+          type: object
+          description: Represents event data values, if any, for this event
+        source:
+          $ref: '#/components/schemas/EventSource'
+    EventCallback:
+      type: object
+      properties:
+        callback:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              example: https://delhivery.requestcatcher.com/
+            meta:
+              type: object
+    Callback:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          example: https://delhivery.requestcatcher.com/
+        meta:
+          type: object
+    TenantResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        data:
+          $ref: '#/components/schemas/TenantResponseData'
+        request:
+          $ref: '#/components/schemas/Request'
+    TenantResponseData:
+      allOf:
+        - $ref: '#/components/schemas/TenantConfig'
+        - $ref: '#/components/schemas/ActionInfo'
+    TenantConfig:
+      description: Attributes associated with each tenant.
+      type: object
+      properties:
+        name:
+          type: string
+        isActive:
+          type: boolean
+        attributes:
+          $ref: '#/components/schemas/TenantAttributes'
+    TenantAttributes:
+      description: Optional attributes provided by tenants, that can be updated
+      type: object
+      properties:
+        terminalTTL:
+          $ref: '#/components/schemas/TerminalTTL'
+    ContainerBatchResponseData:
+      allOf:
+        - $ref: '#/components/schemas/BatchResponse'
+    ContainerCreationBatchRequest:
+      type: object
+      description: >-
+        Object containing payload and call back url for container creation
+        request
+      properties:
+        payload:
+          description: Array of container creation request
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerCreateBatchRequest'
+          maxItems: 1024
+          minItems: 1
+        callback:
+          $ref: '#/components/schemas/BatchCallbackURL'
+    ContainerCallbackResponse:
+      description: >-
+        Represents callback url, which can be called to notify the status of API
+        request.
+      type: object
+      properties:
+        tenantId:
+          description: tenant id.
+          type: string
+        containerType:
+          description: container type.
+          type: string
+        status:
+          $ref: '#/components/schemas/CallbackStatus'
+        reason:
+          description: failure reason in case of execution is failed.
+          type: string
+        data:
+          description: response data
+          type: object
+          properties:
+            id:
+              type: string
+    ContainerStateCallbackResponse:
+      description: >-
+        Represents callback url, which can be called to notify the status of API
+        request.
+      type: object
+      properties:
+        tenantId:
+          description: tenant id.
+          type: string
+        containerType:
+          description: container type.
+          type: string
+        status:
+          $ref: '#/components/schemas/CallbackStatus'
+        reason:
+          description: failure reason in case of execution is failed.
+          type: string
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 123e4567-e89b-42d3-a456-556642440000
+            state:
+              $ref: '#/components/schemas/StateRepresentation'
+    ContainerStateEventCallbackResponse:
+      description: >-
+        Represents callback url, which can be called to notify the status of API
+        request.
+      type: object
+      properties:
+        tenantId:
+          description: tenant id.
+          type: string
+        containerType:
+          description: container type.
+          type: string
+        status:
+          $ref: '#/components/schemas/CallbackStatus'
+        reason:
+          description: failure reason in case of execution is failed.
+          type: string
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              example: 123e4567-e89b-42d3-a456-556642440000
+            state:
+              $ref: '#/components/schemas/StateRepresentation'
+            event:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: Represents name of the event for state transition
+                  minLength: 3
+                  maxLength: 64
+                timestamp:
+                  description: Represents the timestamp of the event occured.
+                  type: integer
+                propagate:
+                  type: boolean
+                  default: false
+                  description: >-
+                    propagate flag indicate whether these events need to
+                    propogate on child containers or not.
+                data:
+                  type: object
+                  description: Represents event data values, if any, for this event
+                source:
+                  $ref: '#/components/schemas/EventSource'
+    ContainerBatchCallbackResponse:
+      description: >-
+        Represents callback url, which can be called to notify the status of API
+        request.
+      type: object
+      properties:
+        tenantId:
+          description: tenant id.
+          type: string
+        containerType:
+          description: container type.
+          type: string
+        status:
+          $ref: '#/components/schemas/CallbackStatus'
+        reason:
+          description: failure reason in case of execution is failed.
+          type: string
+        data:
+          $ref: '#/components/schemas/ContainerBatchResponseData'
+    TenantCallbackResponse:
+      type: object
+      properties:
+        tenantId:
+          description: tenant id.
+          type: string
+      allOf:
+        - $ref: '#/components/schemas/BaseCallbackResponse'
+    BaseCallbackResponse:
+      type: object
+      properties:
+        tenantId:
+          description: tenant id.
+          type: string
+        status:
+          $ref: '#/components/schemas/CallbackStatus'
+        reason:
+          description: failure reason in case of execution is failed.
+          type: string
+        data:
+          description: request data
+          type: object
+    ContainerUpdateBatchRequest:
+      type: object
+      description: Object containing payload and call back url for container update request
+      properties:
+        payload:
+          description: Array of container update request
+          type: array
+          items:
+            $ref: '#/components/schemas/ContainerBatchUpdate'
+        callback:
+          $ref: '#/components/schemas/BatchCallbackURL'
+    BatchResponse:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/BatchResponseMetaData'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchRecordError'
+        success:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchResponseSuccess'
+    BatchResponseMetaData:
+      type: object
+      properties:
+        status:
+          description: status of batch request
+          type: string
+        success:
+          description: total number of successful record.
+          type: integer
+          format: int64
+        failed:
+          description: total number of failed records.
+          type: integer
+          format: int64
+        total:
+          description: total number of record.
+          type: integer
+          format: int64
+    BatchRecordError:
+      type: object
+      properties:
+        refID:
+          description: reference ID of container create batch request.
+          type: string
+        reason:
+          description: failure reason of record.
+          type: string
+    BatchResponseSuccess:
+      type: object
+      properties:
+        refID:
+          description: reference ID of container create batch request.
+          type: string
+        id:
+          description: >-
+            unique identifier of each record, in this case it will be id of the
+            container.
+          type: string
+    ContainerBatchResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ContainerBatchResponseData'
+        request:
+          $ref: '#/components/schemas/Request'
+    EntityUpdateRequest:
+      description: Update entity
+      type: object
+      required:
+        - description
+        - events
+      properties:
+        description:
+          description: Short description of the entity. Max length 64 characters.
+          type: string
+        events:
+          type: array
+          description: List of valid events that can be applied on this entity
+          minItems: 1
+          maxItems: 999
+          items:
+            type: string
+        isEnabled:
+          description: True - Entity is valid & usable. False - Entity is not usable
+          type: boolean
+          default: true
+    ContainerDataFileUpdateRequest:
+      type: object
+      required:
+        - file
+      properties:
+        file:
+          type: string
+          format: binary
+        callback:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              example: https://delhivery.requestcatcher.com/
+            meta:
+              type: object
+    BatchSuccessResponse:
+      allOf:
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                id:
+                  $ref: '#/components/schemas/BatchId'
+            request:
+              $ref: '#/components/schemas/Request'
+    ContainerBatchUpdate:
+      type: object
+      properties:
+        containerId:
+          description: unique identifier of each container
+          type: string
+        data:
+          $ref: '#/components/schemas/ContainerUpdateRequest'
+    BatchCallbackURL:
+      type: object
+      properties:
+        url:
+          description: URL to notify the outcome of the batch request.
+          type: string
+        meta:
+          type: object
+  responses:
+    ErrorResponse:
+      description: Error Occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServerErrorResponse:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequestErrorResponse:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnauthorizedErrorResponse:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFoundErrorResponse:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    SuccessResponse:
+      description: Accepted
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessResponse'
+    ReasonsAllSuccessResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReasonsAllSuccessResponse'
+    EventsAllSuccessResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EventsAllSuccessResponse'
+    PostErrorResponse:
+      description: Error Occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PostErrorResponse'
+    GetErrorResponse:
+      description: Error Occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetErrorResponse'
+    PutErrorResponse:
+      description: Error Occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PutErrorResponse'
+    AttributesConfigResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttributesConfigResponse'
+    StateMachineConfigResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StateMachineConfigResponse'
+    EventsSuccessResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EventsSuccessResponse'
+    EventsOrphanResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EventsOrphanResponse'
+    ReasonsSuccessResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReasonsSuccessResponse'
+    ReasonsOrphanResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReasonsOrphanResponse'
+    EntityStateValidationResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EntityStateValidationResponse'
+    ContainersResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainersResponse'
+    ContainerResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerResponse'
+    ContainerStateResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerStateResponse'
+    ContainerTypeResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerTypeResponse'
+    ContainerTypesResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerTypesResponse'
+    ChildContainerResponse:
+      description: Containerization or decontainerization
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ChildContainerResponse'
+    ContainerChangeLogResponse:
+      description: Container change log
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerChangeLogResponse'
+    ContainerTypeChangeLogResponse:
+      description: Container change log
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerTypeChangeLogResponse'
+    TenantResponse:
+      description: Tenant Response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TenantResponse'
+    ContainerBatchResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerBatchResponse'
+    BatchSuccessResponse:
+      description: Accepted
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BatchSuccessResponse'
+    ContainerTrackingResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerTrackingResponse'
+  requestBodies:
+    ContainerBatchCallbackRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerBatchCallbackResponse'
+    ContainerCallbackRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerCallbackResponse'
+    ContainerStateCallbackRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerStateCallbackResponse'
+    ContainerStateEventCallbackRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerStateEventCallbackResponse'
+    TenantCallbackRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TenantCallbackResponse'
+    CallbackRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CallbackResponse'
+    ContainerTypeCreateRequest:
+      description: Create new container type
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerTypeCreateRequest'
+    ContainerTypeUpdateRequest:
+      description: Update Container type configuration
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerTypeUpdateRequest'
+    AttributesConfigUpdateRequest:
+      description: Update core attributes of particular type of container
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttributesConfigUpdateRequest'
+    StateMachineUpdateRequest:
+      description: Update container type state machine
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StateMachineUpdateRequest'
+    ContainerCreateRequest:
+      description: Create new container
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerCreateRequest'
+    ContainerUpdateRequest:
+      description: Update container
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerUpdateRequest'
+    ParentIdRequest:
+      description: parent id
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ParentIdRequest'
+    ContainerStateUpdateRequest:
+      description: Event for container state transition.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerStateUpdateRequest'
+    ContainerCreateBatchRequest:
+      description: Create new containers by batch request
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerCreationBatchRequest'
+    ContainerUpdateBatchRequest:
+      description: update batch request for container type
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContainerUpdateBatchRequest'
+    ContainerFileUploadRequest:
+      description: upload file request for container type.
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/ContainerDataFileUpdateRequest'
+    EntityUpdateRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EntityUpdateRequest'
+    StateMachineCreateEvent:
+      description: Create new State Machine Event.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EventCreateRequest'
+    StateMachineUpdateEvent:
+      description: Create new State Machine Event.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EventUpdateRequest'
+    ReasonCreateRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReasonCreateRequest'
+    ReasonUpdateRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReasonUpdateRequest'
+    EntityStateValidationRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EntityStateValidationRequest'
+  parameters:
+    ContainerTypeFilterQuery:
+      name: query
+      in: query
+      description: >-
+        Query criteria. Refer following links for more details:<br/> -
+        [match](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)<br/>
+        -
+        [term](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)<br/>
+        -
+        [terms](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)<br/>
+        -
+        [range](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)<br/>
+        -
+        [regexp](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)<br/>
+        -
+        [exists](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)<br/>
+        -
+        [prefix](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html)
+      schema:
+        $ref: '#/components/schemas/ContainerTypeFilterQuery'
+    RequestId:
+      description: Unique request id.
+      in: header
+      name: X-COREOS-REQUEST-ID
+      schema:
+        type: string
+      required: true
+    TenantId:
+      description: Tenant id
+      in: header
+      name: X-COREOS-TID
+      schema:
+        type: string
+        example: delhivery1234
+      required: true
+    EntityCode:
+      name: entityCode
+      in: path
+      description: Code of an entity.
+      required: true
+      schema:
+        $ref: '#/components/schemas/EntityCode'
+    AccessToken:
+      description: Core-os access token
+      in: header
+      name: X-COREOS-ACCESS
+      schema:
+        type: string
+      required: true
+    RequestingApp:
+      description: App requesting for the attributes.
+      in: header
+      name: X-COREOS-ORIGIN-TOKEN
+      schema:
+        type: string
+      required: true
+    UserInfoToken:
+      description: Core-os user info
+      in: header
+      name: X-COREOS-USERINFO
+      schema:
+        type: string
+      required: false
+    ContainerType:
+      name: containerType
+      description: Type of container
+      in: path
+      required: true
+      schema:
+        type: string
+        example: bag
+        pattern: ^[a-zA-Z]{3,16}$
+    ContainerTypeQuery:
+      name: containerType
+      description: Type of container
+      in: query
+      schema:
+        type: string
+        example: bag
+        pattern: ^[a-zA-Z]{3,16}$
+    SortBy:
+      description: fetching data in ascending(asc) or descending(desc) order.
+      name: sortBy
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/SortBy'
+    SortKey:
+      description: key to be used for sorting data
+      name: sortKey
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/SortKey'
+    ContainerTypeId:
+      description: Unique id of Container Type.
+      name: containerTypeId
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-zA-Z]{3,16}$
+    ContainerTypeName:
+      description: A unique name to represent type of a container.
+      name: containerTypeName
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-zA-Z]{3,64}$
+        minLength: 3
+        maxLength: 64
+        example: bag
+    ContainerId:
+      description: Unique id of Container
+      in: path
+      name: containerId
+      required: true
+      schema:
+        type: string
+        pattern: >-
+          ^[a-zA-Z]{3,16}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        example: container:9c9b1138-7cdd-11eb-9439-0242ac130002
+    ContainerTypePath:
+      name: containerId
+      description: Type of container
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-zA-Z]{3,16}$
+        example: bag
+    TrackingId:
+      description: Tracking id of container
+      in: path
+      name: trackingId
+      required: true
+      schema:
+        type: string
+        minimum: 1
+    PageSize:
+      description: Number of items to return.
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 50
+    PageOffset:
+      description: Number of items to skip from start.
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    StartDateTime:
+      description: Start time of the change log in unix epoch format.
+      name: from
+      in: query
+      required: true
+      schema:
+        type: integer
+        example: 1615428351
+    Duration:
+      description: Number of days for which change log is to be returned.
+      name: duration
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 31
+        default: 1
+    SelectFields:
+      name: select
+      in: query
+      description: >-
+        Specifies list of attributes to be included in response (id is always
+        included in response). If not specified, all attributes are included in
+        response.
+      schema:
+        type: array
+        items:
+          type: string
+    BatchId:
+      description: Unique id of batch request.
+      name: batchId
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/BatchId'
+    EventCode:
+      description: Code for an Event.
+      name: eventCode
+      in: path
+      required: true
+      schema:
+        type: string
+    ReasonCode:
+      description: Code for a Reason.
+      name: reasonCode
+      in: path
+      required: true
+      schema:
+        type: string
+    Query:
+      name: query
+      in: query
+      description: >-
+        Query criteria. Refer following links for more details:<br/> -
+        [match](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)<br/>
+        -
+        [multi_match](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)<br/>
+        -
+        [term](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)<br/>
+        -
+        [terms](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)<br/>
+        -
+        [range](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)<br/>
+        -
+        [regexp](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html)<br/>
+        -
+        [exists](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html)<br/>
+        -
+        [fuzzy](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html)<br/>
+        -
+        [prefix](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html)<br/>
+        -
+        [wildcard](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)<br/>
+        -
+        [match_phrase](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html)<br/>
+        -
+        [match_phrase_prefix](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html)
+      schema:
+        $ref: '#/components/schemas/Query'

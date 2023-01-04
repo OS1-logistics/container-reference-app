@@ -1,0 +1,197 @@
+{
+    "entityCode":"0003",
+    "states": [
+        {
+            "defaultSubState": "created",
+            "name": "created",
+            "subStates": [
+                {
+                    "name": "created",
+                    "transitions": [
+                        {
+                            "destination": "opened:opened",
+                            "eventCode": "E-020",
+                            "reasonCode": "R-0046"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "defaultSubState": "opened",
+            "name": "opened",
+            "subStates": [
+                {
+                    "name": "opened",
+                    "transitions": [
+                        {
+                            "destination": "opened:opened",
+                            "eventCode": "E-012",
+                            "reasonCode": "R-0095"
+                        },
+                        {
+                            "destination": "opened:opened",
+                            "eventCode": "E-012",
+                            "reasonCode": "R-0096"
+                        },
+                        {
+                            "destination": "opened:opened",
+                            "eventCode": "E-012",
+                            "reasonCode": "R-0067"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0063"
+                        },
+                        {
+                            "destination": "completed:discarded",
+                            "eventCode": "E-011",
+                            "reasonCode": "R-0058"
+                        },
+                        {
+                            "destination": "completed:discarded",
+                            "eventCode": "E-011",
+                            "reasonCode": "R-0066"
+                        },
+                        {
+                            "destination": "completed:discarded",
+                            "eventCode": "E-011",
+                            "reasonCode": "R-0102"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "closed",
+            "defaultSubState": "picked",
+            "subStates": [
+                {
+                    "name": "picked",
+                    "transitions": [
+                        {
+                            "destination": "opened:opened",
+                            "eventCode": "E-020",
+                            "reasonCode": "R-0069"
+                        },
+                        {
+                            "destination": "completed:delivered",
+                            "eventCode": "E-010",
+                            "reasonCode": "R-0041"
+                        },
+                        {
+                            "destination": "completed:delivered",
+                            "eventCode": "E-010",
+                            "reasonCode": "R-0042"
+                        },
+                        {
+                            "destination": "completed:delivered",
+                            "eventCode": "E-010",
+                            "reasonCode": "R-0043"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0029"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0026"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0013"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0022"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0023"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0024"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0025"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0026"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0027"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0028"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-021",
+                            "reasonCode": "R-0020"
+                        },
+                        {
+                            "destination": "closed:picked",
+                            "eventCode": "E-012",
+                            "reasonCode": "R-0099"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "defaultSubState": "delivered",
+            "name": "completed",
+            "subStates": [
+                {
+                    "name": "delivered",
+                    "transitions": [
+                        {
+                            "destination": "completed:delivered",
+                            "eventCode": "E-012",
+                            "reasonCode": "R-0096"
+                        },
+                        {
+                            "destination": "opened:opened",
+                            "eventCode": "E-013",
+                            "reasonCode": "R-0059"
+                        }
+                    ]
+                },
+                {
+                    "name": "discarded",
+                    "transitions": [
+                        {
+                            "destination": "opened:opened",
+                            "eventCode": "E-013",
+                            "reasonCode": "R-0059"
+                        }
+                    ]
+                },
+                {
+                    "name": "terminal",
+                    "transitions": []
+                }
+            ],
+            "terminalStates": [
+                "terminal"
+            ]
+        }
+    ],
+    "terminalTTL": "45d"
+}
