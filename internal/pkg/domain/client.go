@@ -13,8 +13,7 @@ func NewAAAClient(tenantId string) *aaa.APIClient {
 	cfg := aaa.NewConfiguration()
 	cfg.Host = fmt.Sprintf("%s.%s", tenantId, config.ServiceConf.StackBaseUrl)
 	cfg.Scheme = "https"
-	client := aaa.NewAPIClient(cfg)
-	return client
+	return aaa.NewAPIClient(cfg)
 }
 
 func NewContainerClient(tenantId string) *container.APIClient {
@@ -22,6 +21,5 @@ func NewContainerClient(tenantId string) *container.APIClient {
 	cfg := container.NewConfiguration()
 	cfg.Host = fmt.Sprintf("%s.%s", tenantId, config.ServiceConf.StackBaseUrl)
 	cfg.Scheme = "https"
-	client := container.NewAPIClient(cfg)
-	return client
+	return container.NewAPIClient(cfg)
 }

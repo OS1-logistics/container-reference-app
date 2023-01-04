@@ -4,7 +4,7 @@ info:
   description: "**API documentation for Container service**"
   version: 1.0.0
 servers:
-  - url: http://{tenantSubdomain}
+  - url: http://{tenantSubdomain}/api/v1
     variables:
       tenantSubdomain:
         default: localhost:3000

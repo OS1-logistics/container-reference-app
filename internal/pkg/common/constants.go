@@ -1,9 +1,9 @@
-package constants
+package common
 
 type key int
 
 const (
-	AppName             = "container-reference-app-api"
+	AppName             = "container-reference-app"
 	TenantIDHeaderName  = "X-Coreos-Tid"
 	RequestIDHeaderName = "X-Coreos-Request-Id"
 	UserInfoHeaderName  = "X-Coreos-Userinfo"

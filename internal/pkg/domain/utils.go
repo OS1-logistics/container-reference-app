@@ -8,6 +8,7 @@ import (
 
 	config "github.com/os1-logistics/container-reference-app/configs"
 	cache "github.com/os1-logistics/container-reference-app/internal/pkg/cache"
+	"github.com/os1-logistics/container-reference-app/internal/pkg/common"
 	aaa "github.com/os1-logistics/container-reference-app/internal/pkg/domain/aaa"
 )
 
@@ -17,11 +18,11 @@ func GetToken(tenantId string) (string, error) {
 		tenantId = "alpha"
 	}
 
-	tenantTokenKey := fmt.Sprintf("%s:%s:token", "container-reference-app", tenantId)
+	tenantTokenKey := fmt.Sprintf("%s:%s:os1:token", common.AppName, tenantId)
 	token, isPresent := cache.ServiceCache.Get(tenantTokenKey)
 	if isPresent && token != nil {
 		fmt.Println("Token found in cache")
-		fmt.Println(token)
+		//fmt.Println(token)
 		return token.(string), nil
 	}
 
@@ -44,13 +45,15 @@ func GetToken(tenantId string) (string, error) {
 	var accessToken string
 	fmt.Println("Generating token for tenant: ", tenantId)
 	if response.StatusCode == 200 && success != nil {
-		fmt.Println(success.Data.GetAccessToken())
+		//fmt.Println(success.Data.GetAccessToken())
 		accessToken = success.Data.GetAccessToken()
 		// cache duration is 10 minutes less than the actual token expiry
 		duration := time.Duration(success.Data.GetExpiresIn()-600) * time.Second
 		cache.ServiceCache.SetWithExpiry(tenantTokenKey, accessToken, duration)
-	} else {
-		fmt.Println("Unable to get token")
+		return accessToken, nil
 	}
+
+	fmt.Println("Unable to get token")
+
 	return "", errors.New("Unable to get token")
 }
