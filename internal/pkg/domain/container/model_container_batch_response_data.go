@@ -40,7 +40,7 @@ func NewContainerBatchResponseDataWithDefaults() *ContainerBatchResponseData {
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
 func (o *ContainerBatchResponseData) GetMeta() BatchResponseMetaData {
-	if o == nil || o.Meta == nil {
+	if o == nil || isNil(o.Meta) {
 		var ret BatchResponseMetaData
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *ContainerBatchResponseData) GetMeta() BatchResponseMetaData {
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerBatchResponseData) GetMetaOk() (*BatchResponseMetaData, bool) {
-	if o == nil || o.Meta == nil {
-		return nil, false
+	if o == nil || isNil(o.Meta) {
+    return nil, false
 	}
 	return o.Meta, true
 }
 
 // HasMeta returns a boolean if a field has been set.
 func (o *ContainerBatchResponseData) HasMeta() bool {
-	if o != nil && o.Meta != nil {
+	if o != nil && !isNil(o.Meta) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *ContainerBatchResponseData) SetMeta(v BatchResponseMetaData) {
 
 // GetErrors returns the Errors field value if set, zero value otherwise.
 func (o *ContainerBatchResponseData) GetErrors() []BatchRecordError {
-	if o == nil || o.Errors == nil {
+	if o == nil || isNil(o.Errors) {
 		var ret []BatchRecordError
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *ContainerBatchResponseData) GetErrors() []BatchRecordError {
 // GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerBatchResponseData) GetErrorsOk() ([]BatchRecordError, bool) {
-	if o == nil || o.Errors == nil {
-		return nil, false
+	if o == nil || isNil(o.Errors) {
+    return nil, false
 	}
 	return o.Errors, true
 }
 
 // HasErrors returns a boolean if a field has been set.
 func (o *ContainerBatchResponseData) HasErrors() bool {
-	if o != nil && o.Errors != nil {
+	if o != nil && !isNil(o.Errors) {
 		return true
 	}
 
@@ -104,7 +104,7 @@ func (o *ContainerBatchResponseData) SetErrors(v []BatchRecordError) {
 
 // GetSuccess returns the Success field value if set, zero value otherwise.
 func (o *ContainerBatchResponseData) GetSuccess() []BatchResponseSuccess {
-	if o == nil || o.Success == nil {
+	if o == nil || isNil(o.Success) {
 		var ret []BatchResponseSuccess
 		return ret
 	}
@@ -114,15 +114,15 @@ func (o *ContainerBatchResponseData) GetSuccess() []BatchResponseSuccess {
 // GetSuccessOk returns a tuple with the Success field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerBatchResponseData) GetSuccessOk() ([]BatchResponseSuccess, bool) {
-	if o == nil || o.Success == nil {
-		return nil, false
+	if o == nil || isNil(o.Success) {
+    return nil, false
 	}
 	return o.Success, true
 }
 
 // HasSuccess returns a boolean if a field has been set.
 func (o *ContainerBatchResponseData) HasSuccess() bool {
-	if o != nil && o.Success != nil {
+	if o != nil && !isNil(o.Success) {
 		return true
 	}
 
@@ -136,13 +136,13 @@ func (o *ContainerBatchResponseData) SetSuccess(v []BatchResponseSuccess) {
 
 func (o ContainerBatchResponseData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Meta != nil {
+	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
-	if o.Errors != nil {
+	if !isNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
-	if o.Success != nil {
+	if !isNil(o.Success) {
 		toSerialize["success"] = o.Success
 	}
 	return json.Marshal(toSerialize)

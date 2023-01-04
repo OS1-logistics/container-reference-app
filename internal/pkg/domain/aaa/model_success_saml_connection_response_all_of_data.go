@@ -59,7 +59,7 @@ func NewSuccessSamlConnectionResponseAllOfDataWithDefaults() *SuccessSamlConnect
 
 // GetConnectionId returns the ConnectionId field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOfData) GetConnectionId() string {
-	if o == nil || o.ConnectionId == nil {
+	if o == nil || isNil(o.ConnectionId) {
 		var ret string
 		return ret
 	}
@@ -69,15 +69,15 @@ func (o *SuccessSamlConnectionResponseAllOfData) GetConnectionId() string {
 // GetConnectionIdOk returns a tuple with the ConnectionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) GetConnectionIdOk() (*string, bool) {
-	if o == nil || o.ConnectionId == nil {
-		return nil, false
+	if o == nil || isNil(o.ConnectionId) {
+    return nil, false
 	}
 	return o.ConnectionId, true
 }
 
 // HasConnectionId returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) HasConnectionId() bool {
-	if o != nil && o.ConnectionId != nil {
+	if o != nil && !isNil(o.ConnectionId) {
 		return true
 	}
 
@@ -91,7 +91,7 @@ func (o *SuccessSamlConnectionResponseAllOfData) SetConnectionId(v string) {
 
 // GetConnectionName returns the ConnectionName field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOfData) GetConnectionName() string {
-	if o == nil || o.ConnectionName == nil {
+	if o == nil || isNil(o.ConnectionName) {
 		var ret string
 		return ret
 	}
@@ -101,15 +101,15 @@ func (o *SuccessSamlConnectionResponseAllOfData) GetConnectionName() string {
 // GetConnectionNameOk returns a tuple with the ConnectionName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) GetConnectionNameOk() (*string, bool) {
-	if o == nil || o.ConnectionName == nil {
-		return nil, false
+	if o == nil || isNil(o.ConnectionName) {
+    return nil, false
 	}
 	return o.ConnectionName, true
 }
 
 // HasConnectionName returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) HasConnectionName() bool {
-	if o != nil && o.ConnectionName != nil {
+	if o != nil && !isNil(o.ConnectionName) {
 		return true
 	}
 
@@ -123,7 +123,7 @@ func (o *SuccessSamlConnectionResponseAllOfData) SetConnectionName(v string) {
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOfData) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+	if o == nil || isNil(o.DisplayName) {
 		var ret string
 		return ret
 	}
@@ -133,15 +133,15 @@ func (o *SuccessSamlConnectionResponseAllOfData) GetDisplayName() string {
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
-		return nil, false
+	if o == nil || isNil(o.DisplayName) {
+    return nil, false
 	}
 	return o.DisplayName, true
 }
 
 // HasDisplayName returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+	if o != nil && !isNil(o.DisplayName) {
 		return true
 	}
 
@@ -155,7 +155,7 @@ func (o *SuccessSamlConnectionResponseAllOfData) SetDisplayName(v string) {
 
 // GetConnectionType returns the ConnectionType field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOfData) GetConnectionType() string {
-	if o == nil || o.ConnectionType == nil {
+	if o == nil || isNil(o.ConnectionType) {
 		var ret string
 		return ret
 	}
@@ -165,15 +165,15 @@ func (o *SuccessSamlConnectionResponseAllOfData) GetConnectionType() string {
 // GetConnectionTypeOk returns a tuple with the ConnectionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) GetConnectionTypeOk() (*string, bool) {
-	if o == nil || o.ConnectionType == nil {
-		return nil, false
+	if o == nil || isNil(o.ConnectionType) {
+    return nil, false
 	}
 	return o.ConnectionType, true
 }
 
 // HasConnectionType returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) HasConnectionType() bool {
-	if o != nil && o.ConnectionType != nil {
+	if o != nil && !isNil(o.ConnectionType) {
 		return true
 	}
 
@@ -187,7 +187,7 @@ func (o *SuccessSamlConnectionResponseAllOfData) SetConnectionType(v string) {
 
 // GetSignInEndpoint returns the SignInEndpoint field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOfData) GetSignInEndpoint() string {
-	if o == nil || o.SignInEndpoint == nil {
+	if o == nil || isNil(o.SignInEndpoint) {
 		var ret string
 		return ret
 	}
@@ -197,15 +197,15 @@ func (o *SuccessSamlConnectionResponseAllOfData) GetSignInEndpoint() string {
 // GetSignInEndpointOk returns a tuple with the SignInEndpoint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) GetSignInEndpointOk() (*string, bool) {
-	if o == nil || o.SignInEndpoint == nil {
-		return nil, false
+	if o == nil || isNil(o.SignInEndpoint) {
+    return nil, false
 	}
 	return o.SignInEndpoint, true
 }
 
 // HasSignInEndpoint returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) HasSignInEndpoint() bool {
-	if o != nil && o.SignInEndpoint != nil {
+	if o != nil && !isNil(o.SignInEndpoint) {
 		return true
 	}
 
@@ -219,7 +219,7 @@ func (o *SuccessSamlConnectionResponseAllOfData) SetSignInEndpoint(v string) {
 
 // GetSignOutEndpoint returns the SignOutEndpoint field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOfData) GetSignOutEndpoint() string {
-	if o == nil || o.SignOutEndpoint == nil {
+	if o == nil || isNil(o.SignOutEndpoint) {
 		var ret string
 		return ret
 	}
@@ -229,15 +229,15 @@ func (o *SuccessSamlConnectionResponseAllOfData) GetSignOutEndpoint() string {
 // GetSignOutEndpointOk returns a tuple with the SignOutEndpoint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) GetSignOutEndpointOk() (*string, bool) {
-	if o == nil || o.SignOutEndpoint == nil {
-		return nil, false
+	if o == nil || isNil(o.SignOutEndpoint) {
+    return nil, false
 	}
 	return o.SignOutEndpoint, true
 }
 
 // HasSignOutEndpoint returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) HasSignOutEndpoint() bool {
-	if o != nil && o.SignOutEndpoint != nil {
+	if o != nil && !isNil(o.SignOutEndpoint) {
 		return true
 	}
 
@@ -251,7 +251,7 @@ func (o *SuccessSamlConnectionResponseAllOfData) SetSignOutEndpoint(v string) {
 
 // GetPublicKeyCertificate returns the PublicKeyCertificate field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOfData) GetPublicKeyCertificate() string {
-	if o == nil || o.PublicKeyCertificate == nil {
+	if o == nil || isNil(o.PublicKeyCertificate) {
 		var ret string
 		return ret
 	}
@@ -261,15 +261,15 @@ func (o *SuccessSamlConnectionResponseAllOfData) GetPublicKeyCertificate() strin
 // GetPublicKeyCertificateOk returns a tuple with the PublicKeyCertificate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) GetPublicKeyCertificateOk() (*string, bool) {
-	if o == nil || o.PublicKeyCertificate == nil {
-		return nil, false
+	if o == nil || isNil(o.PublicKeyCertificate) {
+    return nil, false
 	}
 	return o.PublicKeyCertificate, true
 }
 
 // HasPublicKeyCertificate returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) HasPublicKeyCertificate() bool {
-	if o != nil && o.PublicKeyCertificate != nil {
+	if o != nil && !isNil(o.PublicKeyCertificate) {
 		return true
 	}
 
@@ -283,7 +283,7 @@ func (o *SuccessSamlConnectionResponseAllOfData) SetPublicKeyCertificate(v strin
 
 // GetEntityId returns the EntityId field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOfData) GetEntityId() string {
-	if o == nil || o.EntityId == nil {
+	if o == nil || isNil(o.EntityId) {
 		var ret string
 		return ret
 	}
@@ -293,15 +293,15 @@ func (o *SuccessSamlConnectionResponseAllOfData) GetEntityId() string {
 // GetEntityIdOk returns a tuple with the EntityId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) GetEntityIdOk() (*string, bool) {
-	if o == nil || o.EntityId == nil {
-		return nil, false
+	if o == nil || isNil(o.EntityId) {
+    return nil, false
 	}
 	return o.EntityId, true
 }
 
 // HasEntityId returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) HasEntityId() bool {
-	if o != nil && o.EntityId != nil {
+	if o != nil && !isNil(o.EntityId) {
 		return true
 	}
 
@@ -315,7 +315,7 @@ func (o *SuccessSamlConnectionResponseAllOfData) SetEntityId(v string) {
 
 // GetRedirectUri returns the RedirectUri field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOfData) GetRedirectUri() string {
-	if o == nil || o.RedirectUri == nil {
+	if o == nil || isNil(o.RedirectUri) {
 		var ret string
 		return ret
 	}
@@ -325,15 +325,15 @@ func (o *SuccessSamlConnectionResponseAllOfData) GetRedirectUri() string {
 // GetRedirectUriOk returns a tuple with the RedirectUri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) GetRedirectUriOk() (*string, bool) {
-	if o == nil || o.RedirectUri == nil {
-		return nil, false
+	if o == nil || isNil(o.RedirectUri) {
+    return nil, false
 	}
 	return o.RedirectUri, true
 }
 
 // HasRedirectUri returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) HasRedirectUri() bool {
-	if o != nil && o.RedirectUri != nil {
+	if o != nil && !isNil(o.RedirectUri) {
 		return true
 	}
 
@@ -347,7 +347,7 @@ func (o *SuccessSamlConnectionResponseAllOfData) SetRedirectUri(v string) {
 
 // GetMetadataUri returns the MetadataUri field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOfData) GetMetadataUri() string {
-	if o == nil || o.MetadataUri == nil {
+	if o == nil || isNil(o.MetadataUri) {
 		var ret string
 		return ret
 	}
@@ -357,15 +357,15 @@ func (o *SuccessSamlConnectionResponseAllOfData) GetMetadataUri() string {
 // GetMetadataUriOk returns a tuple with the MetadataUri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) GetMetadataUriOk() (*string, bool) {
-	if o == nil || o.MetadataUri == nil {
-		return nil, false
+	if o == nil || isNil(o.MetadataUri) {
+    return nil, false
 	}
 	return o.MetadataUri, true
 }
 
 // HasMetadataUri returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) HasMetadataUri() bool {
-	if o != nil && o.MetadataUri != nil {
+	if o != nil && !isNil(o.MetadataUri) {
 		return true
 	}
 
@@ -379,7 +379,7 @@ func (o *SuccessSamlConnectionResponseAllOfData) SetMetadataUri(v string) {
 
 // GetGuiOrder returns the GuiOrder field value if set, zero value otherwise.
 func (o *SuccessSamlConnectionResponseAllOfData) GetGuiOrder() string {
-	if o == nil || o.GuiOrder == nil {
+	if o == nil || isNil(o.GuiOrder) {
 		var ret string
 		return ret
 	}
@@ -389,15 +389,15 @@ func (o *SuccessSamlConnectionResponseAllOfData) GetGuiOrder() string {
 // GetGuiOrderOk returns a tuple with the GuiOrder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) GetGuiOrderOk() (*string, bool) {
-	if o == nil || o.GuiOrder == nil {
-		return nil, false
+	if o == nil || isNil(o.GuiOrder) {
+    return nil, false
 	}
 	return o.GuiOrder, true
 }
 
 // HasGuiOrder returns a boolean if a field has been set.
 func (o *SuccessSamlConnectionResponseAllOfData) HasGuiOrder() bool {
-	if o != nil && o.GuiOrder != nil {
+	if o != nil && !isNil(o.GuiOrder) {
 		return true
 	}
 
@@ -411,37 +411,37 @@ func (o *SuccessSamlConnectionResponseAllOfData) SetGuiOrder(v string) {
 
 func (o SuccessSamlConnectionResponseAllOfData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ConnectionId != nil {
+	if !isNil(o.ConnectionId) {
 		toSerialize["connectionId"] = o.ConnectionId
 	}
-	if o.ConnectionName != nil {
+	if !isNil(o.ConnectionName) {
 		toSerialize["connectionName"] = o.ConnectionName
 	}
-	if o.DisplayName != nil {
+	if !isNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	if o.ConnectionType != nil {
+	if !isNil(o.ConnectionType) {
 		toSerialize["connectionType"] = o.ConnectionType
 	}
-	if o.SignInEndpoint != nil {
+	if !isNil(o.SignInEndpoint) {
 		toSerialize["signInEndpoint"] = o.SignInEndpoint
 	}
-	if o.SignOutEndpoint != nil {
+	if !isNil(o.SignOutEndpoint) {
 		toSerialize["signOutEndpoint"] = o.SignOutEndpoint
 	}
-	if o.PublicKeyCertificate != nil {
+	if !isNil(o.PublicKeyCertificate) {
 		toSerialize["publicKeyCertificate"] = o.PublicKeyCertificate
 	}
-	if o.EntityId != nil {
+	if !isNil(o.EntityId) {
 		toSerialize["entityId"] = o.EntityId
 	}
-	if o.RedirectUri != nil {
+	if !isNil(o.RedirectUri) {
 		toSerialize["redirectUri"] = o.RedirectUri
 	}
-	if o.MetadataUri != nil {
+	if !isNil(o.MetadataUri) {
 		toSerialize["metadataUri"] = o.MetadataUri
 	}
-	if o.GuiOrder != nil {
+	if !isNil(o.GuiOrder) {
 		toSerialize["guiOrder"] = o.GuiOrder
 	}
 	return json.Marshal(toSerialize)

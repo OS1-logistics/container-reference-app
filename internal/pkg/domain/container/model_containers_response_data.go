@@ -39,7 +39,7 @@ func NewContainersResponseDataWithDefaults() *ContainersResponseData {
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
 func (o *ContainersResponseData) GetMeta() ContainerTypesResponseDataMeta {
-	if o == nil || o.Meta == nil {
+	if o == nil || isNil(o.Meta) {
 		var ret ContainerTypesResponseDataMeta
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *ContainersResponseData) GetMeta() ContainerTypesResponseDataMeta {
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainersResponseData) GetMetaOk() (*ContainerTypesResponseDataMeta, bool) {
-	if o == nil || o.Meta == nil {
-		return nil, false
+	if o == nil || isNil(o.Meta) {
+    return nil, false
 	}
 	return o.Meta, true
 }
 
 // HasMeta returns a boolean if a field has been set.
 func (o *ContainersResponseData) HasMeta() bool {
-	if o != nil && o.Meta != nil {
+	if o != nil && !isNil(o.Meta) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *ContainersResponseData) SetMeta(v ContainerTypesResponseDataMeta) {
 
 // GetContainers returns the Containers field value if set, zero value otherwise.
 func (o *ContainersResponseData) GetContainers() []ContainerResponseData {
-	if o == nil || o.Containers == nil {
+	if o == nil || isNil(o.Containers) {
 		var ret []ContainerResponseData
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *ContainersResponseData) GetContainers() []ContainerResponseData {
 // GetContainersOk returns a tuple with the Containers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainersResponseData) GetContainersOk() ([]ContainerResponseData, bool) {
-	if o == nil || o.Containers == nil {
-		return nil, false
+	if o == nil || isNil(o.Containers) {
+    return nil, false
 	}
 	return o.Containers, true
 }
 
 // HasContainers returns a boolean if a field has been set.
 func (o *ContainersResponseData) HasContainers() bool {
-	if o != nil && o.Containers != nil {
+	if o != nil && !isNil(o.Containers) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *ContainersResponseData) SetContainers(v []ContainerResponseData) {
 
 func (o ContainersResponseData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Meta != nil {
+	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
-	if o.Containers != nil {
+	if !isNil(o.Containers) {
 		toSerialize["containers"] = o.Containers
 	}
 	return json.Marshal(toSerialize)

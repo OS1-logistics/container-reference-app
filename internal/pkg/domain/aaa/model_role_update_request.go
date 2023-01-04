@@ -53,7 +53,7 @@ func NewRoleUpdateRequestWithDefaults() *RoleUpdateRequest {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *RoleUpdateRequest) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -63,15 +63,15 @@ func (o *RoleUpdateRequest) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleUpdateRequest) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *RoleUpdateRequest) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -85,7 +85,7 @@ func (o *RoleUpdateRequest) SetDescription(v string) {
 
 // GetAssignPermissions returns the AssignPermissions field value if set, zero value otherwise.
 func (o *RoleUpdateRequest) GetAssignPermissions() bool {
-	if o == nil || o.AssignPermissions == nil {
+	if o == nil || isNil(o.AssignPermissions) {
 		var ret bool
 		return ret
 	}
@@ -95,15 +95,15 @@ func (o *RoleUpdateRequest) GetAssignPermissions() bool {
 // GetAssignPermissionsOk returns a tuple with the AssignPermissions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleUpdateRequest) GetAssignPermissionsOk() (*bool, bool) {
-	if o == nil || o.AssignPermissions == nil {
-		return nil, false
+	if o == nil || isNil(o.AssignPermissions) {
+    return nil, false
 	}
 	return o.AssignPermissions, true
 }
 
 // HasAssignPermissions returns a boolean if a field has been set.
 func (o *RoleUpdateRequest) HasAssignPermissions() bool {
-	if o != nil && o.AssignPermissions != nil {
+	if o != nil && !isNil(o.AssignPermissions) {
 		return true
 	}
 
@@ -128,15 +128,15 @@ func (o *RoleUpdateRequest) GetPermissions() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RoleUpdateRequest) GetPermissionsOk() ([]string, bool) {
-	if o == nil || o.Permissions == nil {
-		return nil, false
+	if o == nil || isNil(o.Permissions) {
+    return nil, false
 	}
 	return o.Permissions, true
 }
 
 // HasPermissions returns a boolean if a field has been set.
 func (o *RoleUpdateRequest) HasPermissions() bool {
-	if o != nil && o.Permissions != nil {
+	if o != nil && isNil(o.Permissions) {
 		return true
 	}
 
@@ -150,7 +150,7 @@ func (o *RoleUpdateRequest) SetPermissions(v []string) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *RoleUpdateRequest) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -160,15 +160,15 @@ func (o *RoleUpdateRequest) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleUpdateRequest) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *RoleUpdateRequest) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -182,7 +182,7 @@ func (o *RoleUpdateRequest) SetIsActive(v bool) {
 
 // GetIsDeleted returns the IsDeleted field value if set, zero value otherwise.
 func (o *RoleUpdateRequest) GetIsDeleted() bool {
-	if o == nil || o.IsDeleted == nil {
+	if o == nil || isNil(o.IsDeleted) {
 		var ret bool
 		return ret
 	}
@@ -192,15 +192,15 @@ func (o *RoleUpdateRequest) GetIsDeleted() bool {
 // GetIsDeletedOk returns a tuple with the IsDeleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleUpdateRequest) GetIsDeletedOk() (*bool, bool) {
-	if o == nil || o.IsDeleted == nil {
-		return nil, false
+	if o == nil || isNil(o.IsDeleted) {
+    return nil, false
 	}
 	return o.IsDeleted, true
 }
 
 // HasIsDeleted returns a boolean if a field has been set.
 func (o *RoleUpdateRequest) HasIsDeleted() bool {
-	if o != nil && o.IsDeleted != nil {
+	if o != nil && !isNil(o.IsDeleted) {
 		return true
 	}
 
@@ -214,7 +214,7 @@ func (o *RoleUpdateRequest) SetIsDeleted(v bool) {
 
 // GetCanGrantToApps returns the CanGrantToApps field value if set, zero value otherwise.
 func (o *RoleUpdateRequest) GetCanGrantToApps() bool {
-	if o == nil || o.CanGrantToApps == nil {
+	if o == nil || isNil(o.CanGrantToApps) {
 		var ret bool
 		return ret
 	}
@@ -224,15 +224,15 @@ func (o *RoleUpdateRequest) GetCanGrantToApps() bool {
 // GetCanGrantToAppsOk returns a tuple with the CanGrantToApps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleUpdateRequest) GetCanGrantToAppsOk() (*bool, bool) {
-	if o == nil || o.CanGrantToApps == nil {
-		return nil, false
+	if o == nil || isNil(o.CanGrantToApps) {
+    return nil, false
 	}
 	return o.CanGrantToApps, true
 }
 
 // HasCanGrantToApps returns a boolean if a field has been set.
 func (o *RoleUpdateRequest) HasCanGrantToApps() bool {
-	if o != nil && o.CanGrantToApps != nil {
+	if o != nil && !isNil(o.CanGrantToApps) {
 		return true
 	}
 
@@ -246,7 +246,7 @@ func (o *RoleUpdateRequest) SetCanGrantToApps(v bool) {
 
 // GetCanGrantToUsers returns the CanGrantToUsers field value if set, zero value otherwise.
 func (o *RoleUpdateRequest) GetCanGrantToUsers() bool {
-	if o == nil || o.CanGrantToUsers == nil {
+	if o == nil || isNil(o.CanGrantToUsers) {
 		var ret bool
 		return ret
 	}
@@ -256,15 +256,15 @@ func (o *RoleUpdateRequest) GetCanGrantToUsers() bool {
 // GetCanGrantToUsersOk returns a tuple with the CanGrantToUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleUpdateRequest) GetCanGrantToUsersOk() (*bool, bool) {
-	if o == nil || o.CanGrantToUsers == nil {
-		return nil, false
+	if o == nil || isNil(o.CanGrantToUsers) {
+    return nil, false
 	}
 	return o.CanGrantToUsers, true
 }
 
 // HasCanGrantToUsers returns a boolean if a field has been set.
 func (o *RoleUpdateRequest) HasCanGrantToUsers() bool {
-	if o != nil && o.CanGrantToUsers != nil {
+	if o != nil && !isNil(o.CanGrantToUsers) {
 		return true
 	}
 
@@ -278,7 +278,7 @@ func (o *RoleUpdateRequest) SetCanGrantToUsers(v bool) {
 
 // GetSecurityLevel returns the SecurityLevel field value if set, zero value otherwise.
 func (o *RoleUpdateRequest) GetSecurityLevel() string {
-	if o == nil || o.SecurityLevel == nil {
+	if o == nil || isNil(o.SecurityLevel) {
 		var ret string
 		return ret
 	}
@@ -288,15 +288,15 @@ func (o *RoleUpdateRequest) GetSecurityLevel() string {
 // GetSecurityLevelOk returns a tuple with the SecurityLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleUpdateRequest) GetSecurityLevelOk() (*string, bool) {
-	if o == nil || o.SecurityLevel == nil {
-		return nil, false
+	if o == nil || isNil(o.SecurityLevel) {
+    return nil, false
 	}
 	return o.SecurityLevel, true
 }
 
 // HasSecurityLevel returns a boolean if a field has been set.
 func (o *RoleUpdateRequest) HasSecurityLevel() bool {
-	if o != nil && o.SecurityLevel != nil {
+	if o != nil && !isNil(o.SecurityLevel) {
 		return true
 	}
 
@@ -310,28 +310,28 @@ func (o *RoleUpdateRequest) SetSecurityLevel(v string) {
 
 func (o RoleUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.AssignPermissions != nil {
+	if !isNil(o.AssignPermissions) {
 		toSerialize["assignPermissions"] = o.AssignPermissions
 	}
 	if o.Permissions != nil {
 		toSerialize["permissions"] = o.Permissions
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.IsDeleted != nil {
+	if !isNil(o.IsDeleted) {
 		toSerialize["isDeleted"] = o.IsDeleted
 	}
-	if o.CanGrantToApps != nil {
+	if !isNil(o.CanGrantToApps) {
 		toSerialize["canGrantToApps"] = o.CanGrantToApps
 	}
-	if o.CanGrantToUsers != nil {
+	if !isNil(o.CanGrantToUsers) {
 		toSerialize["canGrantToUsers"] = o.CanGrantToUsers
 	}
-	if o.SecurityLevel != nil {
+	if !isNil(o.SecurityLevel) {
 		toSerialize["securityLevel"] = o.SecurityLevel
 	}
 	return json.Marshal(toSerialize)

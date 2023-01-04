@@ -59,7 +59,7 @@ func NewOIDCUpdateRequestWithDefaults() *OIDCUpdateRequest {
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *OIDCUpdateRequest) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+	if o == nil || isNil(o.DisplayName) {
 		var ret string
 		return ret
 	}
@@ -69,15 +69,15 @@ func (o *OIDCUpdateRequest) GetDisplayName() string {
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCUpdateRequest) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
-		return nil, false
+	if o == nil || isNil(o.DisplayName) {
+    return nil, false
 	}
 	return o.DisplayName, true
 }
 
 // HasDisplayName returns a boolean if a field has been set.
 func (o *OIDCUpdateRequest) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+	if o != nil && !isNil(o.DisplayName) {
 		return true
 	}
 
@@ -91,7 +91,7 @@ func (o *OIDCUpdateRequest) SetDisplayName(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *OIDCUpdateRequest) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || isNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -101,15 +101,15 @@ func (o *OIDCUpdateRequest) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCUpdateRequest) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
-		return nil, false
+	if o == nil || isNil(o.Enabled) {
+    return nil, false
 	}
 	return o.Enabled, true
 }
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *OIDCUpdateRequest) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !isNil(o.Enabled) {
 		return true
 	}
 
@@ -123,7 +123,7 @@ func (o *OIDCUpdateRequest) SetEnabled(v bool) {
 
 // GetGuiOrder returns the GuiOrder field value if set, zero value otherwise.
 func (o *OIDCUpdateRequest) GetGuiOrder() float32 {
-	if o == nil || o.GuiOrder == nil {
+	if o == nil || isNil(o.GuiOrder) {
 		var ret float32
 		return ret
 	}
@@ -133,15 +133,15 @@ func (o *OIDCUpdateRequest) GetGuiOrder() float32 {
 // GetGuiOrderOk returns a tuple with the GuiOrder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCUpdateRequest) GetGuiOrderOk() (*float32, bool) {
-	if o == nil || o.GuiOrder == nil {
-		return nil, false
+	if o == nil || isNil(o.GuiOrder) {
+    return nil, false
 	}
 	return o.GuiOrder, true
 }
 
 // HasGuiOrder returns a boolean if a field has been set.
 func (o *OIDCUpdateRequest) HasGuiOrder() bool {
-	if o != nil && o.GuiOrder != nil {
+	if o != nil && !isNil(o.GuiOrder) {
 		return true
 	}
 
@@ -155,7 +155,7 @@ func (o *OIDCUpdateRequest) SetGuiOrder(v float32) {
 
 // GetUserInfoUrl returns the UserInfoUrl field value if set, zero value otherwise.
 func (o *OIDCUpdateRequest) GetUserInfoUrl() string {
-	if o == nil || o.UserInfoUrl == nil {
+	if o == nil || isNil(o.UserInfoUrl) {
 		var ret string
 		return ret
 	}
@@ -165,15 +165,15 @@ func (o *OIDCUpdateRequest) GetUserInfoUrl() string {
 // GetUserInfoUrlOk returns a tuple with the UserInfoUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCUpdateRequest) GetUserInfoUrlOk() (*string, bool) {
-	if o == nil || o.UserInfoUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.UserInfoUrl) {
+    return nil, false
 	}
 	return o.UserInfoUrl, true
 }
 
 // HasUserInfoUrl returns a boolean if a field has been set.
 func (o *OIDCUpdateRequest) HasUserInfoUrl() bool {
-	if o != nil && o.UserInfoUrl != nil {
+	if o != nil && !isNil(o.UserInfoUrl) {
 		return true
 	}
 
@@ -187,7 +187,7 @@ func (o *OIDCUpdateRequest) SetUserInfoUrl(v string) {
 
 // GetLogoutUrl returns the LogoutUrl field value if set, zero value otherwise.
 func (o *OIDCUpdateRequest) GetLogoutUrl() string {
-	if o == nil || o.LogoutUrl == nil {
+	if o == nil || isNil(o.LogoutUrl) {
 		var ret string
 		return ret
 	}
@@ -197,15 +197,15 @@ func (o *OIDCUpdateRequest) GetLogoutUrl() string {
 // GetLogoutUrlOk returns a tuple with the LogoutUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCUpdateRequest) GetLogoutUrlOk() (*string, bool) {
-	if o == nil || o.LogoutUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.LogoutUrl) {
+    return nil, false
 	}
 	return o.LogoutUrl, true
 }
 
 // HasLogoutUrl returns a boolean if a field has been set.
 func (o *OIDCUpdateRequest) HasLogoutUrl() bool {
-	if o != nil && o.LogoutUrl != nil {
+	if o != nil && !isNil(o.LogoutUrl) {
 		return true
 	}
 
@@ -219,7 +219,7 @@ func (o *OIDCUpdateRequest) SetLogoutUrl(v string) {
 
 // GetAuthorizationUrl returns the AuthorizationUrl field value if set, zero value otherwise.
 func (o *OIDCUpdateRequest) GetAuthorizationUrl() string {
-	if o == nil || o.AuthorizationUrl == nil {
+	if o == nil || isNil(o.AuthorizationUrl) {
 		var ret string
 		return ret
 	}
@@ -229,15 +229,15 @@ func (o *OIDCUpdateRequest) GetAuthorizationUrl() string {
 // GetAuthorizationUrlOk returns a tuple with the AuthorizationUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCUpdateRequest) GetAuthorizationUrlOk() (*string, bool) {
-	if o == nil || o.AuthorizationUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.AuthorizationUrl) {
+    return nil, false
 	}
 	return o.AuthorizationUrl, true
 }
 
 // HasAuthorizationUrl returns a boolean if a field has been set.
 func (o *OIDCUpdateRequest) HasAuthorizationUrl() bool {
-	if o != nil && o.AuthorizationUrl != nil {
+	if o != nil && !isNil(o.AuthorizationUrl) {
 		return true
 	}
 
@@ -251,7 +251,7 @@ func (o *OIDCUpdateRequest) SetAuthorizationUrl(v string) {
 
 // GetTokenUrl returns the TokenUrl field value if set, zero value otherwise.
 func (o *OIDCUpdateRequest) GetTokenUrl() string {
-	if o == nil || o.TokenUrl == nil {
+	if o == nil || isNil(o.TokenUrl) {
 		var ret string
 		return ret
 	}
@@ -261,15 +261,15 @@ func (o *OIDCUpdateRequest) GetTokenUrl() string {
 // GetTokenUrlOk returns a tuple with the TokenUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCUpdateRequest) GetTokenUrlOk() (*string, bool) {
-	if o == nil || o.TokenUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.TokenUrl) {
+    return nil, false
 	}
 	return o.TokenUrl, true
 }
 
 // HasTokenUrl returns a boolean if a field has been set.
 func (o *OIDCUpdateRequest) HasTokenUrl() bool {
-	if o != nil && o.TokenUrl != nil {
+	if o != nil && !isNil(o.TokenUrl) {
 		return true
 	}
 
@@ -283,7 +283,7 @@ func (o *OIDCUpdateRequest) SetTokenUrl(v string) {
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
 func (o *OIDCUpdateRequest) GetClientId() string {
-	if o == nil || o.ClientId == nil {
+	if o == nil || isNil(o.ClientId) {
 		var ret string
 		return ret
 	}
@@ -293,15 +293,15 @@ func (o *OIDCUpdateRequest) GetClientId() string {
 // GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCUpdateRequest) GetClientIdOk() (*string, bool) {
-	if o == nil || o.ClientId == nil {
-		return nil, false
+	if o == nil || isNil(o.ClientId) {
+    return nil, false
 	}
 	return o.ClientId, true
 }
 
 // HasClientId returns a boolean if a field has been set.
 func (o *OIDCUpdateRequest) HasClientId() bool {
-	if o != nil && o.ClientId != nil {
+	if o != nil && !isNil(o.ClientId) {
 		return true
 	}
 
@@ -315,7 +315,7 @@ func (o *OIDCUpdateRequest) SetClientId(v string) {
 
 // GetClientSecret returns the ClientSecret field value if set, zero value otherwise.
 func (o *OIDCUpdateRequest) GetClientSecret() string {
-	if o == nil || o.ClientSecret == nil {
+	if o == nil || isNil(o.ClientSecret) {
 		var ret string
 		return ret
 	}
@@ -325,15 +325,15 @@ func (o *OIDCUpdateRequest) GetClientSecret() string {
 // GetClientSecretOk returns a tuple with the ClientSecret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCUpdateRequest) GetClientSecretOk() (*string, bool) {
-	if o == nil || o.ClientSecret == nil {
-		return nil, false
+	if o == nil || isNil(o.ClientSecret) {
+    return nil, false
 	}
 	return o.ClientSecret, true
 }
 
 // HasClientSecret returns a boolean if a field has been set.
 func (o *OIDCUpdateRequest) HasClientSecret() bool {
-	if o != nil && o.ClientSecret != nil {
+	if o != nil && !isNil(o.ClientSecret) {
 		return true
 	}
 
@@ -347,7 +347,7 @@ func (o *OIDCUpdateRequest) SetClientSecret(v string) {
 
 // GetIssuer returns the Issuer field value if set, zero value otherwise.
 func (o *OIDCUpdateRequest) GetIssuer() string {
-	if o == nil || o.Issuer == nil {
+	if o == nil || isNil(o.Issuer) {
 		var ret string
 		return ret
 	}
@@ -357,15 +357,15 @@ func (o *OIDCUpdateRequest) GetIssuer() string {
 // GetIssuerOk returns a tuple with the Issuer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCUpdateRequest) GetIssuerOk() (*string, bool) {
-	if o == nil || o.Issuer == nil {
-		return nil, false
+	if o == nil || isNil(o.Issuer) {
+    return nil, false
 	}
 	return o.Issuer, true
 }
 
 // HasIssuer returns a boolean if a field has been set.
 func (o *OIDCUpdateRequest) HasIssuer() bool {
-	if o != nil && o.Issuer != nil {
+	if o != nil && !isNil(o.Issuer) {
 		return true
 	}
 
@@ -379,7 +379,7 @@ func (o *OIDCUpdateRequest) SetIssuer(v string) {
 
 // GetJwksUrl returns the JwksUrl field value if set, zero value otherwise.
 func (o *OIDCUpdateRequest) GetJwksUrl() string {
-	if o == nil || o.JwksUrl == nil {
+	if o == nil || isNil(o.JwksUrl) {
 		var ret string
 		return ret
 	}
@@ -389,15 +389,15 @@ func (o *OIDCUpdateRequest) GetJwksUrl() string {
 // GetJwksUrlOk returns a tuple with the JwksUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCUpdateRequest) GetJwksUrlOk() (*string, bool) {
-	if o == nil || o.JwksUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.JwksUrl) {
+    return nil, false
 	}
 	return o.JwksUrl, true
 }
 
 // HasJwksUrl returns a boolean if a field has been set.
 func (o *OIDCUpdateRequest) HasJwksUrl() bool {
-	if o != nil && o.JwksUrl != nil {
+	if o != nil && !isNil(o.JwksUrl) {
 		return true
 	}
 
@@ -411,37 +411,37 @@ func (o *OIDCUpdateRequest) SetJwksUrl(v string) {
 
 func (o OIDCUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.DisplayName != nil {
+	if !isNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	if o.Enabled != nil {
+	if !isNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if o.GuiOrder != nil {
+	if !isNil(o.GuiOrder) {
 		toSerialize["guiOrder"] = o.GuiOrder
 	}
-	if o.UserInfoUrl != nil {
+	if !isNil(o.UserInfoUrl) {
 		toSerialize["userInfoUrl"] = o.UserInfoUrl
 	}
-	if o.LogoutUrl != nil {
+	if !isNil(o.LogoutUrl) {
 		toSerialize["logoutUrl"] = o.LogoutUrl
 	}
-	if o.AuthorizationUrl != nil {
+	if !isNil(o.AuthorizationUrl) {
 		toSerialize["authorizationUrl"] = o.AuthorizationUrl
 	}
-	if o.TokenUrl != nil {
+	if !isNil(o.TokenUrl) {
 		toSerialize["tokenUrl"] = o.TokenUrl
 	}
-	if o.ClientId != nil {
+	if !isNil(o.ClientId) {
 		toSerialize["clientId"] = o.ClientId
 	}
-	if o.ClientSecret != nil {
+	if !isNil(o.ClientSecret) {
 		toSerialize["clientSecret"] = o.ClientSecret
 	}
-	if o.Issuer != nil {
+	if !isNil(o.Issuer) {
 		toSerialize["issuer"] = o.Issuer
 	}
-	if o.JwksUrl != nil {
+	if !isNil(o.JwksUrl) {
 		toSerialize["jwksUrl"] = o.JwksUrl
 	}
 	return json.Marshal(toSerialize)

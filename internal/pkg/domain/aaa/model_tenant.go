@@ -50,7 +50,7 @@ func NewTenantWithDefaults() *Tenant {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *Tenant) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -60,15 +60,15 @@ func (o *Tenant) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tenant) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
+	if o == nil || isNil(o.Name) {
+    return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *Tenant) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
@@ -82,7 +82,7 @@ func (o *Tenant) SetName(v string) {
 
 // GetTenantId returns the TenantId field value if set, zero value otherwise.
 func (o *Tenant) GetTenantId() string {
-	if o == nil || o.TenantId == nil {
+	if o == nil || isNil(o.TenantId) {
 		var ret string
 		return ret
 	}
@@ -92,15 +92,15 @@ func (o *Tenant) GetTenantId() string {
 // GetTenantIdOk returns a tuple with the TenantId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tenant) GetTenantIdOk() (*string, bool) {
-	if o == nil || o.TenantId == nil {
-		return nil, false
+	if o == nil || isNil(o.TenantId) {
+    return nil, false
 	}
 	return o.TenantId, true
 }
 
 // HasTenantId returns a boolean if a field has been set.
 func (o *Tenant) HasTenantId() bool {
-	if o != nil && o.TenantId != nil {
+	if o != nil && !isNil(o.TenantId) {
 		return true
 	}
 
@@ -114,7 +114,7 @@ func (o *Tenant) SetTenantId(v string) {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *Tenant) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -124,15 +124,15 @@ func (o *Tenant) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tenant) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
+	if o == nil || isNil(o.Id) {
+    return nil, false
 	}
 	return o.Id, true
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *Tenant) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
@@ -146,7 +146,7 @@ func (o *Tenant) SetId(v string) {
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *Tenant) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+	if o == nil || isNil(o.DisplayName) {
 		var ret string
 		return ret
 	}
@@ -156,15 +156,15 @@ func (o *Tenant) GetDisplayName() string {
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tenant) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
-		return nil, false
+	if o == nil || isNil(o.DisplayName) {
+    return nil, false
 	}
 	return o.DisplayName, true
 }
 
 // HasDisplayName returns a boolean if a field has been set.
 func (o *Tenant) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+	if o != nil && !isNil(o.DisplayName) {
 		return true
 	}
 
@@ -178,7 +178,7 @@ func (o *Tenant) SetDisplayName(v string) {
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *Tenant) GetMetadata() map[string]interface{} {
-	if o == nil || o.Metadata == nil {
+	if o == nil || isNil(o.Metadata) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -188,15 +188,15 @@ func (o *Tenant) GetMetadata() map[string]interface{} {
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tenant) GetMetadataOk() (map[string]interface{}, bool) {
-	if o == nil || o.Metadata == nil {
-		return nil, false
+	if o == nil || isNil(o.Metadata) {
+    return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
 
 // HasMetadata returns a boolean if a field has been set.
 func (o *Tenant) HasMetadata() bool {
-	if o != nil && o.Metadata != nil {
+	if o != nil && !isNil(o.Metadata) {
 		return true
 	}
 
@@ -210,7 +210,7 @@ func (o *Tenant) SetMetadata(v map[string]interface{}) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *Tenant) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || isNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -220,15 +220,15 @@ func (o *Tenant) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tenant) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
-		return nil, false
+	if o == nil || isNil(o.Enabled) {
+    return nil, false
 	}
 	return o.Enabled, true
 }
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *Tenant) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !isNil(o.Enabled) {
 		return true
 	}
 
@@ -242,7 +242,7 @@ func (o *Tenant) SetEnabled(v bool) {
 
 // GetAbacConfig returns the AbacConfig field value if set, zero value otherwise.
 func (o *Tenant) GetAbacConfig() AbacConfigRequest {
-	if o == nil || o.AbacConfig == nil {
+	if o == nil || isNil(o.AbacConfig) {
 		var ret AbacConfigRequest
 		return ret
 	}
@@ -252,15 +252,15 @@ func (o *Tenant) GetAbacConfig() AbacConfigRequest {
 // GetAbacConfigOk returns a tuple with the AbacConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tenant) GetAbacConfigOk() (*AbacConfigRequest, bool) {
-	if o == nil || o.AbacConfig == nil {
-		return nil, false
+	if o == nil || isNil(o.AbacConfig) {
+    return nil, false
 	}
 	return o.AbacConfig, true
 }
 
 // HasAbacConfig returns a boolean if a field has been set.
 func (o *Tenant) HasAbacConfig() bool {
-	if o != nil && o.AbacConfig != nil {
+	if o != nil && !isNil(o.AbacConfig) {
 		return true
 	}
 
@@ -274,25 +274,25 @@ func (o *Tenant) SetAbacConfig(v AbacConfigRequest) {
 
 func (o Tenant) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Name != nil {
+	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.TenantId != nil {
+	if !isNil(o.TenantId) {
 		toSerialize["tenantId"] = o.TenantId
 	}
-	if o.Id != nil {
+	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.DisplayName != nil {
+	if !isNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	if o.Metadata != nil {
+	if !isNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Enabled != nil {
+	if !isNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if o.AbacConfig != nil {
+	if !isNil(o.AbacConfig) {
 		toSerialize["abacConfig"] = o.AbacConfig
 	}
 	return json.Marshal(toSerialize)

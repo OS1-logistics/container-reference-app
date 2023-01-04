@@ -62,7 +62,7 @@ func (o *TrackingDetail) GetOperator() string {
 // and a boolean to check if the value has been set.
 func (o *TrackingDetail) GetOperatorOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Operator, true
 }
@@ -86,7 +86,7 @@ func (o *TrackingDetail) GetTrackingId() string {
 // and a boolean to check if the value has been set.
 func (o *TrackingDetail) GetTrackingIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.TrackingId, true
 }
@@ -98,7 +98,7 @@ func (o *TrackingDetail) SetTrackingId(v string) {
 
 // GetIsPrimary returns the IsPrimary field value if set, zero value otherwise.
 func (o *TrackingDetail) GetIsPrimary() bool {
-	if o == nil || o.IsPrimary == nil {
+	if o == nil || isNil(o.IsPrimary) {
 		var ret bool
 		return ret
 	}
@@ -108,15 +108,15 @@ func (o *TrackingDetail) GetIsPrimary() bool {
 // GetIsPrimaryOk returns a tuple with the IsPrimary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TrackingDetail) GetIsPrimaryOk() (*bool, bool) {
-	if o == nil || o.IsPrimary == nil {
-		return nil, false
+	if o == nil || isNil(o.IsPrimary) {
+    return nil, false
 	}
 	return o.IsPrimary, true
 }
 
 // HasIsPrimary returns a boolean if a field has been set.
 func (o *TrackingDetail) HasIsPrimary() bool {
-	if o != nil && o.IsPrimary != nil {
+	if o != nil && !isNil(o.IsPrimary) {
 		return true
 	}
 
@@ -130,7 +130,7 @@ func (o *TrackingDetail) SetIsPrimary(v bool) {
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
 func (o *TrackingDetail) GetTimestamp() int64 {
-	if o == nil || o.Timestamp == nil {
+	if o == nil || isNil(o.Timestamp) {
 		var ret int64
 		return ret
 	}
@@ -140,15 +140,15 @@ func (o *TrackingDetail) GetTimestamp() int64 {
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TrackingDetail) GetTimestampOk() (*int64, bool) {
-	if o == nil || o.Timestamp == nil {
-		return nil, false
+	if o == nil || isNil(o.Timestamp) {
+    return nil, false
 	}
 	return o.Timestamp, true
 }
 
 // HasTimestamp returns a boolean if a field has been set.
 func (o *TrackingDetail) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
+	if o != nil && !isNil(o.Timestamp) {
 		return true
 	}
 
@@ -168,10 +168,10 @@ func (o TrackingDetail) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["trackingId"] = o.TrackingId
 	}
-	if o.IsPrimary != nil {
+	if !isNil(o.IsPrimary) {
 		toSerialize["isPrimary"] = o.IsPrimary
 	}
-	if o.Timestamp != nil {
+	if !isNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
 	return json.Marshal(toSerialize)

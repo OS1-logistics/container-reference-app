@@ -40,7 +40,7 @@ func NewAttributesConfigUpdateRequestWithDefaults() *AttributesConfigUpdateReque
 
 // GetCallback returns the Callback field value if set, zero value otherwise.
 func (o *AttributesConfigUpdateRequest) GetCallback() map[string]interface{} {
-	if o == nil || o.Callback == nil {
+	if o == nil || isNil(o.Callback) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *AttributesConfigUpdateRequest) GetCallback() map[string]interface{} {
 // GetCallbackOk returns a tuple with the Callback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigUpdateRequest) GetCallbackOk() (*map[string]interface{}, bool) {
-	if o == nil || o.Callback == nil {
-		return nil, false
+	if o == nil || isNil(o.Callback) {
+    return nil, false
 	}
 	return o.Callback, true
 }
 
 // HasCallback returns a boolean if a field has been set.
 func (o *AttributesConfigUpdateRequest) HasCallback() bool {
-	if o != nil && o.Callback != nil {
+	if o != nil && !isNil(o.Callback) {
 		return true
 	}
 
@@ -84,7 +84,7 @@ func (o *AttributesConfigUpdateRequest) GetAttributes() []AttributeConfig {
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigUpdateRequest) GetAttributesOk() ([]AttributeConfig, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Attributes, true
 }
@@ -96,7 +96,7 @@ func (o *AttributesConfigUpdateRequest) SetAttributes(v []AttributeConfig) {
 
 func (o AttributesConfigUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Callback != nil {
+	if !isNil(o.Callback) {
 		toSerialize["callback"] = o.Callback
 	}
 	if true {

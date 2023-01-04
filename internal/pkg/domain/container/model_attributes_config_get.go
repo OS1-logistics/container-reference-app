@@ -51,7 +51,7 @@ func (o *AttributesConfigGet) GetAttributes() []AttributeConfigGet {
 // and a boolean to check if the value has been set.
 func (o *AttributesConfigGet) GetAttributesOk() ([]AttributeConfigGet, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Attributes, true
 }

@@ -64,7 +64,7 @@ func NewContainerTypeMetaResponseWithDefaults() *ContainerTypeMetaResponse {
 
 // GetEntityCode returns the EntityCode field value if set, zero value otherwise.
 func (o *ContainerTypeMetaResponse) GetEntityCode() string {
-	if o == nil || o.EntityCode == nil {
+	if o == nil || isNil(o.EntityCode) {
 		var ret string
 		return ret
 	}
@@ -74,15 +74,15 @@ func (o *ContainerTypeMetaResponse) GetEntityCode() string {
 // GetEntityCodeOk returns a tuple with the EntityCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeMetaResponse) GetEntityCodeOk() (*string, bool) {
-	if o == nil || o.EntityCode == nil {
-		return nil, false
+	if o == nil || isNil(o.EntityCode) {
+    return nil, false
 	}
 	return o.EntityCode, true
 }
 
 // HasEntityCode returns a boolean if a field has been set.
 func (o *ContainerTypeMetaResponse) HasEntityCode() bool {
-	if o != nil && o.EntityCode != nil {
+	if o != nil && !isNil(o.EntityCode) {
 		return true
 	}
 
@@ -108,7 +108,7 @@ func (o *ContainerTypeMetaResponse) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeMetaResponse) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -120,7 +120,7 @@ func (o *ContainerTypeMetaResponse) SetName(v string) {
 
 // GetIsLeaf returns the IsLeaf field value if set, zero value otherwise.
 func (o *ContainerTypeMetaResponse) GetIsLeaf() bool {
-	if o == nil || o.IsLeaf == nil {
+	if o == nil || isNil(o.IsLeaf) {
 		var ret bool
 		return ret
 	}
@@ -130,15 +130,15 @@ func (o *ContainerTypeMetaResponse) GetIsLeaf() bool {
 // GetIsLeafOk returns a tuple with the IsLeaf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeMetaResponse) GetIsLeafOk() (*bool, bool) {
-	if o == nil || o.IsLeaf == nil {
-		return nil, false
+	if o == nil || isNil(o.IsLeaf) {
+    return nil, false
 	}
 	return o.IsLeaf, true
 }
 
 // HasIsLeaf returns a boolean if a field has been set.
 func (o *ContainerTypeMetaResponse) HasIsLeaf() bool {
-	if o != nil && o.IsLeaf != nil {
+	if o != nil && !isNil(o.IsLeaf) {
 		return true
 	}
 
@@ -152,7 +152,7 @@ func (o *ContainerTypeMetaResponse) SetIsLeaf(v bool) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *ContainerTypeMetaResponse) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -162,15 +162,15 @@ func (o *ContainerTypeMetaResponse) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeMetaResponse) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *ContainerTypeMetaResponse) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -184,7 +184,7 @@ func (o *ContainerTypeMetaResponse) SetIsActive(v bool) {
 
 // GetAllowedParent returns the AllowedParent field value if set, zero value otherwise.
 func (o *ContainerTypeMetaResponse) GetAllowedParent() ContainerTypeAllowedParent {
-	if o == nil || o.AllowedParent == nil {
+	if o == nil || isNil(o.AllowedParent) {
 		var ret ContainerTypeAllowedParent
 		return ret
 	}
@@ -194,15 +194,15 @@ func (o *ContainerTypeMetaResponse) GetAllowedParent() ContainerTypeAllowedParen
 // GetAllowedParentOk returns a tuple with the AllowedParent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeMetaResponse) GetAllowedParentOk() (*ContainerTypeAllowedParent, bool) {
-	if o == nil || o.AllowedParent == nil {
-		return nil, false
+	if o == nil || isNil(o.AllowedParent) {
+    return nil, false
 	}
 	return o.AllowedParent, true
 }
 
 // HasAllowedParent returns a boolean if a field has been set.
 func (o *ContainerTypeMetaResponse) HasAllowedParent() bool {
-	if o != nil && o.AllowedParent != nil {
+	if o != nil && !isNil(o.AllowedParent) {
 		return true
 	}
 
@@ -216,7 +216,7 @@ func (o *ContainerTypeMetaResponse) SetAllowedParent(v ContainerTypeAllowedParen
 
 // GetOwnerAppId returns the OwnerAppId field value if set, zero value otherwise.
 func (o *ContainerTypeMetaResponse) GetOwnerAppId() string {
-	if o == nil || o.OwnerAppId == nil {
+	if o == nil || isNil(o.OwnerAppId) {
 		var ret string
 		return ret
 	}
@@ -226,15 +226,15 @@ func (o *ContainerTypeMetaResponse) GetOwnerAppId() string {
 // GetOwnerAppIdOk returns a tuple with the OwnerAppId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeMetaResponse) GetOwnerAppIdOk() (*string, bool) {
-	if o == nil || o.OwnerAppId == nil {
-		return nil, false
+	if o == nil || isNil(o.OwnerAppId) {
+    return nil, false
 	}
 	return o.OwnerAppId, true
 }
 
 // HasOwnerAppId returns a boolean if a field has been set.
 func (o *ContainerTypeMetaResponse) HasOwnerAppId() bool {
-	if o != nil && o.OwnerAppId != nil {
+	if o != nil && !isNil(o.OwnerAppId) {
 		return true
 	}
 
@@ -260,7 +260,7 @@ func (o *ContainerTypeMetaResponse) GetCreatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeMetaResponse) GetCreatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -284,7 +284,7 @@ func (o *ContainerTypeMetaResponse) GetCreatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeMetaResponse) GetCreatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedBy, true
 }
@@ -308,7 +308,7 @@ func (o *ContainerTypeMetaResponse) GetUpdatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeMetaResponse) GetUpdatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedAt, true
 }
@@ -332,7 +332,7 @@ func (o *ContainerTypeMetaResponse) GetUpdatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeMetaResponse) GetUpdatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedBy, true
 }
@@ -344,22 +344,22 @@ func (o *ContainerTypeMetaResponse) SetUpdatedBy(v ActionBy) {
 
 func (o ContainerTypeMetaResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.EntityCode != nil {
+	if !isNil(o.EntityCode) {
 		toSerialize["entityCode"] = o.EntityCode
 	}
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.IsLeaf != nil {
+	if !isNil(o.IsLeaf) {
 		toSerialize["isLeaf"] = o.IsLeaf
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.AllowedParent != nil {
+	if !isNil(o.AllowedParent) {
 		toSerialize["allowedParent"] = o.AllowedParent
 	}
-	if o.OwnerAppId != nil {
+	if !isNil(o.OwnerAppId) {
 		toSerialize["ownerAppId"] = o.OwnerAppId
 	}
 	if true {

@@ -43,7 +43,7 @@ func NewGroupRolesMappingUpdateRequestWithDefaults() *GroupRolesMappingUpdateReq
 
 // GetMembership returns the Membership field value if set, zero value otherwise.
 func (o *GroupRolesMappingUpdateRequest) GetMembership() bool {
-	if o == nil || o.Membership == nil {
+	if o == nil || isNil(o.Membership) {
 		var ret bool
 		return ret
 	}
@@ -53,15 +53,15 @@ func (o *GroupRolesMappingUpdateRequest) GetMembership() bool {
 // GetMembershipOk returns a tuple with the Membership field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupRolesMappingUpdateRequest) GetMembershipOk() (*bool, bool) {
-	if o == nil || o.Membership == nil {
-		return nil, false
+	if o == nil || isNil(o.Membership) {
+    return nil, false
 	}
 	return o.Membership, true
 }
 
 // HasMembership returns a boolean if a field has been set.
 func (o *GroupRolesMappingUpdateRequest) HasMembership() bool {
-	if o != nil && o.Membership != nil {
+	if o != nil && !isNil(o.Membership) {
 		return true
 	}
 
@@ -75,7 +75,7 @@ func (o *GroupRolesMappingUpdateRequest) SetMembership(v bool) {
 
 func (o GroupRolesMappingUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Membership != nil {
+	if !isNil(o.Membership) {
 		toSerialize["membership"] = o.Membership
 	}
 	return json.Marshal(toSerialize)

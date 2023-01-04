@@ -41,7 +41,7 @@ func NewConnectionUpdateRequestWithDefaults() *ConnectionUpdateRequest {
 
 // GetConnectionClientId returns the ConnectionClientId field value if set, zero value otherwise.
 func (o *ConnectionUpdateRequest) GetConnectionClientId() string {
-	if o == nil || o.ConnectionClientId == nil {
+	if o == nil || isNil(o.ConnectionClientId) {
 		var ret string
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *ConnectionUpdateRequest) GetConnectionClientId() string {
 // GetConnectionClientIdOk returns a tuple with the ConnectionClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectionUpdateRequest) GetConnectionClientIdOk() (*string, bool) {
-	if o == nil || o.ConnectionClientId == nil {
-		return nil, false
+	if o == nil || isNil(o.ConnectionClientId) {
+    return nil, false
 	}
 	return o.ConnectionClientId, true
 }
 
 // HasConnectionClientId returns a boolean if a field has been set.
 func (o *ConnectionUpdateRequest) HasConnectionClientId() bool {
-	if o != nil && o.ConnectionClientId != nil {
+	if o != nil && !isNil(o.ConnectionClientId) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *ConnectionUpdateRequest) SetConnectionClientId(v string) {
 
 // GetConnectionClientSecret returns the ConnectionClientSecret field value if set, zero value otherwise.
 func (o *ConnectionUpdateRequest) GetConnectionClientSecret() string {
-	if o == nil || o.ConnectionClientSecret == nil {
+	if o == nil || isNil(o.ConnectionClientSecret) {
 		var ret string
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *ConnectionUpdateRequest) GetConnectionClientSecret() string {
 // GetConnectionClientSecretOk returns a tuple with the ConnectionClientSecret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectionUpdateRequest) GetConnectionClientSecretOk() (*string, bool) {
-	if o == nil || o.ConnectionClientSecret == nil {
-		return nil, false
+	if o == nil || isNil(o.ConnectionClientSecret) {
+    return nil, false
 	}
 	return o.ConnectionClientSecret, true
 }
 
 // HasConnectionClientSecret returns a boolean if a field has been set.
 func (o *ConnectionUpdateRequest) HasConnectionClientSecret() bool {
-	if o != nil && o.ConnectionClientSecret != nil {
+	if o != nil && !isNil(o.ConnectionClientSecret) {
 		return true
 	}
 
@@ -105,10 +105,10 @@ func (o *ConnectionUpdateRequest) SetConnectionClientSecret(v string) {
 
 func (o ConnectionUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ConnectionClientId != nil {
+	if !isNil(o.ConnectionClientId) {
 		toSerialize["connectionClientId"] = o.ConnectionClientId
 	}
-	if o.ConnectionClientSecret != nil {
+	if !isNil(o.ConnectionClientSecret) {
 		toSerialize["connectionClientSecret"] = o.ConnectionClientSecret
 	}
 	return json.Marshal(toSerialize)

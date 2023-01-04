@@ -51,7 +51,7 @@ func (o *StateMachineConfig) GetStates() States {
 // and a boolean to check if the value has been set.
 func (o *StateMachineConfig) GetStatesOk() (*States, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.States, true
 }

@@ -40,7 +40,7 @@ func NewContainerBatchUpdateWithDefaults() *ContainerBatchUpdate {
 
 // GetContainerId returns the ContainerId field value if set, zero value otherwise.
 func (o *ContainerBatchUpdate) GetContainerId() string {
-	if o == nil || o.ContainerId == nil {
+	if o == nil || isNil(o.ContainerId) {
 		var ret string
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *ContainerBatchUpdate) GetContainerId() string {
 // GetContainerIdOk returns a tuple with the ContainerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerBatchUpdate) GetContainerIdOk() (*string, bool) {
-	if o == nil || o.ContainerId == nil {
-		return nil, false
+	if o == nil || isNil(o.ContainerId) {
+    return nil, false
 	}
 	return o.ContainerId, true
 }
 
 // HasContainerId returns a boolean if a field has been set.
 func (o *ContainerBatchUpdate) HasContainerId() bool {
-	if o != nil && o.ContainerId != nil {
+	if o != nil && !isNil(o.ContainerId) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *ContainerBatchUpdate) SetContainerId(v string) {
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *ContainerBatchUpdate) GetData() ContainerUpdateRequest {
-	if o == nil || o.Data == nil {
+	if o == nil || isNil(o.Data) {
 		var ret ContainerUpdateRequest
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *ContainerBatchUpdate) GetData() ContainerUpdateRequest {
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerBatchUpdate) GetDataOk() (*ContainerUpdateRequest, bool) {
-	if o == nil || o.Data == nil {
-		return nil, false
+	if o == nil || isNil(o.Data) {
+    return nil, false
 	}
 	return o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
 func (o *ContainerBatchUpdate) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !isNil(o.Data) {
 		return true
 	}
 
@@ -104,10 +104,10 @@ func (o *ContainerBatchUpdate) SetData(v ContainerUpdateRequest) {
 
 func (o ContainerBatchUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ContainerId != nil {
+	if !isNil(o.ContainerId) {
 		toSerialize["containerId"] = o.ContainerId
 	}
-	if o.Data != nil {
+	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
 	return json.Marshal(toSerialize)

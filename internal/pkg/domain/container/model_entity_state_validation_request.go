@@ -58,7 +58,7 @@ func (o *EntityStateValidationRequest) GetReasonCode() string {
 // and a boolean to check if the value has been set.
 func (o *EntityStateValidationRequest) GetReasonCodeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ReasonCode, true
 }
@@ -82,7 +82,7 @@ func (o *EntityStateValidationRequest) GetEventCode() string {
 // and a boolean to check if the value has been set.
 func (o *EntityStateValidationRequest) GetEventCodeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.EventCode, true
 }
@@ -106,7 +106,7 @@ func (o *EntityStateValidationRequest) GetState() string {
 // and a boolean to check if the value has been set.
 func (o *EntityStateValidationRequest) GetStateOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.State, true
 }

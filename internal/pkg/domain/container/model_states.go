@@ -57,7 +57,7 @@ func (o *States) GetCreated() CreatedState {
 // and a boolean to check if the value has been set.
 func (o *States) GetCreatedOk() (*CreatedState, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Created, true
 }
@@ -81,7 +81,7 @@ func (o *States) GetOpened() OpenedState {
 // and a boolean to check if the value has been set.
 func (o *States) GetOpenedOk() (*OpenedState, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Opened, true
 }
@@ -105,7 +105,7 @@ func (o *States) GetClosed() ClosedState {
 // and a boolean to check if the value has been set.
 func (o *States) GetClosedOk() (*ClosedState, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Closed, true
 }
@@ -129,7 +129,7 @@ func (o *States) GetCompleted() CompletedState {
 // and a boolean to check if the value has been set.
 func (o *States) GetCompletedOk() (*CompletedState, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Completed, true
 }

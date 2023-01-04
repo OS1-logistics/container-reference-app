@@ -50,7 +50,7 @@ func NewContainerTypeCreateRequestWithDefaults() *ContainerTypeCreateRequest {
 
 // GetCallback returns the Callback field value if set, zero value otherwise.
 func (o *ContainerTypeCreateRequest) GetCallback() Callback {
-	if o == nil || o.Callback == nil {
+	if o == nil || isNil(o.Callback) {
 		var ret Callback
 		return ret
 	}
@@ -60,15 +60,15 @@ func (o *ContainerTypeCreateRequest) GetCallback() Callback {
 // GetCallbackOk returns a tuple with the Callback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeCreateRequest) GetCallbackOk() (*Callback, bool) {
-	if o == nil || o.Callback == nil {
-		return nil, false
+	if o == nil || isNil(o.Callback) {
+    return nil, false
 	}
 	return o.Callback, true
 }
 
 // HasCallback returns a boolean if a field has been set.
 func (o *ContainerTypeCreateRequest) HasCallback() bool {
-	if o != nil && o.Callback != nil {
+	if o != nil && !isNil(o.Callback) {
 		return true
 	}
 
@@ -82,7 +82,7 @@ func (o *ContainerTypeCreateRequest) SetCallback(v Callback) {
 
 // GetEntityCode returns the EntityCode field value if set, zero value otherwise.
 func (o *ContainerTypeCreateRequest) GetEntityCode() string {
-	if o == nil || o.EntityCode == nil {
+	if o == nil || isNil(o.EntityCode) {
 		var ret string
 		return ret
 	}
@@ -92,15 +92,15 @@ func (o *ContainerTypeCreateRequest) GetEntityCode() string {
 // GetEntityCodeOk returns a tuple with the EntityCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeCreateRequest) GetEntityCodeOk() (*string, bool) {
-	if o == nil || o.EntityCode == nil {
-		return nil, false
+	if o == nil || isNil(o.EntityCode) {
+    return nil, false
 	}
 	return o.EntityCode, true
 }
 
 // HasEntityCode returns a boolean if a field has been set.
 func (o *ContainerTypeCreateRequest) HasEntityCode() bool {
-	if o != nil && o.EntityCode != nil {
+	if o != nil && !isNil(o.EntityCode) {
 		return true
 	}
 
@@ -126,7 +126,7 @@ func (o *ContainerTypeCreateRequest) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeCreateRequest) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -138,7 +138,7 @@ func (o *ContainerTypeCreateRequest) SetName(v string) {
 
 // GetIsLeaf returns the IsLeaf field value if set, zero value otherwise.
 func (o *ContainerTypeCreateRequest) GetIsLeaf() bool {
-	if o == nil || o.IsLeaf == nil {
+	if o == nil || isNil(o.IsLeaf) {
 		var ret bool
 		return ret
 	}
@@ -148,15 +148,15 @@ func (o *ContainerTypeCreateRequest) GetIsLeaf() bool {
 // GetIsLeafOk returns a tuple with the IsLeaf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeCreateRequest) GetIsLeafOk() (*bool, bool) {
-	if o == nil || o.IsLeaf == nil {
-		return nil, false
+	if o == nil || isNil(o.IsLeaf) {
+    return nil, false
 	}
 	return o.IsLeaf, true
 }
 
 // HasIsLeaf returns a boolean if a field has been set.
 func (o *ContainerTypeCreateRequest) HasIsLeaf() bool {
-	if o != nil && o.IsLeaf != nil {
+	if o != nil && !isNil(o.IsLeaf) {
 		return true
 	}
 
@@ -170,7 +170,7 @@ func (o *ContainerTypeCreateRequest) SetIsLeaf(v bool) {
 
 // GetAllowedParent returns the AllowedParent field value if set, zero value otherwise.
 func (o *ContainerTypeCreateRequest) GetAllowedParent() ContainerTypeAllowedParent {
-	if o == nil || o.AllowedParent == nil {
+	if o == nil || isNil(o.AllowedParent) {
 		var ret ContainerTypeAllowedParent
 		return ret
 	}
@@ -180,15 +180,15 @@ func (o *ContainerTypeCreateRequest) GetAllowedParent() ContainerTypeAllowedPare
 // GetAllowedParentOk returns a tuple with the AllowedParent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeCreateRequest) GetAllowedParentOk() (*ContainerTypeAllowedParent, bool) {
-	if o == nil || o.AllowedParent == nil {
-		return nil, false
+	if o == nil || isNil(o.AllowedParent) {
+    return nil, false
 	}
 	return o.AllowedParent, true
 }
 
 // HasAllowedParent returns a boolean if a field has been set.
 func (o *ContainerTypeCreateRequest) HasAllowedParent() bool {
-	if o != nil && o.AllowedParent != nil {
+	if o != nil && !isNil(o.AllowedParent) {
 		return true
 	}
 
@@ -202,19 +202,19 @@ func (o *ContainerTypeCreateRequest) SetAllowedParent(v ContainerTypeAllowedPare
 
 func (o ContainerTypeCreateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Callback != nil {
+	if !isNil(o.Callback) {
 		toSerialize["callback"] = o.Callback
 	}
-	if o.EntityCode != nil {
+	if !isNil(o.EntityCode) {
 		toSerialize["entityCode"] = o.EntityCode
 	}
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.IsLeaf != nil {
+	if !isNil(o.IsLeaf) {
 		toSerialize["isLeaf"] = o.IsLeaf
 	}
-	if o.AllowedParent != nil {
+	if !isNil(o.AllowedParent) {
 		toSerialize["allowedParent"] = o.AllowedParent
 	}
 	return json.Marshal(toSerialize)

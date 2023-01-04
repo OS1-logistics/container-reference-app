@@ -39,7 +39,7 @@ func NewSuccessRolesResponseV2DataWithDefaults() *SuccessRolesResponseV2Data {
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
 func (o *SuccessRolesResponseV2Data) GetMeta() Meta {
-	if o == nil || o.Meta == nil {
+	if o == nil || isNil(o.Meta) {
 		var ret Meta
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *SuccessRolesResponseV2Data) GetMeta() Meta {
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessRolesResponseV2Data) GetMetaOk() (*Meta, bool) {
-	if o == nil || o.Meta == nil {
-		return nil, false
+	if o == nil || isNil(o.Meta) {
+    return nil, false
 	}
 	return o.Meta, true
 }
 
 // HasMeta returns a boolean if a field has been set.
 func (o *SuccessRolesResponseV2Data) HasMeta() bool {
-	if o != nil && o.Meta != nil {
+	if o != nil && !isNil(o.Meta) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *SuccessRolesResponseV2Data) SetMeta(v Meta) {
 
 // GetRoles returns the Roles field value if set, zero value otherwise.
 func (o *SuccessRolesResponseV2Data) GetRoles() []RoleResponse {
-	if o == nil || o.Roles == nil {
+	if o == nil || isNil(o.Roles) {
 		var ret []RoleResponse
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *SuccessRolesResponseV2Data) GetRoles() []RoleResponse {
 // GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessRolesResponseV2Data) GetRolesOk() ([]RoleResponse, bool) {
-	if o == nil || o.Roles == nil {
-		return nil, false
+	if o == nil || isNil(o.Roles) {
+    return nil, false
 	}
 	return o.Roles, true
 }
 
 // HasRoles returns a boolean if a field has been set.
 func (o *SuccessRolesResponseV2Data) HasRoles() bool {
-	if o != nil && o.Roles != nil {
+	if o != nil && !isNil(o.Roles) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *SuccessRolesResponseV2Data) SetRoles(v []RoleResponse) {
 
 func (o SuccessRolesResponseV2Data) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Meta != nil {
+	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
-	if o.Roles != nil {
+	if !isNil(o.Roles) {
 		toSerialize["roles"] = o.Roles
 	}
 	return json.Marshal(toSerialize)

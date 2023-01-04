@@ -38,7 +38,7 @@ func NewEventCallbackWithDefaults() *EventCallback {
 
 // GetCallback returns the Callback field value if set, zero value otherwise.
 func (o *EventCallback) GetCallback() ContainerTypeUpdateRequestCallback {
-	if o == nil || o.Callback == nil {
+	if o == nil || isNil(o.Callback) {
 		var ret ContainerTypeUpdateRequestCallback
 		return ret
 	}
@@ -48,15 +48,15 @@ func (o *EventCallback) GetCallback() ContainerTypeUpdateRequestCallback {
 // GetCallbackOk returns a tuple with the Callback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventCallback) GetCallbackOk() (*ContainerTypeUpdateRequestCallback, bool) {
-	if o == nil || o.Callback == nil {
-		return nil, false
+	if o == nil || isNil(o.Callback) {
+    return nil, false
 	}
 	return o.Callback, true
 }
 
 // HasCallback returns a boolean if a field has been set.
 func (o *EventCallback) HasCallback() bool {
-	if o != nil && o.Callback != nil {
+	if o != nil && !isNil(o.Callback) {
 		return true
 	}
 
@@ -70,7 +70,7 @@ func (o *EventCallback) SetCallback(v ContainerTypeUpdateRequestCallback) {
 
 func (o EventCallback) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Callback != nil {
+	if !isNil(o.Callback) {
 		toSerialize["callback"] = o.Callback
 	}
 	return json.Marshal(toSerialize)

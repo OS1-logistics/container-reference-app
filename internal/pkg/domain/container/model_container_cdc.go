@@ -82,7 +82,7 @@ func (o *ContainerCDC) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerCDC) GetIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Id, true
 }
@@ -106,7 +106,7 @@ func (o *ContainerCDC) GetContainerType() string {
 // and a boolean to check if the value has been set.
 func (o *ContainerCDC) GetContainerTypeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ContainerType, true
 }
@@ -118,7 +118,7 @@ func (o *ContainerCDC) SetContainerType(v string) {
 
 // GetIsReusable returns the IsReusable field value if set, zero value otherwise.
 func (o *ContainerCDC) GetIsReusable() bool {
-	if o == nil || o.IsReusable == nil {
+	if o == nil || isNil(o.IsReusable) {
 		var ret bool
 		return ret
 	}
@@ -128,15 +128,15 @@ func (o *ContainerCDC) GetIsReusable() bool {
 // GetIsReusableOk returns a tuple with the IsReusable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCDC) GetIsReusableOk() (*bool, bool) {
-	if o == nil || o.IsReusable == nil {
-		return nil, false
+	if o == nil || isNil(o.IsReusable) {
+    return nil, false
 	}
 	return o.IsReusable, true
 }
 
 // HasIsReusable returns a boolean if a field has been set.
 func (o *ContainerCDC) HasIsReusable() bool {
-	if o != nil && o.IsReusable != nil {
+	if o != nil && !isNil(o.IsReusable) {
 		return true
 	}
 
@@ -150,7 +150,7 @@ func (o *ContainerCDC) SetIsReusable(v bool) {
 
 // GetItems returns the Items field value if set, zero value otherwise.
 func (o *ContainerCDC) GetItems() []Item {
-	if o == nil || o.Items == nil {
+	if o == nil || isNil(o.Items) {
 		var ret []Item
 		return ret
 	}
@@ -160,15 +160,15 @@ func (o *ContainerCDC) GetItems() []Item {
 // GetItemsOk returns a tuple with the Items field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCDC) GetItemsOk() ([]Item, bool) {
-	if o == nil || o.Items == nil {
-		return nil, false
+	if o == nil || isNil(o.Items) {
+    return nil, false
 	}
 	return o.Items, true
 }
 
 // HasItems returns a boolean if a field has been set.
 func (o *ContainerCDC) HasItems() bool {
-	if o != nil && o.Items != nil {
+	if o != nil && !isNil(o.Items) {
 		return true
 	}
 
@@ -182,7 +182,7 @@ func (o *ContainerCDC) SetItems(v []Item) {
 
 // GetTrackingDetails returns the TrackingDetails field value if set, zero value otherwise.
 func (o *ContainerCDC) GetTrackingDetails() []TrackingDetail {
-	if o == nil || o.TrackingDetails == nil {
+	if o == nil || isNil(o.TrackingDetails) {
 		var ret []TrackingDetail
 		return ret
 	}
@@ -192,15 +192,15 @@ func (o *ContainerCDC) GetTrackingDetails() []TrackingDetail {
 // GetTrackingDetailsOk returns a tuple with the TrackingDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCDC) GetTrackingDetailsOk() ([]TrackingDetail, bool) {
-	if o == nil || o.TrackingDetails == nil {
-		return nil, false
+	if o == nil || isNil(o.TrackingDetails) {
+    return nil, false
 	}
 	return o.TrackingDetails, true
 }
 
 // HasTrackingDetails returns a boolean if a field has been set.
 func (o *ContainerCDC) HasTrackingDetails() bool {
-	if o != nil && o.TrackingDetails != nil {
+	if o != nil && !isNil(o.TrackingDetails) {
 		return true
 	}
 
@@ -214,7 +214,7 @@ func (o *ContainerCDC) SetTrackingDetails(v []TrackingDetail) {
 
 // GetParentId returns the ParentId field value if set, zero value otherwise.
 func (o *ContainerCDC) GetParentId() string {
-	if o == nil || o.ParentId == nil {
+	if o == nil || isNil(o.ParentId) {
 		var ret string
 		return ret
 	}
@@ -224,15 +224,15 @@ func (o *ContainerCDC) GetParentId() string {
 // GetParentIdOk returns a tuple with the ParentId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCDC) GetParentIdOk() (*string, bool) {
-	if o == nil || o.ParentId == nil {
-		return nil, false
+	if o == nil || isNil(o.ParentId) {
+    return nil, false
 	}
 	return o.ParentId, true
 }
 
 // HasParentId returns a boolean if a field has been set.
 func (o *ContainerCDC) HasParentId() bool {
-	if o != nil && o.ParentId != nil {
+	if o != nil && !isNil(o.ParentId) {
 		return true
 	}
 
@@ -246,7 +246,7 @@ func (o *ContainerCDC) SetParentId(v string) {
 
 // GetAttributes returns the Attributes field value if set, zero value otherwise.
 func (o *ContainerCDC) GetAttributes() map[string]interface{} {
-	if o == nil || o.Attributes == nil {
+	if o == nil || isNil(o.Attributes) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -256,15 +256,15 @@ func (o *ContainerCDC) GetAttributes() map[string]interface{} {
 // GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCDC) GetAttributesOk() (map[string]interface{}, bool) {
-	if o == nil || o.Attributes == nil {
-		return nil, false
+	if o == nil || isNil(o.Attributes) {
+    return map[string]interface{}{}, false
 	}
 	return o.Attributes, true
 }
 
 // HasAttributes returns a boolean if a field has been set.
 func (o *ContainerCDC) HasAttributes() bool {
-	if o != nil && o.Attributes != nil {
+	if o != nil && !isNil(o.Attributes) {
 		return true
 	}
 
@@ -278,7 +278,7 @@ func (o *ContainerCDC) SetAttributes(v map[string]interface{}) {
 
 // GetIsHazmat returns the IsHazmat field value if set, zero value otherwise.
 func (o *ContainerCDC) GetIsHazmat() bool {
-	if o == nil || o.IsHazmat == nil {
+	if o == nil || isNil(o.IsHazmat) {
 		var ret bool
 		return ret
 	}
@@ -288,15 +288,15 @@ func (o *ContainerCDC) GetIsHazmat() bool {
 // GetIsHazmatOk returns a tuple with the IsHazmat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCDC) GetIsHazmatOk() (*bool, bool) {
-	if o == nil || o.IsHazmat == nil {
-		return nil, false
+	if o == nil || isNil(o.IsHazmat) {
+    return nil, false
 	}
 	return o.IsHazmat, true
 }
 
 // HasIsHazmat returns a boolean if a field has been set.
 func (o *ContainerCDC) HasIsHazmat() bool {
-	if o != nil && o.IsHazmat != nil {
+	if o != nil && !isNil(o.IsHazmat) {
 		return true
 	}
 
@@ -310,7 +310,7 @@ func (o *ContainerCDC) SetIsHazmat(v bool) {
 
 // GetIsContainerizable returns the IsContainerizable field value if set, zero value otherwise.
 func (o *ContainerCDC) GetIsContainerizable() bool {
-	if o == nil || o.IsContainerizable == nil {
+	if o == nil || isNil(o.IsContainerizable) {
 		var ret bool
 		return ret
 	}
@@ -320,15 +320,15 @@ func (o *ContainerCDC) GetIsContainerizable() bool {
 // GetIsContainerizableOk returns a tuple with the IsContainerizable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCDC) GetIsContainerizableOk() (*bool, bool) {
-	if o == nil || o.IsContainerizable == nil {
-		return nil, false
+	if o == nil || isNil(o.IsContainerizable) {
+    return nil, false
 	}
 	return o.IsContainerizable, true
 }
 
 // HasIsContainerizable returns a boolean if a field has been set.
 func (o *ContainerCDC) HasIsContainerizable() bool {
-	if o != nil && o.IsContainerizable != nil {
+	if o != nil && !isNil(o.IsContainerizable) {
 		return true
 	}
 
@@ -354,7 +354,7 @@ func (o *ContainerCDC) GetEvent() Event {
 // and a boolean to check if the value has been set.
 func (o *ContainerCDC) GetEventOk() (*Event, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Event, true
 }
@@ -372,25 +372,25 @@ func (o ContainerCDC) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["containerType"] = o.ContainerType
 	}
-	if o.IsReusable != nil {
+	if !isNil(o.IsReusable) {
 		toSerialize["isReusable"] = o.IsReusable
 	}
-	if o.Items != nil {
+	if !isNil(o.Items) {
 		toSerialize["items"] = o.Items
 	}
-	if o.TrackingDetails != nil {
+	if !isNil(o.TrackingDetails) {
 		toSerialize["trackingDetails"] = o.TrackingDetails
 	}
-	if o.ParentId != nil {
+	if !isNil(o.ParentId) {
 		toSerialize["parentId"] = o.ParentId
 	}
-	if o.Attributes != nil {
+	if !isNil(o.Attributes) {
 		toSerialize["attributes"] = o.Attributes
 	}
-	if o.IsHazmat != nil {
+	if !isNil(o.IsHazmat) {
 		toSerialize["isHazmat"] = o.IsHazmat
 	}
-	if o.IsContainerizable != nil {
+	if !isNil(o.IsContainerizable) {
 		toSerialize["isContainerizable"] = o.IsContainerizable
 	}
 	if true {

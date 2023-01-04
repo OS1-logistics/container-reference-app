@@ -48,7 +48,7 @@ func NewResourceResponseWithDefaults() *ResourceResponse {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ResourceResponse) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -58,15 +58,15 @@ func (o *ResourceResponse) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceResponse) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
+	if o == nil || isNil(o.Name) {
+    return nil, false
 	}
 	return o.Name, true
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *ResourceResponse) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
@@ -80,7 +80,7 @@ func (o *ResourceResponse) SetName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ResourceResponse) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -90,15 +90,15 @@ func (o *ResourceResponse) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceResponse) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ResourceResponse) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -112,7 +112,7 @@ func (o *ResourceResponse) SetDescription(v string) {
 
 // GetResourcePath returns the ResourcePath field value if set, zero value otherwise.
 func (o *ResourceResponse) GetResourcePath() string {
-	if o == nil || o.ResourcePath == nil {
+	if o == nil || isNil(o.ResourcePath) {
 		var ret string
 		return ret
 	}
@@ -122,15 +122,15 @@ func (o *ResourceResponse) GetResourcePath() string {
 // GetResourcePathOk returns a tuple with the ResourcePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceResponse) GetResourcePathOk() (*string, bool) {
-	if o == nil || o.ResourcePath == nil {
-		return nil, false
+	if o == nil || isNil(o.ResourcePath) {
+    return nil, false
 	}
 	return o.ResourcePath, true
 }
 
 // HasResourcePath returns a boolean if a field has been set.
 func (o *ResourceResponse) HasResourcePath() bool {
-	if o != nil && o.ResourcePath != nil {
+	if o != nil && !isNil(o.ResourcePath) {
 		return true
 	}
 
@@ -144,7 +144,7 @@ func (o *ResourceResponse) SetResourcePath(v string) {
 
 // GetAllowedHttpMethods returns the AllowedHttpMethods field value if set, zero value otherwise.
 func (o *ResourceResponse) GetAllowedHttpMethods() []string {
-	if o == nil || o.AllowedHttpMethods == nil {
+	if o == nil || isNil(o.AllowedHttpMethods) {
 		var ret []string
 		return ret
 	}
@@ -154,15 +154,15 @@ func (o *ResourceResponse) GetAllowedHttpMethods() []string {
 // GetAllowedHttpMethodsOk returns a tuple with the AllowedHttpMethods field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceResponse) GetAllowedHttpMethodsOk() ([]string, bool) {
-	if o == nil || o.AllowedHttpMethods == nil {
-		return nil, false
+	if o == nil || isNil(o.AllowedHttpMethods) {
+    return nil, false
 	}
 	return o.AllowedHttpMethods, true
 }
 
 // HasAllowedHttpMethods returns a boolean if a field has been set.
 func (o *ResourceResponse) HasAllowedHttpMethods() bool {
-	if o != nil && o.AllowedHttpMethods != nil {
+	if o != nil && !isNil(o.AllowedHttpMethods) {
 		return true
 	}
 
@@ -176,7 +176,7 @@ func (o *ResourceResponse) SetAllowedHttpMethods(v []string) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *ResourceResponse) GetIsActive() string {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret string
 		return ret
 	}
@@ -186,15 +186,15 @@ func (o *ResourceResponse) GetIsActive() string {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceResponse) GetIsActiveOk() (*string, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *ResourceResponse) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -208,7 +208,7 @@ func (o *ResourceResponse) SetIsActive(v string) {
 
 // GetResourceId returns the ResourceId field value if set, zero value otherwise.
 func (o *ResourceResponse) GetResourceId() string {
-	if o == nil || o.ResourceId == nil {
+	if o == nil || isNil(o.ResourceId) {
 		var ret string
 		return ret
 	}
@@ -218,15 +218,15 @@ func (o *ResourceResponse) GetResourceId() string {
 // GetResourceIdOk returns a tuple with the ResourceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceResponse) GetResourceIdOk() (*string, bool) {
-	if o == nil || o.ResourceId == nil {
-		return nil, false
+	if o == nil || isNil(o.ResourceId) {
+    return nil, false
 	}
 	return o.ResourceId, true
 }
 
 // HasResourceId returns a boolean if a field has been set.
 func (o *ResourceResponse) HasResourceId() bool {
-	if o != nil && o.ResourceId != nil {
+	if o != nil && !isNil(o.ResourceId) {
 		return true
 	}
 
@@ -240,22 +240,22 @@ func (o *ResourceResponse) SetResourceId(v string) {
 
 func (o ResourceResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Name != nil {
+	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.ResourcePath != nil {
+	if !isNil(o.ResourcePath) {
 		toSerialize["resourcePath"] = o.ResourcePath
 	}
-	if o.AllowedHttpMethods != nil {
+	if !isNil(o.AllowedHttpMethods) {
 		toSerialize["allowedHttpMethods"] = o.AllowedHttpMethods
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.ResourceId != nil {
+	if !isNil(o.ResourceId) {
 		toSerialize["resourceId"] = o.ResourceId
 	}
 	return json.Marshal(toSerialize)

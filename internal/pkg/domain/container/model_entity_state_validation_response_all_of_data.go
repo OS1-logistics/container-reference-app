@@ -39,7 +39,7 @@ func NewEntityStateValidationResponseAllOfDataWithDefaults() *EntityStateValidat
 
 // GetValid returns the Valid field value if set, zero value otherwise.
 func (o *EntityStateValidationResponseAllOfData) GetValid() bool {
-	if o == nil || o.Valid == nil {
+	if o == nil || isNil(o.Valid) {
 		var ret bool
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *EntityStateValidationResponseAllOfData) GetValid() bool {
 // GetValidOk returns a tuple with the Valid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EntityStateValidationResponseAllOfData) GetValidOk() (*bool, bool) {
-	if o == nil || o.Valid == nil {
-		return nil, false
+	if o == nil || isNil(o.Valid) {
+    return nil, false
 	}
 	return o.Valid, true
 }
 
 // HasValid returns a boolean if a field has been set.
 func (o *EntityStateValidationResponseAllOfData) HasValid() bool {
-	if o != nil && o.Valid != nil {
+	if o != nil && !isNil(o.Valid) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *EntityStateValidationResponseAllOfData) SetValid(v bool) {
 
 func (o EntityStateValidationResponseAllOfData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Valid != nil {
+	if !isNil(o.Valid) {
 		toSerialize["valid"] = o.Valid
 	}
 	return json.Marshal(toSerialize)

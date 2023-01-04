@@ -53,7 +53,7 @@ func NewResourceUpdateRequestWithDefaults() *ResourceUpdateRequest {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ResourceUpdateRequest) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -63,15 +63,15 @@ func (o *ResourceUpdateRequest) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceUpdateRequest) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ResourceUpdateRequest) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -85,7 +85,7 @@ func (o *ResourceUpdateRequest) SetDescription(v string) {
 
 // GetResourcePath returns the ResourcePath field value if set, zero value otherwise.
 func (o *ResourceUpdateRequest) GetResourcePath() string {
-	if o == nil || o.ResourcePath == nil {
+	if o == nil || isNil(o.ResourcePath) {
 		var ret string
 		return ret
 	}
@@ -95,15 +95,15 @@ func (o *ResourceUpdateRequest) GetResourcePath() string {
 // GetResourcePathOk returns a tuple with the ResourcePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceUpdateRequest) GetResourcePathOk() (*string, bool) {
-	if o == nil || o.ResourcePath == nil {
-		return nil, false
+	if o == nil || isNil(o.ResourcePath) {
+    return nil, false
 	}
 	return o.ResourcePath, true
 }
 
 // HasResourcePath returns a boolean if a field has been set.
 func (o *ResourceUpdateRequest) HasResourcePath() bool {
-	if o != nil && o.ResourcePath != nil {
+	if o != nil && !isNil(o.ResourcePath) {
 		return true
 	}
 
@@ -117,7 +117,7 @@ func (o *ResourceUpdateRequest) SetResourcePath(v string) {
 
 // GetAllowedHttpMethods returns the AllowedHttpMethods field value if set, zero value otherwise.
 func (o *ResourceUpdateRequest) GetAllowedHttpMethods() []string {
-	if o == nil || o.AllowedHttpMethods == nil {
+	if o == nil || isNil(o.AllowedHttpMethods) {
 		var ret []string
 		return ret
 	}
@@ -127,15 +127,15 @@ func (o *ResourceUpdateRequest) GetAllowedHttpMethods() []string {
 // GetAllowedHttpMethodsOk returns a tuple with the AllowedHttpMethods field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceUpdateRequest) GetAllowedHttpMethodsOk() ([]string, bool) {
-	if o == nil || o.AllowedHttpMethods == nil {
-		return nil, false
+	if o == nil || isNil(o.AllowedHttpMethods) {
+    return nil, false
 	}
 	return o.AllowedHttpMethods, true
 }
 
 // HasAllowedHttpMethods returns a boolean if a field has been set.
 func (o *ResourceUpdateRequest) HasAllowedHttpMethods() bool {
-	if o != nil && o.AllowedHttpMethods != nil {
+	if o != nil && !isNil(o.AllowedHttpMethods) {
 		return true
 	}
 
@@ -149,7 +149,7 @@ func (o *ResourceUpdateRequest) SetAllowedHttpMethods(v []string) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *ResourceUpdateRequest) GetIsActive() bool {
-	if o == nil || o.IsActive == nil {
+	if o == nil || isNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -159,15 +159,15 @@ func (o *ResourceUpdateRequest) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceUpdateRequest) GetIsActiveOk() (*bool, bool) {
-	if o == nil || o.IsActive == nil {
-		return nil, false
+	if o == nil || isNil(o.IsActive) {
+    return nil, false
 	}
 	return o.IsActive, true
 }
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *ResourceUpdateRequest) HasIsActive() bool {
-	if o != nil && o.IsActive != nil {
+	if o != nil && !isNil(o.IsActive) {
 		return true
 	}
 
@@ -181,7 +181,7 @@ func (o *ResourceUpdateRequest) SetIsActive(v bool) {
 
 // GetIsDeleted returns the IsDeleted field value if set, zero value otherwise.
 func (o *ResourceUpdateRequest) GetIsDeleted() bool {
-	if o == nil || o.IsDeleted == nil {
+	if o == nil || isNil(o.IsDeleted) {
 		var ret bool
 		return ret
 	}
@@ -191,15 +191,15 @@ func (o *ResourceUpdateRequest) GetIsDeleted() bool {
 // GetIsDeletedOk returns a tuple with the IsDeleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourceUpdateRequest) GetIsDeletedOk() (*bool, bool) {
-	if o == nil || o.IsDeleted == nil {
-		return nil, false
+	if o == nil || isNil(o.IsDeleted) {
+    return nil, false
 	}
 	return o.IsDeleted, true
 }
 
 // HasIsDeleted returns a boolean if a field has been set.
 func (o *ResourceUpdateRequest) HasIsDeleted() bool {
-	if o != nil && o.IsDeleted != nil {
+	if o != nil && !isNil(o.IsDeleted) {
 		return true
 	}
 
@@ -213,7 +213,7 @@ func (o *ResourceUpdateRequest) SetIsDeleted(v bool) {
 
 // GetResourcePathFormatted returns the ResourcePathFormatted field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceUpdateRequest) GetResourcePathFormatted() string {
-	if o == nil || o.ResourcePathFormatted.Get() == nil {
+	if o == nil || isNil(o.ResourcePathFormatted.Get()) {
 		var ret string
 		return ret
 	}
@@ -225,7 +225,7 @@ func (o *ResourceUpdateRequest) GetResourcePathFormatted() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceUpdateRequest) GetResourcePathFormattedOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.ResourcePathFormatted.Get(), o.ResourcePathFormatted.IsSet()
 }
@@ -255,7 +255,7 @@ func (o *ResourceUpdateRequest) UnsetResourcePathFormatted() {
 
 // GetAttributePath returns the AttributePath field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceUpdateRequest) GetAttributePath() string {
-	if o == nil || o.AttributePath.Get() == nil {
+	if o == nil || isNil(o.AttributePath.Get()) {
 		var ret string
 		return ret
 	}
@@ -267,7 +267,7 @@ func (o *ResourceUpdateRequest) GetAttributePath() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceUpdateRequest) GetAttributePathOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.AttributePath.Get(), o.AttributePath.IsSet()
 }
@@ -297,7 +297,7 @@ func (o *ResourceUpdateRequest) UnsetAttributePath() {
 
 // GetRequestParameter returns the RequestParameter field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceUpdateRequest) GetRequestParameter() string {
-	if o == nil || o.RequestParameter.Get() == nil {
+	if o == nil || isNil(o.RequestParameter.Get()) {
 		var ret string
 		return ret
 	}
@@ -309,7 +309,7 @@ func (o *ResourceUpdateRequest) GetRequestParameter() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourceUpdateRequest) GetRequestParameterOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.RequestParameter.Get(), o.RequestParameter.IsSet()
 }
@@ -339,19 +339,19 @@ func (o *ResourceUpdateRequest) UnsetRequestParameter() {
 
 func (o ResourceUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.ResourcePath != nil {
+	if !isNil(o.ResourcePath) {
 		toSerialize["resourcePath"] = o.ResourcePath
 	}
-	if o.AllowedHttpMethods != nil {
+	if !isNil(o.AllowedHttpMethods) {
 		toSerialize["allowedHttpMethods"] = o.AllowedHttpMethods
 	}
-	if o.IsActive != nil {
+	if !isNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.IsDeleted != nil {
+	if !isNil(o.IsDeleted) {
 		toSerialize["isDeleted"] = o.IsDeleted
 	}
 	if o.ResourcePathFormatted.IsSet() {

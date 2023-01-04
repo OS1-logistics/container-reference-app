@@ -38,7 +38,7 @@ func NewUserChangeLogResponseDataMetaWithDefaults() *UserChangeLogResponseDataMe
 
 // GetTotalElements returns the TotalElements field value if set, zero value otherwise.
 func (o *UserChangeLogResponseDataMeta) GetTotalElements() int64 {
-	if o == nil || o.TotalElements == nil {
+	if o == nil || isNil(o.TotalElements) {
 		var ret int64
 		return ret
 	}
@@ -48,15 +48,15 @@ func (o *UserChangeLogResponseDataMeta) GetTotalElements() int64 {
 // GetTotalElementsOk returns a tuple with the TotalElements field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserChangeLogResponseDataMeta) GetTotalElementsOk() (*int64, bool) {
-	if o == nil || o.TotalElements == nil {
-		return nil, false
+	if o == nil || isNil(o.TotalElements) {
+    return nil, false
 	}
 	return o.TotalElements, true
 }
 
 // HasTotalElements returns a boolean if a field has been set.
 func (o *UserChangeLogResponseDataMeta) HasTotalElements() bool {
-	if o != nil && o.TotalElements != nil {
+	if o != nil && !isNil(o.TotalElements) {
 		return true
 	}
 
@@ -70,7 +70,7 @@ func (o *UserChangeLogResponseDataMeta) SetTotalElements(v int64) {
 
 func (o UserChangeLogResponseDataMeta) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TotalElements != nil {
+	if !isNil(o.TotalElements) {
 		toSerialize["totalElements"] = o.TotalElements
 	}
 	return json.Marshal(toSerialize)

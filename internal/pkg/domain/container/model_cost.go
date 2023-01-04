@@ -40,7 +40,7 @@ func NewCostWithDefaults() *Cost {
 
 // GetUnit returns the Unit field value if set, zero value otherwise.
 func (o *Cost) GetUnit() CostUnit {
-	if o == nil || o.Unit == nil {
+	if o == nil || isNil(o.Unit) {
 		var ret CostUnit
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *Cost) GetUnit() CostUnit {
 // GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Cost) GetUnitOk() (*CostUnit, bool) {
-	if o == nil || o.Unit == nil {
-		return nil, false
+	if o == nil || isNil(o.Unit) {
+    return nil, false
 	}
 	return o.Unit, true
 }
 
 // HasUnit returns a boolean if a field has been set.
 func (o *Cost) HasUnit() bool {
-	if o != nil && o.Unit != nil {
+	if o != nil && !isNil(o.Unit) {
 		return true
 	}
 
@@ -84,7 +84,7 @@ func (o *Cost) GetTotal() CostTotal {
 // and a boolean to check if the value has been set.
 func (o *Cost) GetTotalOk() (*CostTotal, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Total, true
 }
@@ -96,7 +96,7 @@ func (o *Cost) SetTotal(v CostTotal) {
 
 func (o Cost) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Unit != nil {
+	if !isNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
 	if true {

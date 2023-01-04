@@ -69,7 +69,7 @@ func (o *EventCreateRequest) GetDescription() string {
 // and a boolean to check if the value has been set.
 func (o *EventCreateRequest) GetDescriptionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Description, true
 }
@@ -81,7 +81,7 @@ func (o *EventCreateRequest) SetDescription(v string) {
 
 // GetEventType returns the EventType field value if set, zero value otherwise.
 func (o *EventCreateRequest) GetEventType() EventType {
-	if o == nil || o.EventType == nil {
+	if o == nil || isNil(o.EventType) {
 		var ret EventType
 		return ret
 	}
@@ -91,15 +91,15 @@ func (o *EventCreateRequest) GetEventType() EventType {
 // GetEventTypeOk returns a tuple with the EventType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventCreateRequest) GetEventTypeOk() (*EventType, bool) {
-	if o == nil || o.EventType == nil {
-		return nil, false
+	if o == nil || isNil(o.EventType) {
+    return nil, false
 	}
 	return o.EventType, true
 }
 
 // HasEventType returns a boolean if a field has been set.
 func (o *EventCreateRequest) HasEventType() bool {
-	if o != nil && o.EventType != nil {
+	if o != nil && !isNil(o.EventType) {
 		return true
 	}
 
@@ -113,7 +113,7 @@ func (o *EventCreateRequest) SetEventType(v EventType) {
 
 // GetReasonCodes returns the ReasonCodes field value if set, zero value otherwise.
 func (o *EventCreateRequest) GetReasonCodes() []string {
-	if o == nil || o.ReasonCodes == nil {
+	if o == nil || isNil(o.ReasonCodes) {
 		var ret []string
 		return ret
 	}
@@ -123,15 +123,15 @@ func (o *EventCreateRequest) GetReasonCodes() []string {
 // GetReasonCodesOk returns a tuple with the ReasonCodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventCreateRequest) GetReasonCodesOk() ([]string, bool) {
-	if o == nil || o.ReasonCodes == nil {
-		return nil, false
+	if o == nil || isNil(o.ReasonCodes) {
+    return nil, false
 	}
 	return o.ReasonCodes, true
 }
 
 // HasReasonCodes returns a boolean if a field has been set.
 func (o *EventCreateRequest) HasReasonCodes() bool {
-	if o != nil && o.ReasonCodes != nil {
+	if o != nil && !isNil(o.ReasonCodes) {
 		return true
 	}
 
@@ -145,7 +145,7 @@ func (o *EventCreateRequest) SetReasonCodes(v []string) {
 
 // GetContainerTypeNames returns the ContainerTypeNames field value if set, zero value otherwise.
 func (o *EventCreateRequest) GetContainerTypeNames() []string {
-	if o == nil || o.ContainerTypeNames == nil {
+	if o == nil || isNil(o.ContainerTypeNames) {
 		var ret []string
 		return ret
 	}
@@ -155,15 +155,15 @@ func (o *EventCreateRequest) GetContainerTypeNames() []string {
 // GetContainerTypeNamesOk returns a tuple with the ContainerTypeNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventCreateRequest) GetContainerTypeNamesOk() ([]string, bool) {
-	if o == nil || o.ContainerTypeNames == nil {
-		return nil, false
+	if o == nil || isNil(o.ContainerTypeNames) {
+    return nil, false
 	}
 	return o.ContainerTypeNames, true
 }
 
 // HasContainerTypeNames returns a boolean if a field has been set.
 func (o *EventCreateRequest) HasContainerTypeNames() bool {
-	if o != nil && o.ContainerTypeNames != nil {
+	if o != nil && !isNil(o.ContainerTypeNames) {
 		return true
 	}
 
@@ -177,7 +177,7 @@ func (o *EventCreateRequest) SetContainerTypeNames(v []string) {
 
 // GetIsEnabled returns the IsEnabled field value if set, zero value otherwise.
 func (o *EventCreateRequest) GetIsEnabled() bool {
-	if o == nil || o.IsEnabled == nil {
+	if o == nil || isNil(o.IsEnabled) {
 		var ret bool
 		return ret
 	}
@@ -187,15 +187,15 @@ func (o *EventCreateRequest) GetIsEnabled() bool {
 // GetIsEnabledOk returns a tuple with the IsEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventCreateRequest) GetIsEnabledOk() (*bool, bool) {
-	if o == nil || o.IsEnabled == nil {
-		return nil, false
+	if o == nil || isNil(o.IsEnabled) {
+    return nil, false
 	}
 	return o.IsEnabled, true
 }
 
 // HasIsEnabled returns a boolean if a field has been set.
 func (o *EventCreateRequest) HasIsEnabled() bool {
-	if o != nil && o.IsEnabled != nil {
+	if o != nil && !isNil(o.IsEnabled) {
 		return true
 	}
 
@@ -209,7 +209,7 @@ func (o *EventCreateRequest) SetIsEnabled(v bool) {
 
 // GetDataValidations returns the DataValidations field value if set, zero value otherwise.
 func (o *EventCreateRequest) GetDataValidations() []EventDataItem {
-	if o == nil || o.DataValidations == nil {
+	if o == nil || isNil(o.DataValidations) {
 		var ret []EventDataItem
 		return ret
 	}
@@ -219,15 +219,15 @@ func (o *EventCreateRequest) GetDataValidations() []EventDataItem {
 // GetDataValidationsOk returns a tuple with the DataValidations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventCreateRequest) GetDataValidationsOk() ([]EventDataItem, bool) {
-	if o == nil || o.DataValidations == nil {
-		return nil, false
+	if o == nil || isNil(o.DataValidations) {
+    return nil, false
 	}
 	return o.DataValidations, true
 }
 
 // HasDataValidations returns a boolean if a field has been set.
 func (o *EventCreateRequest) HasDataValidations() bool {
-	if o != nil && o.DataValidations != nil {
+	if o != nil && !isNil(o.DataValidations) {
 		return true
 	}
 
@@ -244,19 +244,19 @@ func (o EventCreateRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["description"] = o.Description
 	}
-	if o.EventType != nil {
+	if !isNil(o.EventType) {
 		toSerialize["eventType"] = o.EventType
 	}
-	if o.ReasonCodes != nil {
+	if !isNil(o.ReasonCodes) {
 		toSerialize["reasonCodes"] = o.ReasonCodes
 	}
-	if o.ContainerTypeNames != nil {
+	if !isNil(o.ContainerTypeNames) {
 		toSerialize["containerTypeNames"] = o.ContainerTypeNames
 	}
-	if o.IsEnabled != nil {
+	if !isNil(o.IsEnabled) {
 		toSerialize["isEnabled"] = o.IsEnabled
 	}
-	if o.DataValidations != nil {
+	if !isNil(o.DataValidations) {
 		toSerialize["dataValidations"] = o.DataValidations
 	}
 	return json.Marshal(toSerialize)

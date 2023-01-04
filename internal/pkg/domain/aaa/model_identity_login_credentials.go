@@ -61,7 +61,7 @@ func (o *IdentityLoginCredentials) GetClientId() string {
 // and a boolean to check if the value has been set.
 func (o *IdentityLoginCredentials) GetClientIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ClientId, true
 }
@@ -85,7 +85,7 @@ func (o *IdentityLoginCredentials) GetConnectionName() string {
 // and a boolean to check if the value has been set.
 func (o *IdentityLoginCredentials) GetConnectionNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ConnectionName, true
 }
@@ -109,7 +109,7 @@ func (o *IdentityLoginCredentials) GetRedirectUrl() string {
 // and a boolean to check if the value has been set.
 func (o *IdentityLoginCredentials) GetRedirectUrlOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.RedirectUrl, true
 }
@@ -133,7 +133,7 @@ func (o *IdentityLoginCredentials) GetState() string {
 // and a boolean to check if the value has been set.
 func (o *IdentityLoginCredentials) GetStateOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.State, true
 }

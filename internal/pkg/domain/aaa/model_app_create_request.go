@@ -66,7 +66,7 @@ func (o *AppCreateRequest) GetAppType() string {
 // and a boolean to check if the value has been set.
 func (o *AppCreateRequest) GetAppTypeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AppType, true
 }
@@ -90,7 +90,7 @@ func (o *AppCreateRequest) GetAppName() string {
 // and a boolean to check if the value has been set.
 func (o *AppCreateRequest) GetAppNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AppName, true
 }
@@ -102,7 +102,7 @@ func (o *AppCreateRequest) SetAppName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *AppCreateRequest) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -112,15 +112,15 @@ func (o *AppCreateRequest) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppCreateRequest) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *AppCreateRequest) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -134,7 +134,7 @@ func (o *AppCreateRequest) SetDescription(v string) {
 
 // GetIsPrivateApp returns the IsPrivateApp field value if set, zero value otherwise.
 func (o *AppCreateRequest) GetIsPrivateApp() bool {
-	if o == nil || o.IsPrivateApp == nil {
+	if o == nil || isNil(o.IsPrivateApp) {
 		var ret bool
 		return ret
 	}
@@ -144,15 +144,15 @@ func (o *AppCreateRequest) GetIsPrivateApp() bool {
 // GetIsPrivateAppOk returns a tuple with the IsPrivateApp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppCreateRequest) GetIsPrivateAppOk() (*bool, bool) {
-	if o == nil || o.IsPrivateApp == nil {
-		return nil, false
+	if o == nil || isNil(o.IsPrivateApp) {
+    return nil, false
 	}
 	return o.IsPrivateApp, true
 }
 
 // HasIsPrivateApp returns a boolean if a field has been set.
 func (o *AppCreateRequest) HasIsPrivateApp() bool {
-	if o != nil && o.IsPrivateApp != nil {
+	if o != nil && !isNil(o.IsPrivateApp) {
 		return true
 	}
 
@@ -166,7 +166,7 @@ func (o *AppCreateRequest) SetIsPrivateApp(v bool) {
 
 // GetPrivateTenantId returns the PrivateTenantId field value if set, zero value otherwise.
 func (o *AppCreateRequest) GetPrivateTenantId() string {
-	if o == nil || o.PrivateTenantId == nil {
+	if o == nil || isNil(o.PrivateTenantId) {
 		var ret string
 		return ret
 	}
@@ -176,15 +176,15 @@ func (o *AppCreateRequest) GetPrivateTenantId() string {
 // GetPrivateTenantIdOk returns a tuple with the PrivateTenantId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppCreateRequest) GetPrivateTenantIdOk() (*string, bool) {
-	if o == nil || o.PrivateTenantId == nil {
-		return nil, false
+	if o == nil || isNil(o.PrivateTenantId) {
+    return nil, false
 	}
 	return o.PrivateTenantId, true
 }
 
 // HasPrivateTenantId returns a boolean if a field has been set.
 func (o *AppCreateRequest) HasPrivateTenantId() bool {
-	if o != nil && o.PrivateTenantId != nil {
+	if o != nil && !isNil(o.PrivateTenantId) {
 		return true
 	}
 
@@ -198,7 +198,7 @@ func (o *AppCreateRequest) SetPrivateTenantId(v string) {
 
 // GetRedirectUri returns the RedirectUri field value if set, zero value otherwise.
 func (o *AppCreateRequest) GetRedirectUri() []string {
-	if o == nil || o.RedirectUri == nil {
+	if o == nil || isNil(o.RedirectUri) {
 		var ret []string
 		return ret
 	}
@@ -208,15 +208,15 @@ func (o *AppCreateRequest) GetRedirectUri() []string {
 // GetRedirectUriOk returns a tuple with the RedirectUri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppCreateRequest) GetRedirectUriOk() ([]string, bool) {
-	if o == nil || o.RedirectUri == nil {
-		return nil, false
+	if o == nil || isNil(o.RedirectUri) {
+    return nil, false
 	}
 	return o.RedirectUri, true
 }
 
 // HasRedirectUri returns a boolean if a field has been set.
 func (o *AppCreateRequest) HasRedirectUri() bool {
-	if o != nil && o.RedirectUri != nil {
+	if o != nil && !isNil(o.RedirectUri) {
 		return true
 	}
 
@@ -230,7 +230,7 @@ func (o *AppCreateRequest) SetRedirectUri(v []string) {
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
 func (o *AppCreateRequest) GetClientId() string {
-	if o == nil || o.ClientId == nil {
+	if o == nil || isNil(o.ClientId) {
 		var ret string
 		return ret
 	}
@@ -240,15 +240,15 @@ func (o *AppCreateRequest) GetClientId() string {
 // GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppCreateRequest) GetClientIdOk() (*string, bool) {
-	if o == nil || o.ClientId == nil {
-		return nil, false
+	if o == nil || isNil(o.ClientId) {
+    return nil, false
 	}
 	return o.ClientId, true
 }
 
 // HasClientId returns a boolean if a field has been set.
 func (o *AppCreateRequest) HasClientId() bool {
-	if o != nil && o.ClientId != nil {
+	if o != nil && !isNil(o.ClientId) {
 		return true
 	}
 
@@ -262,7 +262,7 @@ func (o *AppCreateRequest) SetClientId(v string) {
 
 // GetClientSecret returns the ClientSecret field value if set, zero value otherwise.
 func (o *AppCreateRequest) GetClientSecret() AppCreateRequestClientSecret {
-	if o == nil || o.ClientSecret == nil {
+	if o == nil || isNil(o.ClientSecret) {
 		var ret AppCreateRequestClientSecret
 		return ret
 	}
@@ -272,15 +272,15 @@ func (o *AppCreateRequest) GetClientSecret() AppCreateRequestClientSecret {
 // GetClientSecretOk returns a tuple with the ClientSecret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppCreateRequest) GetClientSecretOk() (*AppCreateRequestClientSecret, bool) {
-	if o == nil || o.ClientSecret == nil {
-		return nil, false
+	if o == nil || isNil(o.ClientSecret) {
+    return nil, false
 	}
 	return o.ClientSecret, true
 }
 
 // HasClientSecret returns a boolean if a field has been set.
 func (o *AppCreateRequest) HasClientSecret() bool {
-	if o != nil && o.ClientSecret != nil {
+	if o != nil && !isNil(o.ClientSecret) {
 		return true
 	}
 
@@ -300,22 +300,22 @@ func (o AppCreateRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["appName"] = o.AppName
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.IsPrivateApp != nil {
+	if !isNil(o.IsPrivateApp) {
 		toSerialize["isPrivateApp"] = o.IsPrivateApp
 	}
-	if o.PrivateTenantId != nil {
+	if !isNil(o.PrivateTenantId) {
 		toSerialize["privateTenantId"] = o.PrivateTenantId
 	}
-	if o.RedirectUri != nil {
+	if !isNil(o.RedirectUri) {
 		toSerialize["redirectUri"] = o.RedirectUri
 	}
-	if o.ClientId != nil {
+	if !isNil(o.ClientId) {
 		toSerialize["clientId"] = o.ClientId
 	}
-	if o.ClientSecret != nil {
+	if !isNil(o.ClientSecret) {
 		toSerialize["clientSecret"] = o.ClientSecret
 	}
 	return json.Marshal(toSerialize)

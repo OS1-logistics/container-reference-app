@@ -7,19 +7,19 @@ import (
 )
 
 type ServerV1 struct {
-	bag      service.BagServiceInterface
-	shipment service.ShipmentServiceInterface
+	bagcsa     service.BagServiceInterface
+	packagecsa service.PackageServiceInterface
 }
 
 func NewServerV1() ServerV1 {
 	return ServerV1{
-		bag:      service.NewBagService(),
-		shipment: service.NewShipmentService(),
+		bagcsa:     service.NewBagService(),
+		packagecsa: service.NewPackageService(),
 	}
 }
 
 func (s ServerV1) GetBags(c *gin.Context, params GetBagsParams) {
-	s.bag.GetBags()
+	s.bagcsa.GetBags()
 	c.JSON(200, gin.H{"message": "ok"})
 }
 func (s ServerV1) CreateBag(c *gin.Context, params CreateBagParams) {
@@ -58,43 +58,43 @@ func (s ServerV1) UpdateBagState(c *gin.Context, bagId string, params UpdateBagS
 func (s ServerV1) UnsealBag(c *gin.Context, bagId string, params UnsealBagParams) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
-func (s ServerV1) GetShipments(c *gin.Context, params GetShipmentsParams) {
-	s.shipment.GetShipments()
+func (s ServerV1) GetPackages(c *gin.Context, params GetPackagesParams) {
+	s.packagecsa.GetPackages()
 	c.JSON(200, gin.H{"message": "ok"})
 }
-func (s ServerV1) CreateShipment(c *gin.Context, params CreateShipmentParams) {
+func (s ServerV1) CreatePackage(c *gin.Context, params CreatePackageParams) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
-func (s ServerV1) UpdateShipmentbyClient(c *gin.Context, shipmentId string, params UpdateShipmentbyClientParams) {
+func (s ServerV1) UpdatePackagebyClient(c *gin.Context, packageId string, params UpdatePackagebyClientParams) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
-func (s ServerV1) GetShipmentAttributes(c *gin.Context, params GetShipmentAttributesParams) {
+func (s ServerV1) GetPackageAttributes(c *gin.Context, params GetPackageAttributesParams) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
-func (s ServerV1) UpdateShipmentAttribute(c *gin.Context, params UpdateShipmentAttributeParams) {
+func (s ServerV1) UpdatePackageAttribute(c *gin.Context, params UpdatePackageAttributeParams) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
-func (s ServerV1) GetShipmentStateTemplateConfig(c *gin.Context) {
+func (s ServerV1) GetPackageStateTemplateConfig(c *gin.Context) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
-func (s ServerV1) PutShipmentStateTemplateConfig(c *gin.Context) {
+func (s ServerV1) PutPackageStateTemplateConfig(c *gin.Context) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
 func (s ServerV1) Containerize(c *gin.Context, containerId string, params ContainerizeParams) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
-func (s ServerV1) ReopenShipment(c *gin.Context, shipmentId string, params ReopenShipmentParams) {
+func (s ServerV1) ReopenPackage(c *gin.Context, packageId string, params ReopenPackageParams) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
-func (s ServerV1) GetShipment(c *gin.Context, shipmentId string, params GetShipmentParams) {
+func (s ServerV1) GetPackage(c *gin.Context, packageId string, params GetPackageParams) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
-func (s ServerV1) UpdateShipment(c *gin.Context, shipmentId string, params UpdateShipmentParams) {
+func (s ServerV1) UpdatePackage(c *gin.Context, packageId string, params UpdatePackageParams) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
-func (s ServerV1) GetShipmentState(c *gin.Context, shipmentId string, params GetShipmentStateParams) {
+func (s ServerV1) GetPackageState(c *gin.Context, packageId string, params GetPackageStateParams) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }
-func (s ServerV1) UpdateShipmentState(c *gin.Context, shipmentId string, params UpdateShipmentStateParams) {
+func (s ServerV1) UpdatePackageState(c *gin.Context, packageId string, params UpdatePackageStateParams) {
 	c.JSON(501, gin.H{"message": "Not Implemented"})
 }

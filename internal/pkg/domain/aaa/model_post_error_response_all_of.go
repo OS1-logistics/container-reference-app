@@ -38,7 +38,7 @@ func NewPostErrorResponseAllOfWithDefaults() *PostErrorResponseAllOf {
 
 // GetRequest returns the Request field value if set, zero value otherwise.
 func (o *PostErrorResponseAllOf) GetRequest() Request {
-	if o == nil || o.Request == nil {
+	if o == nil || isNil(o.Request) {
 		var ret Request
 		return ret
 	}
@@ -48,15 +48,15 @@ func (o *PostErrorResponseAllOf) GetRequest() Request {
 // GetRequestOk returns a tuple with the Request field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PostErrorResponseAllOf) GetRequestOk() (*Request, bool) {
-	if o == nil || o.Request == nil {
-		return nil, false
+	if o == nil || isNil(o.Request) {
+    return nil, false
 	}
 	return o.Request, true
 }
 
 // HasRequest returns a boolean if a field has been set.
 func (o *PostErrorResponseAllOf) HasRequest() bool {
-	if o != nil && o.Request != nil {
+	if o != nil && !isNil(o.Request) {
 		return true
 	}
 
@@ -70,7 +70,7 @@ func (o *PostErrorResponseAllOf) SetRequest(v Request) {
 
 func (o PostErrorResponseAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Request != nil {
+	if !isNil(o.Request) {
 		toSerialize["request"] = o.Request
 	}
 	return json.Marshal(toSerialize)

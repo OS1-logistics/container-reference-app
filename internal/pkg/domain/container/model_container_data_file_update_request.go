@@ -53,7 +53,7 @@ func (o *ContainerDataFileUpdateRequest) GetFile() *os.File {
 // and a boolean to check if the value has been set.
 func (o *ContainerDataFileUpdateRequest) GetFileOk() (**os.File, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.File, true
 }
@@ -65,7 +65,7 @@ func (o *ContainerDataFileUpdateRequest) SetFile(v *os.File) {
 
 // GetCallback returns the Callback field value if set, zero value otherwise.
 func (o *ContainerDataFileUpdateRequest) GetCallback() ContainerTypeUpdateRequestCallback {
-	if o == nil || o.Callback == nil {
+	if o == nil || isNil(o.Callback) {
 		var ret ContainerTypeUpdateRequestCallback
 		return ret
 	}
@@ -75,15 +75,15 @@ func (o *ContainerDataFileUpdateRequest) GetCallback() ContainerTypeUpdateReques
 // GetCallbackOk returns a tuple with the Callback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerDataFileUpdateRequest) GetCallbackOk() (*ContainerTypeUpdateRequestCallback, bool) {
-	if o == nil || o.Callback == nil {
-		return nil, false
+	if o == nil || isNil(o.Callback) {
+    return nil, false
 	}
 	return o.Callback, true
 }
 
 // HasCallback returns a boolean if a field has been set.
 func (o *ContainerDataFileUpdateRequest) HasCallback() bool {
-	if o != nil && o.Callback != nil {
+	if o != nil && !isNil(o.Callback) {
 		return true
 	}
 
@@ -100,7 +100,7 @@ func (o ContainerDataFileUpdateRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["file"] = o.File
 	}
-	if o.Callback != nil {
+	if !isNil(o.Callback) {
 		toSerialize["callback"] = o.Callback
 	}
 	return json.Marshal(toSerialize)

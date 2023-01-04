@@ -44,7 +44,7 @@ func NewContainerUpdateRequestWithDefaults() *ContainerUpdateRequest {
 
 // GetCallback returns the Callback field value if set, zero value otherwise.
 func (o *ContainerUpdateRequest) GetCallback() map[string]interface{} {
-	if o == nil || o.Callback == nil {
+	if o == nil || isNil(o.Callback) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -54,15 +54,15 @@ func (o *ContainerUpdateRequest) GetCallback() map[string]interface{} {
 // GetCallbackOk returns a tuple with the Callback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerUpdateRequest) GetCallbackOk() (*map[string]interface{}, bool) {
-	if o == nil || o.Callback == nil {
-		return nil, false
+	if o == nil || isNil(o.Callback) {
+    return nil, false
 	}
 	return o.Callback, true
 }
 
 // HasCallback returns a boolean if a field has been set.
 func (o *ContainerUpdateRequest) HasCallback() bool {
-	if o != nil && o.Callback != nil {
+	if o != nil && !isNil(o.Callback) {
 		return true
 	}
 
@@ -76,7 +76,7 @@ func (o *ContainerUpdateRequest) SetCallback(v map[string]interface{}) {
 
 // GetTrackingDetails returns the TrackingDetails field value if set, zero value otherwise.
 func (o *ContainerUpdateRequest) GetTrackingDetails() []ContainerUpdateAttributesTrackingDetailsInner {
-	if o == nil || o.TrackingDetails == nil {
+	if o == nil || isNil(o.TrackingDetails) {
 		var ret []ContainerUpdateAttributesTrackingDetailsInner
 		return ret
 	}
@@ -86,15 +86,15 @@ func (o *ContainerUpdateRequest) GetTrackingDetails() []ContainerUpdateAttribute
 // GetTrackingDetailsOk returns a tuple with the TrackingDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerUpdateRequest) GetTrackingDetailsOk() ([]ContainerUpdateAttributesTrackingDetailsInner, bool) {
-	if o == nil || o.TrackingDetails == nil {
-		return nil, false
+	if o == nil || isNil(o.TrackingDetails) {
+    return nil, false
 	}
 	return o.TrackingDetails, true
 }
 
 // HasTrackingDetails returns a boolean if a field has been set.
 func (o *ContainerUpdateRequest) HasTrackingDetails() bool {
-	if o != nil && o.TrackingDetails != nil {
+	if o != nil && !isNil(o.TrackingDetails) {
 		return true
 	}
 
@@ -108,7 +108,7 @@ func (o *ContainerUpdateRequest) SetTrackingDetails(v []ContainerUpdateAttribute
 
 // GetAttributes returns the Attributes field value if set, zero value otherwise.
 func (o *ContainerUpdateRequest) GetAttributes() map[string]interface{} {
-	if o == nil || o.Attributes == nil {
+	if o == nil || isNil(o.Attributes) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -118,15 +118,15 @@ func (o *ContainerUpdateRequest) GetAttributes() map[string]interface{} {
 // GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerUpdateRequest) GetAttributesOk() (map[string]interface{}, bool) {
-	if o == nil || o.Attributes == nil {
-		return nil, false
+	if o == nil || isNil(o.Attributes) {
+    return map[string]interface{}{}, false
 	}
 	return o.Attributes, true
 }
 
 // HasAttributes returns a boolean if a field has been set.
 func (o *ContainerUpdateRequest) HasAttributes() bool {
-	if o != nil && o.Attributes != nil {
+	if o != nil && !isNil(o.Attributes) {
 		return true
 	}
 
@@ -140,7 +140,7 @@ func (o *ContainerUpdateRequest) SetAttributes(v map[string]interface{}) {
 
 // GetItems returns the Items field value if set, zero value otherwise.
 func (o *ContainerUpdateRequest) GetItems() []Item {
-	if o == nil || o.Items == nil {
+	if o == nil || isNil(o.Items) {
 		var ret []Item
 		return ret
 	}
@@ -150,15 +150,15 @@ func (o *ContainerUpdateRequest) GetItems() []Item {
 // GetItemsOk returns a tuple with the Items field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerUpdateRequest) GetItemsOk() ([]Item, bool) {
-	if o == nil || o.Items == nil {
-		return nil, false
+	if o == nil || isNil(o.Items) {
+    return nil, false
 	}
 	return o.Items, true
 }
 
 // HasItems returns a boolean if a field has been set.
 func (o *ContainerUpdateRequest) HasItems() bool {
-	if o != nil && o.Items != nil {
+	if o != nil && !isNil(o.Items) {
 		return true
 	}
 
@@ -172,16 +172,16 @@ func (o *ContainerUpdateRequest) SetItems(v []Item) {
 
 func (o ContainerUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Callback != nil {
+	if !isNil(o.Callback) {
 		toSerialize["callback"] = o.Callback
 	}
-	if o.TrackingDetails != nil {
+	if !isNil(o.TrackingDetails) {
 		toSerialize["trackingDetails"] = o.TrackingDetails
 	}
-	if o.Attributes != nil {
+	if !isNil(o.Attributes) {
 		toSerialize["attributes"] = o.Attributes
 	}
-	if o.Items != nil {
+	if !isNil(o.Items) {
 		toSerialize["items"] = o.Items
 	}
 	return json.Marshal(toSerialize)

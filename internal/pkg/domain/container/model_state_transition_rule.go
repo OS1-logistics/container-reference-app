@@ -57,7 +57,7 @@ func (o *StateTransitionRule) GetEventCode() string {
 // and a boolean to check if the value has been set.
 func (o *StateTransitionRule) GetEventCodeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.EventCode, true
 }
@@ -81,7 +81,7 @@ func (o *StateTransitionRule) GetDestination() string {
 // and a boolean to check if the value has been set.
 func (o *StateTransitionRule) GetDestinationOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Destination, true
 }
@@ -93,7 +93,7 @@ func (o *StateTransitionRule) SetDestination(v string) {
 
 // GetReasonCode returns the ReasonCode field value if set, zero value otherwise.
 func (o *StateTransitionRule) GetReasonCode() string {
-	if o == nil || o.ReasonCode == nil {
+	if o == nil || isNil(o.ReasonCode) {
 		var ret string
 		return ret
 	}
@@ -103,15 +103,15 @@ func (o *StateTransitionRule) GetReasonCode() string {
 // GetReasonCodeOk returns a tuple with the ReasonCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StateTransitionRule) GetReasonCodeOk() (*string, bool) {
-	if o == nil || o.ReasonCode == nil {
-		return nil, false
+	if o == nil || isNil(o.ReasonCode) {
+    return nil, false
 	}
 	return o.ReasonCode, true
 }
 
 // HasReasonCode returns a boolean if a field has been set.
 func (o *StateTransitionRule) HasReasonCode() bool {
-	if o != nil && o.ReasonCode != nil {
+	if o != nil && !isNil(o.ReasonCode) {
 		return true
 	}
 
@@ -131,7 +131,7 @@ func (o StateTransitionRule) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["destination"] = o.Destination
 	}
-	if o.ReasonCode != nil {
+	if !isNil(o.ReasonCode) {
 		toSerialize["reasonCode"] = o.ReasonCode
 	}
 	return json.Marshal(toSerialize)

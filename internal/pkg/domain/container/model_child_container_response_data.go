@@ -40,7 +40,7 @@ func NewChildContainerResponseDataWithDefaults() *ChildContainerResponseData {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ChildContainerResponseData) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *ChildContainerResponseData) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ChildContainerResponseData) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
+	if o == nil || isNil(o.Id) {
+    return nil, false
 	}
 	return o.Id, true
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *ChildContainerResponseData) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *ChildContainerResponseData) SetId(v string) {
 
 // GetOperation returns the Operation field value if set, zero value otherwise.
 func (o *ChildContainerResponseData) GetOperation() Child {
-	if o == nil || o.Operation == nil {
+	if o == nil || isNil(o.Operation) {
 		var ret Child
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *ChildContainerResponseData) GetOperation() Child {
 // GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ChildContainerResponseData) GetOperationOk() (*Child, bool) {
-	if o == nil || o.Operation == nil {
-		return nil, false
+	if o == nil || isNil(o.Operation) {
+    return nil, false
 	}
 	return o.Operation, true
 }
 
 // HasOperation returns a boolean if a field has been set.
 func (o *ChildContainerResponseData) HasOperation() bool {
-	if o != nil && o.Operation != nil {
+	if o != nil && !isNil(o.Operation) {
 		return true
 	}
 
@@ -104,10 +104,10 @@ func (o *ChildContainerResponseData) SetOperation(v Child) {
 
 func (o ChildContainerResponseData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Operation != nil {
+	if !isNil(o.Operation) {
 		toSerialize["operation"] = o.Operation
 	}
 	return json.Marshal(toSerialize)

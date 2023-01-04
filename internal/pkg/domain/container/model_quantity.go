@@ -40,7 +40,7 @@ func NewQuantityWithDefaults() *Quantity {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *Quantity) GetValue() int32 {
-	if o == nil || o.Value == nil {
+	if o == nil || isNil(o.Value) {
 		var ret int32
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *Quantity) GetValue() int32 {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Quantity) GetValueOk() (*int32, bool) {
-	if o == nil || o.Value == nil {
-		return nil, false
+	if o == nil || isNil(o.Value) {
+    return nil, false
 	}
 	return o.Value, true
 }
 
 // HasValue returns a boolean if a field has been set.
 func (o *Quantity) HasValue() bool {
-	if o != nil && o.Value != nil {
+	if o != nil && !isNil(o.Value) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *Quantity) SetValue(v int32) {
 
 // GetUnit returns the Unit field value if set, zero value otherwise.
 func (o *Quantity) GetUnit() Unit {
-	if o == nil || o.Unit == nil {
+	if o == nil || isNil(o.Unit) {
 		var ret Unit
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *Quantity) GetUnit() Unit {
 // GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Quantity) GetUnitOk() (*Unit, bool) {
-	if o == nil || o.Unit == nil {
-		return nil, false
+	if o == nil || isNil(o.Unit) {
+    return nil, false
 	}
 	return o.Unit, true
 }
 
 // HasUnit returns a boolean if a field has been set.
 func (o *Quantity) HasUnit() bool {
-	if o != nil && o.Unit != nil {
+	if o != nil && !isNil(o.Unit) {
 		return true
 	}
 
@@ -104,10 +104,10 @@ func (o *Quantity) SetUnit(v Unit) {
 
 func (o Quantity) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Value != nil {
+	if !isNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
-	if o.Unit != nil {
+	if !isNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
 	return json.Marshal(toSerialize)

@@ -38,7 +38,7 @@ func NewContainerEventsWithDefaults() *ContainerEvents {
 
 // GetContainerId returns the ContainerId field value if set, zero value otherwise.
 func (o *ContainerEvents) GetContainerId() []string {
-	if o == nil || o.ContainerId == nil {
+	if o == nil || isNil(o.ContainerId) {
 		var ret []string
 		return ret
 	}
@@ -48,15 +48,15 @@ func (o *ContainerEvents) GetContainerId() []string {
 // GetContainerIdOk returns a tuple with the ContainerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerEvents) GetContainerIdOk() ([]string, bool) {
-	if o == nil || o.ContainerId == nil {
-		return nil, false
+	if o == nil || isNil(o.ContainerId) {
+    return nil, false
 	}
 	return o.ContainerId, true
 }
 
 // HasContainerId returns a boolean if a field has been set.
 func (o *ContainerEvents) HasContainerId() bool {
-	if o != nil && o.ContainerId != nil {
+	if o != nil && !isNil(o.ContainerId) {
 		return true
 	}
 
@@ -70,7 +70,7 @@ func (o *ContainerEvents) SetContainerId(v []string) {
 
 func (o ContainerEvents) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ContainerId != nil {
+	if !isNil(o.ContainerId) {
 		toSerialize["containerId"] = o.ContainerId
 	}
 	return json.Marshal(toSerialize)

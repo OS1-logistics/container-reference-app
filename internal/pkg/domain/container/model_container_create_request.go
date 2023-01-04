@@ -62,7 +62,7 @@ func NewContainerCreateRequestWithDefaults() *ContainerCreateRequest {
 
 // GetCallback returns the Callback field value if set, zero value otherwise.
 func (o *ContainerCreateRequest) GetCallback() map[string]interface{} {
-	if o == nil || o.Callback == nil {
+	if o == nil || isNil(o.Callback) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -72,15 +72,15 @@ func (o *ContainerCreateRequest) GetCallback() map[string]interface{} {
 // GetCallbackOk returns a tuple with the Callback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateRequest) GetCallbackOk() (*map[string]interface{}, bool) {
-	if o == nil || o.Callback == nil {
-		return nil, false
+	if o == nil || isNil(o.Callback) {
+    return nil, false
 	}
 	return o.Callback, true
 }
 
 // HasCallback returns a boolean if a field has been set.
 func (o *ContainerCreateRequest) HasCallback() bool {
-	if o != nil && o.Callback != nil {
+	if o != nil && !isNil(o.Callback) {
 		return true
 	}
 
@@ -94,7 +94,7 @@ func (o *ContainerCreateRequest) SetCallback(v map[string]interface{}) {
 
 // GetTrackingDetails returns the TrackingDetails field value if set, zero value otherwise.
 func (o *ContainerCreateRequest) GetTrackingDetails() []ContainerCreateAttributesTrackingDetailsInner {
-	if o == nil || o.TrackingDetails == nil {
+	if o == nil || isNil(o.TrackingDetails) {
 		var ret []ContainerCreateAttributesTrackingDetailsInner
 		return ret
 	}
@@ -104,15 +104,15 @@ func (o *ContainerCreateRequest) GetTrackingDetails() []ContainerCreateAttribute
 // GetTrackingDetailsOk returns a tuple with the TrackingDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateRequest) GetTrackingDetailsOk() ([]ContainerCreateAttributesTrackingDetailsInner, bool) {
-	if o == nil || o.TrackingDetails == nil {
-		return nil, false
+	if o == nil || isNil(o.TrackingDetails) {
+    return nil, false
 	}
 	return o.TrackingDetails, true
 }
 
 // HasTrackingDetails returns a boolean if a field has been set.
 func (o *ContainerCreateRequest) HasTrackingDetails() bool {
-	if o != nil && o.TrackingDetails != nil {
+	if o != nil && !isNil(o.TrackingDetails) {
 		return true
 	}
 
@@ -126,7 +126,7 @@ func (o *ContainerCreateRequest) SetTrackingDetails(v []ContainerCreateAttribute
 
 // GetAttributes returns the Attributes field value if set, zero value otherwise.
 func (o *ContainerCreateRequest) GetAttributes() map[string]interface{} {
-	if o == nil || o.Attributes == nil {
+	if o == nil || isNil(o.Attributes) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -136,15 +136,15 @@ func (o *ContainerCreateRequest) GetAttributes() map[string]interface{} {
 // GetAttributesOk returns a tuple with the Attributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateRequest) GetAttributesOk() (map[string]interface{}, bool) {
-	if o == nil || o.Attributes == nil {
-		return nil, false
+	if o == nil || isNil(o.Attributes) {
+    return map[string]interface{}{}, false
 	}
 	return o.Attributes, true
 }
 
 // HasAttributes returns a boolean if a field has been set.
 func (o *ContainerCreateRequest) HasAttributes() bool {
-	if o != nil && o.Attributes != nil {
+	if o != nil && !isNil(o.Attributes) {
 		return true
 	}
 
@@ -158,7 +158,7 @@ func (o *ContainerCreateRequest) SetAttributes(v map[string]interface{}) {
 
 // GetItems returns the Items field value if set, zero value otherwise.
 func (o *ContainerCreateRequest) GetItems() []Item {
-	if o == nil || o.Items == nil {
+	if o == nil || isNil(o.Items) {
 		var ret []Item
 		return ret
 	}
@@ -168,15 +168,15 @@ func (o *ContainerCreateRequest) GetItems() []Item {
 // GetItemsOk returns a tuple with the Items field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateRequest) GetItemsOk() ([]Item, bool) {
-	if o == nil || o.Items == nil {
-		return nil, false
+	if o == nil || isNil(o.Items) {
+    return nil, false
 	}
 	return o.Items, true
 }
 
 // HasItems returns a boolean if a field has been set.
 func (o *ContainerCreateRequest) HasItems() bool {
-	if o != nil && o.Items != nil {
+	if o != nil && !isNil(o.Items) {
 		return true
 	}
 
@@ -190,7 +190,7 @@ func (o *ContainerCreateRequest) SetItems(v []Item) {
 
 // GetIsHazmat returns the IsHazmat field value if set, zero value otherwise.
 func (o *ContainerCreateRequest) GetIsHazmat() bool {
-	if o == nil || o.IsHazmat == nil {
+	if o == nil || isNil(o.IsHazmat) {
 		var ret bool
 		return ret
 	}
@@ -200,15 +200,15 @@ func (o *ContainerCreateRequest) GetIsHazmat() bool {
 // GetIsHazmatOk returns a tuple with the IsHazmat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateRequest) GetIsHazmatOk() (*bool, bool) {
-	if o == nil || o.IsHazmat == nil {
-		return nil, false
+	if o == nil || isNil(o.IsHazmat) {
+    return nil, false
 	}
 	return o.IsHazmat, true
 }
 
 // HasIsHazmat returns a boolean if a field has been set.
 func (o *ContainerCreateRequest) HasIsHazmat() bool {
-	if o != nil && o.IsHazmat != nil {
+	if o != nil && !isNil(o.IsHazmat) {
 		return true
 	}
 
@@ -222,7 +222,7 @@ func (o *ContainerCreateRequest) SetIsHazmat(v bool) {
 
 // GetIsContainerizable returns the IsContainerizable field value if set, zero value otherwise.
 func (o *ContainerCreateRequest) GetIsContainerizable() bool {
-	if o == nil || o.IsContainerizable == nil {
+	if o == nil || isNil(o.IsContainerizable) {
 		var ret bool
 		return ret
 	}
@@ -232,15 +232,15 @@ func (o *ContainerCreateRequest) GetIsContainerizable() bool {
 // GetIsContainerizableOk returns a tuple with the IsContainerizable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateRequest) GetIsContainerizableOk() (*bool, bool) {
-	if o == nil || o.IsContainerizable == nil {
-		return nil, false
+	if o == nil || isNil(o.IsContainerizable) {
+    return nil, false
 	}
 	return o.IsContainerizable, true
 }
 
 // HasIsContainerizable returns a boolean if a field has been set.
 func (o *ContainerCreateRequest) HasIsContainerizable() bool {
-	if o != nil && o.IsContainerizable != nil {
+	if o != nil && !isNil(o.IsContainerizable) {
 		return true
 	}
 
@@ -254,7 +254,7 @@ func (o *ContainerCreateRequest) SetIsContainerizable(v bool) {
 
 // GetIsReusable returns the IsReusable field value if set, zero value otherwise.
 func (o *ContainerCreateRequest) GetIsReusable() bool {
-	if o == nil || o.IsReusable == nil {
+	if o == nil || isNil(o.IsReusable) {
 		var ret bool
 		return ret
 	}
@@ -264,15 +264,15 @@ func (o *ContainerCreateRequest) GetIsReusable() bool {
 // GetIsReusableOk returns a tuple with the IsReusable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreateRequest) GetIsReusableOk() (*bool, bool) {
-	if o == nil || o.IsReusable == nil {
-		return nil, false
+	if o == nil || isNil(o.IsReusable) {
+    return nil, false
 	}
 	return o.IsReusable, true
 }
 
 // HasIsReusable returns a boolean if a field has been set.
 func (o *ContainerCreateRequest) HasIsReusable() bool {
-	if o != nil && o.IsReusable != nil {
+	if o != nil && !isNil(o.IsReusable) {
 		return true
 	}
 
@@ -286,25 +286,25 @@ func (o *ContainerCreateRequest) SetIsReusable(v bool) {
 
 func (o ContainerCreateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Callback != nil {
+	if !isNil(o.Callback) {
 		toSerialize["callback"] = o.Callback
 	}
-	if o.TrackingDetails != nil {
+	if !isNil(o.TrackingDetails) {
 		toSerialize["trackingDetails"] = o.TrackingDetails
 	}
-	if o.Attributes != nil {
+	if !isNil(o.Attributes) {
 		toSerialize["attributes"] = o.Attributes
 	}
-	if o.Items != nil {
+	if !isNil(o.Items) {
 		toSerialize["items"] = o.Items
 	}
-	if o.IsHazmat != nil {
+	if !isNil(o.IsHazmat) {
 		toSerialize["isHazmat"] = o.IsHazmat
 	}
-	if o.IsContainerizable != nil {
+	if !isNil(o.IsContainerizable) {
 		toSerialize["isContainerizable"] = o.IsContainerizable
 	}
-	if o.IsReusable != nil {
+	if !isNil(o.IsReusable) {
 		toSerialize["isReusable"] = o.IsReusable
 	}
 	return json.Marshal(toSerialize)

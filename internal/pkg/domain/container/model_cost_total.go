@@ -41,7 +41,7 @@ func NewCostTotalWithDefaults() *CostTotal {
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
 func (o *CostTotal) GetAmount() float32 {
-	if o == nil || o.Amount == nil {
+	if o == nil || isNil(o.Amount) {
 		var ret float32
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *CostTotal) GetAmount() float32 {
 // GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CostTotal) GetAmountOk() (*float32, bool) {
-	if o == nil || o.Amount == nil {
-		return nil, false
+	if o == nil || isNil(o.Amount) {
+    return nil, false
 	}
 	return o.Amount, true
 }
 
 // HasAmount returns a boolean if a field has been set.
 func (o *CostTotal) HasAmount() bool {
-	if o != nil && o.Amount != nil {
+	if o != nil && !isNil(o.Amount) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *CostTotal) SetAmount(v float32) {
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
 func (o *CostTotal) GetCurrency() string {
-	if o == nil || o.Currency == nil {
+	if o == nil || isNil(o.Currency) {
 		var ret string
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *CostTotal) GetCurrency() string {
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CostTotal) GetCurrencyOk() (*string, bool) {
-	if o == nil || o.Currency == nil {
-		return nil, false
+	if o == nil || isNil(o.Currency) {
+    return nil, false
 	}
 	return o.Currency, true
 }
 
 // HasCurrency returns a boolean if a field has been set.
 func (o *CostTotal) HasCurrency() bool {
-	if o != nil && o.Currency != nil {
+	if o != nil && !isNil(o.Currency) {
 		return true
 	}
 
@@ -105,10 +105,10 @@ func (o *CostTotal) SetCurrency(v string) {
 
 func (o CostTotal) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Amount != nil {
+	if !isNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
-	if o.Currency != nil {
+	if !isNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
 	return json.Marshal(toSerialize)

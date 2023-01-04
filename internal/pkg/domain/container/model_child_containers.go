@@ -38,7 +38,7 @@ func NewChildContainersWithDefaults() *ChildContainers {
 
 // GetChildContainerIDs returns the ChildContainerIDs field value if set, zero value otherwise.
 func (o *ChildContainers) GetChildContainerIDs() []string {
-	if o == nil || o.ChildContainerIDs == nil {
+	if o == nil || isNil(o.ChildContainerIDs) {
 		var ret []string
 		return ret
 	}
@@ -48,15 +48,15 @@ func (o *ChildContainers) GetChildContainerIDs() []string {
 // GetChildContainerIDsOk returns a tuple with the ChildContainerIDs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ChildContainers) GetChildContainerIDsOk() ([]string, bool) {
-	if o == nil || o.ChildContainerIDs == nil {
-		return nil, false
+	if o == nil || isNil(o.ChildContainerIDs) {
+    return nil, false
 	}
 	return o.ChildContainerIDs, true
 }
 
 // HasChildContainerIDs returns a boolean if a field has been set.
 func (o *ChildContainers) HasChildContainerIDs() bool {
-	if o != nil && o.ChildContainerIDs != nil {
+	if o != nil && !isNil(o.ChildContainerIDs) {
 		return true
 	}
 
@@ -70,7 +70,7 @@ func (o *ChildContainers) SetChildContainerIDs(v []string) {
 
 func (o ChildContainers) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ChildContainerIDs != nil {
+	if !isNil(o.ChildContainerIDs) {
 		toSerialize["childContainerIDs"] = o.ChildContainerIDs
 	}
 	return json.Marshal(toSerialize)

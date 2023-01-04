@@ -43,7 +43,7 @@ func NewSuccessConnectionResponseAllOfDataWithDefaults() *SuccessConnectionRespo
 
 // GetConnectionId returns the ConnectionId field value if set, zero value otherwise.
 func (o *SuccessConnectionResponseAllOfData) GetConnectionId() string {
-	if o == nil || o.ConnectionId == nil {
+	if o == nil || isNil(o.ConnectionId) {
 		var ret string
 		return ret
 	}
@@ -53,15 +53,15 @@ func (o *SuccessConnectionResponseAllOfData) GetConnectionId() string {
 // GetConnectionIdOk returns a tuple with the ConnectionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessConnectionResponseAllOfData) GetConnectionIdOk() (*string, bool) {
-	if o == nil || o.ConnectionId == nil {
-		return nil, false
+	if o == nil || isNil(o.ConnectionId) {
+    return nil, false
 	}
 	return o.ConnectionId, true
 }
 
 // HasConnectionId returns a boolean if a field has been set.
 func (o *SuccessConnectionResponseAllOfData) HasConnectionId() bool {
-	if o != nil && o.ConnectionId != nil {
+	if o != nil && !isNil(o.ConnectionId) {
 		return true
 	}
 
@@ -75,7 +75,7 @@ func (o *SuccessConnectionResponseAllOfData) SetConnectionId(v string) {
 
 // GetConnectionName returns the ConnectionName field value if set, zero value otherwise.
 func (o *SuccessConnectionResponseAllOfData) GetConnectionName() string {
-	if o == nil || o.ConnectionName == nil {
+	if o == nil || isNil(o.ConnectionName) {
 		var ret string
 		return ret
 	}
@@ -85,15 +85,15 @@ func (o *SuccessConnectionResponseAllOfData) GetConnectionName() string {
 // GetConnectionNameOk returns a tuple with the ConnectionName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessConnectionResponseAllOfData) GetConnectionNameOk() (*string, bool) {
-	if o == nil || o.ConnectionName == nil {
-		return nil, false
+	if o == nil || isNil(o.ConnectionName) {
+    return nil, false
 	}
 	return o.ConnectionName, true
 }
 
 // HasConnectionName returns a boolean if a field has been set.
 func (o *SuccessConnectionResponseAllOfData) HasConnectionName() bool {
-	if o != nil && o.ConnectionName != nil {
+	if o != nil && !isNil(o.ConnectionName) {
 		return true
 	}
 
@@ -107,7 +107,7 @@ func (o *SuccessConnectionResponseAllOfData) SetConnectionName(v string) {
 
 // GetConnectionType returns the ConnectionType field value if set, zero value otherwise.
 func (o *SuccessConnectionResponseAllOfData) GetConnectionType() string {
-	if o == nil || o.ConnectionType == nil {
+	if o == nil || isNil(o.ConnectionType) {
 		var ret string
 		return ret
 	}
@@ -117,15 +117,15 @@ func (o *SuccessConnectionResponseAllOfData) GetConnectionType() string {
 // GetConnectionTypeOk returns a tuple with the ConnectionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessConnectionResponseAllOfData) GetConnectionTypeOk() (*string, bool) {
-	if o == nil || o.ConnectionType == nil {
-		return nil, false
+	if o == nil || isNil(o.ConnectionType) {
+    return nil, false
 	}
 	return o.ConnectionType, true
 }
 
 // HasConnectionType returns a boolean if a field has been set.
 func (o *SuccessConnectionResponseAllOfData) HasConnectionType() bool {
-	if o != nil && o.ConnectionType != nil {
+	if o != nil && !isNil(o.ConnectionType) {
 		return true
 	}
 
@@ -139,13 +139,13 @@ func (o *SuccessConnectionResponseAllOfData) SetConnectionType(v string) {
 
 func (o SuccessConnectionResponseAllOfData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ConnectionId != nil {
+	if !isNil(o.ConnectionId) {
 		toSerialize["connectionId"] = o.ConnectionId
 	}
-	if o.ConnectionName != nil {
+	if !isNil(o.ConnectionName) {
 		toSerialize["connectionName"] = o.ConnectionName
 	}
-	if o.ConnectionType != nil {
+	if !isNil(o.ConnectionType) {
 		toSerialize["connectionType"] = o.ConnectionType
 	}
 	return json.Marshal(toSerialize)

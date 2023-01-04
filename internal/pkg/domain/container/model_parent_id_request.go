@@ -44,7 +44,7 @@ func NewParentIdRequestWithDefaults() *ParentIdRequest {
 
 // GetCallback returns the Callback field value if set, zero value otherwise.
 func (o *ParentIdRequest) GetCallback() map[string]interface{} {
-	if o == nil || o.Callback == nil {
+	if o == nil || isNil(o.Callback) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -54,15 +54,15 @@ func (o *ParentIdRequest) GetCallback() map[string]interface{} {
 // GetCallbackOk returns a tuple with the Callback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ParentIdRequest) GetCallbackOk() (*map[string]interface{}, bool) {
-	if o == nil || o.Callback == nil {
-		return nil, false
+	if o == nil || isNil(o.Callback) {
+    return nil, false
 	}
 	return o.Callback, true
 }
 
 // HasCallback returns a boolean if a field has been set.
 func (o *ParentIdRequest) HasCallback() bool {
-	if o != nil && o.Callback != nil {
+	if o != nil && !isNil(o.Callback) {
 		return true
 	}
 
@@ -88,7 +88,7 @@ func (o *ParentIdRequest) GetParentId() string {
 // and a boolean to check if the value has been set.
 func (o *ParentIdRequest) GetParentIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ParentId, true
 }
@@ -112,7 +112,7 @@ func (o *ParentIdRequest) GetAction() string {
 // and a boolean to check if the value has been set.
 func (o *ParentIdRequest) GetActionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Action, true
 }
@@ -124,7 +124,7 @@ func (o *ParentIdRequest) SetAction(v string) {
 
 func (o ParentIdRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Callback != nil {
+	if !isNil(o.Callback) {
 		toSerialize["callback"] = o.Callback
 	}
 	if true {

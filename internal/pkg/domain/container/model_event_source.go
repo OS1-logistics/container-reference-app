@@ -56,7 +56,7 @@ func (o *EventSource) GetAppId() string {
 // and a boolean to check if the value has been set.
 func (o *EventSource) GetAppIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AppId, true
 }
@@ -68,7 +68,7 @@ func (o *EventSource) SetAppId(v string) {
 
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *EventSource) GetUserId() string {
-	if o == nil || o.UserId == nil {
+	if o == nil || isNil(o.UserId) {
 		var ret string
 		return ret
 	}
@@ -78,15 +78,15 @@ func (o *EventSource) GetUserId() string {
 // GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventSource) GetUserIdOk() (*string, bool) {
-	if o == nil || o.UserId == nil {
-		return nil, false
+	if o == nil || isNil(o.UserId) {
+    return nil, false
 	}
 	return o.UserId, true
 }
 
 // HasUserId returns a boolean if a field has been set.
 func (o *EventSource) HasUserId() bool {
-	if o != nil && o.UserId != nil {
+	if o != nil && !isNil(o.UserId) {
 		return true
 	}
 
@@ -100,7 +100,7 @@ func (o *EventSource) SetUserId(v string) {
 
 // GetLocId returns the LocId field value if set, zero value otherwise.
 func (o *EventSource) GetLocId() string {
-	if o == nil || o.LocId == nil {
+	if o == nil || isNil(o.LocId) {
 		var ret string
 		return ret
 	}
@@ -110,15 +110,15 @@ func (o *EventSource) GetLocId() string {
 // GetLocIdOk returns a tuple with the LocId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventSource) GetLocIdOk() (*string, bool) {
-	if o == nil || o.LocId == nil {
-		return nil, false
+	if o == nil || isNil(o.LocId) {
+    return nil, false
 	}
 	return o.LocId, true
 }
 
 // HasLocId returns a boolean if a field has been set.
 func (o *EventSource) HasLocId() bool {
-	if o != nil && o.LocId != nil {
+	if o != nil && !isNil(o.LocId) {
 		return true
 	}
 
@@ -135,10 +135,10 @@ func (o EventSource) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["appId"] = o.AppId
 	}
-	if o.UserId != nil {
+	if !isNil(o.UserId) {
 		toSerialize["userId"] = o.UserId
 	}
-	if o.LocId != nil {
+	if !isNil(o.LocId) {
 		toSerialize["locId"] = o.LocId
 	}
 	return json.Marshal(toSerialize)

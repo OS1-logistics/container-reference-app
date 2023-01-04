@@ -38,7 +38,7 @@ func NewAppMutableDataAllOfWithDefaults() *AppMutableDataAllOf {
 
 // GetIsDeleted returns the IsDeleted field value if set, zero value otherwise.
 func (o *AppMutableDataAllOf) GetIsDeleted() bool {
-	if o == nil || o.IsDeleted == nil {
+	if o == nil || isNil(o.IsDeleted) {
 		var ret bool
 		return ret
 	}
@@ -48,15 +48,15 @@ func (o *AppMutableDataAllOf) GetIsDeleted() bool {
 // GetIsDeletedOk returns a tuple with the IsDeleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppMutableDataAllOf) GetIsDeletedOk() (*bool, bool) {
-	if o == nil || o.IsDeleted == nil {
-		return nil, false
+	if o == nil || isNil(o.IsDeleted) {
+    return nil, false
 	}
 	return o.IsDeleted, true
 }
 
 // HasIsDeleted returns a boolean if a field has been set.
 func (o *AppMutableDataAllOf) HasIsDeleted() bool {
-	if o != nil && o.IsDeleted != nil {
+	if o != nil && !isNil(o.IsDeleted) {
 		return true
 	}
 
@@ -70,7 +70,7 @@ func (o *AppMutableDataAllOf) SetIsDeleted(v bool) {
 
 func (o AppMutableDataAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.IsDeleted != nil {
+	if !isNil(o.IsDeleted) {
 		toSerialize["isDeleted"] = o.IsDeleted
 	}
 	return json.Marshal(toSerialize)

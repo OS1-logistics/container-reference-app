@@ -39,7 +39,7 @@ func NewRoleResponseAllOfWithDefaults() *RoleResponseAllOf {
 
 // GetCanGrantToApps returns the CanGrantToApps field value if set, zero value otherwise.
 func (o *RoleResponseAllOf) GetCanGrantToApps() bool {
-	if o == nil || o.CanGrantToApps == nil {
+	if o == nil || isNil(o.CanGrantToApps) {
 		var ret bool
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *RoleResponseAllOf) GetCanGrantToApps() bool {
 // GetCanGrantToAppsOk returns a tuple with the CanGrantToApps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleResponseAllOf) GetCanGrantToAppsOk() (*bool, bool) {
-	if o == nil || o.CanGrantToApps == nil {
-		return nil, false
+	if o == nil || isNil(o.CanGrantToApps) {
+    return nil, false
 	}
 	return o.CanGrantToApps, true
 }
 
 // HasCanGrantToApps returns a boolean if a field has been set.
 func (o *RoleResponseAllOf) HasCanGrantToApps() bool {
-	if o != nil && o.CanGrantToApps != nil {
+	if o != nil && !isNil(o.CanGrantToApps) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *RoleResponseAllOf) SetCanGrantToApps(v bool) {
 
 func (o RoleResponseAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.CanGrantToApps != nil {
+	if !isNil(o.CanGrantToApps) {
 		toSerialize["canGrantToApps"] = o.CanGrantToApps
 	}
 	return json.Marshal(toSerialize)

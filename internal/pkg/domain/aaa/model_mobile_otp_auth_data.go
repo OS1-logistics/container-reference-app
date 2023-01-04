@@ -41,7 +41,7 @@ func NewMobileOTPAuthDataWithDefaults() *MobileOTPAuthData {
 
 // GetMobile returns the Mobile field value if set, zero value otherwise.
 func (o *MobileOTPAuthData) GetMobile() MobileNumber {
-	if o == nil || o.Mobile == nil {
+	if o == nil || isNil(o.Mobile) {
 		var ret MobileNumber
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *MobileOTPAuthData) GetMobile() MobileNumber {
 // GetMobileOk returns a tuple with the Mobile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MobileOTPAuthData) GetMobileOk() (*MobileNumber, bool) {
-	if o == nil || o.Mobile == nil {
-		return nil, false
+	if o == nil || isNil(o.Mobile) {
+    return nil, false
 	}
 	return o.Mobile, true
 }
 
 // HasMobile returns a boolean if a field has been set.
 func (o *MobileOTPAuthData) HasMobile() bool {
-	if o != nil && o.Mobile != nil {
+	if o != nil && !isNil(o.Mobile) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *MobileOTPAuthData) SetMobile(v MobileNumber) {
 
 // GetOtp returns the Otp field value if set, zero value otherwise.
 func (o *MobileOTPAuthData) GetOtp() string {
-	if o == nil || o.Otp == nil {
+	if o == nil || isNil(o.Otp) {
 		var ret string
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *MobileOTPAuthData) GetOtp() string {
 // GetOtpOk returns a tuple with the Otp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MobileOTPAuthData) GetOtpOk() (*string, bool) {
-	if o == nil || o.Otp == nil {
-		return nil, false
+	if o == nil || isNil(o.Otp) {
+    return nil, false
 	}
 	return o.Otp, true
 }
 
 // HasOtp returns a boolean if a field has been set.
 func (o *MobileOTPAuthData) HasOtp() bool {
-	if o != nil && o.Otp != nil {
+	if o != nil && !isNil(o.Otp) {
 		return true
 	}
 
@@ -117,7 +117,7 @@ func (o *MobileOTPAuthData) GetAudience() string {
 // and a boolean to check if the value has been set.
 func (o *MobileOTPAuthData) GetAudienceOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Audience, true
 }
@@ -129,10 +129,10 @@ func (o *MobileOTPAuthData) SetAudience(v string) {
 
 func (o MobileOTPAuthData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Mobile != nil {
+	if !isNil(o.Mobile) {
 		toSerialize["mobile"] = o.Mobile
 	}
-	if o.Otp != nil {
+	if !isNil(o.Otp) {
 		toSerialize["otp"] = o.Otp
 	}
 	if true {

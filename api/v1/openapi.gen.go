@@ -37,20 +37,20 @@ const (
 
 // Defines values for Type.
 const (
-	TypeBag      Type = "bag"
-	TypeShipment Type = "shipment"
+	TypeBag     Type = "bag"
+	TypePackage Type = "package"
 )
 
 // Defines values for UpdateAttributeParamsType.
 const (
-	UpdateAttributeParamsTypeBag      UpdateAttributeParamsType = "bag"
-	UpdateAttributeParamsTypeShipment UpdateAttributeParamsType = "shipment"
+	UpdateAttributeParamsTypeBag     UpdateAttributeParamsType = "bag"
+	UpdateAttributeParamsTypePackage UpdateAttributeParamsType = "package"
 )
 
-// Defines values for UpdateShipmentAttributeParamsType.
+// Defines values for UpdatePackageAttributeParamsType.
 const (
-	Bag      UpdateShipmentAttributeParamsType = "bag"
-	Shipment UpdateShipmentAttributeParamsType = "shipment"
+	Bag     UpdatePackageAttributeParamsType = "bag"
+	Package UpdatePackageAttributeParamsType = "package"
 )
 
 // ActionBy defines model for ActionBy.
@@ -139,14 +139,14 @@ type BagSystemSchema struct {
 	// CreatedAt Timestamp of when the bag was created. Represents a date time as number of seconds elapsed since 00:00Hrs of 1st January 1970 UTC.
 	CreatedAt *int `json:"createdAt,omitempty"`
 
-	// CurrentLocation current location of the shipment
+	// CurrentLocation current location of the package
 	CurrentLocation *string `json:"currentLocation,omitempty"`
 	Id              *string `json:"id,omitempty"`
 	Mot             *string `json:"mot,omitempty"`
 	MoveTogether    *bool   `json:"moveTogether,omitempty"`
 	Ntc             *string `json:"ntc,omitempty"`
+	PackageFlow     *string `json:"packageFlow,omitempty"`
 	ProductType     *string `json:"productType,omitempty"`
-	ShipmentFlow    *string `json:"shipmentFlow,omitempty"`
 	Sot             *string `json:"sot,omitempty"`
 
 	// Status Status of the bag
@@ -329,6 +329,84 @@ type EventSchema struct {
 // Method HTTP method requested on the API endpoint
 type Method string
 
+// PackageBaseSchema defines model for PackageBase.
+type PackageBaseSchema struct {
+	PackageReadOnlySchema *PackageReadOnlySchema `json:"attributes,omitempty"`
+
+	// IsContainerizable Defines whether container can be put into other containers or not.
+	IsContainerizable *bool `json:"isContainerizable,omitempty"`
+
+	// IsHazmat Represents whether this container can contain hazardous materials or not
+	IsHazmat *bool `json:"isHazmat,omitempty"`
+}
+
+// PackageCoreSchema defines model for PackageCore.
+type PackageCoreSchema struct {
+	// TrackingDetails Status of the package
+	TrackingDetails *[]TrackingDetailSchema `json:"trackingDetails,omitempty"`
+}
+
+// PackageCreateRequestSchema defines model for PackageCreateRequest.
+type PackageCreateRequestSchema struct {
+	PackageReadOnlySchema *PackageReadOnlySchema `json:"attributes,omitempty"`
+
+	// IsContainerizable Defines whether container can be put into other containers or not.
+	IsContainerizable *bool `json:"isContainerizable,omitempty"`
+
+	// IsHazmat Represents whether this container can contain hazardous materials or not
+	IsHazmat *bool `json:"isHazmat,omitempty"`
+
+	// TrackingDetails Status of the package
+	TrackingDetails *[]TrackingDetailSchema `json:"trackingDetails,omitempty"`
+}
+
+// PackageReadOnlySchema defines model for PackageReadOnly.
+type PackageReadOnlySchema struct {
+	Amount struct {
+		// CurrencyCode Country code
+		CurrencyCode *string `json:"currencyCode,omitempty"`
+
+		// MinorUnit Minor unit of currency
+		MinorUnit *float32 `json:"minorUnit,omitempty"`
+		Value     *float32 `json:"value,omitempty"`
+	} `json:"amount"`
+	ClientContainerId string  `json:"clientContainerId"`
+	ClientId          *string `json:"clientId,omitempty"`
+	Description       string  `json:"description"`
+
+	// Dimensions Size of the package
+	Dimensions *struct {
+		Breadth *float32 `json:"breadth,omitempty"`
+		Height  *float32 `json:"height,omitempty"`
+		Length  *float32 `json:"length,omitempty"`
+
+		// Weight Dead weight of the package
+		Weight *float32 `json:"weight,omitempty"`
+	} `json:"dimensions,omitempty"`
+
+	// LsId Ls id of the container
+	LsId            string  `json:"lsId"`
+	MaxAttemptCount float32 `json:"maxAttemptCount"`
+	ScanLocation    *string `json:"scanLocation,omitempty"`
+}
+
+// PackageUpdateRequestSchema defines model for PackageUpdateRequest.
+type PackageUpdateRequestSchema struct {
+	Attributes *struct {
+		PackageReadOnlySchema *PackageReadOnlySchema `json:"attributes,omitempty"`
+
+		// IsContainerizable Defines whether container can be put into other containers or not.
+		IsContainerizable *bool `json:"isContainerizable,omitempty"`
+
+		// IsHazmat Represents whether this container can contain hazardous materials or not
+		IsHazmat *bool `json:"isHazmat,omitempty"`
+
+		// TrackingDetails Status of the package
+		TrackingDetails *[]TrackingDetailSchema `json:"trackingDetails,omitempty"`
+	} `json:"attributes,omitempty"`
+	Event *EventSchema `json:"event,omitempty"`
+}
+
 // RangeSchema Minimum & maximum values if data type is number. Minimum and maximum length if data type is string
 type RangeSchema struct {
 	Max *float32 `json:"max,omitempty"`
@@ -343,84 +421,6 @@ type RequestSchema struct {
 	Method      *Method `json:"method,omitempty"`
 	QueryString *string `json:"queryString,omitempty"`
 	Uri         *string `json:"uri,omitempty"`
-}
-
-// ShipmentBaseSchema defines model for ShipmentBase.
-type ShipmentBaseSchema struct {
-	ShipmentReadOnlySchema *ShipmentReadOnlySchema `json:"attributes,omitempty"`
-
-	// IsContainerizable Defines whether container can be put into other containers or not.
-	IsContainerizable *bool `json:"isContainerizable,omitempty"`
-
-	// IsHazmat Represents whether this container can contain hazardous materials or not
-	IsHazmat *bool `json:"isHazmat,omitempty"`
-}
-
-// ShipmentCoreSchema defines model for ShipmentCore.
-type ShipmentCoreSchema struct {
-	// TrackingDetails Status of the shipment
-	TrackingDetails *[]TrackingDetailSchema `json:"trackingDetails,omitempty"`
-}
-
-// ShipmentCreateRequestSchema defines model for ShipmentCreateRequest.
-type ShipmentCreateRequestSchema struct {
-	ShipmentReadOnlySchema *ShipmentReadOnlySchema `json:"attributes,omitempty"`
-
-	// IsContainerizable Defines whether container can be put into other containers or not.
-	IsContainerizable *bool `json:"isContainerizable,omitempty"`
-
-	// IsHazmat Represents whether this container can contain hazardous materials or not
-	IsHazmat *bool `json:"isHazmat,omitempty"`
-
-	// TrackingDetails Status of the shipment
-	TrackingDetails *[]TrackingDetailSchema `json:"trackingDetails,omitempty"`
-}
-
-// ShipmentReadOnlySchema defines model for ShipmentReadOnly.
-type ShipmentReadOnlySchema struct {
-	Amount struct {
-		// CurrencyCode Country code
-		CurrencyCode *string `json:"currencyCode,omitempty"`
-
-		// MinorUnit Minor unit of currency
-		MinorUnit *float32 `json:"minorUnit,omitempty"`
-		Value     *float32 `json:"value,omitempty"`
-	} `json:"amount"`
-	ClientContainerId string  `json:"clientContainerId"`
-	ClientId          *string `json:"clientId,omitempty"`
-	Description       string  `json:"description"`
-
-	// Dimensions Size of the shipment
-	Dimensions *struct {
-		Breadth *float32 `json:"breadth,omitempty"`
-		Height  *float32 `json:"height,omitempty"`
-		Length  *float32 `json:"length,omitempty"`
-
-		// Weight Dead weight of the shipment
-		Weight *float32 `json:"weight,omitempty"`
-	} `json:"dimensions,omitempty"`
-
-	// LsId Ls id of the container
-	LsId            string  `json:"lsId"`
-	MaxAttemptCount float32 `json:"maxAttemptCount"`
-	ScanLocation    *string `json:"scanLocation,omitempty"`
-}
-
-// ShipmentUpdateRequestSchema defines model for ShipmentUpdateRequest.
-type ShipmentUpdateRequestSchema struct {
-	Attributes *struct {
-		ShipmentReadOnlySchema *ShipmentReadOnlySchema `json:"attributes,omitempty"`
-
-		// IsContainerizable Defines whether container can be put into other containers or not.
-		IsContainerizable *bool `json:"isContainerizable,omitempty"`
-
-		// IsHazmat Represents whether this container can contain hazardous materials or not
-		IsHazmat *bool `json:"isHazmat,omitempty"`
-
-		// TrackingDetails Status of the shipment
-		TrackingDetails *[]TrackingDetailSchema `json:"trackingDetails,omitempty"`
-	} `json:"attributes,omitempty"`
-	Event *EventSchema `json:"event,omitempty"`
 }
 
 // StateMachineConfigSchema Container type state-machine configuration
@@ -530,7 +530,7 @@ type GetBagResponse struct {
 		// CreatedAt Timestamp of when the bag was created. Represents a date time as number of seconds elapsed since 00:00Hrs of 1st January 1970 UTC.
 		CreatedAt *int `json:"createdAt,omitempty"`
 
-		// CurrentLocation current location of the shipment
+		// CurrentLocation current location of the package
 		CurrentLocation *string `json:"currentLocation,omitempty"`
 		Destination     *string `json:"destination,omitempty"`
 		Id              *string `json:"id,omitempty"`
@@ -538,8 +538,8 @@ type GetBagResponse struct {
 		MoveTogether    *bool   `json:"moveTogether,omitempty"`
 		Ntc             *string `json:"ntc,omitempty"`
 		OriginLocation  *string `json:"originLocation,omitempty"`
+		PackageFlow     *string `json:"packageFlow,omitempty"`
 		ProductType     *string `json:"productType,omitempty"`
-		ShipmentFlow    *string `json:"shipmentFlow,omitempty"`
 		Sot             *string `json:"sot,omitempty"`
 
 		// Status Status of the bag
@@ -561,7 +561,7 @@ type GetBagsResponse struct {
 			// CreatedAt Timestamp of when the bag was created. Represents a date time as number of seconds elapsed since 00:00Hrs of 1st January 1970 UTC.
 			CreatedAt *int `json:"createdAt,omitempty"`
 
-			// CurrentLocation current location of the shipment
+			// CurrentLocation current location of the package
 			CurrentLocation *string `json:"currentLocation,omitempty"`
 			Destination     *string `json:"destination,omitempty"`
 			Id              *string `json:"id,omitempty"`
@@ -569,8 +569,8 @@ type GetBagsResponse struct {
 			MoveTogether    *bool   `json:"moveTogether,omitempty"`
 			Ntc             *string `json:"ntc,omitempty"`
 			OriginLocation  *string `json:"originLocation,omitempty"`
+			PackageFlow     *string `json:"packageFlow,omitempty"`
 			ProductType     *string `json:"productType,omitempty"`
-			ShipmentFlow    *string `json:"shipmentFlow,omitempty"`
 			Sot             *string `json:"sot,omitempty"`
 
 			// Status Status of the bag
@@ -589,10 +589,10 @@ type GetBagsResponse struct {
 	RequestSchema *RequestSchema `json:"request,omitempty"`
 }
 
-// GetShipmentResponse defines model for GetShipmentResponse.
-type GetShipmentResponse struct {
+// GetPackageResponse defines model for GetPackageResponse.
+type GetPackageResponse struct {
 	Data *struct {
-		ShipmentReadOnlySchema *ShipmentReadOnlySchema `json:"attributes,omitempty"`
+		PackageReadOnlySchema *PackageReadOnlySchema `json:"attributes,omitempty"`
 
 		// IsContainerizable Defines whether container can be put into other containers or not.
 		IsContainerizable *bool `json:"isContainerizable,omitempty"`
@@ -600,7 +600,7 @@ type GetShipmentResponse struct {
 		// IsHazmat Represents whether this container can contain hazardous materials or not
 		IsHazmat *bool `json:"isHazmat,omitempty"`
 
-		// TrackingDetails Status of the shipment
+		// TrackingDetails Status of the package
 		TrackingDetails *[]TrackingDetailSchema `json:"trackingDetails,omitempty"`
 	} `json:"data,omitempty"`
 
@@ -609,14 +609,14 @@ type GetShipmentResponse struct {
 	RequestSchema *RequestSchema `json:"request,omitempty"`
 }
 
-// GetShipmentsResponse defines model for GetShipmentsResponse.
-type GetShipmentsResponse struct {
+// GetPackagesResponse defines model for GetPackagesResponse.
+type GetPackagesResponse struct {
 	Data *struct {
 		Meta *struct {
 			TotalElements *float32 `json:"totalElements,omitempty"`
 		} `json:"meta,omitempty"`
-		Shipments *[]struct {
-			ShipmentReadOnlySchema *ShipmentReadOnlySchema `json:"attributes,omitempty"`
+		Packages *[]struct {
+			PackageReadOnlySchema *PackageReadOnlySchema `json:"attributes,omitempty"`
 
 			// IsContainerizable Defines whether container can be put into other containers or not.
 			IsContainerizable *bool `json:"isContainerizable,omitempty"`
@@ -624,9 +624,9 @@ type GetShipmentsResponse struct {
 			// IsHazmat Represents whether this container can contain hazardous materials or not
 			IsHazmat *bool `json:"isHazmat,omitempty"`
 
-			// TrackingDetails Status of the shipment
+			// TrackingDetails Status of the package
 			TrackingDetails *[]TrackingDetailSchema `json:"trackingDetails,omitempty"`
-		} `json:"shipments,omitempty"`
+		} `json:"packages,omitempty"`
 	} `json:"data,omitempty"`
 
 	// Error Error Information
@@ -655,11 +655,11 @@ type ContainerStateUpdateRequest = ContainerStateUpdateRequestSchema
 // ContainerizationRequest defines model for ContainerizationRequest.
 type ContainerizationRequest = ContainerizationRequestSchema
 
-// ShipmentCreateRequest defines model for ShipmentCreateRequest.
-type ShipmentCreateRequest = ShipmentCreateRequestSchema
+// PackageCreateRequest defines model for PackageCreateRequest.
+type PackageCreateRequest = PackageCreateRequestSchema
 
-// ShipmentUpdateRequest defines model for ShipmentUpdateRequest.
-type ShipmentUpdateRequest = ShipmentUpdateRequestSchema
+// PackageUpdateRequest defines model for PackageUpdateRequest.
+type PackageUpdateRequest = PackageUpdateRequestSchema
 
 // StateMachineUpdateRequest Update state machine config
 type StateMachineUpdateRequest = StateMachineUpdateRequestSchema
@@ -766,8 +766,8 @@ type UnsealBagParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
-// GetShipmentsParams defines parameters for GetShipments.
-type GetShipmentsParams struct {
+// GetPackagesParams defines parameters for GetPackages.
+type GetPackagesParams struct {
 	// Status Status of the bag to filter by.
 	Status *Status `form:"status,omitempty" json:"status,omitempty"`
 
@@ -778,8 +778,8 @@ type GetShipmentsParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
-// CreateShipmentParams defines parameters for CreateShipment.
-type CreateShipmentParams struct {
+// CreatePackageParams defines parameters for CreatePackage.
+type CreatePackageParams struct {
 	// XCOREOSREQUESTID Unique request Id
 	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
 
@@ -787,8 +787,8 @@ type CreateShipmentParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
-// UpdateShipmentbyClientParams defines parameters for UpdateShipmentbyClient.
-type UpdateShipmentbyClientParams struct {
+// UpdatePackagebyClientParams defines parameters for UpdatePackagebyClient.
+type UpdatePackagebyClientParams struct {
 	// XCOREOSREQUESTID Unique request Id
 	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
 
@@ -796,8 +796,8 @@ type UpdateShipmentbyClientParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
-// GetShipmentAttributesParams defines parameters for GetShipmentAttributes.
-type GetShipmentAttributesParams struct {
+// GetPackageAttributesParams defines parameters for GetPackageAttributes.
+type GetPackageAttributesParams struct {
 	// Limit Number of items to return.
 	Limit *PageSize `form:"limit,omitempty" json:"limit,omitempty"`
 
@@ -805,14 +805,14 @@ type GetShipmentAttributesParams struct {
 	Offset *PageOffset `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// UpdateShipmentAttributeParams defines parameters for UpdateShipmentAttribute.
-type UpdateShipmentAttributeParams struct {
+// UpdatePackageAttributeParams defines parameters for UpdatePackageAttribute.
+type UpdatePackageAttributeParams struct {
 	// Type Type of the bag to filter by.
-	Type *UpdateShipmentAttributeParamsType `form:"type,omitempty" json:"type,omitempty"`
+	Type *UpdatePackageAttributeParamsType `form:"type,omitempty" json:"type,omitempty"`
 }
 
-// UpdateShipmentAttributeParamsType defines parameters for UpdateShipmentAttribute.
-type UpdateShipmentAttributeParamsType string
+// UpdatePackageAttributeParamsType defines parameters for UpdatePackageAttribute.
+type UpdatePackageAttributeParamsType string
 
 // ContainerizeParams defines parameters for Containerize.
 type ContainerizeParams struct {
@@ -823,8 +823,8 @@ type ContainerizeParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
-// ReopenShipmentParams defines parameters for ReopenShipment.
-type ReopenShipmentParams struct {
+// ReopenPackageParams defines parameters for ReopenPackage.
+type ReopenPackageParams struct {
 	// XCOREOSREQUESTID Unique request Id
 	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
 
@@ -832,8 +832,8 @@ type ReopenShipmentParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
-// GetShipmentParams defines parameters for GetShipment.
-type GetShipmentParams struct {
+// GetPackageParams defines parameters for GetPackage.
+type GetPackageParams struct {
 	// XCOREOSREQUESTID Unique request Id
 	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
 
@@ -841,8 +841,8 @@ type GetShipmentParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
-// UpdateShipmentParams defines parameters for UpdateShipment.
-type UpdateShipmentParams struct {
+// UpdatePackageParams defines parameters for UpdatePackage.
+type UpdatePackageParams struct {
 	// XCOREOSREQUESTID Unique request Id
 	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
 
@@ -850,8 +850,8 @@ type UpdateShipmentParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
-// GetShipmentStateParams defines parameters for GetShipmentState.
-type GetShipmentStateParams struct {
+// GetPackageStateParams defines parameters for GetPackageState.
+type GetPackageStateParams struct {
 	// XCOREOSREQUESTID Unique request Id
 	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
 
@@ -859,8 +859,8 @@ type GetShipmentStateParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
-// UpdateShipmentStateParams defines parameters for UpdateShipmentState.
-type UpdateShipmentStateParams struct {
+// UpdatePackageStateParams defines parameters for UpdatePackageState.
+type UpdatePackageStateParams struct {
 	// XCOREOSREQUESTID Unique request Id
 	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
 
@@ -886,26 +886,26 @@ type UpdateBagJSONRequestBody = BagUpdateRequestSchema
 // UpdateBagStateJSONRequestBody defines body for UpdateBagState for application/json ContentType.
 type UpdateBagStateJSONRequestBody = ContainerStateUpdateRequestSchema
 
-// CreateShipmentJSONRequestBody defines body for CreateShipment for application/json ContentType.
-type CreateShipmentJSONRequestBody = ShipmentCreateRequestSchema
+// CreatePackageJSONRequestBody defines body for CreatePackage for application/json ContentType.
+type CreatePackageJSONRequestBody = PackageCreateRequestSchema
 
-// UpdateShipmentbyClientJSONRequestBody defines body for UpdateShipmentbyClient for application/json ContentType.
-type UpdateShipmentbyClientJSONRequestBody = ShipmentUpdateRequestSchema
+// UpdatePackagebyClientJSONRequestBody defines body for UpdatePackagebyClient for application/json ContentType.
+type UpdatePackagebyClientJSONRequestBody = PackageUpdateRequestSchema
 
-// UpdateShipmentAttributeJSONRequestBody defines body for UpdateShipmentAttribute for application/json ContentType.
-type UpdateShipmentAttributeJSONRequestBody = AttributeUpdateRequestSchema
+// UpdatePackageAttributeJSONRequestBody defines body for UpdatePackageAttribute for application/json ContentType.
+type UpdatePackageAttributeJSONRequestBody = AttributeUpdateRequestSchema
 
-// PutShipmentStateTemplateConfigJSONRequestBody defines body for PutShipmentStateTemplateConfig for application/json ContentType.
-type PutShipmentStateTemplateConfigJSONRequestBody = StateMachineUpdateRequestSchema
+// PutPackageStateTemplateConfigJSONRequestBody defines body for PutPackageStateTemplateConfig for application/json ContentType.
+type PutPackageStateTemplateConfigJSONRequestBody = StateMachineUpdateRequestSchema
 
 // ContainerizeJSONRequestBody defines body for Containerize for application/json ContentType.
 type ContainerizeJSONRequestBody = ContainerizationRequestSchema
 
-// UpdateShipmentJSONRequestBody defines body for UpdateShipment for application/json ContentType.
-type UpdateShipmentJSONRequestBody = ShipmentUpdateRequestSchema
+// UpdatePackageJSONRequestBody defines body for UpdatePackage for application/json ContentType.
+type UpdatePackageJSONRequestBody = PackageUpdateRequestSchema
 
-// UpdateShipmentStateJSONRequestBody defines body for UpdateShipmentState for application/json ContentType.
-type UpdateShipmentStateJSONRequestBody = ContainerStateUpdateRequestSchema
+// UpdatePackageStateJSONRequestBody defines body for UpdatePackageState for application/json ContentType.
+type UpdatePackageStateJSONRequestBody = ContainerStateUpdateRequestSchema
 
 // AsAttributeUpdateDefaultValue0 returns the union data inside the AttributeUpdate_DefaultValue as a AttributeUpdateDefaultValue0
 func (t AttributeUpdate_DefaultValue) AsAttributeUpdateDefaultValue0() (AttributeUpdateDefaultValue0, error) {
@@ -1036,45 +1036,45 @@ type ServerInterface interface {
 	// Unseal(Open) a bag
 	// (PUT /bags/{bagId}/unseal/)
 	UnsealBag(c *gin.Context, bagId string, params UnsealBagParams)
-	// Get list of current configured Shipments
-	// (GET /shipments)
-	GetShipments(c *gin.Context, params GetShipmentsParams)
-	// Create a new Shipment
-	// (POST /shipments)
-	CreateShipment(c *gin.Context, params CreateShipmentParams)
-	// Update properties of a configured shipment
-	// (PUT /shipments/client/{shipmentId})
-	UpdateShipmentbyClient(c *gin.Context, shipmentId string, params UpdateShipmentbyClientParams)
+	// Get list of current configured Packages
+	// (GET /packages)
+	GetPackages(c *gin.Context, params GetPackagesParams)
+	// Create a new Package
+	// (POST /packages)
+	CreatePackage(c *gin.Context, params CreatePackageParams)
+	// Update properties of a configured package
+	// (PUT /packages/client/{packageId})
+	UpdatePackagebyClient(c *gin.Context, packageId string, params UpdatePackagebyClientParams)
 	// Get list of Attributes
-	// (GET /shipments/config/attributes)
-	GetShipmentAttributes(c *gin.Context, params GetShipmentAttributesParams)
+	// (GET /packages/config/attributes)
+	GetPackageAttributes(c *gin.Context, params GetPackageAttributesParams)
 	// Update details of a Attribute
-	// (PUT /shipments/config/attributes)
-	UpdateShipmentAttribute(c *gin.Context, params UpdateShipmentAttributeParams)
+	// (PUT /packages/config/attributes)
+	UpdatePackageAttribute(c *gin.Context, params UpdatePackageAttributeParams)
 	// Get the current State Machine of a particular resource
-	// (GET /shipments/config/state-machine)
-	GetShipmentStateTemplateConfig(c *gin.Context)
+	// (GET /packages/config/state-machine)
+	GetPackageStateTemplateConfig(c *gin.Context)
 	// Update the State Machine of a particular resource
-	// (PUT /shipments/config/state-machine)
-	PutShipmentStateTemplateConfig(c *gin.Context)
-	// Add or remove a shipment from the bag
-	// (PUT /shipments/containerize/{containerId}/)
+	// (PUT /packages/config/state-machine)
+	PutPackageStateTemplateConfig(c *gin.Context)
+	// Add or remove a package from the bag
+	// (PUT /packages/containerize/{containerId}/)
 	Containerize(c *gin.Context, containerId string, params ContainerizeParams)
-	// Reopen a Discarded shipemnt
-	// (PUT /shipments/reopen/{shipmentId})
-	ReopenShipment(c *gin.Context, shipmentId string, params ReopenShipmentParams)
-	// Get properties of a configured Shipment
-	// (GET /shipments/{shipmentId})
-	GetShipment(c *gin.Context, shipmentId string, params GetShipmentParams)
-	// Update properties of a configured shipment
-	// (PUT /shipments/{shipmentId})
-	UpdateShipment(c *gin.Context, shipmentId string, params UpdateShipmentParams)
+	// Reopen a Discarded package
+	// (PUT /packages/reopen/{packageId})
+	ReopenPackage(c *gin.Context, packageId string, params ReopenPackageParams)
+	// Get properties of a configured Package
+	// (GET /packages/{packageId})
+	GetPackage(c *gin.Context, packageId string, params GetPackageParams)
+	// Update properties of a configured package
+	// (PUT /packages/{packageId})
+	UpdatePackage(c *gin.Context, packageId string, params UpdatePackageParams)
 	// Get current state of the bag
-	// (GET /shipments/{shipmentId}/state/)
-	GetShipmentState(c *gin.Context, shipmentId string, params GetShipmentStateParams)
+	// (GET /packages/{packageId}/state/)
+	GetPackageState(c *gin.Context, packageId string, params GetPackageStateParams)
 	// Seal(Close), Open or Discard a bag
-	// (PUT /shipments/{shipmentId}/transition/state/)
-	UpdateShipmentState(c *gin.Context, shipmentId string, params UpdateShipmentStateParams)
+	// (PUT /packages/{packageId}/transition/state/)
+	UpdatePackageState(c *gin.Context, packageId string, params UpdatePackageStateParams)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -1771,13 +1771,13 @@ func (siw *ServerInterfaceWrapper) UnsealBag(c *gin.Context) {
 	siw.Handler.UnsealBag(c, bagId, params)
 }
 
-// GetShipments operation middleware
-func (siw *ServerInterfaceWrapper) GetShipments(c *gin.Context) {
+// GetPackages operation middleware
+func (siw *ServerInterfaceWrapper) GetPackages(c *gin.Context) {
 
 	var err error
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params GetShipmentsParams
+	var params GetPackagesParams
 
 	// ------------- Optional query parameter "status" -------------
 
@@ -1837,16 +1837,16 @@ func (siw *ServerInterfaceWrapper) GetShipments(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.GetShipments(c, params)
+	siw.Handler.GetPackages(c, params)
 }
 
-// CreateShipment operation middleware
-func (siw *ServerInterfaceWrapper) CreateShipment(c *gin.Context) {
+// CreatePackage operation middleware
+func (siw *ServerInterfaceWrapper) CreatePackage(c *gin.Context) {
 
 	var err error
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params CreateShipmentParams
+	var params CreatePackageParams
 
 	headers := c.Request.Header
 
@@ -1898,25 +1898,25 @@ func (siw *ServerInterfaceWrapper) CreateShipment(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.CreateShipment(c, params)
+	siw.Handler.CreatePackage(c, params)
 }
 
-// UpdateShipmentbyClient operation middleware
-func (siw *ServerInterfaceWrapper) UpdateShipmentbyClient(c *gin.Context) {
+// UpdatePackagebyClient operation middleware
+func (siw *ServerInterfaceWrapper) UpdatePackagebyClient(c *gin.Context) {
 
 	var err error
 
-	// ------------- Path parameter "shipmentId" -------------
-	var shipmentId string
+	// ------------- Path parameter "packageId" -------------
+	var packageId string
 
-	err = runtime.BindStyledParameter("simple", false, "shipmentId", c.Param("shipmentId"), &shipmentId)
+	err = runtime.BindStyledParameter("simple", false, "packageId", c.Param("packageId"), &packageId)
 	if err != nil {
-		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter shipmentId: %s", err), http.StatusBadRequest)
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter packageId: %s", err), http.StatusBadRequest)
 		return
 	}
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params UpdateShipmentbyClientParams
+	var params UpdatePackagebyClientParams
 
 	headers := c.Request.Header
 
@@ -1968,16 +1968,16 @@ func (siw *ServerInterfaceWrapper) UpdateShipmentbyClient(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.UpdateShipmentbyClient(c, shipmentId, params)
+	siw.Handler.UpdatePackagebyClient(c, packageId, params)
 }
 
-// GetShipmentAttributes operation middleware
-func (siw *ServerInterfaceWrapper) GetShipmentAttributes(c *gin.Context) {
+// GetPackageAttributes operation middleware
+func (siw *ServerInterfaceWrapper) GetPackageAttributes(c *gin.Context) {
 
 	var err error
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params GetShipmentAttributesParams
+	var params GetPackageAttributesParams
 
 	// ------------- Optional query parameter "limit" -------------
 
@@ -1999,16 +1999,16 @@ func (siw *ServerInterfaceWrapper) GetShipmentAttributes(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.GetShipmentAttributes(c, params)
+	siw.Handler.GetPackageAttributes(c, params)
 }
 
-// UpdateShipmentAttribute operation middleware
-func (siw *ServerInterfaceWrapper) UpdateShipmentAttribute(c *gin.Context) {
+// UpdatePackageAttribute operation middleware
+func (siw *ServerInterfaceWrapper) UpdatePackageAttribute(c *gin.Context) {
 
 	var err error
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params UpdateShipmentAttributeParams
+	var params UpdatePackageAttributeParams
 
 	// ------------- Optional query parameter "type" -------------
 
@@ -2022,27 +2022,27 @@ func (siw *ServerInterfaceWrapper) UpdateShipmentAttribute(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.UpdateShipmentAttribute(c, params)
+	siw.Handler.UpdatePackageAttribute(c, params)
 }
 
-// GetShipmentStateTemplateConfig operation middleware
-func (siw *ServerInterfaceWrapper) GetShipmentStateTemplateConfig(c *gin.Context) {
+// GetPackageStateTemplateConfig operation middleware
+func (siw *ServerInterfaceWrapper) GetPackageStateTemplateConfig(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
 		middleware(c)
 	}
 
-	siw.Handler.GetShipmentStateTemplateConfig(c)
+	siw.Handler.GetPackageStateTemplateConfig(c)
 }
 
-// PutShipmentStateTemplateConfig operation middleware
-func (siw *ServerInterfaceWrapper) PutShipmentStateTemplateConfig(c *gin.Context) {
+// PutPackageStateTemplateConfig operation middleware
+func (siw *ServerInterfaceWrapper) PutPackageStateTemplateConfig(c *gin.Context) {
 
 	for _, middleware := range siw.HandlerMiddlewares {
 		middleware(c)
 	}
 
-	siw.Handler.PutShipmentStateTemplateConfig(c)
+	siw.Handler.PutPackageStateTemplateConfig(c)
 }
 
 // Containerize operation middleware
@@ -2115,22 +2115,22 @@ func (siw *ServerInterfaceWrapper) Containerize(c *gin.Context) {
 	siw.Handler.Containerize(c, containerId, params)
 }
 
-// ReopenShipment operation middleware
-func (siw *ServerInterfaceWrapper) ReopenShipment(c *gin.Context) {
+// ReopenPackage operation middleware
+func (siw *ServerInterfaceWrapper) ReopenPackage(c *gin.Context) {
 
 	var err error
 
-	// ------------- Path parameter "shipmentId" -------------
-	var shipmentId string
+	// ------------- Path parameter "packageId" -------------
+	var packageId string
 
-	err = runtime.BindStyledParameter("simple", false, "shipmentId", c.Param("shipmentId"), &shipmentId)
+	err = runtime.BindStyledParameter("simple", false, "packageId", c.Param("packageId"), &packageId)
 	if err != nil {
-		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter shipmentId: %s", err), http.StatusBadRequest)
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter packageId: %s", err), http.StatusBadRequest)
 		return
 	}
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params ReopenShipmentParams
+	var params ReopenPackageParams
 
 	headers := c.Request.Header
 
@@ -2182,25 +2182,25 @@ func (siw *ServerInterfaceWrapper) ReopenShipment(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.ReopenShipment(c, shipmentId, params)
+	siw.Handler.ReopenPackage(c, packageId, params)
 }
 
-// GetShipment operation middleware
-func (siw *ServerInterfaceWrapper) GetShipment(c *gin.Context) {
+// GetPackage operation middleware
+func (siw *ServerInterfaceWrapper) GetPackage(c *gin.Context) {
 
 	var err error
 
-	// ------------- Path parameter "shipmentId" -------------
-	var shipmentId string
+	// ------------- Path parameter "packageId" -------------
+	var packageId string
 
-	err = runtime.BindStyledParameter("simple", false, "shipmentId", c.Param("shipmentId"), &shipmentId)
+	err = runtime.BindStyledParameter("simple", false, "packageId", c.Param("packageId"), &packageId)
 	if err != nil {
-		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter shipmentId: %s", err), http.StatusBadRequest)
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter packageId: %s", err), http.StatusBadRequest)
 		return
 	}
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params GetShipmentParams
+	var params GetPackageParams
 
 	headers := c.Request.Header
 
@@ -2252,25 +2252,25 @@ func (siw *ServerInterfaceWrapper) GetShipment(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.GetShipment(c, shipmentId, params)
+	siw.Handler.GetPackage(c, packageId, params)
 }
 
-// UpdateShipment operation middleware
-func (siw *ServerInterfaceWrapper) UpdateShipment(c *gin.Context) {
+// UpdatePackage operation middleware
+func (siw *ServerInterfaceWrapper) UpdatePackage(c *gin.Context) {
 
 	var err error
 
-	// ------------- Path parameter "shipmentId" -------------
-	var shipmentId string
+	// ------------- Path parameter "packageId" -------------
+	var packageId string
 
-	err = runtime.BindStyledParameter("simple", false, "shipmentId", c.Param("shipmentId"), &shipmentId)
+	err = runtime.BindStyledParameter("simple", false, "packageId", c.Param("packageId"), &packageId)
 	if err != nil {
-		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter shipmentId: %s", err), http.StatusBadRequest)
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter packageId: %s", err), http.StatusBadRequest)
 		return
 	}
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params UpdateShipmentParams
+	var params UpdatePackageParams
 
 	headers := c.Request.Header
 
@@ -2322,25 +2322,25 @@ func (siw *ServerInterfaceWrapper) UpdateShipment(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.UpdateShipment(c, shipmentId, params)
+	siw.Handler.UpdatePackage(c, packageId, params)
 }
 
-// GetShipmentState operation middleware
-func (siw *ServerInterfaceWrapper) GetShipmentState(c *gin.Context) {
+// GetPackageState operation middleware
+func (siw *ServerInterfaceWrapper) GetPackageState(c *gin.Context) {
 
 	var err error
 
-	// ------------- Path parameter "shipmentId" -------------
-	var shipmentId string
+	// ------------- Path parameter "packageId" -------------
+	var packageId string
 
-	err = runtime.BindStyledParameter("simple", false, "shipmentId", c.Param("shipmentId"), &shipmentId)
+	err = runtime.BindStyledParameter("simple", false, "packageId", c.Param("packageId"), &packageId)
 	if err != nil {
-		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter shipmentId: %s", err), http.StatusBadRequest)
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter packageId: %s", err), http.StatusBadRequest)
 		return
 	}
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params GetShipmentStateParams
+	var params GetPackageStateParams
 
 	headers := c.Request.Header
 
@@ -2392,25 +2392,25 @@ func (siw *ServerInterfaceWrapper) GetShipmentState(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.GetShipmentState(c, shipmentId, params)
+	siw.Handler.GetPackageState(c, packageId, params)
 }
 
-// UpdateShipmentState operation middleware
-func (siw *ServerInterfaceWrapper) UpdateShipmentState(c *gin.Context) {
+// UpdatePackageState operation middleware
+func (siw *ServerInterfaceWrapper) UpdatePackageState(c *gin.Context) {
 
 	var err error
 
-	// ------------- Path parameter "shipmentId" -------------
-	var shipmentId string
+	// ------------- Path parameter "packageId" -------------
+	var packageId string
 
-	err = runtime.BindStyledParameter("simple", false, "shipmentId", c.Param("shipmentId"), &shipmentId)
+	err = runtime.BindStyledParameter("simple", false, "packageId", c.Param("packageId"), &packageId)
 	if err != nil {
-		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter shipmentId: %s", err), http.StatusBadRequest)
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter packageId: %s", err), http.StatusBadRequest)
 		return
 	}
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params UpdateShipmentStateParams
+	var params UpdatePackageStateParams
 
 	headers := c.Request.Header
 
@@ -2462,7 +2462,7 @@ func (siw *ServerInterfaceWrapper) UpdateShipmentState(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.UpdateShipmentState(c, shipmentId, params)
+	siw.Handler.UpdatePackageState(c, packageId, params)
 }
 
 // GinServerOptions provides options for the Gin server.
@@ -2520,31 +2520,31 @@ func RegisterHandlersWithOptions(router *gin.Engine, si ServerInterface, options
 
 	router.PUT(options.BaseURL+"/bags/:bagId/unseal/", wrapper.UnsealBag)
 
-	router.GET(options.BaseURL+"/shipments", wrapper.GetShipments)
+	router.GET(options.BaseURL+"/packages", wrapper.GetPackages)
 
-	router.POST(options.BaseURL+"/shipments", wrapper.CreateShipment)
+	router.POST(options.BaseURL+"/packages", wrapper.CreatePackage)
 
-	router.PUT(options.BaseURL+"/shipments/client/:shipmentId", wrapper.UpdateShipmentbyClient)
+	router.PUT(options.BaseURL+"/packages/client/:packageId", wrapper.UpdatePackagebyClient)
 
-	router.GET(options.BaseURL+"/shipments/config/attributes", wrapper.GetShipmentAttributes)
+	router.GET(options.BaseURL+"/packages/config/attributes", wrapper.GetPackageAttributes)
 
-	router.PUT(options.BaseURL+"/shipments/config/attributes", wrapper.UpdateShipmentAttribute)
+	router.PUT(options.BaseURL+"/packages/config/attributes", wrapper.UpdatePackageAttribute)
 
-	router.GET(options.BaseURL+"/shipments/config/state-machine", wrapper.GetShipmentStateTemplateConfig)
+	router.GET(options.BaseURL+"/packages/config/state-machine", wrapper.GetPackageStateTemplateConfig)
 
-	router.PUT(options.BaseURL+"/shipments/config/state-machine", wrapper.PutShipmentStateTemplateConfig)
+	router.PUT(options.BaseURL+"/packages/config/state-machine", wrapper.PutPackageStateTemplateConfig)
 
-	router.PUT(options.BaseURL+"/shipments/containerize/:containerId/", wrapper.Containerize)
+	router.PUT(options.BaseURL+"/packages/containerize/:containerId/", wrapper.Containerize)
 
-	router.PUT(options.BaseURL+"/shipments/reopen/:shipmentId", wrapper.ReopenShipment)
+	router.PUT(options.BaseURL+"/packages/reopen/:packageId", wrapper.ReopenPackage)
 
-	router.GET(options.BaseURL+"/shipments/:shipmentId", wrapper.GetShipment)
+	router.GET(options.BaseURL+"/packages/:packageId", wrapper.GetPackage)
 
-	router.PUT(options.BaseURL+"/shipments/:shipmentId", wrapper.UpdateShipment)
+	router.PUT(options.BaseURL+"/packages/:packageId", wrapper.UpdatePackage)
 
-	router.GET(options.BaseURL+"/shipments/:shipmentId/state/", wrapper.GetShipmentState)
+	router.GET(options.BaseURL+"/packages/:packageId/state/", wrapper.GetPackageState)
 
-	router.PUT(options.BaseURL+"/shipments/:shipmentId/transition/state/", wrapper.UpdateShipmentState)
+	router.PUT(options.BaseURL+"/packages/:packageId/transition/state/", wrapper.UpdatePackageState)
 
 	return router
 }

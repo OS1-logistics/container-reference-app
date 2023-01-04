@@ -43,7 +43,7 @@ func NewEventDataValidationAllOfWithDefaults() *EventDataValidationAllOf {
 
 // GetBlocking returns the Blocking field value if set, zero value otherwise.
 func (o *EventDataValidationAllOf) GetBlocking() bool {
-	if o == nil || o.Blocking == nil {
+	if o == nil || isNil(o.Blocking) {
 		var ret bool
 		return ret
 	}
@@ -53,15 +53,15 @@ func (o *EventDataValidationAllOf) GetBlocking() bool {
 // GetBlockingOk returns a tuple with the Blocking field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventDataValidationAllOf) GetBlockingOk() (*bool, bool) {
-	if o == nil || o.Blocking == nil {
-		return nil, false
+	if o == nil || isNil(o.Blocking) {
+    return nil, false
 	}
 	return o.Blocking, true
 }
 
 // HasBlocking returns a boolean if a field has been set.
 func (o *EventDataValidationAllOf) HasBlocking() bool {
-	if o != nil && o.Blocking != nil {
+	if o != nil && !isNil(o.Blocking) {
 		return true
 	}
 
@@ -75,7 +75,7 @@ func (o *EventDataValidationAllOf) SetBlocking(v bool) {
 
 func (o EventDataValidationAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Blocking != nil {
+	if !isNil(o.Blocking) {
 		toSerialize["blocking"] = o.Blocking
 	}
 	return json.Marshal(toSerialize)

@@ -48,7 +48,7 @@ func NewEmailPayloadWithDefaults() *EmailPayload {
 
 // GetEmailId returns the EmailId field value if set, zero value otherwise.
 func (o *EmailPayload) GetEmailId() string {
-	if o == nil || o.EmailId == nil {
+	if o == nil || isNil(o.EmailId) {
 		var ret string
 		return ret
 	}
@@ -58,15 +58,15 @@ func (o *EmailPayload) GetEmailId() string {
 // GetEmailIdOk returns a tuple with the EmailId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EmailPayload) GetEmailIdOk() (*string, bool) {
-	if o == nil || o.EmailId == nil {
-		return nil, false
+	if o == nil || isNil(o.EmailId) {
+    return nil, false
 	}
 	return o.EmailId, true
 }
 
 // HasEmailId returns a boolean if a field has been set.
 func (o *EmailPayload) HasEmailId() bool {
-	if o != nil && o.EmailId != nil {
+	if o != nil && !isNil(o.EmailId) {
 		return true
 	}
 
@@ -80,7 +80,7 @@ func (o *EmailPayload) SetEmailId(v string) {
 
 // GetMobile returns the Mobile field value if set, zero value otherwise.
 func (o *EmailPayload) GetMobile() AuthReqOtpRequestMobile {
-	if o == nil || o.Mobile == nil {
+	if o == nil || isNil(o.Mobile) {
 		var ret AuthReqOtpRequestMobile
 		return ret
 	}
@@ -90,15 +90,15 @@ func (o *EmailPayload) GetMobile() AuthReqOtpRequestMobile {
 // GetMobileOk returns a tuple with the Mobile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EmailPayload) GetMobileOk() (*AuthReqOtpRequestMobile, bool) {
-	if o == nil || o.Mobile == nil {
-		return nil, false
+	if o == nil || isNil(o.Mobile) {
+    return nil, false
 	}
 	return o.Mobile, true
 }
 
 // HasMobile returns a boolean if a field has been set.
 func (o *EmailPayload) HasMobile() bool {
-	if o != nil && o.Mobile != nil {
+	if o != nil && !isNil(o.Mobile) {
 		return true
 	}
 
@@ -124,7 +124,7 @@ func (o *EmailPayload) GetOtp() string {
 // and a boolean to check if the value has been set.
 func (o *EmailPayload) GetOtpOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Otp, true
 }
@@ -148,7 +148,7 @@ func (o *EmailPayload) GetAudience() string {
 // and a boolean to check if the value has been set.
 func (o *EmailPayload) GetAudienceOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Audience, true
 }
@@ -160,7 +160,7 @@ func (o *EmailPayload) SetAudience(v string) {
 
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *EmailPayload) GetMode() string {
-	if o == nil || o.Mode == nil {
+	if o == nil || isNil(o.Mode) {
 		var ret string
 		return ret
 	}
@@ -170,15 +170,15 @@ func (o *EmailPayload) GetMode() string {
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EmailPayload) GetModeOk() (*string, bool) {
-	if o == nil || o.Mode == nil {
-		return nil, false
+	if o == nil || isNil(o.Mode) {
+    return nil, false
 	}
 	return o.Mode, true
 }
 
 // HasMode returns a boolean if a field has been set.
 func (o *EmailPayload) HasMode() bool {
-	if o != nil && o.Mode != nil {
+	if o != nil && !isNil(o.Mode) {
 		return true
 	}
 
@@ -192,10 +192,10 @@ func (o *EmailPayload) SetMode(v string) {
 
 func (o EmailPayload) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.EmailId != nil {
+	if !isNil(o.EmailId) {
 		toSerialize["emailId"] = o.EmailId
 	}
-	if o.Mobile != nil {
+	if !isNil(o.Mobile) {
 		toSerialize["mobile"] = o.Mobile
 	}
 	if true {
@@ -204,7 +204,7 @@ func (o EmailPayload) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["audience"] = o.Audience
 	}
-	if o.Mode != nil {
+	if !isNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
 	return json.Marshal(toSerialize)

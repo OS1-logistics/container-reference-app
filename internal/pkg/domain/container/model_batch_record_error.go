@@ -41,7 +41,7 @@ func NewBatchRecordErrorWithDefaults() *BatchRecordError {
 
 // GetRefID returns the RefID field value if set, zero value otherwise.
 func (o *BatchRecordError) GetRefID() string {
-	if o == nil || o.RefID == nil {
+	if o == nil || isNil(o.RefID) {
 		var ret string
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *BatchRecordError) GetRefID() string {
 // GetRefIDOk returns a tuple with the RefID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BatchRecordError) GetRefIDOk() (*string, bool) {
-	if o == nil || o.RefID == nil {
-		return nil, false
+	if o == nil || isNil(o.RefID) {
+    return nil, false
 	}
 	return o.RefID, true
 }
 
 // HasRefID returns a boolean if a field has been set.
 func (o *BatchRecordError) HasRefID() bool {
-	if o != nil && o.RefID != nil {
+	if o != nil && !isNil(o.RefID) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *BatchRecordError) SetRefID(v string) {
 
 // GetReason returns the Reason field value if set, zero value otherwise.
 func (o *BatchRecordError) GetReason() string {
-	if o == nil || o.Reason == nil {
+	if o == nil || isNil(o.Reason) {
 		var ret string
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *BatchRecordError) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BatchRecordError) GetReasonOk() (*string, bool) {
-	if o == nil || o.Reason == nil {
-		return nil, false
+	if o == nil || isNil(o.Reason) {
+    return nil, false
 	}
 	return o.Reason, true
 }
 
 // HasReason returns a boolean if a field has been set.
 func (o *BatchRecordError) HasReason() bool {
-	if o != nil && o.Reason != nil {
+	if o != nil && !isNil(o.Reason) {
 		return true
 	}
 
@@ -105,10 +105,10 @@ func (o *BatchRecordError) SetReason(v string) {
 
 func (o BatchRecordError) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.RefID != nil {
+	if !isNil(o.RefID) {
 		toSerialize["refID"] = o.RefID
 	}
-	if o.Reason != nil {
+	if !isNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
 	return json.Marshal(toSerialize)

@@ -63,7 +63,7 @@ func (o *ConnectionSamlCreateRequest) GetConnectionName() string {
 // and a boolean to check if the value has been set.
 func (o *ConnectionSamlCreateRequest) GetConnectionNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ConnectionName, true
 }
@@ -75,7 +75,7 @@ func (o *ConnectionSamlCreateRequest) SetConnectionName(v string) {
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *ConnectionSamlCreateRequest) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+	if o == nil || isNil(o.DisplayName) {
 		var ret string
 		return ret
 	}
@@ -85,15 +85,15 @@ func (o *ConnectionSamlCreateRequest) GetDisplayName() string {
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectionSamlCreateRequest) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
-		return nil, false
+	if o == nil || isNil(o.DisplayName) {
+    return nil, false
 	}
 	return o.DisplayName, true
 }
 
 // HasDisplayName returns a boolean if a field has been set.
 func (o *ConnectionSamlCreateRequest) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+	if o != nil && !isNil(o.DisplayName) {
 		return true
 	}
 
@@ -107,7 +107,7 @@ func (o *ConnectionSamlCreateRequest) SetDisplayName(v string) {
 
 // GetGuiOrder returns the GuiOrder field value if set, zero value otherwise.
 func (o *ConnectionSamlCreateRequest) GetGuiOrder() float32 {
-	if o == nil || o.GuiOrder == nil {
+	if o == nil || isNil(o.GuiOrder) {
 		var ret float32
 		return ret
 	}
@@ -117,15 +117,15 @@ func (o *ConnectionSamlCreateRequest) GetGuiOrder() float32 {
 // GetGuiOrderOk returns a tuple with the GuiOrder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectionSamlCreateRequest) GetGuiOrderOk() (*float32, bool) {
-	if o == nil || o.GuiOrder == nil {
-		return nil, false
+	if o == nil || isNil(o.GuiOrder) {
+    return nil, false
 	}
 	return o.GuiOrder, true
 }
 
 // HasGuiOrder returns a boolean if a field has been set.
 func (o *ConnectionSamlCreateRequest) HasGuiOrder() bool {
-	if o != nil && o.GuiOrder != nil {
+	if o != nil && !isNil(o.GuiOrder) {
 		return true
 	}
 
@@ -139,7 +139,7 @@ func (o *ConnectionSamlCreateRequest) SetGuiOrder(v float32) {
 
 // GetSignInEndpoint returns the SignInEndpoint field value if set, zero value otherwise.
 func (o *ConnectionSamlCreateRequest) GetSignInEndpoint() string {
-	if o == nil || o.SignInEndpoint == nil {
+	if o == nil || isNil(o.SignInEndpoint) {
 		var ret string
 		return ret
 	}
@@ -149,15 +149,15 @@ func (o *ConnectionSamlCreateRequest) GetSignInEndpoint() string {
 // GetSignInEndpointOk returns a tuple with the SignInEndpoint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectionSamlCreateRequest) GetSignInEndpointOk() (*string, bool) {
-	if o == nil || o.SignInEndpoint == nil {
-		return nil, false
+	if o == nil || isNil(o.SignInEndpoint) {
+    return nil, false
 	}
 	return o.SignInEndpoint, true
 }
 
 // HasSignInEndpoint returns a boolean if a field has been set.
 func (o *ConnectionSamlCreateRequest) HasSignInEndpoint() bool {
-	if o != nil && o.SignInEndpoint != nil {
+	if o != nil && !isNil(o.SignInEndpoint) {
 		return true
 	}
 
@@ -171,7 +171,7 @@ func (o *ConnectionSamlCreateRequest) SetSignInEndpoint(v string) {
 
 // GetSignOutEndpoint returns the SignOutEndpoint field value if set, zero value otherwise.
 func (o *ConnectionSamlCreateRequest) GetSignOutEndpoint() string {
-	if o == nil || o.SignOutEndpoint == nil {
+	if o == nil || isNil(o.SignOutEndpoint) {
 		var ret string
 		return ret
 	}
@@ -181,15 +181,15 @@ func (o *ConnectionSamlCreateRequest) GetSignOutEndpoint() string {
 // GetSignOutEndpointOk returns a tuple with the SignOutEndpoint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConnectionSamlCreateRequest) GetSignOutEndpointOk() (*string, bool) {
-	if o == nil || o.SignOutEndpoint == nil {
-		return nil, false
+	if o == nil || isNil(o.SignOutEndpoint) {
+    return nil, false
 	}
 	return o.SignOutEndpoint, true
 }
 
 // HasSignOutEndpoint returns a boolean if a field has been set.
 func (o *ConnectionSamlCreateRequest) HasSignOutEndpoint() bool {
-	if o != nil && o.SignOutEndpoint != nil {
+	if o != nil && !isNil(o.SignOutEndpoint) {
 		return true
 	}
 
@@ -215,7 +215,7 @@ func (o *ConnectionSamlCreateRequest) GetPublicKeyCertificate() string {
 // and a boolean to check if the value has been set.
 func (o *ConnectionSamlCreateRequest) GetPublicKeyCertificateOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.PublicKeyCertificate, true
 }
@@ -230,16 +230,16 @@ func (o ConnectionSamlCreateRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["connectionName"] = o.ConnectionName
 	}
-	if o.DisplayName != nil {
+	if !isNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	if o.GuiOrder != nil {
+	if !isNil(o.GuiOrder) {
 		toSerialize["guiOrder"] = o.GuiOrder
 	}
-	if o.SignInEndpoint != nil {
+	if !isNil(o.SignInEndpoint) {
 		toSerialize["signInEndpoint"] = o.SignInEndpoint
 	}
-	if o.SignOutEndpoint != nil {
+	if !isNil(o.SignOutEndpoint) {
 		toSerialize["signOutEndpoint"] = o.SignOutEndpoint
 	}
 	if true {

@@ -57,7 +57,7 @@ func (o *ActionInfo) GetCreatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *ActionInfo) GetCreatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedAt, true
 }
@@ -81,7 +81,7 @@ func (o *ActionInfo) GetCreatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *ActionInfo) GetCreatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.CreatedBy, true
 }
@@ -105,7 +105,7 @@ func (o *ActionInfo) GetUpdatedAt() int64 {
 // and a boolean to check if the value has been set.
 func (o *ActionInfo) GetUpdatedAtOk() (*int64, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedAt, true
 }
@@ -129,7 +129,7 @@ func (o *ActionInfo) GetUpdatedBy() ActionBy {
 // and a boolean to check if the value has been set.
 func (o *ActionInfo) GetUpdatedByOk() (*ActionBy, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.UpdatedBy, true
 }

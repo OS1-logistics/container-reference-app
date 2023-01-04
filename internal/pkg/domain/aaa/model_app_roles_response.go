@@ -41,7 +41,7 @@ func NewAppRolesResponseWithDefaults() *AppRolesResponse {
 
 // GetAppId returns the AppId field value if set, zero value otherwise.
 func (o *AppRolesResponse) GetAppId() string {
-	if o == nil || o.AppId == nil {
+	if o == nil || isNil(o.AppId) {
 		var ret string
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *AppRolesResponse) GetAppId() string {
 // GetAppIdOk returns a tuple with the AppId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppRolesResponse) GetAppIdOk() (*string, bool) {
-	if o == nil || o.AppId == nil {
-		return nil, false
+	if o == nil || isNil(o.AppId) {
+    return nil, false
 	}
 	return o.AppId, true
 }
 
 // HasAppId returns a boolean if a field has been set.
 func (o *AppRolesResponse) HasAppId() bool {
-	if o != nil && o.AppId != nil {
+	if o != nil && !isNil(o.AppId) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *AppRolesResponse) SetAppId(v string) {
 
 // GetRoles returns the Roles field value if set, zero value otherwise.
 func (o *AppRolesResponse) GetRoles() []string {
-	if o == nil || o.Roles == nil {
+	if o == nil || isNil(o.Roles) {
 		var ret []string
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *AppRolesResponse) GetRoles() []string {
 // GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppRolesResponse) GetRolesOk() ([]string, bool) {
-	if o == nil || o.Roles == nil {
-		return nil, false
+	if o == nil || isNil(o.Roles) {
+    return nil, false
 	}
 	return o.Roles, true
 }
 
 // HasRoles returns a boolean if a field has been set.
 func (o *AppRolesResponse) HasRoles() bool {
-	if o != nil && o.Roles != nil {
+	if o != nil && !isNil(o.Roles) {
 		return true
 	}
 
@@ -105,10 +105,10 @@ func (o *AppRolesResponse) SetRoles(v []string) {
 
 func (o AppRolesResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.AppId != nil {
+	if !isNil(o.AppId) {
 		toSerialize["appId"] = o.AppId
 	}
-	if o.Roles != nil {
+	if !isNil(o.Roles) {
 		toSerialize["roles"] = o.Roles
 	}
 	return json.Marshal(toSerialize)

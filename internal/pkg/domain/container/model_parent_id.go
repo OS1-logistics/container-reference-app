@@ -55,7 +55,7 @@ func (o *ParentId) GetParentId() string {
 // and a boolean to check if the value has been set.
 func (o *ParentId) GetParentIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ParentId, true
 }
@@ -79,7 +79,7 @@ func (o *ParentId) GetAction() string {
 // and a boolean to check if the value has been set.
 func (o *ParentId) GetActionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Action, true
 }

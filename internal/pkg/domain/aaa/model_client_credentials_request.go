@@ -57,7 +57,7 @@ func (o *ClientCredentialsRequest) GetClientId() string {
 // and a boolean to check if the value has been set.
 func (o *ClientCredentialsRequest) GetClientIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ClientId, true
 }
@@ -81,7 +81,7 @@ func (o *ClientCredentialsRequest) GetClientSecret() string {
 // and a boolean to check if the value has been set.
 func (o *ClientCredentialsRequest) GetClientSecretOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ClientSecret, true
 }
@@ -93,7 +93,7 @@ func (o *ClientCredentialsRequest) SetClientSecret(v string) {
 
 // GetAudience returns the Audience field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ClientCredentialsRequest) GetAudience() string {
-	if o == nil || o.Audience.Get() == nil {
+	if o == nil || isNil(o.Audience.Get()) {
 		var ret string
 		return ret
 	}
@@ -105,7 +105,7 @@ func (o *ClientCredentialsRequest) GetAudience() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClientCredentialsRequest) GetAudienceOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Audience.Get(), o.Audience.IsSet()
 }

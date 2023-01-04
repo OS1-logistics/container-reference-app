@@ -57,7 +57,7 @@ func (o *CreatedState) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *CreatedState) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -81,7 +81,7 @@ func (o *CreatedState) GetDefaultSubstate() string {
 // and a boolean to check if the value has been set.
 func (o *CreatedState) GetDefaultSubstateOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.DefaultSubstate, true
 }
@@ -105,7 +105,7 @@ func (o *CreatedState) GetSubStates() []SubState {
 // and a boolean to check if the value has been set.
 func (o *CreatedState) GetSubStatesOk() ([]SubState, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.SubStates, true
 }

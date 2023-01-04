@@ -55,7 +55,7 @@ func (o *MultipartFileUploadRequest) GetFile() *os.File {
 // and a boolean to check if the value has been set.
 func (o *MultipartFileUploadRequest) GetFileOk() (**os.File, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.File, true
 }
@@ -79,7 +79,7 @@ func (o *MultipartFileUploadRequest) GetCallback() string {
 // and a boolean to check if the value has been set.
 func (o *MultipartFileUploadRequest) GetCallbackOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Callback, true
 }

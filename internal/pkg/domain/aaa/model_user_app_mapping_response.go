@@ -40,7 +40,7 @@ func NewUserAppMappingResponseWithDefaults() *UserAppMappingResponse {
 
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *UserAppMappingResponse) GetUserId() string {
-	if o == nil || o.UserId == nil {
+	if o == nil || isNil(o.UserId) {
 		var ret string
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *UserAppMappingResponse) GetUserId() string {
 // GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserAppMappingResponse) GetUserIdOk() (*string, bool) {
-	if o == nil || o.UserId == nil {
-		return nil, false
+	if o == nil || isNil(o.UserId) {
+    return nil, false
 	}
 	return o.UserId, true
 }
 
 // HasUserId returns a boolean if a field has been set.
 func (o *UserAppMappingResponse) HasUserId() bool {
-	if o != nil && o.UserId != nil {
+	if o != nil && !isNil(o.UserId) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *UserAppMappingResponse) SetUserId(v string) {
 
 // GetApps returns the Apps field value if set, zero value otherwise.
 func (o *UserAppMappingResponse) GetApps() []string {
-	if o == nil || o.Apps == nil {
+	if o == nil || isNil(o.Apps) {
 		var ret []string
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *UserAppMappingResponse) GetApps() []string {
 // GetAppsOk returns a tuple with the Apps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserAppMappingResponse) GetAppsOk() ([]string, bool) {
-	if o == nil || o.Apps == nil {
-		return nil, false
+	if o == nil || isNil(o.Apps) {
+    return nil, false
 	}
 	return o.Apps, true
 }
 
 // HasApps returns a boolean if a field has been set.
 func (o *UserAppMappingResponse) HasApps() bool {
-	if o != nil && o.Apps != nil {
+	if o != nil && !isNil(o.Apps) {
 		return true
 	}
 
@@ -104,10 +104,10 @@ func (o *UserAppMappingResponse) SetApps(v []string) {
 
 func (o UserAppMappingResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.UserId != nil {
+	if !isNil(o.UserId) {
 		toSerialize["userId"] = o.UserId
 	}
-	if o.Apps != nil {
+	if !isNil(o.Apps) {
 		toSerialize["apps"] = o.Apps
 	}
 	return json.Marshal(toSerialize)

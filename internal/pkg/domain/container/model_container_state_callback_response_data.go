@@ -40,7 +40,7 @@ func NewContainerStateCallbackResponseDataWithDefaults() *ContainerStateCallback
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ContainerStateCallbackResponseData) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *ContainerStateCallbackResponseData) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateCallbackResponseData) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
+	if o == nil || isNil(o.Id) {
+    return nil, false
 	}
 	return o.Id, true
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *ContainerStateCallbackResponseData) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *ContainerStateCallbackResponseData) SetId(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *ContainerStateCallbackResponseData) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || isNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *ContainerStateCallbackResponseData) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerStateCallbackResponseData) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
-		return nil, false
+	if o == nil || isNil(o.State) {
+    return nil, false
 	}
 	return o.State, true
 }
 
 // HasState returns a boolean if a field has been set.
 func (o *ContainerStateCallbackResponseData) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !isNil(o.State) {
 		return true
 	}
 
@@ -104,10 +104,10 @@ func (o *ContainerStateCallbackResponseData) SetState(v string) {
 
 func (o ContainerStateCallbackResponseData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.State != nil {
+	if !isNil(o.State) {
 		toSerialize["state"] = o.State
 	}
 	return json.Marshal(toSerialize)

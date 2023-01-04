@@ -39,7 +39,7 @@ func NewSMSSendRequestReqWithDefaults() *SMSSendRequestReq {
 
 // GetIp returns the Ip field value if set, zero value otherwise.
 func (o *SMSSendRequestReq) GetIp() string {
-	if o == nil || o.Ip == nil {
+	if o == nil || isNil(o.Ip) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *SMSSendRequestReq) GetIp() string {
 // GetIpOk returns a tuple with the Ip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SMSSendRequestReq) GetIpOk() (*string, bool) {
-	if o == nil || o.Ip == nil {
-		return nil, false
+	if o == nil || isNil(o.Ip) {
+    return nil, false
 	}
 	return o.Ip, true
 }
 
 // HasIp returns a boolean if a field has been set.
 func (o *SMSSendRequestReq) HasIp() bool {
-	if o != nil && o.Ip != nil {
+	if o != nil && !isNil(o.Ip) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *SMSSendRequestReq) SetIp(v string) {
 
 // GetUserAgent returns the UserAgent field value if set, zero value otherwise.
 func (o *SMSSendRequestReq) GetUserAgent() string {
-	if o == nil || o.UserAgent == nil {
+	if o == nil || isNil(o.UserAgent) {
 		var ret string
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *SMSSendRequestReq) GetUserAgent() string {
 // GetUserAgentOk returns a tuple with the UserAgent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SMSSendRequestReq) GetUserAgentOk() (*string, bool) {
-	if o == nil || o.UserAgent == nil {
-		return nil, false
+	if o == nil || isNil(o.UserAgent) {
+    return nil, false
 	}
 	return o.UserAgent, true
 }
 
 // HasUserAgent returns a boolean if a field has been set.
 func (o *SMSSendRequestReq) HasUserAgent() bool {
-	if o != nil && o.UserAgent != nil {
+	if o != nil && !isNil(o.UserAgent) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *SMSSendRequestReq) SetUserAgent(v string) {
 
 func (o SMSSendRequestReq) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Ip != nil {
+	if !isNil(o.Ip) {
 		toSerialize["ip"] = o.Ip
 	}
-	if o.UserAgent != nil {
+	if !isNil(o.UserAgent) {
 		toSerialize["user-agent"] = o.UserAgent
 	}
 	return json.Marshal(toSerialize)

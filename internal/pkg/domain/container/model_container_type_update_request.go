@@ -52,7 +52,7 @@ func (o *ContainerTypeUpdateRequest) GetAllowedParent() ContainerTypeAllowedPare
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeUpdateRequest) GetAllowedParentOk() (*ContainerTypeAllowedParent, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AllowedParent, true
 }
@@ -64,7 +64,7 @@ func (o *ContainerTypeUpdateRequest) SetAllowedParent(v ContainerTypeAllowedPare
 
 // GetCallback returns the Callback field value if set, zero value otherwise.
 func (o *ContainerTypeUpdateRequest) GetCallback() ContainerTypeUpdateRequestCallback {
-	if o == nil || o.Callback == nil {
+	if o == nil || isNil(o.Callback) {
 		var ret ContainerTypeUpdateRequestCallback
 		return ret
 	}
@@ -74,15 +74,15 @@ func (o *ContainerTypeUpdateRequest) GetCallback() ContainerTypeUpdateRequestCal
 // GetCallbackOk returns a tuple with the Callback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeUpdateRequest) GetCallbackOk() (*ContainerTypeUpdateRequestCallback, bool) {
-	if o == nil || o.Callback == nil {
-		return nil, false
+	if o == nil || isNil(o.Callback) {
+    return nil, false
 	}
 	return o.Callback, true
 }
 
 // HasCallback returns a boolean if a field has been set.
 func (o *ContainerTypeUpdateRequest) HasCallback() bool {
-	if o != nil && o.Callback != nil {
+	if o != nil && !isNil(o.Callback) {
 		return true
 	}
 
@@ -99,7 +99,7 @@ func (o ContainerTypeUpdateRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["allowedParent"] = o.AllowedParent
 	}
-	if o.Callback != nil {
+	if !isNil(o.Callback) {
 		toSerialize["callback"] = o.Callback
 	}
 	return json.Marshal(toSerialize)

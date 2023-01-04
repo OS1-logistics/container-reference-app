@@ -39,7 +39,7 @@ func NewSuccessVerifyOtpResponseDataWithDefaults() *SuccessVerifyOtpResponseData
 
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *SuccessVerifyOtpResponseData) GetUserId() string {
-	if o == nil || o.UserId == nil {
+	if o == nil || isNil(o.UserId) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *SuccessVerifyOtpResponseData) GetUserId() string {
 // GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessVerifyOtpResponseData) GetUserIdOk() (*string, bool) {
-	if o == nil || o.UserId == nil {
-		return nil, false
+	if o == nil || isNil(o.UserId) {
+    return nil, false
 	}
 	return o.UserId, true
 }
 
 // HasUserId returns a boolean if a field has been set.
 func (o *SuccessVerifyOtpResponseData) HasUserId() bool {
-	if o != nil && o.UserId != nil {
+	if o != nil && !isNil(o.UserId) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *SuccessVerifyOtpResponseData) SetUserId(v string) {
 
 func (o SuccessVerifyOtpResponseData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.UserId != nil {
+	if !isNil(o.UserId) {
 		toSerialize["userId"] = o.UserId
 	}
 	return json.Marshal(toSerialize)

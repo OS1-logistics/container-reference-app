@@ -45,7 +45,7 @@ func NewContainerBatchCallbackResponseWithDefaults() *ContainerBatchCallbackResp
 
 // GetTenantId returns the TenantId field value if set, zero value otherwise.
 func (o *ContainerBatchCallbackResponse) GetTenantId() string {
-	if o == nil || o.TenantId == nil {
+	if o == nil || isNil(o.TenantId) {
 		var ret string
 		return ret
 	}
@@ -55,15 +55,15 @@ func (o *ContainerBatchCallbackResponse) GetTenantId() string {
 // GetTenantIdOk returns a tuple with the TenantId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerBatchCallbackResponse) GetTenantIdOk() (*string, bool) {
-	if o == nil || o.TenantId == nil {
-		return nil, false
+	if o == nil || isNil(o.TenantId) {
+    return nil, false
 	}
 	return o.TenantId, true
 }
 
 // HasTenantId returns a boolean if a field has been set.
 func (o *ContainerBatchCallbackResponse) HasTenantId() bool {
-	if o != nil && o.TenantId != nil {
+	if o != nil && !isNil(o.TenantId) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *ContainerBatchCallbackResponse) SetTenantId(v string) {
 
 // GetContainerType returns the ContainerType field value if set, zero value otherwise.
 func (o *ContainerBatchCallbackResponse) GetContainerType() string {
-	if o == nil || o.ContainerType == nil {
+	if o == nil || isNil(o.ContainerType) {
 		var ret string
 		return ret
 	}
@@ -87,15 +87,15 @@ func (o *ContainerBatchCallbackResponse) GetContainerType() string {
 // GetContainerTypeOk returns a tuple with the ContainerType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerBatchCallbackResponse) GetContainerTypeOk() (*string, bool) {
-	if o == nil || o.ContainerType == nil {
-		return nil, false
+	if o == nil || isNil(o.ContainerType) {
+    return nil, false
 	}
 	return o.ContainerType, true
 }
 
 // HasContainerType returns a boolean if a field has been set.
 func (o *ContainerBatchCallbackResponse) HasContainerType() bool {
-	if o != nil && o.ContainerType != nil {
+	if o != nil && !isNil(o.ContainerType) {
 		return true
 	}
 
@@ -109,7 +109,7 @@ func (o *ContainerBatchCallbackResponse) SetContainerType(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ContainerBatchCallbackResponse) GetStatus() CallbackStatus {
-	if o == nil || o.Status == nil {
+	if o == nil || isNil(o.Status) {
 		var ret CallbackStatus
 		return ret
 	}
@@ -119,15 +119,15 @@ func (o *ContainerBatchCallbackResponse) GetStatus() CallbackStatus {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerBatchCallbackResponse) GetStatusOk() (*CallbackStatus, bool) {
-	if o == nil || o.Status == nil {
-		return nil, false
+	if o == nil || isNil(o.Status) {
+    return nil, false
 	}
 	return o.Status, true
 }
 
 // HasStatus returns a boolean if a field has been set.
 func (o *ContainerBatchCallbackResponse) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !isNil(o.Status) {
 		return true
 	}
 
@@ -141,7 +141,7 @@ func (o *ContainerBatchCallbackResponse) SetStatus(v CallbackStatus) {
 
 // GetReason returns the Reason field value if set, zero value otherwise.
 func (o *ContainerBatchCallbackResponse) GetReason() string {
-	if o == nil || o.Reason == nil {
+	if o == nil || isNil(o.Reason) {
 		var ret string
 		return ret
 	}
@@ -151,15 +151,15 @@ func (o *ContainerBatchCallbackResponse) GetReason() string {
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerBatchCallbackResponse) GetReasonOk() (*string, bool) {
-	if o == nil || o.Reason == nil {
-		return nil, false
+	if o == nil || isNil(o.Reason) {
+    return nil, false
 	}
 	return o.Reason, true
 }
 
 // HasReason returns a boolean if a field has been set.
 func (o *ContainerBatchCallbackResponse) HasReason() bool {
-	if o != nil && o.Reason != nil {
+	if o != nil && !isNil(o.Reason) {
 		return true
 	}
 
@@ -173,7 +173,7 @@ func (o *ContainerBatchCallbackResponse) SetReason(v string) {
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *ContainerBatchCallbackResponse) GetData() ContainerBatchResponseData {
-	if o == nil || o.Data == nil {
+	if o == nil || isNil(o.Data) {
 		var ret ContainerBatchResponseData
 		return ret
 	}
@@ -183,15 +183,15 @@ func (o *ContainerBatchCallbackResponse) GetData() ContainerBatchResponseData {
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerBatchCallbackResponse) GetDataOk() (*ContainerBatchResponseData, bool) {
-	if o == nil || o.Data == nil {
-		return nil, false
+	if o == nil || isNil(o.Data) {
+    return nil, false
 	}
 	return o.Data, true
 }
 
 // HasData returns a boolean if a field has been set.
 func (o *ContainerBatchCallbackResponse) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !isNil(o.Data) {
 		return true
 	}
 
@@ -205,19 +205,19 @@ func (o *ContainerBatchCallbackResponse) SetData(v ContainerBatchResponseData) {
 
 func (o ContainerBatchCallbackResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TenantId != nil {
+	if !isNil(o.TenantId) {
 		toSerialize["tenantId"] = o.TenantId
 	}
-	if o.ContainerType != nil {
+	if !isNil(o.ContainerType) {
 		toSerialize["containerType"] = o.ContainerType
 	}
-	if o.Status != nil {
+	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if o.Reason != nil {
+	if !isNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
-	if o.Data != nil {
+	if !isNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
 	return json.Marshal(toSerialize)

@@ -41,7 +41,7 @@ func NewGroupUpdateRequestUsersWithDefaults() *GroupUpdateRequestUsers {
 
 // GetUserIds returns the UserIds field value if set, zero value otherwise.
 func (o *GroupUpdateRequestUsers) GetUserIds() []string {
-	if o == nil || o.UserIds == nil {
+	if o == nil || isNil(o.UserIds) {
 		var ret []string
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *GroupUpdateRequestUsers) GetUserIds() []string {
 // GetUserIdsOk returns a tuple with the UserIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupUpdateRequestUsers) GetUserIdsOk() ([]string, bool) {
-	if o == nil || o.UserIds == nil {
-		return nil, false
+	if o == nil || isNil(o.UserIds) {
+    return nil, false
 	}
 	return o.UserIds, true
 }
 
 // HasUserIds returns a boolean if a field has been set.
 func (o *GroupUpdateRequestUsers) HasUserIds() bool {
-	if o != nil && o.UserIds != nil {
+	if o != nil && !isNil(o.UserIds) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *GroupUpdateRequestUsers) SetUserIds(v []string) {
 
 // GetMembership returns the Membership field value if set, zero value otherwise.
 func (o *GroupUpdateRequestUsers) GetMembership() bool {
-	if o == nil || o.Membership == nil {
+	if o == nil || isNil(o.Membership) {
 		var ret bool
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *GroupUpdateRequestUsers) GetMembership() bool {
 // GetMembershipOk returns a tuple with the Membership field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupUpdateRequestUsers) GetMembershipOk() (*bool, bool) {
-	if o == nil || o.Membership == nil {
-		return nil, false
+	if o == nil || isNil(o.Membership) {
+    return nil, false
 	}
 	return o.Membership, true
 }
 
 // HasMembership returns a boolean if a field has been set.
 func (o *GroupUpdateRequestUsers) HasMembership() bool {
-	if o != nil && o.Membership != nil {
+	if o != nil && !isNil(o.Membership) {
 		return true
 	}
 
@@ -105,10 +105,10 @@ func (o *GroupUpdateRequestUsers) SetMembership(v bool) {
 
 func (o GroupUpdateRequestUsers) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.UserIds != nil {
+	if !isNil(o.UserIds) {
 		toSerialize["userIds"] = o.UserIds
 	}
-	if o.Membership != nil {
+	if !isNil(o.Membership) {
 		toSerialize["membership"] = o.Membership
 	}
 	return json.Marshal(toSerialize)

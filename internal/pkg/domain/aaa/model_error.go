@@ -43,7 +43,7 @@ func NewErrorWithDefaults() *Error {
 
 // GetCode returns the Code field value if set, zero value otherwise.
 func (o *Error) GetCode() string {
-	if o == nil || o.Code == nil {
+	if o == nil || isNil(o.Code) {
 		var ret string
 		return ret
 	}
@@ -53,15 +53,15 @@ func (o *Error) GetCode() string {
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Error) GetCodeOk() (*string, bool) {
-	if o == nil || o.Code == nil {
-		return nil, false
+	if o == nil || isNil(o.Code) {
+    return nil, false
 	}
 	return o.Code, true
 }
 
 // HasCode returns a boolean if a field has been set.
 func (o *Error) HasCode() bool {
-	if o != nil && o.Code != nil {
+	if o != nil && !isNil(o.Code) {
 		return true
 	}
 
@@ -75,7 +75,7 @@ func (o *Error) SetCode(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *Error) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || isNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -85,15 +85,15 @@ func (o *Error) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Error) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
-		return nil, false
+	if o == nil || isNil(o.Description) {
+    return nil, false
 	}
 	return o.Description, true
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *Error) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !isNil(o.Description) {
 		return true
 	}
 
@@ -107,7 +107,7 @@ func (o *Error) SetDescription(v string) {
 
 // GetAdditionalInfo returns the AdditionalInfo field value if set, zero value otherwise.
 func (o *Error) GetAdditionalInfo() map[string]interface{} {
-	if o == nil || o.AdditionalInfo == nil {
+	if o == nil || isNil(o.AdditionalInfo) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -117,15 +117,15 @@ func (o *Error) GetAdditionalInfo() map[string]interface{} {
 // GetAdditionalInfoOk returns a tuple with the AdditionalInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Error) GetAdditionalInfoOk() (map[string]interface{}, bool) {
-	if o == nil || o.AdditionalInfo == nil {
-		return nil, false
+	if o == nil || isNil(o.AdditionalInfo) {
+    return map[string]interface{}{}, false
 	}
 	return o.AdditionalInfo, true
 }
 
 // HasAdditionalInfo returns a boolean if a field has been set.
 func (o *Error) HasAdditionalInfo() bool {
-	if o != nil && o.AdditionalInfo != nil {
+	if o != nil && !isNil(o.AdditionalInfo) {
 		return true
 	}
 
@@ -139,13 +139,13 @@ func (o *Error) SetAdditionalInfo(v map[string]interface{}) {
 
 func (o Error) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Code != nil {
+	if !isNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}
-	if o.Description != nil {
+	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.AdditionalInfo != nil {
+	if !isNil(o.AdditionalInfo) {
 		toSerialize["additionalInfo"] = o.AdditionalInfo
 	}
 	return json.Marshal(toSerialize)

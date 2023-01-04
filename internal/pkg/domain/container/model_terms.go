@@ -39,7 +39,7 @@ func NewTermsWithDefaults() *Terms {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *Terms) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || isNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *Terms) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Terms) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
-		return nil, false
+	if o == nil || isNil(o.Key) {
+    return nil, false
 	}
 	return o.Key, true
 }
 
 // HasKey returns a boolean if a field has been set.
 func (o *Terms) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !isNil(o.Key) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *Terms) SetKey(v string) {
 
 // GetValues returns the Values field value if set, zero value otherwise.
 func (o *Terms) GetValues() []string {
-	if o == nil || o.Values == nil {
+	if o == nil || isNil(o.Values) {
 		var ret []string
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *Terms) GetValues() []string {
 // GetValuesOk returns a tuple with the Values field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Terms) GetValuesOk() ([]string, bool) {
-	if o == nil || o.Values == nil {
-		return nil, false
+	if o == nil || isNil(o.Values) {
+    return nil, false
 	}
 	return o.Values, true
 }
 
 // HasValues returns a boolean if a field has been set.
 func (o *Terms) HasValues() bool {
-	if o != nil && o.Values != nil {
+	if o != nil && !isNil(o.Values) {
 		return true
 	}
 
@@ -103,10 +103,10 @@ func (o *Terms) SetValues(v []string) {
 
 func (o Terms) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Key != nil {
+	if !isNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
-	if o.Values != nil {
+	if !isNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
 	return json.Marshal(toSerialize)

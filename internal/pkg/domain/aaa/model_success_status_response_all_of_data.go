@@ -39,7 +39,7 @@ func NewSuccessStatusResponseAllOfDataWithDefaults() *SuccessStatusResponseAllOf
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *SuccessStatusResponseAllOfData) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || isNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -49,15 +49,15 @@ func (o *SuccessStatusResponseAllOfData) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SuccessStatusResponseAllOfData) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
-		return nil, false
+	if o == nil || isNil(o.Status) {
+    return nil, false
 	}
 	return o.Status, true
 }
 
 // HasStatus returns a boolean if a field has been set.
 func (o *SuccessStatusResponseAllOfData) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !isNil(o.Status) {
 		return true
 	}
 
@@ -71,7 +71,7 @@ func (o *SuccessStatusResponseAllOfData) SetStatus(v string) {
 
 func (o SuccessStatusResponseAllOfData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Status != nil {
+	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
 	return json.Marshal(toSerialize)

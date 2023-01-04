@@ -63,7 +63,7 @@ func NewOIDCResponseWithDefaults() *OIDCResponse {
 
 // GetConnectionId returns the ConnectionId field value if set, zero value otherwise.
 func (o *OIDCResponse) GetConnectionId() string {
-	if o == nil || o.ConnectionId == nil {
+	if o == nil || isNil(o.ConnectionId) {
 		var ret string
 		return ret
 	}
@@ -73,15 +73,15 @@ func (o *OIDCResponse) GetConnectionId() string {
 // GetConnectionIdOk returns a tuple with the ConnectionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetConnectionIdOk() (*string, bool) {
-	if o == nil || o.ConnectionId == nil {
-		return nil, false
+	if o == nil || isNil(o.ConnectionId) {
+    return nil, false
 	}
 	return o.ConnectionId, true
 }
 
 // HasConnectionId returns a boolean if a field has been set.
 func (o *OIDCResponse) HasConnectionId() bool {
-	if o != nil && o.ConnectionId != nil {
+	if o != nil && !isNil(o.ConnectionId) {
 		return true
 	}
 
@@ -95,7 +95,7 @@ func (o *OIDCResponse) SetConnectionId(v string) {
 
 // GetConnectionName returns the ConnectionName field value if set, zero value otherwise.
 func (o *OIDCResponse) GetConnectionName() string {
-	if o == nil || o.ConnectionName == nil {
+	if o == nil || isNil(o.ConnectionName) {
 		var ret string
 		return ret
 	}
@@ -105,15 +105,15 @@ func (o *OIDCResponse) GetConnectionName() string {
 // GetConnectionNameOk returns a tuple with the ConnectionName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetConnectionNameOk() (*string, bool) {
-	if o == nil || o.ConnectionName == nil {
-		return nil, false
+	if o == nil || isNil(o.ConnectionName) {
+    return nil, false
 	}
 	return o.ConnectionName, true
 }
 
 // HasConnectionName returns a boolean if a field has been set.
 func (o *OIDCResponse) HasConnectionName() bool {
-	if o != nil && o.ConnectionName != nil {
+	if o != nil && !isNil(o.ConnectionName) {
 		return true
 	}
 
@@ -127,7 +127,7 @@ func (o *OIDCResponse) SetConnectionName(v string) {
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *OIDCResponse) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+	if o == nil || isNil(o.DisplayName) {
 		var ret string
 		return ret
 	}
@@ -137,15 +137,15 @@ func (o *OIDCResponse) GetDisplayName() string {
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
-		return nil, false
+	if o == nil || isNil(o.DisplayName) {
+    return nil, false
 	}
 	return o.DisplayName, true
 }
 
 // HasDisplayName returns a boolean if a field has been set.
 func (o *OIDCResponse) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+	if o != nil && !isNil(o.DisplayName) {
 		return true
 	}
 
@@ -159,7 +159,7 @@ func (o *OIDCResponse) SetDisplayName(v string) {
 
 // GetConnectionType returns the ConnectionType field value if set, zero value otherwise.
 func (o *OIDCResponse) GetConnectionType() string {
-	if o == nil || o.ConnectionType == nil {
+	if o == nil || isNil(o.ConnectionType) {
 		var ret string
 		return ret
 	}
@@ -169,15 +169,15 @@ func (o *OIDCResponse) GetConnectionType() string {
 // GetConnectionTypeOk returns a tuple with the ConnectionType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetConnectionTypeOk() (*string, bool) {
-	if o == nil || o.ConnectionType == nil {
-		return nil, false
+	if o == nil || isNil(o.ConnectionType) {
+    return nil, false
 	}
 	return o.ConnectionType, true
 }
 
 // HasConnectionType returns a boolean if a field has been set.
 func (o *OIDCResponse) HasConnectionType() bool {
-	if o != nil && o.ConnectionType != nil {
+	if o != nil && !isNil(o.ConnectionType) {
 		return true
 	}
 
@@ -191,7 +191,7 @@ func (o *OIDCResponse) SetConnectionType(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *OIDCResponse) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || isNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -201,15 +201,15 @@ func (o *OIDCResponse) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
-		return nil, false
+	if o == nil || isNil(o.Enabled) {
+    return nil, false
 	}
 	return o.Enabled, true
 }
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *OIDCResponse) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !isNil(o.Enabled) {
 		return true
 	}
 
@@ -223,7 +223,7 @@ func (o *OIDCResponse) SetEnabled(v bool) {
 
 // GetAuthorizationUrl returns the AuthorizationUrl field value if set, zero value otherwise.
 func (o *OIDCResponse) GetAuthorizationUrl() string {
-	if o == nil || o.AuthorizationUrl == nil {
+	if o == nil || isNil(o.AuthorizationUrl) {
 		var ret string
 		return ret
 	}
@@ -233,15 +233,15 @@ func (o *OIDCResponse) GetAuthorizationUrl() string {
 // GetAuthorizationUrlOk returns a tuple with the AuthorizationUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetAuthorizationUrlOk() (*string, bool) {
-	if o == nil || o.AuthorizationUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.AuthorizationUrl) {
+    return nil, false
 	}
 	return o.AuthorizationUrl, true
 }
 
 // HasAuthorizationUrl returns a boolean if a field has been set.
 func (o *OIDCResponse) HasAuthorizationUrl() bool {
-	if o != nil && o.AuthorizationUrl != nil {
+	if o != nil && !isNil(o.AuthorizationUrl) {
 		return true
 	}
 
@@ -255,7 +255,7 @@ func (o *OIDCResponse) SetAuthorizationUrl(v string) {
 
 // GetTokenUrl returns the TokenUrl field value if set, zero value otherwise.
 func (o *OIDCResponse) GetTokenUrl() string {
-	if o == nil || o.TokenUrl == nil {
+	if o == nil || isNil(o.TokenUrl) {
 		var ret string
 		return ret
 	}
@@ -265,15 +265,15 @@ func (o *OIDCResponse) GetTokenUrl() string {
 // GetTokenUrlOk returns a tuple with the TokenUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetTokenUrlOk() (*string, bool) {
-	if o == nil || o.TokenUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.TokenUrl) {
+    return nil, false
 	}
 	return o.TokenUrl, true
 }
 
 // HasTokenUrl returns a boolean if a field has been set.
 func (o *OIDCResponse) HasTokenUrl() bool {
-	if o != nil && o.TokenUrl != nil {
+	if o != nil && !isNil(o.TokenUrl) {
 		return true
 	}
 
@@ -287,7 +287,7 @@ func (o *OIDCResponse) SetTokenUrl(v string) {
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
 func (o *OIDCResponse) GetClientId() string {
-	if o == nil || o.ClientId == nil {
+	if o == nil || isNil(o.ClientId) {
 		var ret string
 		return ret
 	}
@@ -297,15 +297,15 @@ func (o *OIDCResponse) GetClientId() string {
 // GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetClientIdOk() (*string, bool) {
-	if o == nil || o.ClientId == nil {
-		return nil, false
+	if o == nil || isNil(o.ClientId) {
+    return nil, false
 	}
 	return o.ClientId, true
 }
 
 // HasClientId returns a boolean if a field has been set.
 func (o *OIDCResponse) HasClientId() bool {
-	if o != nil && o.ClientId != nil {
+	if o != nil && !isNil(o.ClientId) {
 		return true
 	}
 
@@ -319,7 +319,7 @@ func (o *OIDCResponse) SetClientId(v string) {
 
 // GetUserInfoUrl returns the UserInfoUrl field value if set, zero value otherwise.
 func (o *OIDCResponse) GetUserInfoUrl() string {
-	if o == nil || o.UserInfoUrl == nil {
+	if o == nil || isNil(o.UserInfoUrl) {
 		var ret string
 		return ret
 	}
@@ -329,15 +329,15 @@ func (o *OIDCResponse) GetUserInfoUrl() string {
 // GetUserInfoUrlOk returns a tuple with the UserInfoUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetUserInfoUrlOk() (*string, bool) {
-	if o == nil || o.UserInfoUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.UserInfoUrl) {
+    return nil, false
 	}
 	return o.UserInfoUrl, true
 }
 
 // HasUserInfoUrl returns a boolean if a field has been set.
 func (o *OIDCResponse) HasUserInfoUrl() bool {
-	if o != nil && o.UserInfoUrl != nil {
+	if o != nil && !isNil(o.UserInfoUrl) {
 		return true
 	}
 
@@ -351,7 +351,7 @@ func (o *OIDCResponse) SetUserInfoUrl(v string) {
 
 // GetLogoutUrl returns the LogoutUrl field value if set, zero value otherwise.
 func (o *OIDCResponse) GetLogoutUrl() string {
-	if o == nil || o.LogoutUrl == nil {
+	if o == nil || isNil(o.LogoutUrl) {
 		var ret string
 		return ret
 	}
@@ -361,15 +361,15 @@ func (o *OIDCResponse) GetLogoutUrl() string {
 // GetLogoutUrlOk returns a tuple with the LogoutUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetLogoutUrlOk() (*string, bool) {
-	if o == nil || o.LogoutUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.LogoutUrl) {
+    return nil, false
 	}
 	return o.LogoutUrl, true
 }
 
 // HasLogoutUrl returns a boolean if a field has been set.
 func (o *OIDCResponse) HasLogoutUrl() bool {
-	if o != nil && o.LogoutUrl != nil {
+	if o != nil && !isNil(o.LogoutUrl) {
 		return true
 	}
 
@@ -383,7 +383,7 @@ func (o *OIDCResponse) SetLogoutUrl(v string) {
 
 // GetGuiOrder returns the GuiOrder field value if set, zero value otherwise.
 func (o *OIDCResponse) GetGuiOrder() float32 {
-	if o == nil || o.GuiOrder == nil {
+	if o == nil || isNil(o.GuiOrder) {
 		var ret float32
 		return ret
 	}
@@ -393,15 +393,15 @@ func (o *OIDCResponse) GetGuiOrder() float32 {
 // GetGuiOrderOk returns a tuple with the GuiOrder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetGuiOrderOk() (*float32, bool) {
-	if o == nil || o.GuiOrder == nil {
-		return nil, false
+	if o == nil || isNil(o.GuiOrder) {
+    return nil, false
 	}
 	return o.GuiOrder, true
 }
 
 // HasGuiOrder returns a boolean if a field has been set.
 func (o *OIDCResponse) HasGuiOrder() bool {
-	if o != nil && o.GuiOrder != nil {
+	if o != nil && !isNil(o.GuiOrder) {
 		return true
 	}
 
@@ -415,7 +415,7 @@ func (o *OIDCResponse) SetGuiOrder(v float32) {
 
 // GetIssuer returns the Issuer field value if set, zero value otherwise.
 func (o *OIDCResponse) GetIssuer() string {
-	if o == nil || o.Issuer == nil {
+	if o == nil || isNil(o.Issuer) {
 		var ret string
 		return ret
 	}
@@ -425,15 +425,15 @@ func (o *OIDCResponse) GetIssuer() string {
 // GetIssuerOk returns a tuple with the Issuer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetIssuerOk() (*string, bool) {
-	if o == nil || o.Issuer == nil {
-		return nil, false
+	if o == nil || isNil(o.Issuer) {
+    return nil, false
 	}
 	return o.Issuer, true
 }
 
 // HasIssuer returns a boolean if a field has been set.
 func (o *OIDCResponse) HasIssuer() bool {
-	if o != nil && o.Issuer != nil {
+	if o != nil && !isNil(o.Issuer) {
 		return true
 	}
 
@@ -447,7 +447,7 @@ func (o *OIDCResponse) SetIssuer(v string) {
 
 // GetJwksUrl returns the JwksUrl field value if set, zero value otherwise.
 func (o *OIDCResponse) GetJwksUrl() string {
-	if o == nil || o.JwksUrl == nil {
+	if o == nil || isNil(o.JwksUrl) {
 		var ret string
 		return ret
 	}
@@ -457,15 +457,15 @@ func (o *OIDCResponse) GetJwksUrl() string {
 // GetJwksUrlOk returns a tuple with the JwksUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OIDCResponse) GetJwksUrlOk() (*string, bool) {
-	if o == nil || o.JwksUrl == nil {
-		return nil, false
+	if o == nil || isNil(o.JwksUrl) {
+    return nil, false
 	}
 	return o.JwksUrl, true
 }
 
 // HasJwksUrl returns a boolean if a field has been set.
 func (o *OIDCResponse) HasJwksUrl() bool {
-	if o != nil && o.JwksUrl != nil {
+	if o != nil && !isNil(o.JwksUrl) {
 		return true
 	}
 
@@ -479,43 +479,43 @@ func (o *OIDCResponse) SetJwksUrl(v string) {
 
 func (o OIDCResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ConnectionId != nil {
+	if !isNil(o.ConnectionId) {
 		toSerialize["connectionId"] = o.ConnectionId
 	}
-	if o.ConnectionName != nil {
+	if !isNil(o.ConnectionName) {
 		toSerialize["connectionName"] = o.ConnectionName
 	}
-	if o.DisplayName != nil {
+	if !isNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	if o.ConnectionType != nil {
+	if !isNil(o.ConnectionType) {
 		toSerialize["connectionType"] = o.ConnectionType
 	}
-	if o.Enabled != nil {
+	if !isNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if o.AuthorizationUrl != nil {
+	if !isNil(o.AuthorizationUrl) {
 		toSerialize["authorizationUrl"] = o.AuthorizationUrl
 	}
-	if o.TokenUrl != nil {
+	if !isNil(o.TokenUrl) {
 		toSerialize["tokenUrl"] = o.TokenUrl
 	}
-	if o.ClientId != nil {
+	if !isNil(o.ClientId) {
 		toSerialize["clientId"] = o.ClientId
 	}
-	if o.UserInfoUrl != nil {
+	if !isNil(o.UserInfoUrl) {
 		toSerialize["userInfoUrl"] = o.UserInfoUrl
 	}
-	if o.LogoutUrl != nil {
+	if !isNil(o.LogoutUrl) {
 		toSerialize["logoutUrl"] = o.LogoutUrl
 	}
-	if o.GuiOrder != nil {
+	if !isNil(o.GuiOrder) {
 		toSerialize["guiOrder"] = o.GuiOrder
 	}
-	if o.Issuer != nil {
+	if !isNil(o.Issuer) {
 		toSerialize["issuer"] = o.Issuer
 	}
-	if o.JwksUrl != nil {
+	if !isNil(o.JwksUrl) {
 		toSerialize["jwksUrl"] = o.JwksUrl
 	}
 	return json.Marshal(toSerialize)

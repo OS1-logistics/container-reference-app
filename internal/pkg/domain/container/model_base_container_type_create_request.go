@@ -59,7 +59,7 @@ func (o *BaseContainerTypeCreateRequest) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *BaseContainerTypeCreateRequest) GetNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Name, true
 }
@@ -71,7 +71,7 @@ func (o *BaseContainerTypeCreateRequest) SetName(v string) {
 
 // GetIsLeaf returns the IsLeaf field value if set, zero value otherwise.
 func (o *BaseContainerTypeCreateRequest) GetIsLeaf() bool {
-	if o == nil || o.IsLeaf == nil {
+	if o == nil || isNil(o.IsLeaf) {
 		var ret bool
 		return ret
 	}
@@ -81,15 +81,15 @@ func (o *BaseContainerTypeCreateRequest) GetIsLeaf() bool {
 // GetIsLeafOk returns a tuple with the IsLeaf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BaseContainerTypeCreateRequest) GetIsLeafOk() (*bool, bool) {
-	if o == nil || o.IsLeaf == nil {
-		return nil, false
+	if o == nil || isNil(o.IsLeaf) {
+    return nil, false
 	}
 	return o.IsLeaf, true
 }
 
 // HasIsLeaf returns a boolean if a field has been set.
 func (o *BaseContainerTypeCreateRequest) HasIsLeaf() bool {
-	if o != nil && o.IsLeaf != nil {
+	if o != nil && !isNil(o.IsLeaf) {
 		return true
 	}
 
@@ -103,7 +103,7 @@ func (o *BaseContainerTypeCreateRequest) SetIsLeaf(v bool) {
 
 // GetAllowedParent returns the AllowedParent field value if set, zero value otherwise.
 func (o *BaseContainerTypeCreateRequest) GetAllowedParent() ContainerTypeAllowedParent {
-	if o == nil || o.AllowedParent == nil {
+	if o == nil || isNil(o.AllowedParent) {
 		var ret ContainerTypeAllowedParent
 		return ret
 	}
@@ -113,15 +113,15 @@ func (o *BaseContainerTypeCreateRequest) GetAllowedParent() ContainerTypeAllowed
 // GetAllowedParentOk returns a tuple with the AllowedParent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BaseContainerTypeCreateRequest) GetAllowedParentOk() (*ContainerTypeAllowedParent, bool) {
-	if o == nil || o.AllowedParent == nil {
-		return nil, false
+	if o == nil || isNil(o.AllowedParent) {
+    return nil, false
 	}
 	return o.AllowedParent, true
 }
 
 // HasAllowedParent returns a boolean if a field has been set.
 func (o *BaseContainerTypeCreateRequest) HasAllowedParent() bool {
-	if o != nil && o.AllowedParent != nil {
+	if o != nil && !isNil(o.AllowedParent) {
 		return true
 	}
 
@@ -138,10 +138,10 @@ func (o BaseContainerTypeCreateRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.IsLeaf != nil {
+	if !isNil(o.IsLeaf) {
 		toSerialize["isLeaf"] = o.IsLeaf
 	}
-	if o.AllowedParent != nil {
+	if !isNil(o.AllowedParent) {
 		toSerialize["allowedParent"] = o.AllowedParent
 	}
 	return json.Marshal(toSerialize)

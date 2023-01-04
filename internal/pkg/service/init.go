@@ -24,14 +24,16 @@ func Initialize(tenantId string) error {
 
 	glog.Info("Initializing the application with container types")
 
-	const shipmentOrderContainerTypeName = "ShipmentOrder"
-	const bagContainerTypeName = "Bag"
+	// package type for container sample app
+	const packageOrderContainerTypeName = "PackageCsa"
+	// bag type for container sample app
+	const bagContainerTypeName = "BagCsa"
 	containerClient := domain.NewContainerClient(tenantId)
 	ctx := context.Background()
 
 	token, _ := domain.GetToken(tenantId)
 
-	getContainerTypeRequest1 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, shipmentOrderContainerTypeName)
+	getContainerTypeRequest1 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, packageOrderContainerTypeName)
 	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSACCESS(token)
 	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSTID(tenantId)
 	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSREQUESTID("1234")
@@ -43,21 +45,21 @@ func Initialize(tenantId string) error {
 		getErrResponse := GetErrorResponse(&getresponse1.Body)
 		// The container type you are searching/updating undefined doesnt exists
 		if getErrResponse.Error.Code == "100920043304" {
-			// create container type ShipmentOrder
+			// create container type PackageCsa
 			containerTypeRequest := containerClient.ContainerTypeApi.CreateContainerType(ctx)
 			containerTypeRequest = containerTypeRequest.XCOREOSACCESS(token)
 			containerTypeRequest = containerTypeRequest.XCOREOSTID(tenantId)
 			containerTypeRequest = containerTypeRequest.XCOREOSREQUESTID("1234")
 			containerTypeRequest = containerTypeRequest.XCOREOSUSERINFO("1234")
 
-			ShipmentOrderContainerTypeCreateRequest := containerdomain.ContainerTypeCreateRequest{
-				Name:   shipmentOrderContainerTypeName,
+			PackageCsaContainerTypeCreateRequest := containerdomain.ContainerTypeCreateRequest{
+				Name:   packageOrderContainerTypeName,
 				IsLeaf: containerdomain.PtrBool(true),
 			}
-			containerTypeRequest = containerTypeRequest.ContainerTypeCreateRequest(ShipmentOrderContainerTypeCreateRequest)
+			containerTypeRequest = containerTypeRequest.ContainerTypeCreateRequest(PackageCsaContainerTypeCreateRequest)
 
 			_, response, err := containerClient.ContainerTypeApi.CreateContainerTypeExecute(containerTypeRequest)
-			glog.Info("====================Create ShipmentOrder type=====================")
+			glog.Info("====================Create PackageCsa type=====================")
 			glog.Info(response)
 
 			if err != nil {
@@ -70,7 +72,7 @@ func Initialize(tenantId string) error {
 		}
 	}
 
-	glog.Info("====================ShipmentOrder Type Created Idempotently=====================")
+	glog.Info("====================PackageCsa Type Created Idempotently=====================")
 
 	getContainerTypeRequest2 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, bagContainerTypeName)
 	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSACCESS(token)
@@ -83,7 +85,7 @@ func Initialize(tenantId string) error {
 	if getresponse2.StatusCode == 400 {
 		errResponse := GetErrorResponse(&getresponse2.Body)
 		if errResponse.Error.Description == "The container type you are searching/updating undefined doesnt exists" {
-			// create container type ShipmentOrder
+			// create container type PackageCsa
 			containerTypeRequest := containerClient.ContainerTypeApi.CreateContainerType(ctx)
 			containerTypeRequest = containerTypeRequest.XCOREOSACCESS(token)
 			containerTypeRequest = containerTypeRequest.XCOREOSTID(tenantId)
@@ -98,7 +100,7 @@ func Initialize(tenantId string) error {
 			containerTypeRequest = containerTypeRequest.ContainerTypeCreateRequest(BagContainerTypeCreateRequest)
 
 			_, response, err := containerClient.ContainerTypeApi.CreateContainerTypeExecute(containerTypeRequest)
-			glog.Info("====================Create Bag type=====================")
+			glog.Info("====================Create BagCsa type=====================")
 			glog.Info(response)
 
 			if err != nil {
@@ -112,6 +114,6 @@ func Initialize(tenantId string) error {
 			return fmt.Errorf("Error while getting container type Bag: %s", errResponse.Error.Description)
 		}
 	}
-	glog.Info("====================Bag Type Created Idempotently=====================")
+	glog.Info("====================BagCsa Type Created Idempotently=====================")
 	return nil
 }

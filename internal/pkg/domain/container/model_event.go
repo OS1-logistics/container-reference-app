@@ -68,7 +68,7 @@ func (o *Event) GetEventCode() string {
 // and a boolean to check if the value has been set.
 func (o *Event) GetEventCodeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.EventCode, true
 }
@@ -80,7 +80,7 @@ func (o *Event) SetEventCode(v string) {
 
 // GetReasonCode returns the ReasonCode field value if set, zero value otherwise.
 func (o *Event) GetReasonCode() string {
-	if o == nil || o.ReasonCode == nil {
+	if o == nil || isNil(o.ReasonCode) {
 		var ret string
 		return ret
 	}
@@ -90,15 +90,15 @@ func (o *Event) GetReasonCode() string {
 // GetReasonCodeOk returns a tuple with the ReasonCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Event) GetReasonCodeOk() (*string, bool) {
-	if o == nil || o.ReasonCode == nil {
-		return nil, false
+	if o == nil || isNil(o.ReasonCode) {
+    return nil, false
 	}
 	return o.ReasonCode, true
 }
 
 // HasReasonCode returns a boolean if a field has been set.
 func (o *Event) HasReasonCode() bool {
-	if o != nil && o.ReasonCode != nil {
+	if o != nil && !isNil(o.ReasonCode) {
 		return true
 	}
 
@@ -124,7 +124,7 @@ func (o *Event) GetTimestamp() int32 {
 // and a boolean to check if the value has been set.
 func (o *Event) GetTimestampOk() (*int32, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Timestamp, true
 }
@@ -136,7 +136,7 @@ func (o *Event) SetTimestamp(v int32) {
 
 // GetPropagate returns the Propagate field value if set, zero value otherwise.
 func (o *Event) GetPropagate() bool {
-	if o == nil || o.Propagate == nil {
+	if o == nil || isNil(o.Propagate) {
 		var ret bool
 		return ret
 	}
@@ -146,15 +146,15 @@ func (o *Event) GetPropagate() bool {
 // GetPropagateOk returns a tuple with the Propagate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Event) GetPropagateOk() (*bool, bool) {
-	if o == nil || o.Propagate == nil {
-		return nil, false
+	if o == nil || isNil(o.Propagate) {
+    return nil, false
 	}
 	return o.Propagate, true
 }
 
 // HasPropagate returns a boolean if a field has been set.
 func (o *Event) HasPropagate() bool {
-	if o != nil && o.Propagate != nil {
+	if o != nil && !isNil(o.Propagate) {
 		return true
 	}
 
@@ -180,7 +180,7 @@ func (o *Event) GetData() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *Event) GetDataOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return nil, false
+    return map[string]interface{}{}, false
 	}
 	return o.Data, true
 }
@@ -204,7 +204,7 @@ func (o *Event) GetSource() EventSource {
 // and a boolean to check if the value has been set.
 func (o *Event) GetSourceOk() (*EventSource, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Source, true
 }
@@ -219,13 +219,13 @@ func (o Event) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["eventCode"] = o.EventCode
 	}
-	if o.ReasonCode != nil {
+	if !isNil(o.ReasonCode) {
 		toSerialize["reasonCode"] = o.ReasonCode
 	}
 	if true {
 		toSerialize["timestamp"] = o.Timestamp
 	}
-	if o.Propagate != nil {
+	if !isNil(o.Propagate) {
 		toSerialize["propagate"] = o.Propagate
 	}
 	if true {

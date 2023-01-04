@@ -40,7 +40,7 @@ func NewContainerCreationBatchRequestWithDefaults() *ContainerCreationBatchReque
 
 // GetPayload returns the Payload field value if set, zero value otherwise.
 func (o *ContainerCreationBatchRequest) GetPayload() []ContainerCreateBatchRequest {
-	if o == nil || o.Payload == nil {
+	if o == nil || isNil(o.Payload) {
 		var ret []ContainerCreateBatchRequest
 		return ret
 	}
@@ -50,15 +50,15 @@ func (o *ContainerCreationBatchRequest) GetPayload() []ContainerCreateBatchReque
 // GetPayloadOk returns a tuple with the Payload field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreationBatchRequest) GetPayloadOk() ([]ContainerCreateBatchRequest, bool) {
-	if o == nil || o.Payload == nil {
-		return nil, false
+	if o == nil || isNil(o.Payload) {
+    return nil, false
 	}
 	return o.Payload, true
 }
 
 // HasPayload returns a boolean if a field has been set.
 func (o *ContainerCreationBatchRequest) HasPayload() bool {
-	if o != nil && o.Payload != nil {
+	if o != nil && !isNil(o.Payload) {
 		return true
 	}
 
@@ -72,7 +72,7 @@ func (o *ContainerCreationBatchRequest) SetPayload(v []ContainerCreateBatchReque
 
 // GetCallback returns the Callback field value if set, zero value otherwise.
 func (o *ContainerCreationBatchRequest) GetCallback() BatchCallbackURL {
-	if o == nil || o.Callback == nil {
+	if o == nil || isNil(o.Callback) {
 		var ret BatchCallbackURL
 		return ret
 	}
@@ -82,15 +82,15 @@ func (o *ContainerCreationBatchRequest) GetCallback() BatchCallbackURL {
 // GetCallbackOk returns a tuple with the Callback field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerCreationBatchRequest) GetCallbackOk() (*BatchCallbackURL, bool) {
-	if o == nil || o.Callback == nil {
-		return nil, false
+	if o == nil || isNil(o.Callback) {
+    return nil, false
 	}
 	return o.Callback, true
 }
 
 // HasCallback returns a boolean if a field has been set.
 func (o *ContainerCreationBatchRequest) HasCallback() bool {
-	if o != nil && o.Callback != nil {
+	if o != nil && !isNil(o.Callback) {
 		return true
 	}
 
@@ -104,10 +104,10 @@ func (o *ContainerCreationBatchRequest) SetCallback(v BatchCallbackURL) {
 
 func (o ContainerCreationBatchRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Payload != nil {
+	if !isNil(o.Payload) {
 		toSerialize["payload"] = o.Payload
 	}
-	if o.Callback != nil {
+	if !isNil(o.Callback) {
 		toSerialize["callback"] = o.Callback
 	}
 	return json.Marshal(toSerialize)

@@ -69,7 +69,7 @@ func NewAppInfoWithDefaults() *AppInfo {
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AppInfo) GetDescription() string {
-	if o == nil || o.Description.Get() == nil {
+	if o == nil || isNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
@@ -81,7 +81,7 @@ func (o *AppInfo) GetDescription() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AppInfo) GetDescriptionOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Description.Get(), o.Description.IsSet()
 }
@@ -123,7 +123,7 @@ func (o *AppInfo) GetIsPrivateApp() bool {
 // and a boolean to check if the value has been set.
 func (o *AppInfo) GetIsPrivateAppOk() (*bool, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.IsPrivateApp, true
 }
@@ -135,7 +135,7 @@ func (o *AppInfo) SetIsPrivateApp(v bool) {
 
 // GetPrivateTenantId returns the PrivateTenantId field value if set, zero value otherwise.
 func (o *AppInfo) GetPrivateTenantId() string {
-	if o == nil || o.PrivateTenantId == nil {
+	if o == nil || isNil(o.PrivateTenantId) {
 		var ret string
 		return ret
 	}
@@ -145,15 +145,15 @@ func (o *AppInfo) GetPrivateTenantId() string {
 // GetPrivateTenantIdOk returns a tuple with the PrivateTenantId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppInfo) GetPrivateTenantIdOk() (*string, bool) {
-	if o == nil || o.PrivateTenantId == nil {
-		return nil, false
+	if o == nil || isNil(o.PrivateTenantId) {
+    return nil, false
 	}
 	return o.PrivateTenantId, true
 }
 
 // HasPrivateTenantId returns a boolean if a field has been set.
 func (o *AppInfo) HasPrivateTenantId() bool {
-	if o != nil && o.PrivateTenantId != nil {
+	if o != nil && !isNil(o.PrivateTenantId) {
 		return true
 	}
 
@@ -179,7 +179,7 @@ func (o *AppInfo) GetIsActive() bool {
 // and a boolean to check if the value has been set.
 func (o *AppInfo) GetIsActiveOk() (*bool, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.IsActive, true
 }
@@ -191,7 +191,7 @@ func (o *AppInfo) SetIsActive(v bool) {
 
 // GetRedirectUri returns the RedirectUri field value if set, zero value otherwise.
 func (o *AppInfo) GetRedirectUri() []string {
-	if o == nil || o.RedirectUri == nil {
+	if o == nil || isNil(o.RedirectUri) {
 		var ret []string
 		return ret
 	}
@@ -201,15 +201,15 @@ func (o *AppInfo) GetRedirectUri() []string {
 // GetRedirectUriOk returns a tuple with the RedirectUri field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppInfo) GetRedirectUriOk() ([]string, bool) {
-	if o == nil || o.RedirectUri == nil {
-		return nil, false
+	if o == nil || isNil(o.RedirectUri) {
+    return nil, false
 	}
 	return o.RedirectUri, true
 }
 
 // HasRedirectUri returns a boolean if a field has been set.
 func (o *AppInfo) HasRedirectUri() bool {
-	if o != nil && o.RedirectUri != nil {
+	if o != nil && !isNil(o.RedirectUri) {
 		return true
 	}
 
@@ -236,8 +236,8 @@ func (o *AppInfo) GetAppId() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AppInfo) GetAppIdOk() (*interface{}, bool) {
-	if o == nil || o.AppId == nil {
-		return nil, false
+	if o == nil || isNil(o.AppId) {
+    return nil, false
 	}
 	return &o.AppId, true
 }
@@ -261,7 +261,7 @@ func (o *AppInfo) GetAppType() string {
 // and a boolean to check if the value has been set.
 func (o *AppInfo) GetAppTypeOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AppType, true
 }
@@ -285,7 +285,7 @@ func (o *AppInfo) GetAppName() string {
 // and a boolean to check if the value has been set.
 func (o *AppInfo) GetAppNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.AppName, true
 }
@@ -297,7 +297,7 @@ func (o *AppInfo) SetAppName(v string) {
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
 func (o *AppInfo) GetClientId() string {
-	if o == nil || o.ClientId == nil {
+	if o == nil || isNil(o.ClientId) {
 		var ret string
 		return ret
 	}
@@ -307,15 +307,15 @@ func (o *AppInfo) GetClientId() string {
 // GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppInfo) GetClientIdOk() (*string, bool) {
-	if o == nil || o.ClientId == nil {
-		return nil, false
+	if o == nil || isNil(o.ClientId) {
+    return nil, false
 	}
 	return o.ClientId, true
 }
 
 // HasClientId returns a boolean if a field has been set.
 func (o *AppInfo) HasClientId() bool {
-	if o != nil && o.ClientId != nil {
+	if o != nil && !isNil(o.ClientId) {
 		return true
 	}
 
@@ -329,7 +329,7 @@ func (o *AppInfo) SetClientId(v string) {
 
 // GetSecretId returns the SecretId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AppInfo) GetSecretId() string {
-	if o == nil || o.SecretId.Get() == nil {
+	if o == nil || isNil(o.SecretId.Get()) {
 		var ret string
 		return ret
 	}
@@ -341,7 +341,7 @@ func (o *AppInfo) GetSecretId() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AppInfo) GetSecretIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.SecretId.Get(), o.SecretId.IsSet()
 }
@@ -371,7 +371,7 @@ func (o *AppInfo) UnsetSecretId() {
 
 // GetIsDeleted returns the IsDeleted field value if set, zero value otherwise.
 func (o *AppInfo) GetIsDeleted() bool {
-	if o == nil || o.IsDeleted == nil {
+	if o == nil || isNil(o.IsDeleted) {
 		var ret bool
 		return ret
 	}
@@ -381,15 +381,15 @@ func (o *AppInfo) GetIsDeleted() bool {
 // GetIsDeletedOk returns a tuple with the IsDeleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AppInfo) GetIsDeletedOk() (*bool, bool) {
-	if o == nil || o.IsDeleted == nil {
-		return nil, false
+	if o == nil || isNil(o.IsDeleted) {
+    return nil, false
 	}
 	return o.IsDeleted, true
 }
 
 // HasIsDeleted returns a boolean if a field has been set.
 func (o *AppInfo) HasIsDeleted() bool {
-	if o != nil && o.IsDeleted != nil {
+	if o != nil && !isNil(o.IsDeleted) {
 		return true
 	}
 
@@ -409,13 +409,13 @@ func (o AppInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["isPrivateApp"] = o.IsPrivateApp
 	}
-	if o.PrivateTenantId != nil {
+	if !isNil(o.PrivateTenantId) {
 		toSerialize["privateTenantId"] = o.PrivateTenantId
 	}
 	if true {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if o.RedirectUri != nil {
+	if !isNil(o.RedirectUri) {
 		toSerialize["redirectUri"] = o.RedirectUri
 	}
 	if o.AppId != nil {
@@ -427,13 +427,13 @@ func (o AppInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["appName"] = o.AppName
 	}
-	if o.ClientId != nil {
+	if !isNil(o.ClientId) {
 		toSerialize["clientId"] = o.ClientId
 	}
 	if o.SecretId.IsSet() {
 		toSerialize["secretId"] = o.SecretId.Get()
 	}
-	if o.IsDeleted != nil {
+	if !isNil(o.IsDeleted) {
 		toSerialize["isDeleted"] = o.IsDeleted
 	}
 	return json.Marshal(toSerialize)

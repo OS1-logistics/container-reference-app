@@ -39,7 +39,7 @@ func NewSocialAuthWithDefaults() *SocialAuth {
 
 // GetGoogle returns the Google field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SocialAuth) GetGoogle() bool {
-	if o == nil || o.Google.Get() == nil {
+	if o == nil || isNil(o.Google.Get()) {
 		var ret bool
 		return ret
 	}
@@ -51,7 +51,7 @@ func (o *SocialAuth) GetGoogle() bool {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SocialAuth) GetGoogleOk() (*bool, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return o.Google.Get(), o.Google.IsSet()
 }

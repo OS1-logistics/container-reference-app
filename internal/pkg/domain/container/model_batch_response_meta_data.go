@@ -45,7 +45,7 @@ func NewBatchResponseMetaDataWithDefaults() *BatchResponseMetaData {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *BatchResponseMetaData) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || isNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -55,15 +55,15 @@ func (o *BatchResponseMetaData) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BatchResponseMetaData) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
-		return nil, false
+	if o == nil || isNil(o.Status) {
+    return nil, false
 	}
 	return o.Status, true
 }
 
 // HasStatus returns a boolean if a field has been set.
 func (o *BatchResponseMetaData) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !isNil(o.Status) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *BatchResponseMetaData) SetStatus(v string) {
 
 // GetSuccess returns the Success field value if set, zero value otherwise.
 func (o *BatchResponseMetaData) GetSuccess() int64 {
-	if o == nil || o.Success == nil {
+	if o == nil || isNil(o.Success) {
 		var ret int64
 		return ret
 	}
@@ -87,15 +87,15 @@ func (o *BatchResponseMetaData) GetSuccess() int64 {
 // GetSuccessOk returns a tuple with the Success field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BatchResponseMetaData) GetSuccessOk() (*int64, bool) {
-	if o == nil || o.Success == nil {
-		return nil, false
+	if o == nil || isNil(o.Success) {
+    return nil, false
 	}
 	return o.Success, true
 }
 
 // HasSuccess returns a boolean if a field has been set.
 func (o *BatchResponseMetaData) HasSuccess() bool {
-	if o != nil && o.Success != nil {
+	if o != nil && !isNil(o.Success) {
 		return true
 	}
 
@@ -109,7 +109,7 @@ func (o *BatchResponseMetaData) SetSuccess(v int64) {
 
 // GetFailed returns the Failed field value if set, zero value otherwise.
 func (o *BatchResponseMetaData) GetFailed() int64 {
-	if o == nil || o.Failed == nil {
+	if o == nil || isNil(o.Failed) {
 		var ret int64
 		return ret
 	}
@@ -119,15 +119,15 @@ func (o *BatchResponseMetaData) GetFailed() int64 {
 // GetFailedOk returns a tuple with the Failed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BatchResponseMetaData) GetFailedOk() (*int64, bool) {
-	if o == nil || o.Failed == nil {
-		return nil, false
+	if o == nil || isNil(o.Failed) {
+    return nil, false
 	}
 	return o.Failed, true
 }
 
 // HasFailed returns a boolean if a field has been set.
 func (o *BatchResponseMetaData) HasFailed() bool {
-	if o != nil && o.Failed != nil {
+	if o != nil && !isNil(o.Failed) {
 		return true
 	}
 
@@ -141,7 +141,7 @@ func (o *BatchResponseMetaData) SetFailed(v int64) {
 
 // GetTotal returns the Total field value if set, zero value otherwise.
 func (o *BatchResponseMetaData) GetTotal() int64 {
-	if o == nil || o.Total == nil {
+	if o == nil || isNil(o.Total) {
 		var ret int64
 		return ret
 	}
@@ -151,15 +151,15 @@ func (o *BatchResponseMetaData) GetTotal() int64 {
 // GetTotalOk returns a tuple with the Total field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BatchResponseMetaData) GetTotalOk() (*int64, bool) {
-	if o == nil || o.Total == nil {
-		return nil, false
+	if o == nil || isNil(o.Total) {
+    return nil, false
 	}
 	return o.Total, true
 }
 
 // HasTotal returns a boolean if a field has been set.
 func (o *BatchResponseMetaData) HasTotal() bool {
-	if o != nil && o.Total != nil {
+	if o != nil && !isNil(o.Total) {
 		return true
 	}
 
@@ -173,16 +173,16 @@ func (o *BatchResponseMetaData) SetTotal(v int64) {
 
 func (o BatchResponseMetaData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Status != nil {
+	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if o.Success != nil {
+	if !isNil(o.Success) {
 		toSerialize["success"] = o.Success
 	}
-	if o.Failed != nil {
+	if !isNil(o.Failed) {
 		toSerialize["failed"] = o.Failed
 	}
-	if o.Total != nil {
+	if !isNil(o.Total) {
 		toSerialize["total"] = o.Total
 	}
 	return json.Marshal(toSerialize)

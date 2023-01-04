@@ -41,7 +41,7 @@ func NewContainerTypeAllowedParentWithDefaults() *ContainerTypeAllowedParent {
 
 // GetOneOf returns the OneOf field value if set, zero value otherwise.
 func (o *ContainerTypeAllowedParent) GetOneOf() []string {
-	if o == nil || o.OneOf == nil {
+	if o == nil || isNil(o.OneOf) {
 		var ret []string
 		return ret
 	}
@@ -51,15 +51,15 @@ func (o *ContainerTypeAllowedParent) GetOneOf() []string {
 // GetOneOfOk returns a tuple with the OneOf field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeAllowedParent) GetOneOfOk() ([]string, bool) {
-	if o == nil || o.OneOf == nil {
-		return nil, false
+	if o == nil || isNil(o.OneOf) {
+    return nil, false
 	}
 	return o.OneOf, true
 }
 
 // HasOneOf returns a boolean if a field has been set.
 func (o *ContainerTypeAllowedParent) HasOneOf() bool {
-	if o != nil && o.OneOf != nil {
+	if o != nil && !isNil(o.OneOf) {
 		return true
 	}
 
@@ -73,7 +73,7 @@ func (o *ContainerTypeAllowedParent) SetOneOf(v []string) {
 
 // GetNot returns the Not field value if set, zero value otherwise.
 func (o *ContainerTypeAllowedParent) GetNot() []string {
-	if o == nil || o.Not == nil {
+	if o == nil || isNil(o.Not) {
 		var ret []string
 		return ret
 	}
@@ -83,15 +83,15 @@ func (o *ContainerTypeAllowedParent) GetNot() []string {
 // GetNotOk returns a tuple with the Not field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerTypeAllowedParent) GetNotOk() ([]string, bool) {
-	if o == nil || o.Not == nil {
-		return nil, false
+	if o == nil || isNil(o.Not) {
+    return nil, false
 	}
 	return o.Not, true
 }
 
 // HasNot returns a boolean if a field has been set.
 func (o *ContainerTypeAllowedParent) HasNot() bool {
-	if o != nil && o.Not != nil {
+	if o != nil && !isNil(o.Not) {
 		return true
 	}
 
@@ -105,10 +105,10 @@ func (o *ContainerTypeAllowedParent) SetNot(v []string) {
 
 func (o ContainerTypeAllowedParent) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.OneOf != nil {
+	if !isNil(o.OneOf) {
 		toSerialize["oneOf"] = o.OneOf
 	}
-	if o.Not != nil {
+	if !isNil(o.Not) {
 		toSerialize["not"] = o.Not
 	}
 	return json.Marshal(toSerialize)

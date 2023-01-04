@@ -44,7 +44,7 @@ func NewFileStatusWithDefaults() *FileStatus {
 
 // GetTenantId returns the TenantId field value if set, zero value otherwise.
 func (o *FileStatus) GetTenantId() string {
-	if o == nil || o.TenantId == nil {
+	if o == nil || isNil(o.TenantId) {
 		var ret string
 		return ret
 	}
@@ -54,15 +54,15 @@ func (o *FileStatus) GetTenantId() string {
 // GetTenantIdOk returns a tuple with the TenantId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FileStatus) GetTenantIdOk() (*string, bool) {
-	if o == nil || o.TenantId == nil {
-		return nil, false
+	if o == nil || isNil(o.TenantId) {
+    return nil, false
 	}
 	return o.TenantId, true
 }
 
 // HasTenantId returns a boolean if a field has been set.
 func (o *FileStatus) HasTenantId() bool {
-	if o != nil && o.TenantId != nil {
+	if o != nil && !isNil(o.TenantId) {
 		return true
 	}
 
@@ -76,7 +76,7 @@ func (o *FileStatus) SetTenantId(v string) {
 
 // GetStatusId returns the StatusId field value if set, zero value otherwise.
 func (o *FileStatus) GetStatusId() string {
-	if o == nil || o.StatusId == nil {
+	if o == nil || isNil(o.StatusId) {
 		var ret string
 		return ret
 	}
@@ -86,15 +86,15 @@ func (o *FileStatus) GetStatusId() string {
 // GetStatusIdOk returns a tuple with the StatusId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FileStatus) GetStatusIdOk() (*string, bool) {
-	if o == nil || o.StatusId == nil {
-		return nil, false
+	if o == nil || isNil(o.StatusId) {
+    return nil, false
 	}
 	return o.StatusId, true
 }
 
 // HasStatusId returns a boolean if a field has been set.
 func (o *FileStatus) HasStatusId() bool {
-	if o != nil && o.StatusId != nil {
+	if o != nil && !isNil(o.StatusId) {
 		return true
 	}
 
@@ -108,7 +108,7 @@ func (o *FileStatus) SetStatusId(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *FileStatus) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || isNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -118,15 +118,15 @@ func (o *FileStatus) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FileStatus) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
-		return nil, false
+	if o == nil || isNil(o.Status) {
+    return nil, false
 	}
 	return o.Status, true
 }
 
 // HasStatus returns a boolean if a field has been set.
 func (o *FileStatus) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !isNil(o.Status) {
 		return true
 	}
 
@@ -140,7 +140,7 @@ func (o *FileStatus) SetStatus(v string) {
 
 // GetReason returns the Reason field value if set, zero value otherwise.
 func (o *FileStatus) GetReason() []string {
-	if o == nil || o.Reason == nil {
+	if o == nil || isNil(o.Reason) {
 		var ret []string
 		return ret
 	}
@@ -150,15 +150,15 @@ func (o *FileStatus) GetReason() []string {
 // GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FileStatus) GetReasonOk() ([]string, bool) {
-	if o == nil || o.Reason == nil {
-		return nil, false
+	if o == nil || isNil(o.Reason) {
+    return nil, false
 	}
 	return o.Reason, true
 }
 
 // HasReason returns a boolean if a field has been set.
 func (o *FileStatus) HasReason() bool {
-	if o != nil && o.Reason != nil {
+	if o != nil && !isNil(o.Reason) {
 		return true
 	}
 
@@ -172,16 +172,16 @@ func (o *FileStatus) SetReason(v []string) {
 
 func (o FileStatus) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TenantId != nil {
+	if !isNil(o.TenantId) {
 		toSerialize["tenantId"] = o.TenantId
 	}
-	if o.StatusId != nil {
+	if !isNil(o.StatusId) {
 		toSerialize["statusId"] = o.StatusId
 	}
-	if o.Status != nil {
+	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if o.Reason != nil {
+	if !isNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
 	return json.Marshal(toSerialize)

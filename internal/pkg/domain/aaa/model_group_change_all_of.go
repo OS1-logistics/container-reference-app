@@ -51,7 +51,7 @@ func (o *GroupChangeAllOf) GetCdc() GroupResponse {
 // and a boolean to check if the value has been set.
 func (o *GroupChangeAllOf) GetCdcOk() (*GroupResponse, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.Cdc, true
 }

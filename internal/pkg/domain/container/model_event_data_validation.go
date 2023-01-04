@@ -52,7 +52,7 @@ func NewEventDataValidationWithDefaults() *EventDataValidation {
 
 // GetRange returns the Range field value if set, zero value otherwise.
 func (o *EventDataValidation) GetRange() Range {
-	if o == nil || o.Range == nil {
+	if o == nil || isNil(o.Range) {
 		var ret Range
 		return ret
 	}
@@ -62,15 +62,15 @@ func (o *EventDataValidation) GetRange() Range {
 // GetRangeOk returns a tuple with the Range field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventDataValidation) GetRangeOk() (*Range, bool) {
-	if o == nil || o.Range == nil {
-		return nil, false
+	if o == nil || isNil(o.Range) {
+    return nil, false
 	}
 	return o.Range, true
 }
 
 // HasRange returns a boolean if a field has been set.
 func (o *EventDataValidation) HasRange() bool {
-	if o != nil && o.Range != nil {
+	if o != nil && !isNil(o.Range) {
 		return true
 	}
 
@@ -84,7 +84,7 @@ func (o *EventDataValidation) SetRange(v Range) {
 
 // GetRegex returns the Regex field value if set, zero value otherwise.
 func (o *EventDataValidation) GetRegex() string {
-	if o == nil || o.Regex == nil {
+	if o == nil || isNil(o.Regex) {
 		var ret string
 		return ret
 	}
@@ -94,15 +94,15 @@ func (o *EventDataValidation) GetRegex() string {
 // GetRegexOk returns a tuple with the Regex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventDataValidation) GetRegexOk() (*string, bool) {
-	if o == nil || o.Regex == nil {
-		return nil, false
+	if o == nil || isNil(o.Regex) {
+    return nil, false
 	}
 	return o.Regex, true
 }
 
 // HasRegex returns a boolean if a field has been set.
 func (o *EventDataValidation) HasRegex() bool {
-	if o != nil && o.Regex != nil {
+	if o != nil && !isNil(o.Regex) {
 		return true
 	}
 
@@ -116,7 +116,7 @@ func (o *EventDataValidation) SetRegex(v string) {
 
 // GetRequired returns the Required field value if set, zero value otherwise.
 func (o *EventDataValidation) GetRequired() bool {
-	if o == nil || o.Required == nil {
+	if o == nil || isNil(o.Required) {
 		var ret bool
 		return ret
 	}
@@ -126,15 +126,15 @@ func (o *EventDataValidation) GetRequired() bool {
 // GetRequiredOk returns a tuple with the Required field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventDataValidation) GetRequiredOk() (*bool, bool) {
-	if o == nil || o.Required == nil {
-		return nil, false
+	if o == nil || isNil(o.Required) {
+    return nil, false
 	}
 	return o.Required, true
 }
 
 // HasRequired returns a boolean if a field has been set.
 func (o *EventDataValidation) HasRequired() bool {
-	if o != nil && o.Required != nil {
+	if o != nil && !isNil(o.Required) {
 		return true
 	}
 
@@ -148,7 +148,7 @@ func (o *EventDataValidation) SetRequired(v bool) {
 
 // GetBlocking returns the Blocking field value if set, zero value otherwise.
 func (o *EventDataValidation) GetBlocking() bool {
-	if o == nil || o.Blocking == nil {
+	if o == nil || isNil(o.Blocking) {
 		var ret bool
 		return ret
 	}
@@ -158,15 +158,15 @@ func (o *EventDataValidation) GetBlocking() bool {
 // GetBlockingOk returns a tuple with the Blocking field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EventDataValidation) GetBlockingOk() (*bool, bool) {
-	if o == nil || o.Blocking == nil {
-		return nil, false
+	if o == nil || isNil(o.Blocking) {
+    return nil, false
 	}
 	return o.Blocking, true
 }
 
 // HasBlocking returns a boolean if a field has been set.
 func (o *EventDataValidation) HasBlocking() bool {
-	if o != nil && o.Blocking != nil {
+	if o != nil && !isNil(o.Blocking) {
 		return true
 	}
 
@@ -180,16 +180,16 @@ func (o *EventDataValidation) SetBlocking(v bool) {
 
 func (o EventDataValidation) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Range != nil {
+	if !isNil(o.Range) {
 		toSerialize["range"] = o.Range
 	}
-	if o.Regex != nil {
+	if !isNil(o.Regex) {
 		toSerialize["regex"] = o.Regex
 	}
-	if o.Required != nil {
+	if !isNil(o.Required) {
 		toSerialize["required"] = o.Required
 	}
-	if o.Blocking != nil {
+	if !isNil(o.Blocking) {
 		toSerialize["blocking"] = o.Blocking
 	}
 	return json.Marshal(toSerialize)

@@ -45,7 +45,7 @@ func NewContainerStateWithDefaults() *ContainerState {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ContainerState) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -55,15 +55,15 @@ func (o *ContainerState) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerState) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
+	if o == nil || isNil(o.Id) {
+    return nil, false
 	}
 	return o.Id, true
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *ContainerState) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *ContainerState) SetId(v string) {
 
 // GetState returns the State field value if set, zero value otherwise.
 func (o *ContainerState) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || isNil(o.State) {
 		var ret string
 		return ret
 	}
@@ -87,15 +87,15 @@ func (o *ContainerState) GetState() string {
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerState) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
-		return nil, false
+	if o == nil || isNil(o.State) {
+    return nil, false
 	}
 	return o.State, true
 }
 
 // HasState returns a boolean if a field has been set.
 func (o *ContainerState) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && !isNil(o.State) {
 		return true
 	}
 
@@ -109,7 +109,7 @@ func (o *ContainerState) SetState(v string) {
 
 // GetEvent returns the Event field value if set, zero value otherwise.
 func (o *ContainerState) GetEvent() Event {
-	if o == nil || o.Event == nil {
+	if o == nil || isNil(o.Event) {
 		var ret Event
 		return ret
 	}
@@ -119,15 +119,15 @@ func (o *ContainerState) GetEvent() Event {
 // GetEventOk returns a tuple with the Event field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerState) GetEventOk() (*Event, bool) {
-	if o == nil || o.Event == nil {
-		return nil, false
+	if o == nil || isNil(o.Event) {
+    return nil, false
 	}
 	return o.Event, true
 }
 
 // HasEvent returns a boolean if a field has been set.
 func (o *ContainerState) HasEvent() bool {
-	if o != nil && o.Event != nil {
+	if o != nil && !isNil(o.Event) {
 		return true
 	}
 
@@ -141,7 +141,7 @@ func (o *ContainerState) SetEvent(v Event) {
 
 // GetStateChange returns the StateChange field value if set, zero value otherwise.
 func (o *ContainerState) GetStateChange() bool {
-	if o == nil || o.StateChange == nil {
+	if o == nil || isNil(o.StateChange) {
 		var ret bool
 		return ret
 	}
@@ -151,15 +151,15 @@ func (o *ContainerState) GetStateChange() bool {
 // GetStateChangeOk returns a tuple with the StateChange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerState) GetStateChangeOk() (*bool, bool) {
-	if o == nil || o.StateChange == nil {
-		return nil, false
+	if o == nil || isNil(o.StateChange) {
+    return nil, false
 	}
 	return o.StateChange, true
 }
 
 // HasStateChange returns a boolean if a field has been set.
 func (o *ContainerState) HasStateChange() bool {
-	if o != nil && o.StateChange != nil {
+	if o != nil && !isNil(o.StateChange) {
 		return true
 	}
 
@@ -173,7 +173,7 @@ func (o *ContainerState) SetStateChange(v bool) {
 
 // GetTerminalTtl returns the TerminalTtl field value if set, zero value otherwise.
 func (o *ContainerState) GetTerminalTtl() int32 {
-	if o == nil || o.TerminalTtl == nil {
+	if o == nil || isNil(o.TerminalTtl) {
 		var ret int32
 		return ret
 	}
@@ -183,15 +183,15 @@ func (o *ContainerState) GetTerminalTtl() int32 {
 // GetTerminalTtlOk returns a tuple with the TerminalTtl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContainerState) GetTerminalTtlOk() (*int32, bool) {
-	if o == nil || o.TerminalTtl == nil {
-		return nil, false
+	if o == nil || isNil(o.TerminalTtl) {
+    return nil, false
 	}
 	return o.TerminalTtl, true
 }
 
 // HasTerminalTtl returns a boolean if a field has been set.
 func (o *ContainerState) HasTerminalTtl() bool {
-	if o != nil && o.TerminalTtl != nil {
+	if o != nil && !isNil(o.TerminalTtl) {
 		return true
 	}
 
@@ -205,19 +205,19 @@ func (o *ContainerState) SetTerminalTtl(v int32) {
 
 func (o ContainerState) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.State != nil {
+	if !isNil(o.State) {
 		toSerialize["state"] = o.State
 	}
-	if o.Event != nil {
+	if !isNil(o.Event) {
 		toSerialize["event"] = o.Event
 	}
-	if o.StateChange != nil {
+	if !isNil(o.StateChange) {
 		toSerialize["stateChange"] = o.StateChange
 	}
-	if o.TerminalTtl != nil {
+	if !isNil(o.TerminalTtl) {
 		toSerialize["terminalTtl"] = o.TerminalTtl
 	}
 	return json.Marshal(toSerialize)

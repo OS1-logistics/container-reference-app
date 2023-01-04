@@ -58,7 +58,7 @@ func (o *ConnectionCreateRequest) GetConnectionName() string {
 // and a boolean to check if the value has been set.
 func (o *ConnectionCreateRequest) GetConnectionNameOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ConnectionName, true
 }
@@ -82,7 +82,7 @@ func (o *ConnectionCreateRequest) GetConnectionClientId() string {
 // and a boolean to check if the value has been set.
 func (o *ConnectionCreateRequest) GetConnectionClientIdOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ConnectionClientId, true
 }
@@ -106,7 +106,7 @@ func (o *ConnectionCreateRequest) GetConnectionClientSecret() string {
 // and a boolean to check if the value has been set.
 func (o *ConnectionCreateRequest) GetConnectionClientSecretOk() (*string, bool) {
 	if o == nil {
-		return nil, false
+    return nil, false
 	}
 	return &o.ConnectionClientSecret, true
 }
