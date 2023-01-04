@@ -3,7 +3,7 @@ package service
 import (
 	"fmt"
 
-	container_client "github.com/os1-logistics/container-reference-app/internal/pkg/clients/container"
+	container "github.com/os1-logistics/container-reference-app/internal/pkg/domain/container"
 )
 
 type ShipmentServiceInterface interface {
@@ -11,7 +11,7 @@ type ShipmentServiceInterface interface {
 }
 
 type ShipmentService struct {
-	containerClient container_client.APIClient
+	containerClient container.APIClient
 }
 
 func NewShipmentService() ShipmentService {

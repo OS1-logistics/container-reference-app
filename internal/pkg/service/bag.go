@@ -1,11 +1,11 @@
 package service
 
 import (
-	"context"
 	"fmt"
 
-	aaa_client "github.com/os1-logistics/container-reference-app/internal/pkg/clients/aaa"
-	container_client "github.com/os1-logistics/container-reference-app/internal/pkg/clients/container"
+	domain "github.com/os1-logistics/container-reference-app/internal/pkg/domain"
+	aaa "github.com/os1-logistics/container-reference-app/internal/pkg/domain/aaa"
+	container "github.com/os1-logistics/container-reference-app/internal/pkg/domain/container"
 )
 
 type BagServiceInterface interface {
@@ -13,44 +13,36 @@ type BagServiceInterface interface {
 }
 
 type BagService struct {
-	containerApiClient container_client.APIClient
-	aaaApiClient       aaa_client.APIClient
+	containerApiClient container.APIClient
+	aaaApiClient       aaa.APIClient
 }
 
 func NewBagService() BagService {
 
-	aaaCfg := aaa_client.NewConfiguration()
-	aaaCfg.Host = "alpha.preprod.fxtrt.io"
-	aaaCfg.Scheme = "https"
+	containerClient := domain.NewContainerClient("alpha")
+	aaaClient := domain.NewAAAClient("alpha")
 
-	aaaClient := aaa_client.NewAPIClient(aaaCfg)
+	domain.GetToken("alpha")
+	// ctx := context.Background()
+	// ApiAuthClientCredentialsRequest := aaaClient.AuthenticationApi.AuthClientCredentials(ctx)
 
-	containerCfg := container_client.NewConfiguration()
-	containerCfg.Host = "alpha.preprod.fxtrt.io"
-	containerCfg.Scheme = "https"
+	// ClientCredentialsRequest := aaa.ClientCredentialsRequest{
+	// 	ClientId:     "platform:app:ContainerReferenceApp-backend",
+	// 	ClientSecret: "****",
+	// 	Audience:     *aaa.NewNullableString(aaa.PtrString("container:reference:app")),
+	// }
 
-	containerClient := container_client.NewAPIClient(containerCfg)
+	// request := ApiAuthClientCredentialsRequest.ClientCredentialsRequest(ClientCredentialsRequest)
+	// request = request.XCOREOSREQUESTID("1234")
+	// request = request.XCOREOSTID("alpha")
 
-	ctx := context.Background()
-	ApiAuthClientCredentialsRequest := aaaClient.AuthenticationApi.AuthClientCredentials(ctx)
-
-	ClientCredentialsRequest := aaa_client.ClientCredentialsRequest{
-		ClientId:     "platform:app:ContainerReferenceApp-backend",
-		ClientSecret: "****",
-		Audience:     *aaa_client.NewNullableString(aaa_client.PtrString("container:reference:app")),
-	}
-
-	request := ApiAuthClientCredentialsRequest.ClientCredentialsRequest(ClientCredentialsRequest)
-	request = request.XCOREOSREQUESTID("1234")
-	request = request.XCOREOSTID("alpha")
-
-	success, response, _ := aaaClient.AuthenticationApi.AuthClientCredentialsExecute(request)
-	fmt.Println("=====================================")
-	if response.StatusCode == 200 && success != nil {
-		fmt.Println(success.Data.GetAccessToken())
-	} else {
-		fmt.Println("Unable to get token")
-	}
+	// success, response, _ := aaaClient.AuthenticationApi.AuthClientCredentialsExecute(request)
+	// fmt.Println("=====================================")
+	// if response.StatusCode == 200 && success != nil {
+	// 	fmt.Println(success.Data.GetAccessToken())
+	// } else {
+	// 	fmt.Println("Unable to get token")
+	// }
 
 	return BagService{
 		aaaApiClient:       *aaaClient,
@@ -59,6 +51,6 @@ func NewBagService() BagService {
 }
 
 func (s BagService) GetBags() {
-
+	domain.GetToken("alpha")
 	fmt.Println("invoked GetBags")
 }
