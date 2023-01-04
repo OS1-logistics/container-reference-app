@@ -8,8 +8,8 @@ import (
 	api "github.com/os1-logistics/container-reference-app/api"
 	apiv1 "github.com/os1-logistics/container-reference-app/api/v1"
 	config "github.com/os1-logistics/container-reference-app/configs"
+	inits "github.com/os1-logistics/container-reference-app/init"
 	cache "github.com/os1-logistics/container-reference-app/internal/pkg/cache"
-	"github.com/os1-logistics/container-reference-app/internal/pkg/service"
 )
 
 func main() {
@@ -21,7 +21,7 @@ func main() {
 	cache.LoadCache()
 
 	// should be called as a fallback for container type being not available
-	err := service.Initialize("alpha")
+	err := inits.Initialize("alpha")
 
 	if err != nil {
 		glog.Error(err)

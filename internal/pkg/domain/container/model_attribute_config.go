@@ -24,6 +24,7 @@ type AttributeConfig struct {
 	Indexed *bool `json:"indexed,omitempty"`
 	// Access Parameter for the Attribute
 	IsReadPublic *bool `json:"isReadPublic,omitempty"`
+	DefaultValue *AttributeConfigDefaultValue `json:"defaultValue,omitempty"`
 	Validation *AttributeValidation `json:"validation,omitempty"`
 }
 
@@ -194,6 +195,38 @@ func (o *AttributeConfig) SetIsReadPublic(v bool) {
 	o.IsReadPublic = &v
 }
 
+// GetDefaultValue returns the DefaultValue field value if set, zero value otherwise.
+func (o *AttributeConfig) GetDefaultValue() AttributeConfigDefaultValue {
+	if o == nil || isNil(o.DefaultValue) {
+		var ret AttributeConfigDefaultValue
+		return ret
+	}
+	return *o.DefaultValue
+}
+
+// GetDefaultValueOk returns a tuple with the DefaultValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AttributeConfig) GetDefaultValueOk() (*AttributeConfigDefaultValue, bool) {
+	if o == nil || isNil(o.DefaultValue) {
+    return nil, false
+	}
+	return o.DefaultValue, true
+}
+
+// HasDefaultValue returns a boolean if a field has been set.
+func (o *AttributeConfig) HasDefaultValue() bool {
+	if o != nil && !isNil(o.DefaultValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultValue gets a reference to the given AttributeConfigDefaultValue and assigns it to the DefaultValue field.
+func (o *AttributeConfig) SetDefaultValue(v AttributeConfigDefaultValue) {
+	o.DefaultValue = &v
+}
+
 // GetValidation returns the Validation field value if set, zero value otherwise.
 func (o *AttributeConfig) GetValidation() AttributeValidation {
 	if o == nil || isNil(o.Validation) {
@@ -242,6 +275,9 @@ func (o AttributeConfig) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.IsReadPublic) {
 		toSerialize["isReadPublic"] = o.IsReadPublic
+	}
+	if !isNil(o.DefaultValue) {
+		toSerialize["defaultValue"] = o.DefaultValue
 	}
 	if !isNil(o.Validation) {
 		toSerialize["validation"] = o.Validation

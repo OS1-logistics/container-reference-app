@@ -5416,6 +5416,8 @@ components:
           default: false
           description: Access Parameter for the Attribute
           type: boolean
+        defaultValue:
+          $ref: '#/components/schemas/AttributeConfig_defaultValue'
         validation:
           $ref: '#/components/schemas/AttributeValidation'
       required:
@@ -5458,6 +5460,8 @@ components:
           type: boolean
         ownerAppId:
           type: string
+        defaultValue:
+          $ref: '#/components/schemas/AttributeConfig_defaultValue'
         validation:
           $ref: '#/components/schemas/AttributeValidation'
       required:
@@ -5476,6 +5480,13 @@ components:
           maxLength: 512
           minLength: 1
           type: string
+        valueOneOf:
+          description: Field to specify enum values for an attribute. list of valueOneOf
+            should be homogeneous.
+          items:
+            $ref: '#/components/schemas/AttributeConfig_defaultValue'
+          minItems: 1
+          type: array
         required:
           default: false
           description: "Field to specify if the value for the attribute is mandatory\
@@ -6624,6 +6635,11 @@ components:
         meta:
           type: object
       type: object
+    AttributeConfig_defaultValue:
+      anyOf:
+      - type: number
+      - type: string
+      - type: boolean
     ContainerUpdateAttributes_trackingDetails_inner:
       properties:
         operator:
