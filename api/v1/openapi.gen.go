@@ -307,9 +307,6 @@ type ErrorSchema struct {
 	// AdditionalInfo Additional information related to the error
 	AdditionalInfo *map[string]interface{} `json:"additionalInfo,omitempty"`
 
-	// Code Error code
-	Code string `json:"code"`
-
 	// Description Error description
 	Description string `json:"description"`
 }
@@ -346,9 +343,10 @@ type PackageCoreSchema struct {
 	TrackingDetails *[]TrackingDetailSchema `json:"trackingDetails,omitempty"`
 }
 
-// PackageCreateRequestSchema defines model for PackageCreateRequest.
+// PackageCreateRequestSchema defines model for PackageCreateRequestSchema.
 type PackageCreateRequestSchema struct {
-	PackageReadOnlySchema *PackageReadOnlySchema `json:"attributes,omitempty"`
+	// Destination Destination facility Id
+	Destination string `json:"destination"`
 
 	// IsContainerizable Defines whether container can be put into other containers or not.
 	IsContainerizable *bool `json:"isContainerizable,omitempty"`
@@ -356,8 +354,12 @@ type PackageCreateRequestSchema struct {
 	// IsHazmat Represents whether this container can contain hazardous materials or not
 	IsHazmat *bool `json:"isHazmat,omitempty"`
 
-	// TrackingDetails Status of the package
-	TrackingDetails *[]TrackingDetailSchema `json:"trackingDetails,omitempty"`
+	// IsReusable Is the package reusable for some other order
+	IsReusable *bool `json:"isReusable,omitempty"`
+
+	// Origin Origination facility Id
+	Origin     string `json:"origin"`
+	TrackingId string `json:"trackingId"`
 }
 
 // PackageReadOnlySchema defines model for PackageReadOnly.

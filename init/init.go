@@ -8,6 +8,7 @@ import (
 	"io"
 
 	"github.com/golang/glog"
+	"github.com/os1-logistics/container-reference-app/internal/pkg/common"
 	"github.com/os1-logistics/container-reference-app/internal/pkg/domain"
 	containerdomain "github.com/os1-logistics/container-reference-app/internal/pkg/domain/container"
 )
@@ -24,10 +25,6 @@ func Initialize(tenantId string) error {
 
 	glog.Info("Initializing the application with container types")
 
-	// package type for container sample app
-	const packageContainerTypeName = "PackageCsa"
-	// bag type for container sample app
-	const bagContainerTypeName = "BagCsa"
 	containerClient := domain.NewContainerClient(tenantId)
 	ctx := context.Background()
 
@@ -35,7 +32,7 @@ func Initialize(tenantId string) error {
 
 	// Package type
 
-	getContainerTypeRequest1 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, packageContainerTypeName)
+	getContainerTypeRequest1 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, common.PackageContainerTypeName)
 	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSACCESS(token)
 	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSTID(tenantId)
 	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSREQUESTID("1234")
@@ -55,7 +52,7 @@ func Initialize(tenantId string) error {
 			containerTypeRequest = containerTypeRequest.XCOREOSUSERINFO("1234")
 
 			PackageCsaContainerTypeCreateRequest := containerdomain.ContainerTypeCreateRequest{
-				Name:   packageContainerTypeName,
+				Name:   common.PackageContainerTypeName,
 				IsLeaf: containerdomain.PtrBool(true),
 			}
 			containerTypeRequest = containerTypeRequest.ContainerTypeCreateRequest(PackageCsaContainerTypeCreateRequest)
@@ -78,7 +75,7 @@ func Initialize(tenantId string) error {
 	glog.Info("====================PackageCsa Type Created Idempotently=====================")
 
 	glog.Info("====================Create PackageCsa Type attributes=====================")
-	ApiUpdateAttributesConfigRequest := containerClient.ContainerTypeAttributesConfigApi.UpdateAttributesConfig(ctx, packageContainerTypeName)
+	ApiUpdateAttributesConfigRequest := containerClient.ContainerTypeAttributesConfigApi.UpdateAttributesConfig(ctx, common.PackageContainerTypeName)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSACCESS(token)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSORIGINTOKEN(token)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSTID(tenantId)
@@ -212,7 +209,7 @@ func Initialize(tenantId string) error {
 
 	// Bag type
 
-	getContainerTypeRequest2 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, bagContainerTypeName)
+	getContainerTypeRequest2 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, common.BagContainerTypeName)
 	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSACCESS(token)
 	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSTID(tenantId)
 	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSREQUESTID("1234")
@@ -231,7 +228,7 @@ func Initialize(tenantId string) error {
 			containerTypeRequest = containerTypeRequest.XCOREOSUSERINFO("1234")
 
 			BagContainerTypeCreateRequest := containerdomain.ContainerTypeCreateRequest{
-				Name:   bagContainerTypeName,
+				Name:   common.BagContainerTypeName,
 				IsLeaf: containerdomain.PtrBool(false),
 			}
 
@@ -256,7 +253,7 @@ func Initialize(tenantId string) error {
 	glog.Info("====================BagCsa Type Created Idempotently=====================")
 
 	glog.Info("====================Create BagCsa Type attributes=====================")
-	ApiUpdateAttributesConfigRequest = containerClient.ContainerTypeAttributesConfigApi.UpdateAttributesConfig(ctx, bagContainerTypeName)
+	ApiUpdateAttributesConfigRequest = containerClient.ContainerTypeAttributesConfigApi.UpdateAttributesConfig(ctx, common.BagContainerTypeName)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSACCESS(token)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSORIGINTOKEN(token)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSTID(tenantId)

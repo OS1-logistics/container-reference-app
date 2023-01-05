@@ -587,12 +587,8 @@ components:
       type: object
       x-go-name: ErrorSchema
       required:
-        - code
         - description
       properties:
-        code:
-          type: string
-          description: Error code
         description:
           type: string
           description: Error description
@@ -1290,14 +1286,37 @@ components:
           description: Status of the package
           items:
             $ref: "#/components/schemas/trackingDetail"
-    PackageCreateRequest:
+    PackageCreateRequestSchema:
       type: object
-      x-go-name: PackageCreateRequestSchema
+      properties:
+        trackingId:
+          type: string
+          example: TR223433WD
+        origin:
+          type: string
+          description: Origination facility Id
+          example: facility:317221c7-831d-4fde-9ee4-13e7898c2485
+        destination:          
+          type: string
+          description: Destination facility Id
+          example: facility:317221c7-831d-4fde-9ee4-13e7898c2485
+        isReusable:
+          type: boolean
+          description: Is the package reusable for some other order
+          default: false
+        isHazmat:
+          type: boolean
+          description: Represents whether this container can contain hazardous materials
+            or not
+          default: false
+        isContainerizable:
+          type: boolean
+          description: Defines whether container can be put into other containers or not.
+          default: false
       required:
-        - attributes
-      allOf:
-        - $ref: "#/components/schemas/PackageCore"
-        - $ref: "#/components/schemas/PackageBase"
+        - trackingId
+        - origin
+        - destination
     PackageUpdateRequest:
       type: object
       x-go-name: PackageUpdateRequestSchema
@@ -1469,7 +1488,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/PackageCreateRequest"
+            $ref: "#/components/schemas/PackageCreateRequestSchema"
     PackageUpdateRequest:
       description: ContainerUpdateRequest
       content:

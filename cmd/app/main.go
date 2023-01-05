@@ -40,7 +40,7 @@ func main() {
 	})
 
 	// create a new v1 server instance
-	s := apiv1.NewServerV1()
+	s := api.NewServerV1()
 
 	// serveer options
 	o := apiv1.GinServerOptions{
