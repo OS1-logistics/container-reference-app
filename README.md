@@ -5,6 +5,7 @@
 
 - [Go](https://golang.org/doc/install)
 - [Make](https://www.gnu.org/software/make/)
+- [openapi-generator](https://openapi-generator.tech/) install the one which is compatible with your OS.
 
 ### To Run the App
 

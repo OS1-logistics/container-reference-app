@@ -9,7 +9,6 @@ import (
 	api "github.com/os1-logistics/container-reference-app/api"
 	apiv1 "github.com/os1-logistics/container-reference-app/api/v1"
 	config "github.com/os1-logistics/container-reference-app/configs"
-	inits "github.com/os1-logistics/container-reference-app/init"
 	cache "github.com/os1-logistics/container-reference-app/internal/pkg/cache"
 	"github.com/os1-logistics/container-reference-app/internal/pkg/common"
 )
@@ -22,13 +21,17 @@ func main() {
 	config.LoadConfig()
 	cache.LoadCache()
 
-	// should be called as a fallback for container type being not available
-	err := inits.Initialize("alpha")
+	/**
+	Uncomment the below line to run the initialization as part of the tenant that
+	you are working on so tha the container type is created in start up and easy for
+	developers to test
+	*/
 
-	if err != nil {
-		glog.Error(err)
-		panic("Unable to initialize the application. Container type creation failed")
-	}
+	// err := inits.Initialize("alpha")
+	// if err != nil {
+	// 	glog.Error(err)
+	// 	panic("Unable to initialize the application. Container type creation failed")
+	// }
 
 	r := gin.New()
 
