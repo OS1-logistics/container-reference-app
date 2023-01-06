@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"time"
 
 	"github.com/golang/glog"
 	api_v1 "github.com/os1-logistics/container-reference-app/api/v1"
@@ -125,7 +126,6 @@ func (s Service) CreatePackage(tenantId string, request api_v1.CreatePackageJSON
 
 	if e != nil {
 		glog.Error(e)
-		fmt.Printf("%v", r)
 		return nil, e
 	}
 
@@ -176,7 +176,6 @@ func (s Service) CreateBag(tenantId string, request api_v1.CreateBagJSONRequestB
 
 	if e != nil {
 		glog.Error(e)
-		fmt.Printf("%v", r)
 		return nil, e
 	}
 
@@ -239,5 +238,57 @@ func (s Service) GetBags(tenantId string) (*api_v1.GetBagsResponse, error) {
 	}
 
 	return nil, e
+
+}
+
+// container operations
+func (s Service) UpdateContainerState(tenantId string, containerId string, command string) error {
+
+	var operation *common.Operation = nil
+
+	if command == common.OPERATION_OPEN.Name {
+		operation = &common.OPERATION_OPEN
+	} else if command == common.OPERATION_CLOSE.Name {
+		operation = &common.OPERATION_CLOSE
+	} else if command == common.OPERATION_COMPLETE.Name {
+		operation = &common.OPERATION_COMPLETE
+	} else if command == common.OPERATION_DEAD.Name {
+		operation = &common.OPERATION_DEAD
+	} else {
+		return fmt.Errorf("Command %s is not supported", command)
+	}
+
+	token, _ := domain.GetToken(tenantId)
+	ctx := context.Background()
+	apiUpdateContainerStateRequest := s.containerApiClient.ContainerStateApi.UpdateContainerState(ctx, containerId)
+	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.XCOREOSACCESS(token)
+	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.XCOREOSTID(tenantId)
+	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.XCOREOSREQUESTID("1234")
+	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.XCOREOSUSERINFO("1234")
+
+	containerStateUpdateRequest := containerdomain.ContainerStateUpdateRequest{
+		EventCode:  operation.EventCode,
+		ReasonCode: containerdomain.PtrString(operation.ReasonCode),
+		Timestamp:  int32(time.Now().UTC().UnixMicro()),
+		Data:       map[string]interface{}{},
+		Source: containerdomain.EventSource{
+			AppId:  common.AppName,
+			UserId: containerdomain.PtrString("1234"),
+			LocId:  containerdomain.PtrString("1234"),
+		},
+	}
+	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.ContainerStateUpdateRequest(containerStateUpdateRequest)
+
+	_, r, e := s.containerApiClient.ContainerStateApi.UpdateContainerStateExecute(apiUpdateContainerStateRequest)
+
+	if e != nil {
+		return e
+	}
+
+	if r.StatusCode == 200 || r.StatusCode == 201 || r.StatusCode == 202 {
+		return nil
+	}
+
+	return e
 
 }
