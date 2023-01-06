@@ -156,8 +156,26 @@ type GetBagParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
-// OpenBagParams defines parameters for OpenBag.
-type OpenBagParams struct {
+// AddPackageToBagParams defines parameters for AddPackageToBag.
+type AddPackageToBagParams struct {
+	// XCOREOSREQUESTID Unique request Id
+	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
+
+	// XCOREOSTENANTID Tenant Id
+	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+}
+
+// RemovePackageFromBagParams defines parameters for RemovePackageFromBag.
+type RemovePackageFromBagParams struct {
+	// XCOREOSREQUESTID Unique request Id
+	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
+
+	// XCOREOSTENANTID Tenant Id
+	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+}
+
+// ChangeBagStateParams defines parameters for ChangeBagState.
+type ChangeBagStateParams struct {
 	// XCOREOSREQUESTID Unique request Id
 	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
 
@@ -192,8 +210,8 @@ type GetPackageParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
-// OpenPackageParams defines parameters for OpenPackage.
-type OpenPackageParams struct {
+// ChangePackageStateParams defines parameters for ChangePackageState.
+type ChangePackageStateParams struct {
 	// XCOREOSREQUESTID Unique request Id
 	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
 
@@ -218,9 +236,15 @@ type ServerInterface interface {
 	// Get properties of a configured Bag
 	// (GET /bags/{bagId})
 	GetBag(c *gin.Context, bagId string, params GetBagParams)
+	// Bag composition operation
+	// (POST /bags/{bagId}/add/{packageId})
+	AddPackageToBag(c *gin.Context, bagId string, packageId string, params AddPackageToBagParams)
+	// Bag composition operation
+	// (POST /bags/{bagId}/remove/{packageId})
+	RemovePackageFromBag(c *gin.Context, bagId string, packageId string, params RemovePackageFromBagParams)
 	// Operation to perform on a package
-	// (POST /bags/{bagId}/{command})
-	OpenBag(c *gin.Context, bagId string, command string, params OpenBagParams)
+	// (POST /bags/{bagId}/state/{command})
+	ChangeBagState(c *gin.Context, bagId string, command string, params ChangeBagStateParams)
 	// Get list of current configured Packages
 	// (GET /packages)
 	GetPackages(c *gin.Context, params GetPackagesParams)
@@ -231,8 +255,8 @@ type ServerInterface interface {
 	// (GET /packages/{packageId})
 	GetPackage(c *gin.Context, packageId string, params GetPackageParams)
 	// Operation to perform on a package
-	// (POST /packages/{packageId}/{command})
-	OpenPackage(c *gin.Context, packageId string, command string, params OpenPackageParams)
+	// (POST /packages/{packageId}/state/{command})
+	ChangePackageState(c *gin.Context, packageId string, command string, params ChangePackageStateParams)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -436,8 +460,8 @@ func (siw *ServerInterfaceWrapper) GetBag(c *gin.Context) {
 	siw.Handler.GetBag(c, bagId, params)
 }
 
-// OpenBag operation middleware
-func (siw *ServerInterfaceWrapper) OpenBag(c *gin.Context) {
+// AddPackageToBag operation middleware
+func (siw *ServerInterfaceWrapper) AddPackageToBag(c *gin.Context) {
 
 	var err error
 
@@ -450,17 +474,17 @@ func (siw *ServerInterfaceWrapper) OpenBag(c *gin.Context) {
 		return
 	}
 
-	// ------------- Path parameter "command" -------------
-	var command string
+	// ------------- Path parameter "packageId" -------------
+	var packageId string
 
-	err = runtime.BindStyledParameter("simple", false, "command", c.Param("command"), &command)
+	err = runtime.BindStyledParameter("simple", false, "packageId", c.Param("packageId"), &packageId)
 	if err != nil {
-		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter command: %s", err), http.StatusBadRequest)
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter packageId: %s", err), http.StatusBadRequest)
 		return
 	}
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params OpenBagParams
+	var params AddPackageToBagParams
 
 	headers := c.Request.Header
 
@@ -512,7 +536,165 @@ func (siw *ServerInterfaceWrapper) OpenBag(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.OpenBag(c, bagId, command, params)
+	siw.Handler.AddPackageToBag(c, bagId, packageId, params)
+}
+
+// RemovePackageFromBag operation middleware
+func (siw *ServerInterfaceWrapper) RemovePackageFromBag(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "bagId" -------------
+	var bagId string
+
+	err = runtime.BindStyledParameter("simple", false, "bagId", c.Param("bagId"), &bagId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter bagId: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Path parameter "packageId" -------------
+	var packageId string
+
+	err = runtime.BindStyledParameter("simple", false, "packageId", c.Param("packageId"), &packageId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter packageId: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	// Parameter object where we will unmarshal all parameters from the context
+	var params RemovePackageFromBagParams
+
+	headers := c.Request.Header
+
+	// ------------- Required header parameter "X-COREOS-REQUEST-ID" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-REQUEST-ID")]; found {
+		var XCOREOSREQUESTID RequestId
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-REQUEST-ID, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-REQUEST-ID", runtime.ParamLocationHeader, valueList[0], &XCOREOSREQUESTID)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-REQUEST-ID: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSREQUESTID = XCOREOSREQUESTID
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-REQUEST-ID is required, but not found: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Required header parameter "X-COREOS-TENANT-ID" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-TENANT-ID")]; found {
+		var XCOREOSTENANTID TenantId
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-TENANT-ID, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-TENANT-ID", runtime.ParamLocationHeader, valueList[0], &XCOREOSTENANTID)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-TENANT-ID: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSTENANTID = XCOREOSTENANTID
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-TENANT-ID is required, but not found: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+	}
+
+	siw.Handler.RemovePackageFromBag(c, bagId, packageId, params)
+}
+
+// ChangeBagState operation middleware
+func (siw *ServerInterfaceWrapper) ChangeBagState(c *gin.Context) {
+
+	var err error
+
+	// ------------- Path parameter "bagId" -------------
+	var bagId string
+
+	err = runtime.BindStyledParameter("simple", false, "bagId", c.Param("bagId"), &bagId)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter bagId: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Path parameter "command" -------------
+	var command string
+
+	err = runtime.BindStyledParameter("simple", false, "command", c.Param("command"), &command)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter command: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	// Parameter object where we will unmarshal all parameters from the context
+	var params ChangeBagStateParams
+
+	headers := c.Request.Header
+
+	// ------------- Required header parameter "X-COREOS-REQUEST-ID" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-REQUEST-ID")]; found {
+		var XCOREOSREQUESTID RequestId
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-REQUEST-ID, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-REQUEST-ID", runtime.ParamLocationHeader, valueList[0], &XCOREOSREQUESTID)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-REQUEST-ID: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSREQUESTID = XCOREOSREQUESTID
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-REQUEST-ID is required, but not found: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Required header parameter "X-COREOS-TENANT-ID" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-TENANT-ID")]; found {
+		var XCOREOSTENANTID TenantId
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-TENANT-ID, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-TENANT-ID", runtime.ParamLocationHeader, valueList[0], &XCOREOSTENANTID)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-TENANT-ID: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSTENANTID = XCOREOSTENANTID
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-TENANT-ID is required, but not found: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+	}
+
+	siw.Handler.ChangeBagState(c, bagId, command, params)
 }
 
 // GetPackages operation middleware
@@ -707,8 +889,8 @@ func (siw *ServerInterfaceWrapper) GetPackage(c *gin.Context) {
 	siw.Handler.GetPackage(c, packageId, params)
 }
 
-// OpenPackage operation middleware
-func (siw *ServerInterfaceWrapper) OpenPackage(c *gin.Context) {
+// ChangePackageState operation middleware
+func (siw *ServerInterfaceWrapper) ChangePackageState(c *gin.Context) {
 
 	var err error
 
@@ -731,7 +913,7 @@ func (siw *ServerInterfaceWrapper) OpenPackage(c *gin.Context) {
 	}
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params OpenPackageParams
+	var params ChangePackageStateParams
 
 	headers := c.Request.Header
 
@@ -783,7 +965,7 @@ func (siw *ServerInterfaceWrapper) OpenPackage(c *gin.Context) {
 		middleware(c)
 	}
 
-	siw.Handler.OpenPackage(c, packageId, command, params)
+	siw.Handler.ChangePackageState(c, packageId, command, params)
 }
 
 // GinServerOptions provides options for the Gin server.
@@ -821,7 +1003,11 @@ func RegisterHandlersWithOptions(router *gin.Engine, si ServerInterface, options
 
 	router.GET(options.BaseURL+"/bags/:bagId", wrapper.GetBag)
 
-	router.POST(options.BaseURL+"/bags/:bagId/:command", wrapper.OpenBag)
+	router.POST(options.BaseURL+"/bags/:bagId/add/:packageId", wrapper.AddPackageToBag)
+
+	router.POST(options.BaseURL+"/bags/:bagId/remove/:packageId", wrapper.RemovePackageFromBag)
+
+	router.POST(options.BaseURL+"/bags/:bagId/state/:command", wrapper.ChangeBagState)
 
 	router.GET(options.BaseURL+"/packages", wrapper.GetPackages)
 
@@ -829,7 +1015,7 @@ func RegisterHandlersWithOptions(router *gin.Engine, si ServerInterface, options
 
 	router.GET(options.BaseURL+"/packages/:packageId", wrapper.GetPackage)
 
-	router.POST(options.BaseURL+"/packages/:packageId/:command", wrapper.OpenPackage)
+	router.POST(options.BaseURL+"/packages/:packageId/state/:command", wrapper.ChangePackageState)
 
 	return router
 }

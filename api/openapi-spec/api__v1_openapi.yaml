@@ -41,7 +41,6 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
   "/packages/{packageId}":
-    description: Package specific Id
     parameters:
       - in: path
         name: packageId
@@ -63,8 +62,7 @@ paths:
           $ref: "#/components/responses/GetPackageResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
-  "/packages/{packageId}/{command}":
-    description: Package Id
+  "/packages/{packageId}/state/{command}":
     parameters:
       - in: path
         name: packageId
@@ -77,7 +75,7 @@ paths:
         description: operation to perform on the packag. eg. open, close, dispach
         schema:
           type: string
-          enum: 
+          enum:
             - open
             - close
             - complete
@@ -92,7 +90,7 @@ paths:
       summary: Operation to perform on a package
       description: >
         API to open, close a package
-      operationId: openPackage
+      operationId: changePackageState
       responses:
         default:
           $ref: "#/components/responses/DefaultResponse"
@@ -148,8 +146,8 @@ paths:
         "200":
           $ref: "#/components/responses/GetBagResponse"
         default:
-          $ref: "#/components/responses/DefaultResponse"    
-  "/bags/{bagId}/{command}":
+          $ref: "#/components/responses/DefaultResponse"
+  "/bags/{bagId}/state/{command}":
     description: Bag Id
     parameters:
       - in: path
@@ -163,11 +161,11 @@ paths:
         description: operation to perform on the bag. eg. open, close, dispach
         schema:
           type: string
-          enum: 
+          enum:
             - open
             - close
             - complete
-            - dead          
+            - dead
         required: true
         example: open
       - $ref: "#/components/parameters/RequestId"
@@ -178,10 +176,62 @@ paths:
       summary: Operation to perform on a package
       description: >
         API to open, close a bag
-      operationId: openBag
+      operationId: changeBagState
       responses:
         default:
-          $ref: "#/components/responses/DefaultResponse"          
+          $ref: "#/components/responses/DefaultResponse"
+  "/bags/{bagId}/add/{packageId}":
+    parameters:
+      - in: path
+        name: bagId
+        description: bag identifier
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: packageId
+        description: Unique Id of Package
+        schema:
+          type: string
+        required: true
+      - $ref: "#/components/parameters/RequestId"
+      - $ref: "#/components/parameters/TenantId"
+    post:
+      tags:
+        - Bag Operations
+      summary: Bag composition operation
+      description: >
+        API to add a package to a bag
+      operationId: addPackageToBag
+      responses:
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+  "/bags/{bagId}/remove/{packageId}":
+    parameters:
+      - in: path
+        name: bagId
+        description: bag identifier
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: packageId
+        description: Unique Id of Package
+        schema:
+          type: string
+        required: true
+      - $ref: "#/components/parameters/RequestId"
+      - $ref: "#/components/parameters/TenantId"
+    post:
+      tags:
+        - Bag Operations
+      summary: Bag composition operation
+      description: >
+        API to remove a package from a bag
+      operationId: removePackageFromBag
+      responses:
+        default:
+          $ref: "#/components/responses/DefaultResponse"
 components:
   schemas:
     Error:

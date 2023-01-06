@@ -3,44 +3,43 @@ package common
 type key int
 
 const (
-	AppName             = "container-reference-app"
-	TenantIDHeaderName  = "X-Coreos-Tid"
-	RequestIDHeaderName = "X-Coreos-Request-Id"
-	UserInfoHeaderName  = "X-Coreos-Userinfo"
-	AcessHeaderName     = "X-Coreos-Access"
-	BasePath            = "/"
+	AppName                            = "container-reference-app"
+	TenantIDHeaderName                 = "X-Coreos-Tid"
+	RequestIDHeaderName                = "X-Coreos-Request-Id"
+	UserInfoHeaderName                 = "X-Coreos-Userinfo"
+	AcessHeaderName                    = "X-Coreos-Access"
+	BasePath                           = "/api/v1"
+	PackageContainerTypeName           = "PackageCsa"
+	BagContainerTypeName               = "BagT"
+	CONTAINER_OPERATION_CONTAINERIZE   = "CONTAINERIZE"
+	CONTAINER_OPERATION_DECONTAINERIZE = "DECONTAINERIZE"
 )
 
-type Operation struct {
+type ContainerStateOperation struct {
 	Name       string
 	EventCode  string
 	ReasonCode string
 }
 
 var (
-	OPERATION_OPEN = Operation{
+	STATE_OPERATION_OPEN = ContainerStateOperation{
 		Name:       "open",
 		EventCode:  "E-025",
 		ReasonCode: "R-0001",
 	}
-	OPERATION_CLOSE = Operation{
+	STATE_OPERATION_CLOSE = ContainerStateOperation{
 		Name:       "close",
 		EventCode:  "E-026",
 		ReasonCode: "R-0001",
 	}
-	OPERATION_COMPLETE = Operation{
+	STATE_OPERATION_COMPLETE = ContainerStateOperation{
 		Name:       "complete",
 		EventCode:  "E-027",
 		ReasonCode: "R-0001",
 	}
-	OPERATION_DEAD = Operation{
+	STATE_OPERATION_DEAD = ContainerStateOperation{
 		Name:       "dead",
 		EventCode:  "E-028",
 		ReasonCode: "R-0001",
 	}
 )
-
-const UserStruct = "user"
-const StateMachineFilePath = "domain/init/state-machnine.json"
-const PackageContainerTypeName = "PackageCsa"
-const BagContainerTypeName = "BagT"
