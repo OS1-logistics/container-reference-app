@@ -22,9 +22,14 @@ func main() {
 	config.LoadConfig()
 	cache.LoadCache()
 
-	// should be called as a fallback for container type being not available
-	err := inits.Initialize("alpha")
+	/**
+	Uncomment the below line to run the initialization as part of the tenant that
+	you are working on so tha the container type is created in start up and easy for
+	developers to test
+	*/
 
+	// TODO: add a api to initialize the container type
+	err := inits.Initialize("alpha")
 	if err != nil {
 		glog.Error(err)
 		panic("Unable to initialize the application. Container type creation failed")
