@@ -41,7 +41,6 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
   "/packages/{packageId}":
-    description: Package specific Id
     parameters:
       - in: path
         name: packageId
@@ -64,7 +63,6 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
   "/packages/{packageId}/state/{command}":
-    description: Package Id
     parameters:
       - in: path
         name: packageId
@@ -95,35 +93,7 @@ paths:
       operationId: changePackageState
       responses:
         default:
-          $ref: "#/components/responses/DefaultResponse"
-  "/packages/{packageId}/add/{bagId}":
-    description: Package Id
-    parameters:
-      - in: path
-        name: packageId
-        description: Unique Id of Package
-        schema:
-          type: string
-        required: true
-      - in: path
-        name: bagId
-        description: bag id to add to package
-        schema:
-          type: string
-        required: true
-        example: open
-      - $ref: "#/components/parameters/RequestId"
-      - $ref: "#/components/parameters/TenantId"
-    post:
-      tags:
-        - Package Operations
-      summary: Package composition operation
-      description: >
-        API to add a bag to package
-      operationId: addBagToPackage
-      responses:
-        default:
-          $ref: "#/components/responses/DefaultResponse"          
+          $ref: "#/components/responses/DefaultResponse"         
   /bags:
     parameters:
       - $ref: "#/components/parameters/RequestId"
@@ -210,6 +180,58 @@ paths:
       responses:
         default:
           $ref: "#/components/responses/DefaultResponse"          
+  "/bags/{bagId}/add/{packageId}":
+    parameters:
+      - in: path
+        name: bagId
+        description: bag identifier
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: packageId
+        description: Unique Id of Package
+        schema:
+          type: string
+        required: true        
+      - $ref: "#/components/parameters/RequestId"
+      - $ref: "#/components/parameters/TenantId"
+    post:
+      tags:
+        - Bag Operations
+      summary: Bag composition operation
+      description: >
+        API to add a package to a bag
+      operationId: addPackageToBag
+      responses:
+        default:
+          $ref: "#/components/responses/DefaultResponse"           
+  "/bags/{bagId}/remove/{packageId}":
+    parameters:
+      - in: path
+        name: bagId
+        description: bag identifier
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: packageId
+        description: Unique Id of Package
+        schema:
+          type: string
+        required: true        
+      - $ref: "#/components/parameters/RequestId"
+      - $ref: "#/components/parameters/TenantId"
+    post:
+      tags:
+        - Bag Operations
+      summary: Bag composition operation
+      description: >
+        API to remove a package from a bag
+      operationId: removePackageFromBag
+      responses:
+        default:
+          $ref: "#/components/responses/DefaultResponse"                     
 components:
   schemas:
     Error:

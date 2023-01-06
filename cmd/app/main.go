@@ -11,6 +11,7 @@ import (
 	config "github.com/os1-logistics/container-reference-app/configs"
 	inits "github.com/os1-logistics/container-reference-app/init"
 	cache "github.com/os1-logistics/container-reference-app/internal/pkg/cache"
+	"github.com/os1-logistics/container-reference-app/internal/pkg/common"
 )
 
 func main() {
@@ -45,7 +46,7 @@ func main() {
 
 	// serveer options
 	o := apiv1.GinServerOptions{
-		BaseURL: "/api/v1",
+		BaseURL: common.BasePath,
 	}
 
 	// register generated handlers with v1 server implementation

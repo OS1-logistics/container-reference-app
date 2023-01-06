@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	api_v1 "github.com/os1-logistics/container-reference-app/api/v1"
+	"github.com/os1-logistics/container-reference-app/internal/pkg/common"
 	service "github.com/os1-logistics/container-reference-app/internal/pkg/service"
 )
 
@@ -138,19 +139,44 @@ func (s ServerV1) CreateBag(c *gin.Context, params api_v1.CreateBagParams) {
 }
 
 func (s ServerV1) ChangeBagState(c *gin.Context, bagId string, command string, params api_v1.ChangeBagStateParams) {
-	Response := &api_v1.CreatedResponse{}
 
 	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, bagId, command)
 	if e != nil {
+		Response := &api_v1.DefaultResponse{}
 		Response.ErrorSchema = &api_v1.ErrorSchema{}
 		Response.ErrorSchema.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
 
-	c.JSON(http.StatusAccepted, Response)
+	c.JSON(http.StatusOK, nil)
 }
 
-func (s ServerV1) AddBagToPackage(c *gin.Context, packageId string, bagId string, params api_v1.AddBagToPackageParams) {
+func (s ServerV1) AddPackageToBag(c *gin.Context, bagId string, packageId string, params api_v1.AddPackageToBagParams) {
+
+	e := s.ser.ContainerizeOperations(params.XCOREOSTENANTID, bagId, packageId, common.CONTAINER_OPERATION_CONTAINERIZE)
+	if e != nil {
+		Response := &api_v1.DefaultResponse{}
+		Response.ErrorSchema = &api_v1.ErrorSchema{}
+		Response.ErrorSchema.Description = e.Error()
+		c.JSON(http.StatusInternalServerError, Response)
+		return
+	}
+
+	c.JSON(http.StatusOK, nil)
+}
+
+func (s ServerV1) RemovePackageFromBag(c *gin.Context, bagId string, packageId string, params api_v1.RemovePackageFromBagParams) {
+
+	e := s.ser.ContainerizeOperations(params.XCOREOSTENANTID, bagId, packageId, common.CONTAINER_OPERATION_DECONTAINERIZE)
+	if e != nil {
+		Response := &api_v1.DefaultResponse{}
+		Response.ErrorSchema = &api_v1.ErrorSchema{}
+		Response.ErrorSchema.Description = e.Error()
+		c.JSON(http.StatusInternalServerError, Response)
+		return
+	}
+
+	c.JSON(http.StatusOK, nil)
 
 }
