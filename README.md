@@ -24,3 +24,8 @@ The OpenAPI spec is generated from the `api/openapi-spec/v1/api__v1_openapi.yaml
 make openapi-codegen
 ```
 
+### To Run the App
+
+```
+make run
+```

@@ -16,3 +16,7 @@ build:
 	@go mod tidy
 	@go get -d -v ./...
 	@go build -v ./...
+
+.PHONY: run
+run:
+	@go run ./cmd/app/main.go
