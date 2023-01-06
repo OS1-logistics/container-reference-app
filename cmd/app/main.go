@@ -5,11 +5,13 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
+
 	api "github.com/os1-logistics/container-reference-app/api"
 	apiv1 "github.com/os1-logistics/container-reference-app/api/v1"
 	config "github.com/os1-logistics/container-reference-app/configs"
 	inits "github.com/os1-logistics/container-reference-app/init"
 	cache "github.com/os1-logistics/container-reference-app/internal/pkg/cache"
+	service "github.com/os1-logistics/container-reference-app/internal/pkg/service"
 )
 
 func main() {
@@ -40,7 +42,7 @@ func main() {
 	})
 
 	// create a new v1 server instance
-	s := api.NewServerV1()
+	s := service.NewServiceV1()
 
 	// serveer options
 	o := apiv1.GinServerOptions{
