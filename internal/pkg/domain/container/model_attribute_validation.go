@@ -19,6 +19,8 @@ type AttributeValidation struct {
 	Range *Range `json:"range,omitempty"`
 	// Field to specify the regex pattern that the value of an attribute MUST match.this validation alllowed only for string type of attributes.
 	Regex *string `json:"regex,omitempty"`
+	// Field to specify enum values for an attribute. list of valueOneOf should be homogeneous.
+	ValueOneOf []AttributeConfigDefaultValue `json:"valueOneOf,omitempty"`
 	// Field to specify if the value for the attribute is mandatory or not. If TRUE, the value MUST be provided.
 	Required *bool `json:"required,omitempty"`
 }
@@ -108,6 +110,38 @@ func (o *AttributeValidation) SetRegex(v string) {
 	o.Regex = &v
 }
 
+// GetValueOneOf returns the ValueOneOf field value if set, zero value otherwise.
+func (o *AttributeValidation) GetValueOneOf() []AttributeConfigDefaultValue {
+	if o == nil || isNil(o.ValueOneOf) {
+		var ret []AttributeConfigDefaultValue
+		return ret
+	}
+	return o.ValueOneOf
+}
+
+// GetValueOneOfOk returns a tuple with the ValueOneOf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AttributeValidation) GetValueOneOfOk() ([]AttributeConfigDefaultValue, bool) {
+	if o == nil || isNil(o.ValueOneOf) {
+    return nil, false
+	}
+	return o.ValueOneOf, true
+}
+
+// HasValueOneOf returns a boolean if a field has been set.
+func (o *AttributeValidation) HasValueOneOf() bool {
+	if o != nil && !isNil(o.ValueOneOf) {
+		return true
+	}
+
+	return false
+}
+
+// SetValueOneOf gets a reference to the given []AttributeConfigDefaultValue and assigns it to the ValueOneOf field.
+func (o *AttributeValidation) SetValueOneOf(v []AttributeConfigDefaultValue) {
+	o.ValueOneOf = v
+}
+
 // GetRequired returns the Required field value if set, zero value otherwise.
 func (o *AttributeValidation) GetRequired() bool {
 	if o == nil || isNil(o.Required) {
@@ -147,6 +181,9 @@ func (o AttributeValidation) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.Regex) {
 		toSerialize["regex"] = o.Regex
+	}
+	if !isNil(o.ValueOneOf) {
+		toSerialize["valueOneOf"] = o.ValueOneOf
 	}
 	if !isNil(o.Required) {
 		toSerialize["required"] = o.Required

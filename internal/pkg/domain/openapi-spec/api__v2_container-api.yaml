@@ -2697,6 +2697,11 @@ components:
       description: Rules defining the allowed container types as parent of a container type
       type: object
       minProperties: 1
+      # anyOf:
+      #   - required:
+      #       - oneOf
+      #   - required:
+      #       - not
       properties:
         oneOf:
           description: List of container types allowed as parent of this container type
@@ -2806,14 +2811,11 @@ components:
           type: boolean
           default: false
           description: Access Parameter for the Attribute
-        # defaultValue:
-        #   anyOf:
-        #     - type: number
-        #     - type: string
-        #     - items: {}
-        #       type: array
-        #     - type: boolean
-        #     - type: object
+        defaultValue:
+          anyOf:
+            - type: number
+            - type: string
+            - type: boolean
         validation:
           $ref: '#/components/schemas/AttributeValidation'
         
@@ -2856,14 +2858,11 @@ components:
           description: Access Parameter for the Attribute
         ownerAppId:
           type: string
-        # defaultValue:
-        #   anyOf:
-        #     - type: number
-        #     - type: string
-        #     - items: {}
-        #       type: array
-        #     - type: boolean
-        #     - type: object
+        defaultValue:
+          anyOf:
+            - type: number
+            - type: string
+            - type: boolean
         validation:
           $ref: '#/components/schemas/AttributeValidation'
     AttributeValidation:
@@ -2882,20 +2881,17 @@ components:
             Field to specify the regex pattern that the value of an attribute
             MUST match.this validation alllowed only for string type of
             attributes.
-        # valueOneOf:
-        #   type: array
-        #   items:
-        #     anyOf:
-        #       - type: number
-        #       - type: string
-        #       - items: {}
-        #         type: array
-        #       - type: boolean
-        #       - type: object
-        #   minItems: 1
-        #   description: >-
-        #     Field to specify enum values for an attribute. list of valueOneOf
-        #     should be homogeneous.
+        valueOneOf:
+          type: array
+          items:
+            anyOf:
+              - type: number
+              - type: string
+              - type: boolean
+          minItems: 1
+          description: >-
+            Field to specify enum values for an attribute. list of valueOneOf
+            should be homogeneous.
         required:
           type: boolean
           default: false

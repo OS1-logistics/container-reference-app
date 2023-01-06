@@ -23,6 +23,7 @@ func GetToken(tenantId string) (string, error) {
 	token, isPresent := cache.ServiceCache.Get(tenantTokenKey)
 	if isPresent && token != nil {
 		glog.Info("Token found in cache")
+		fmt.Println(token)
 		return token.(string), nil
 	}
 
