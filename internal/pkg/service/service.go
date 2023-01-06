@@ -126,7 +126,6 @@ func (s Service) CreatePackage(tenantId string, request api_v1.CreatePackageJSON
 
 	if e != nil {
 		glog.Error(e)
-		fmt.Printf("%v", r)
 		return nil, e
 	}
 
@@ -177,7 +176,6 @@ func (s Service) CreateBag(tenantId string, request api_v1.CreateBagJSONRequestB
 
 	if e != nil {
 		glog.Error(e)
-		fmt.Printf("%v", r)
 		return nil, e
 	}
 
@@ -246,11 +244,16 @@ func (s Service) GetBags(tenantId string) (*api_v1.GetBagsResponse, error) {
 // container operations
 func (s Service) UpdateContainerState(tenantId string, containerId string, command string) error {
 
-	eventCode := ""
-	reasonCode := ""
-	if command == "open" {
-		eventCode = "E-025"
-		reasonCode = "R-0001"
+	var operation *common.Operation = nil
+
+	if command == common.OPERATION_OPEN.Name {
+		operation = &common.OPERATION_OPEN
+	} else if command == common.OPERATION_CLOSE.Name {
+		operation = &common.OPERATION_CLOSE
+	} else if command == common.OPERATION_COMPLETE.Name {
+		operation = &common.OPERATION_COMPLETE
+	} else if command == common.OPERATION_DEAD.Name {
+		operation = &common.OPERATION_DEAD
 	} else {
 		return fmt.Errorf("Command %s is not supported", command)
 	}
@@ -264,8 +267,8 @@ func (s Service) UpdateContainerState(tenantId string, containerId string, comma
 	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.XCOREOSUSERINFO("1234")
 
 	containerStateUpdateRequest := containerdomain.ContainerStateUpdateRequest{
-		EventCode:  eventCode,
-		ReasonCode: containerdomain.PtrString(reasonCode),
+		EventCode:  operation.EventCode,
+		ReasonCode: containerdomain.PtrString(operation.ReasonCode),
 		Timestamp:  int32(time.Now().UTC().UnixMicro()),
 		Data:       map[string]interface{}{},
 		Source: containerdomain.EventSource{
@@ -276,14 +279,13 @@ func (s Service) UpdateContainerState(tenantId string, containerId string, comma
 	}
 	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.ContainerStateUpdateRequest(containerStateUpdateRequest)
 
-	d, r, e := s.containerApiClient.ContainerStateApi.UpdateContainerStateExecute(apiUpdateContainerStateRequest)
+	_, r, e := s.containerApiClient.ContainerStateApi.UpdateContainerStateExecute(apiUpdateContainerStateRequest)
 
 	if e != nil {
 		return e
 	}
 
 	if r.StatusCode == 200 || r.StatusCode == 201 || r.StatusCode == 202 {
-		fmt.Println(d)
 		return nil
 	}
 

@@ -218,7 +218,7 @@ type ServerInterface interface {
 	// Get properties of a configured Bag
 	// (GET /bags/{bagId})
 	GetBag(c *gin.Context, bagId string, params GetBagParams)
-	// Open a Bag
+	// Operation to perform on a package
 	// (POST /bags/{bagId}/{command})
 	OpenBag(c *gin.Context, bagId string, command string, params OpenBagParams)
 	// Get list of current configured Packages
@@ -230,7 +230,7 @@ type ServerInterface interface {
 	// Get properties of a configured Package
 	// (GET /packages/{packageId})
 	GetPackage(c *gin.Context, packageId string, params GetPackageParams)
-	// Open a package
+	// Operation to perform on a package
 	// (POST /packages/{packageId}/{command})
 	OpenPackage(c *gin.Context, packageId string, command string, params OpenPackageParams)
 }

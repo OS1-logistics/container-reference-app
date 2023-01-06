@@ -204,7 +204,7 @@ func Initialize(tenantId string) error {
 	}
 
 	if r.StatusCode == 202 {
-		fmt.Println("Package Attributes updated accepted successfully")
+		glog.Info("Package Attributes updated accepted successfully")
 	}
 
 	// Bag type
@@ -373,7 +373,7 @@ func Initialize(tenantId string) error {
 	}
 
 	if r.StatusCode == 202 {
-		fmt.Println("Bag Attributes updated accepted successfully")
+		glog.Info("Bag Attributes updated accepted successfully")
 	}
 
 	return nil

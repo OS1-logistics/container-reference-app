@@ -77,6 +77,11 @@ paths:
         description: operation to perform on the packag. eg. open, close, dispach
         schema:
           type: string
+          enum: 
+            - open
+            - close
+            - complete
+            - dead
         required: true
         example: open
       - $ref: "#/components/parameters/RequestId"
@@ -84,9 +89,9 @@ paths:
     post:
       tags:
         - Package Operations
-      summary: Open a package
+      summary: Operation to perform on a package
       description: >
-        API to open a package
+        API to open, close a package
       operationId: openPackage
       responses:
         default:
@@ -158,6 +163,11 @@ paths:
         description: operation to perform on the bag. eg. open, close, dispach
         schema:
           type: string
+          enum: 
+            - open
+            - close
+            - complete
+            - dead          
         required: true
         example: open
       - $ref: "#/components/parameters/RequestId"
@@ -165,9 +175,9 @@ paths:
     post:
       tags:
         - Bag Operations
-      summary: Open a Bag
+      summary: Operation to perform on a package
       description: >
-        API to open a bag
+        API to open, close a bag
       operationId: openBag
       responses:
         default:
