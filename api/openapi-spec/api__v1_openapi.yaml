@@ -63,7 +63,7 @@ paths:
           $ref: "#/components/responses/GetPackageResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
-  "/packages/{packageId}/{command}":
+  "/packages/{packageId}/state/{command}":
     description: Package Id
     parameters:
       - in: path
@@ -92,10 +92,38 @@ paths:
       summary: Operation to perform on a package
       description: >
         API to open, close a package
-      operationId: openPackage
+      operationId: changePackageState
       responses:
         default:
           $ref: "#/components/responses/DefaultResponse"
+  "/packages/{packageId}/add/{bagId}":
+    description: Package Id
+    parameters:
+      - in: path
+        name: packageId
+        description: Unique Id of Package
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: bagId
+        description: bag id to add to package
+        schema:
+          type: string
+        required: true
+        example: open
+      - $ref: "#/components/parameters/RequestId"
+      - $ref: "#/components/parameters/TenantId"
+    post:
+      tags:
+        - Package Operations
+      summary: Package composition operation
+      description: >
+        API to add a bag to package
+      operationId: addBagToPackage
+      responses:
+        default:
+          $ref: "#/components/responses/DefaultResponse"          
   /bags:
     parameters:
       - $ref: "#/components/parameters/RequestId"
@@ -149,7 +177,7 @@ paths:
           $ref: "#/components/responses/GetBagResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"    
-  "/bags/{bagId}/{command}":
+  "/bags/{bagId}/state/{command}":
     description: Bag Id
     parameters:
       - in: path
@@ -178,7 +206,7 @@ paths:
       summary: Operation to perform on a package
       description: >
         API to open, close a bag
-      operationId: openBag
+      operationId: changeBagState
       responses:
         default:
           $ref: "#/components/responses/DefaultResponse"          

@@ -70,7 +70,7 @@ func (s ServerV1) CreatePackage(c *gin.Context, params api_v1.CreatePackageParam
 	c.JSON(http.StatusAccepted, Response)
 }
 
-func (s ServerV1) OpenPackage(c *gin.Context, packageId string, command string, params api_v1.OpenPackageParams) {
+func (s ServerV1) ChangePackageState(c *gin.Context, packageId string, command string, params api_v1.ChangePackageStateParams) {
 	Response := &api_v1.CreatedResponse{}
 
 	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, packageId, command)
@@ -137,7 +137,7 @@ func (s ServerV1) CreateBag(c *gin.Context, params api_v1.CreateBagParams) {
 
 }
 
-func (s ServerV1) OpenBag(c *gin.Context, bagId string, command string, params api_v1.OpenBagParams) {
+func (s ServerV1) ChangeBagState(c *gin.Context, bagId string, command string, params api_v1.ChangeBagStateParams) {
 	Response := &api_v1.CreatedResponse{}
 
 	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, bagId, command)
@@ -149,4 +149,8 @@ func (s ServerV1) OpenBag(c *gin.Context, bagId string, command string, params a
 	}
 
 	c.JSON(http.StatusAccepted, Response)
+}
+
+func (s ServerV1) AddBagToPackage(c *gin.Context, packageId string, bagId string, params api_v1.AddBagToPackageParams) {
+
 }
