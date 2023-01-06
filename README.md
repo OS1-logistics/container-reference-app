@@ -6,10 +6,23 @@
 - [Go](https://golang.org/doc/install)
 - [Make](https://www.gnu.org/software/make/)
 
-Run make to install the dependencies:
+### To Run the App
+
+- Run make to install the dependencies
 
 ```
 make install
+```
+- Run make to build the app
+
+```
+make build
+```
+
+- Run make to run the app
+
+```
+make run
 ```
 
 ## Codegen 
@@ -34,11 +47,3 @@ openapi-codegen-client:
 	openapi-generator generate -g go -i internal/pkg/domain/openapi-spec/api__v2_<domainname>-api.yaml -o internal/pkg/domain/<domainname> -p packageName=<domainname>domain -p enumClassPrefix=true --global-property skipFormModel=false,modelDocs=false,apiTests=false,apiDocs=false
 ```
 - Run `make openapi-codegen-client` to generate the client code.
-
-### To Run the App
-
-To run the app in local for development, run the following command: 
-
-```
-make run
-```
