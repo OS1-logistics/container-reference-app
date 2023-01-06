@@ -9,22 +9,9 @@
 
 ### To Run the App
 
-- Run make to install the dependencies
-
-```
-make install
-```
-- Run make to build the app
-
-```
-make build
-```
-
-- Run make to run the app
-
-```
-make run
-```
+- To install the dependencies `make install`
+- To build the app `make build`
+- To run the app run `export $(cat .env.local | xargs)` to export the environment variables then run `make run`
 
 ## Codegen 
 
