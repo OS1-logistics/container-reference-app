@@ -268,7 +268,7 @@ func Initialize(tenantId string) error {
 				Description: containerdomain.PtrString("Container Name - package/ bag"),
 				Indexed:     containerdomain.PtrBool(true),
 				Validation: &containerdomain.AttributeValidation{
-					Regex:    containerdomain.PtrString("^package$"),
+					Regex:    containerdomain.PtrString("^bag$"),
 					Required: containerdomain.PtrBool(true),
 				},
 			},
@@ -278,7 +278,7 @@ func Initialize(tenantId string) error {
 				Description: containerdomain.PtrString("Container Type - reusable/ non-reusable"),
 				Indexed:     containerdomain.PtrBool(true),
 				Validation: &containerdomain.AttributeValidation{
-					Regex:    containerdomain.PtrString("^non-reusable$"),
+					Regex:    containerdomain.PtrString("^reusable$"),
 					Required: containerdomain.PtrBool(true),
 				},
 			},
@@ -297,7 +297,7 @@ func Initialize(tenantId string) error {
 				Description: containerdomain.PtrString("Allowable containers - package/ bag"),
 				Indexed:     containerdomain.PtrBool(false),
 				Validation: &containerdomain.AttributeValidation{
-					Required: containerdomain.PtrBool(true),
+					Required: containerdomain.PtrBool(false),
 				},
 			},
 			{

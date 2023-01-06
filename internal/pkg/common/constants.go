@@ -14,4 +14,4 @@ const (
 const UserStruct = "user"
 const StateMachineFilePath = "domain/init/state-machnine.json"
 const PackageContainerTypeName = "PackageCsa"
-const BagContainerTypeName = "BagCsa"
+const BagContainerTypeName = "BagT"
