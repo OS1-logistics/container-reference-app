@@ -75,7 +75,7 @@ paths:
         description: operation to perform on the packag. eg. open, close, dispach
         schema:
           type: string
-          enum: 
+          enum:
             - open
             - close
             - complete
@@ -93,7 +93,7 @@ paths:
       operationId: changePackageState
       responses:
         default:
-          $ref: "#/components/responses/DefaultResponse"         
+          $ref: "#/components/responses/DefaultResponse"
   /bags:
     parameters:
       - $ref: "#/components/parameters/RequestId"
@@ -146,7 +146,7 @@ paths:
         "200":
           $ref: "#/components/responses/GetBagResponse"
         default:
-          $ref: "#/components/responses/DefaultResponse"    
+          $ref: "#/components/responses/DefaultResponse"
   "/bags/{bagId}/state/{command}":
     description: Bag Id
     parameters:
@@ -161,11 +161,11 @@ paths:
         description: operation to perform on the bag. eg. open, close, dispach
         schema:
           type: string
-          enum: 
+          enum:
             - open
             - close
             - complete
-            - dead          
+            - dead
         required: true
         example: open
       - $ref: "#/components/parameters/RequestId"
@@ -179,7 +179,7 @@ paths:
       operationId: changeBagState
       responses:
         default:
-          $ref: "#/components/responses/DefaultResponse"          
+          $ref: "#/components/responses/DefaultResponse"
   "/bags/{bagId}/add/{packageId}":
     parameters:
       - in: path
@@ -193,7 +193,7 @@ paths:
         description: Unique Id of Package
         schema:
           type: string
-        required: true        
+        required: true
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
     post:
@@ -205,7 +205,7 @@ paths:
       operationId: addPackageToBag
       responses:
         default:
-          $ref: "#/components/responses/DefaultResponse"           
+          $ref: "#/components/responses/DefaultResponse"
   "/bags/{bagId}/remove/{packageId}":
     parameters:
       - in: path
@@ -219,7 +219,7 @@ paths:
         description: Unique Id of Package
         schema:
           type: string
-        required: true        
+        required: true
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
     post:
@@ -231,7 +231,7 @@ paths:
       operationId: removePackageFromBag
       responses:
         default:
-          $ref: "#/components/responses/DefaultResponse"                     
+          $ref: "#/components/responses/DefaultResponse"
 components:
   schemas:
     Error:
