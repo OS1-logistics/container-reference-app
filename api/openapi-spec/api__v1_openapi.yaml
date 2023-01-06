@@ -28,6 +28,18 @@ paths:
           $ref: "#/components/responses/CreatedResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
+    get:
+      tags:
+        - Packages
+      summary: Get list of current configured Packages
+      description: >
+        API to get all packages
+      operationId: getPackages
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPackagesResponse"
+        default:
+          $ref: "#/components/responses/DefaultResponse"          
   "/packages/{packageId}":
     description: Package specific Id
     parameters:
@@ -51,6 +63,59 @@ paths:
           $ref: "#/components/responses/GetPackageResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
+  /bags:
+    parameters:
+      - $ref: "#/components/parameters/RequestId"
+      - $ref: "#/components/parameters/TenantId"
+    post:
+      tags:
+        - Bags
+      summary: Create a new Bag
+      description: >
+        API to create a bag in the tenant's network
+      operationId: createBag
+      requestBody:
+        $ref: "#/components/requestBodies/BagCreateRequest"
+      responses:
+        "201":
+          $ref: "#/components/responses/CreatedResponse"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+    get:
+      tags:
+        - Bags
+      summary: Get list of current configured bags
+      description: >
+        API to get all bags
+      operationId: getBags
+      responses:
+        "200":
+          $ref: "#/components/responses/GetBagsResponse"
+        default:
+          $ref: "#/components/responses/DefaultResponse"          
+  "/bags/{bagId}":
+    description: Bag specific Id
+    parameters:
+      - in: path
+        name: bagId
+        description: Unique Id of Bag
+        schema:
+          type: string
+        required: true
+      - $ref: "#/components/parameters/RequestId"
+      - $ref: "#/components/parameters/TenantId"
+    get:
+      tags:
+        - Bags
+      summary: Get properties of a configured Bag
+      description: >
+        API to get properties a configured Bag
+      operationId: getBag
+      responses:
+        "200":
+          $ref: "#/components/responses/GetBagResponse"
+        default:
+          $ref: "#/components/responses/DefaultResponse"          
 components:
   schemas:
     Error:
@@ -132,7 +197,47 @@ components:
         - trackingId
         - origin
         - destination
+    BagCreateRequestSchema:
+      type: object
+      properties:
+        trackingId:
+          type: string
+          example: TR223433WD
+        origin:
+          type: string
+          description: Origination facility Id
+          example: facility:317221c7-831d-4fde-9ee4-13e7898c2485
+        destination:
+          type: string
+          description: Destination facility Id
+          example: facility:317221c7-831d-4fde-9ee4-13e7898c2485
+        isReusable:
+          type: boolean
+          description: Is the package reusable for some other order
+          default: false
+        isHazmat:
+          type: boolean
+          description:
+            Represents whether this container can contain hazardous materials
+            or not
+          default: false
+        isContainerizable:
+          type: boolean
+          description: Defines whether container can be put into other containers or not.
+          default: false
+      required:
+        - trackingId
+        - origin
+        - destination        
   parameters:
+    Status:
+      description: Status of the package to filter by.
+      in: query
+      name: status
+      schema:
+        type: string
+      required: false
+      example: active:created
     RequestId:
       description: Unique request Id
       in: header
@@ -149,11 +254,17 @@ components:
       required: true
   requestBodies:
     PackageCreateRequest:
-      description: Request consisting config of a new package
+      description: Request consisting attributes to create a new package
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/PackageCreateRequestSchema"
+    BagCreateRequest:
+      description: Request consisting attributes to create a new bag
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BagCreateRequestSchema"            
   responses:
     CreatedResponse:
       description: Default Success Response
@@ -166,9 +277,42 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DefaultResponse"
+            $ref: "#/components/schemas/DefaultResponse"            
     GetPackageResponse:
-      description: Get Container Response
+      description: Get Package Response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: "#/components/schemas/Error"
+              data:
+                type: object
+    GetPackagesResponse:
+      description: Get Packages Response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: "#/components/schemas/Error"
+              data:
+                type: object                
+    GetBagsResponse:
+      description: Get Bag Response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: "#/components/schemas/Error"
+              data:
+                type: object
+    GetBagResponse:
+      description: Get Bag Response
       content:
         application/json:
           schema:
