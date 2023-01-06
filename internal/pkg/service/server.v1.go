@@ -52,3 +52,17 @@ func (s ServiceV1) GetPackage(c *gin.Context, packageId string, params api_v1.Ge
 
 	c.JSON(200, r)
 }
+
+func (s ServiceV1) GetPackages(c *gin.Context, params api_v1.GetPackagesParams) {
+
+	r, e := s.packagecsa.GetPackages(params.XCOREOSTENANTID)
+	if e != nil {
+		Response := &api_v1.CreatedResponse{}
+		Response.ErrorSchema = &api_v1.ErrorSchema{}
+		Response.ErrorSchema.Description = e.Error()
+		c.JSON(http.StatusInternalServerError, Response)
+		return
+	}
+
+	c.JSON(200, r)
+}

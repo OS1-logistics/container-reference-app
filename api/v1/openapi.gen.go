@@ -63,6 +63,9 @@ type PackageCreateRequestSchema struct {
 // RequestId defines model for RequestId.
 type RequestId = string
 
+// Status defines model for Status.
+type Status = string
+
 // TenantId defines model for TenantId.
 type TenantId = string
 
@@ -80,8 +83,28 @@ type GetPackageResponse struct {
 	ErrorSchema *ErrorSchema `json:"error,omitempty"`
 }
 
+// GetPackagesResponse defines model for GetPackagesResponse.
+type GetPackagesResponse struct {
+	Data *map[string]interface{} `json:"data,omitempty"`
+
+	// Error Error Information
+	ErrorSchema *ErrorSchema `json:"error,omitempty"`
+}
+
 // PackageCreateRequest defines model for PackageCreateRequest.
 type PackageCreateRequest = PackageCreateRequestSchema
+
+// GetPackagesParams defines parameters for GetPackages.
+type GetPackagesParams struct {
+	// Status Status of the package to filter by.
+	Status *Status `form:"status,omitempty" json:"status,omitempty"`
+
+	// XCOREOSREQUESTID Unique request Id
+	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
+
+	// XCOREOSTENANTID Tenant Id
+	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+}
 
 // CreatePackageParams defines parameters for CreatePackage.
 type CreatePackageParams struct {
@@ -106,6 +129,9 @@ type CreatePackageJSONRequestBody = PackageCreateRequestSchema
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
+	// Get list of current configured Packages
+	// (GET /packages)
+	GetPackages(c *gin.Context, params GetPackagesParams)
 	// Create a new Package
 	// (POST /packages)
 	CreatePackage(c *gin.Context, params CreatePackageParams)
@@ -122,6 +148,75 @@ type ServerInterfaceWrapper struct {
 }
 
 type MiddlewareFunc func(c *gin.Context)
+
+// GetPackages operation middleware
+func (siw *ServerInterfaceWrapper) GetPackages(c *gin.Context) {
+
+	var err error
+
+	// Parameter object where we will unmarshal all parameters from the context
+	var params GetPackagesParams
+
+	// ------------- Optional query parameter "status" -------------
+
+	err = runtime.BindQueryParameter("form", true, false, "status", c.Request.URL.Query(), &params.Status)
+	if err != nil {
+		siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter status: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	headers := c.Request.Header
+
+	// ------------- Required header parameter "X-COREOS-REQUEST-ID" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-REQUEST-ID")]; found {
+		var XCOREOSREQUESTID RequestId
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-REQUEST-ID, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-REQUEST-ID", runtime.ParamLocationHeader, valueList[0], &XCOREOSREQUESTID)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-REQUEST-ID: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSREQUESTID = XCOREOSREQUESTID
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-REQUEST-ID is required, but not found: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Required header parameter "X-COREOS-TENANT-ID" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-TENANT-ID")]; found {
+		var XCOREOSTENANTID TenantId
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-TENANT-ID, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-TENANT-ID", runtime.ParamLocationHeader, valueList[0], &XCOREOSTENANTID)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-TENANT-ID: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSTENANTID = XCOREOSTENANTID
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-TENANT-ID is required, but not found: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+	}
+
+	siw.Handler.GetPackages(c, params)
+}
 
 // CreatePackage operation middleware
 func (siw *ServerInterfaceWrapper) CreatePackage(c *gin.Context) {
@@ -282,6 +377,8 @@ func RegisterHandlersWithOptions(router *gin.Engine, si ServerInterface, options
 		HandlerMiddlewares: options.Middlewares,
 		ErrorHandler:       errorHandler,
 	}
+
+	router.GET(options.BaseURL+"/packages", wrapper.GetPackages)
 
 	router.POST(options.BaseURL+"/packages", wrapper.CreatePackage)
 

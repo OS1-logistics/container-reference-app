@@ -28,6 +28,18 @@ paths:
           $ref: "#/components/responses/CreatedResponse"
         default:
           $ref: "#/components/responses/DefaultResponse"
+    get:
+      tags:
+        - Packages
+      summary: Get list of current configured Packages
+      description: >
+        API to get all packages
+      operationId: getPackages
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPackagesResponse"
+        default:
+          $ref: "#/components/responses/DefaultResponse"          
   "/packages/{packageId}":
     description: Package specific Id
     parameters:
@@ -133,6 +145,14 @@ components:
         - origin
         - destination
   parameters:
+    Status:
+      description: Status of the package to filter by.
+      in: query
+      name: status
+      schema:
+        type: string
+      required: false
+      example: active:created
     RequestId:
       description: Unique request Id
       in: header
@@ -166,9 +186,9 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DefaultResponse"
+            $ref: "#/components/schemas/DefaultResponse"            
     GetPackageResponse:
-      description: Get Container Response
+      description: Get Package Response
       content:
         application/json:
           schema:
@@ -178,3 +198,14 @@ components:
                 $ref: "#/components/schemas/Error"
               data:
                 type: object
+    GetPackagesResponse:
+      description: Get Packages Response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                $ref: "#/components/schemas/Error"
+              data:
+                type: object                

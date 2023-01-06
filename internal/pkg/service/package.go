@@ -33,10 +33,6 @@ func StructToMap(obj interface{}) (newMap *map[string]interface{}, err error) {
 	return
 }
 
-func (s PackageService) GetPackages(tenantId string) {
-	glog.Infof("invoked GetPackages with tenant %s", tenantId)
-}
-
 func (s PackageService) GetPackage(tenantId string, packageId string) (*api_v1.GetPackageResponse, error) {
 	token, _ := domain.GetToken(tenantId)
 	ctx := context.Background()
@@ -64,9 +60,35 @@ func (s PackageService) GetPackage(tenantId string, packageId string) (*api_v1.G
 
 }
 
+func (s PackageService) GetPackages(tenantId string) (*api_v1.GetPackagesResponse, error) {
+
+	token, _ := domain.GetToken(tenantId)
+	ctx := context.Background()
+	ApiGetContainersRequest := s.containerApiClient.ContainerApi.GetContainers(ctx, common.PackageContainerTypeName)
+	ApiGetContainersRequest = ApiGetContainersRequest.XCOREOSACCESS(token)
+	ApiGetContainersRequest = ApiGetContainersRequest.XCOREOSTID(tenantId)
+	ApiGetContainersRequest = ApiGetContainersRequest.XCOREOSREQUESTID("1234")
+	ApiGetContainersRequest = ApiGetContainersRequest.XCOREOSUSERINFO("1234")
+
+	d, r, e := s.containerApiClient.ContainerApi.GetContainersExecute(ApiGetContainersRequest)
+
+	if e != nil {
+		return nil, e
+	}
+
+	if r.StatusCode == 200 {
+		data, _ := StructToMap(d.Data)
+		response := &api_v1.GetPackagesResponse{
+			Data: data,
+		}
+		return response, nil
+	}
+
+	return nil, e
+
+}
+
 func (s PackageService) CreatePackage(tenantId string, request api_v1.CreatePackageJSONRequestBody) (*string, error) {
-	glog.Info("invoked CreatePackage")
-	fmt.Printf("request: %v", request)
 
 	token, _ := domain.GetToken(tenantId)
 	ctx := context.Background()
