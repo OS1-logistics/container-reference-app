@@ -70,6 +70,20 @@ func (s ServerV1) CreatePackage(c *gin.Context, params api_v1.CreatePackageParam
 	c.JSON(http.StatusAccepted, Response)
 }
 
+func (s ServerV1) OpenPackage(c *gin.Context, packageId string, command string, params api_v1.OpenPackageParams) {
+	Response := &api_v1.CreatedResponse{}
+
+	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, packageId, command)
+	if e != nil {
+		Response.ErrorSchema = &api_v1.ErrorSchema{}
+		Response.ErrorSchema.Description = e.Error()
+		c.JSON(http.StatusInternalServerError, Response)
+		return
+	}
+
+	c.JSON(http.StatusAccepted, Response)
+}
+
 // Bags
 
 func (s ServerV1) GetBag(c *gin.Context, bagId string, params api_v1.GetBagParams) {
@@ -121,4 +135,18 @@ func (s ServerV1) CreateBag(c *gin.Context, params api_v1.CreateBagParams) {
 	Response.DataSchema.Id = id
 	c.JSON(http.StatusAccepted, Response)
 
+}
+
+func (s ServerV1) OpenBag(c *gin.Context, bagId string, command string, params api_v1.OpenBagParams) {
+	Response := &api_v1.CreatedResponse{}
+
+	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, bagId, command)
+	if e != nil {
+		Response.ErrorSchema = &api_v1.ErrorSchema{}
+		Response.ErrorSchema.Description = e.Error()
+		c.JSON(http.StatusInternalServerError, Response)
+		return
+	}
+
+	c.JSON(http.StatusAccepted, Response)
 }

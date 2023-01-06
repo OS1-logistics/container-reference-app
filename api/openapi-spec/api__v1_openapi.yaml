@@ -39,7 +39,7 @@ paths:
         "200":
           $ref: "#/components/responses/GetPackagesResponse"
         default:
-          $ref: "#/components/responses/DefaultResponse"          
+          $ref: "#/components/responses/DefaultResponse"
   "/packages/{packageId}":
     description: Package specific Id
     parameters:
@@ -61,6 +61,34 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/GetPackageResponse"
+        default:
+          $ref: "#/components/responses/DefaultResponse"
+  "/packages/{packageId}/{command}":
+    description: Package Id
+    parameters:
+      - in: path
+        name: packageId
+        description: Unique Id of Package
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: command
+        description: operation to perform on the packag. eg. open, close, dispach
+        schema:
+          type: string
+        required: true
+        example: open
+      - $ref: "#/components/parameters/RequestId"
+      - $ref: "#/components/parameters/TenantId"
+    post:
+      tags:
+        - Package Operations
+      summary: Open a package
+      description: >
+        API to open a package
+      operationId: openPackage
+      responses:
         default:
           $ref: "#/components/responses/DefaultResponse"
   /bags:
@@ -92,7 +120,7 @@ paths:
         "200":
           $ref: "#/components/responses/GetBagsResponse"
         default:
-          $ref: "#/components/responses/DefaultResponse"          
+          $ref: "#/components/responses/DefaultResponse"
   "/bags/{bagId}":
     description: Bag specific Id
     parameters:
@@ -114,6 +142,34 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/GetBagResponse"
+        default:
+          $ref: "#/components/responses/DefaultResponse"    
+  "/bags/{bagId}/{command}":
+    description: Bag Id
+    parameters:
+      - in: path
+        name: bagId
+        description: Unique Id of Bag
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: command
+        description: operation to perform on the bag. eg. open, close, dispach
+        schema:
+          type: string
+        required: true
+        example: open
+      - $ref: "#/components/parameters/RequestId"
+      - $ref: "#/components/parameters/TenantId"
+    post:
+      tags:
+        - Bag Operations
+      summary: Open a Bag
+      description: >
+        API to open a bag
+      operationId: openBag
+      responses:
         default:
           $ref: "#/components/responses/DefaultResponse"          
 components:
@@ -144,9 +200,8 @@ components:
           $ref: "#/components/schemas/Error"
         data:
           $ref: "#/components/schemas/Data"
-    DefaultResponse:
+    DefaultResponseSchema:
       type: object
-      x-go-name: DefaultResponseSchema
       properties:
         error:
           $ref: "#/components/schemas/Error"
@@ -228,7 +283,7 @@ components:
       required:
         - trackingId
         - origin
-        - destination        
+        - destination
   parameters:
     Status:
       description: Status of the package to filter by.
@@ -264,7 +319,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BagCreateRequestSchema"            
+            $ref: "#/components/schemas/BagCreateRequestSchema"
   responses:
     CreatedResponse:
       description: Default Success Response
@@ -277,7 +332,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DefaultResponse"            
+            $ref: "#/components/schemas/DefaultResponseSchema"
     GetPackageResponse:
       description: Get Package Response
       content:
@@ -299,7 +354,7 @@ components:
               error:
                 $ref: "#/components/schemas/Error"
               data:
-                type: object                
+                type: object
     GetBagsResponse:
       description: Get Bag Response
       content:

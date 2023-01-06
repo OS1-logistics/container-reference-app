@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"time"
 
 	"github.com/golang/glog"
 	api_v1 "github.com/os1-logistics/container-reference-app/api/v1"
@@ -239,5 +240,53 @@ func (s Service) GetBags(tenantId string) (*api_v1.GetBagsResponse, error) {
 	}
 
 	return nil, e
+
+}
+
+// container operations
+func (s Service) UpdateContainerState(tenantId string, containerId string, command string) error {
+
+	eventCode := ""
+	reasonCode := ""
+	if command == "open" {
+		eventCode = "E-025"
+		reasonCode = "R-0001"
+	} else {
+		return fmt.Errorf("Command %s is not supported", command)
+	}
+
+	token, _ := domain.GetToken(tenantId)
+	ctx := context.Background()
+	apiUpdateContainerStateRequest := s.containerApiClient.ContainerStateApi.UpdateContainerState(ctx, containerId)
+	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.XCOREOSACCESS(token)
+	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.XCOREOSTID(tenantId)
+	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.XCOREOSREQUESTID("1234")
+	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.XCOREOSUSERINFO("1234")
+
+	containerStateUpdateRequest := containerdomain.ContainerStateUpdateRequest{
+		EventCode:  eventCode,
+		ReasonCode: containerdomain.PtrString(reasonCode),
+		Timestamp:  int32(time.Now().UTC().UnixMicro()),
+		Data:       map[string]interface{}{},
+		Source: containerdomain.EventSource{
+			AppId:  common.AppName,
+			UserId: containerdomain.PtrString("1234"),
+			LocId:  containerdomain.PtrString("1234"),
+		},
+	}
+	apiUpdateContainerStateRequest = apiUpdateContainerStateRequest.ContainerStateUpdateRequest(containerStateUpdateRequest)
+
+	d, r, e := s.containerApiClient.ContainerStateApi.UpdateContainerStateExecute(apiUpdateContainerStateRequest)
+
+	if e != nil {
+		return e
+	}
+
+	if r.StatusCode == 200 || r.StatusCode == 201 || r.StatusCode == 202 {
+		fmt.Println(d)
+		return nil
+	}
+
+	return e
 
 }
