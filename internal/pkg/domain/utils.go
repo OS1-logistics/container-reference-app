@@ -46,6 +46,7 @@ func GetToken(tenantId string) (string, error) {
 	glog.Info("Generating token for tenant: ", tenantId)
 	if response.StatusCode == 200 && success != nil {
 		accessToken = success.Data.GetAccessToken()
+		fmt.Printf(accessToken)
 		// cache duration is 10 minutes less than the actual token expiry
 		duration := time.Duration(success.Data.GetExpiresIn()-600) * time.Second
 		cache.ServiceCache.SetWithExpiry(tenantTokenKey, accessToken, duration)

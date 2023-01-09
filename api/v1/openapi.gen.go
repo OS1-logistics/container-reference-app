@@ -16,9 +16,6 @@ type BagCreateRequestSchema struct {
 	// Destination Destination facility Id
 	Destination string `json:"destination"`
 
-	// IsContainerizable Defines whether container can be put into other containers or not.
-	IsContainerizable *bool `json:"isContainerizable,omitempty"`
-
 	// IsHazmat Represents whether this container can contain hazardous materials or not
 	IsHazmat *bool `json:"isHazmat,omitempty"`
 
@@ -64,9 +61,6 @@ type ErrorSchema struct {
 type PackageCreateRequestSchema struct {
 	// Destination Destination facility Id
 	Destination string `json:"destination"`
-
-	// IsContainerizable Defines whether container can be put into other containers or not.
-	IsContainerizable *bool `json:"isContainerizable,omitempty"`
 
 	// IsHazmat Represents whether this container can contain hazardous materials or not
 	IsHazmat *bool `json:"isHazmat,omitempty"`

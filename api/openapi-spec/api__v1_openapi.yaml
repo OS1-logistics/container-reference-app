@@ -304,10 +304,6 @@ components:
             Represents whether this container can contain hazardous materials
             or not
           default: false
-        isContainerizable:
-          type: boolean
-          description: Defines whether container can be put into other containers or not.
-          default: false
       required:
         - trackingId
         - origin
@@ -335,10 +331,6 @@ components:
           description:
             Represents whether this container can contain hazardous materials
             or not
-          default: false
-        isContainerizable:
-          type: boolean
-          description: Defines whether container can be put into other containers or not.
           default: false
       required:
         - trackingId

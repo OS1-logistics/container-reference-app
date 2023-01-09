@@ -98,7 +98,7 @@ func (s Service) CreatePackage(tenantId string, request api_v1.CreatePackageJSON
 
 	containerCreateRequest := containerdomain.ContainerCreateRequest{
 		IsHazmat:          request.IsHazmat,
-		IsContainerizable: request.IsContainerizable,
+		IsContainerizable: containerdomain.PtrBool(true),
 		IsReusable:        request.IsReusable,
 		TrackingDetails:   []containerdomain.ContainerCreateAttributesTrackingDetailsInner{},
 		Attributes: map[string]interface{}{
@@ -148,7 +148,7 @@ func (s Service) CreateBag(tenantId string, request api_v1.CreateBagJSONRequestB
 
 	containerCreateRequest := containerdomain.ContainerCreateRequest{
 		IsHazmat:          request.IsHazmat,
-		IsContainerizable: request.IsContainerizable,
+		IsContainerizable: containerdomain.PtrBool(false),
 		IsReusable:        request.IsReusable,
 		TrackingDetails:   []containerdomain.ContainerCreateAttributesTrackingDetailsInner{},
 		Attributes: map[string]interface{}{
