@@ -24,9 +24,11 @@ func NewPackageService() Service {
 func StructToMap(obj interface{}) (newMap *map[string]interface{}, err error) {
 	data, err := json.Marshal(obj) // Convert to a json string
 	if err != nil {
+		glog.Error("StructToMap : ", err)
 		return
 	}
 	err = json.Unmarshal(data, &newMap) // Convert to a map
+	glog.Error("StructToMap :", err)
 	return
 }
 
@@ -51,6 +53,8 @@ func (s Service) GetPackage(tenantId string, packageId string) (*api_v1.GetPacka
 	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.GetContainerByIdExecute(ApiGetContainerByIdRequest)
 
 	if e != nil {
+		glog.Error(r)
+		glog.Error(e)
 		return nil, e
 	}
 
@@ -80,6 +84,7 @@ func (s Service) GetPackages(tenantId string) (*api_v1.GetPackagesResponse, erro
 	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.GetContainersExecute(ApiGetContainersRequest)
 
 	if e != nil {
+		glog.Error(r)
 		return nil, e
 	}
 
@@ -239,6 +244,8 @@ func (s Service) GetBags(tenantId string) (*api_v1.GetBagsResponse, error) {
 	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.GetContainersExecute(ApiGetContainersRequest)
 
 	if e != nil {
+		glog.Error(r)
+		glog.Error(e)
 		return nil, e
 	}
 
