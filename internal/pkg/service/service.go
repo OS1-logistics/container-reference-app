@@ -38,7 +38,7 @@ func (s Service) GetPackage(tenantId string, packageId string) (*api_v1.GetPacka
 	token, _ := domain.GetToken(tenantId)
 	ctx := context.Background()
 	ApiGetContainerByIdRequest := s.containerApiClient.ContainerApi.
-		GetContainerById(ctx, packageId).
+		GetContainerById(ctx, packageId, common.PackageContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
 		XCOREOSREQUESTID("1234").
@@ -97,6 +97,7 @@ func (s Service) CreatePackage(tenantId string, request api_v1.CreatePackageJSON
 	ctx := context.Background()
 
 	containerCreateRequest := containerdomain.ContainerCreateRequest{
+		ScannableId:       *request.ScannableId,
 		IsHazmat:          request.IsHazmat,
 		IsContainerizable: containerdomain.PtrBool(true),
 		IsReusable:        request.IsReusable,
@@ -147,6 +148,7 @@ func (s Service) CreateBag(tenantId string, request api_v1.CreateBagJSONRequestB
 	ctx := context.Background()
 
 	containerCreateRequest := containerdomain.ContainerCreateRequest{
+		ScannableId:       *request.ScannableId,
 		IsHazmat:          request.IsHazmat,
 		IsContainerizable: containerdomain.PtrBool(false),
 		IsReusable:        request.IsReusable,
@@ -194,7 +196,7 @@ func (s Service) GetBag(tenantId string, bagId string) (*api_v1.GetBagResponse, 
 	token, _ := domain.GetToken(tenantId)
 	ctx := context.Background()
 	ApiGetContainerByIdRequest := s.containerApiClient.ContainerApi.
-		GetContainerById(ctx, bagId).
+		GetContainerById(ctx, bagId, common.BagContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
 		XCOREOSREQUESTID("1234").
@@ -248,7 +250,7 @@ func (s Service) GetBags(tenantId string) (*api_v1.GetBagsResponse, error) {
 }
 
 // container operations
-func (s Service) UpdateContainerState(tenantId string, containerId string, command string) error {
+func (s Service) UpdateContainerState(tenantId string, containerId string, command string, containerTypeName string) error {
 
 	var operation *common.ContainerStateOperation = nil
 
@@ -280,7 +282,7 @@ func (s Service) UpdateContainerState(tenantId string, containerId string, comma
 	}
 
 	apiUpdateContainerStateRequest := s.containerApiClient.ContainerStateApi.
-		UpdateContainerState(ctx, containerId).
+		UpdateContainerState(ctx, containerId, containerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
 		XCOREOSREQUESTID("1234").

@@ -23,8 +23,11 @@ type BagCreateRequestSchema struct {
 	IsReusable *bool `json:"isReusable,omitempty"`
 
 	// Origin Origination facility Id
-	Origin     string `json:"origin"`
-	TrackingId string `json:"trackingId"`
+	Origin string `json:"origin"`
+
+	// ScannableId Scannable bag id
+	ScannableId *string `json:"scannableId,omitempty"`
+	TrackingId  string  `json:"trackingId"`
 }
 
 // CreatedResponseSchema defines model for CreatedResponseSchema.
@@ -69,8 +72,11 @@ type PackageCreateRequestSchema struct {
 	IsReusable *bool `json:"isReusable,omitempty"`
 
 	// Origin Origination facility Id
-	Origin     string `json:"origin"`
-	TrackingId string `json:"trackingId"`
+	Origin string `json:"origin"`
+
+	// ScannableId A scannable container identifier
+	ScannableId *string `json:"scannableId,omitempty"`
+	TrackingId  string  `json:"trackingId"`
 }
 
 // RequestId defines model for RequestId.

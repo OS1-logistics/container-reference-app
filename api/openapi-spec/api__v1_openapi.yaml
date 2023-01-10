@@ -282,7 +282,11 @@ components:
           example: false
     PackageCreateRequestSchema:
       type: object
-      properties:
+      properties:        
+        scannableId:
+          type: string
+          description: A scannable container identifier 
+          example: CNT4433TRD
         trackingId:
           type: string
           example: TR223433WD
@@ -311,6 +315,10 @@ components:
     BagCreateRequestSchema:
       type: object
       properties:
+        scannableId:
+          type: string
+          description: Scannable bag id
+          example: BAGT#23223FNT        
         trackingId:
           type: string
           example: TR223433WD
