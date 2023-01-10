@@ -125,6 +125,26 @@ curl --location --request POST 'http://localhost:3000/api/v1/bags/BagT:7a635074-
 --header 'Accept: application/json'
 ```
 
+### Ability to add a package to a bag
+
+Before adding a package to a bag, the package should be in `open` state and the bag should be in `open` state.
+
+```
+curl --location --request POST 'http://localhost:3000/api/v1/bags/BagT:859af678-ceef-5932-92d1-831c52ca5e54/add/PackageCsa:7a635074-c9b2-5b66-9d09-0a1909b16aeb' \
+--header 'X-COREOS-REQUEST-ID: 0b8d01bf-050c-45f6-a0b1-21bd702fd6a6' \
+--header 'X-COREOS-TENANT-ID: alpha' \
+--header 'Accept: application/json'
+```
+
+### Ability to remove a package to a bag
+
+```
+curl --location --request POST 'http://localhost:3000/api/v1/bags/BagT:859af678-ceef-5932-92d1-831c52ca5e54/remove/PackageCsa:7a635074-c9b2-5b66-9d09-0a1909b16aeb' \
+--header 'X-COREOS-REQUEST-ID: 0b8d01bf-050c-45f6-a0b1-21bd702fd6a6' \
+--header 'X-COREOS-TENANT-ID: alpha' \
+--header 'Accept: application/json'
+```
+
 ### Ability to list all packages
 
 ```

@@ -171,8 +171,7 @@ func (s ServerV1) AddPackageToBag(c *gin.Context, bagId string, packageId string
 	e := s.ser.ContainerizeOperations(params.XCOREOSTENANTID, bagId, packageId, common.CONTAINER_OPERATION_CONTAINERIZE)
 	if e != nil {
 		Response := &api_v1.DefaultResponse{}
-		Response.ErrorSchema = &api_v1.ErrorSchema{}
-		Response.ErrorSchema.Description = e.Error()
+		Response.ErrorSchema = e
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
@@ -185,8 +184,7 @@ func (s ServerV1) RemovePackageFromBag(c *gin.Context, bagId string, packageId s
 	e := s.ser.ContainerizeOperations(params.XCOREOSTENANTID, bagId, packageId, common.CONTAINER_OPERATION_DECONTAINERIZE)
 	if e != nil {
 		Response := &api_v1.DefaultResponse{}
-		Response.ErrorSchema = &api_v1.ErrorSchema{}
-		Response.ErrorSchema.Description = e.Error()
+		Response.ErrorSchema = e
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}

@@ -1,9 +1,11 @@
 package service
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"time"
 
 	"github.com/golang/glog"
@@ -30,6 +32,14 @@ func StructToMap(obj interface{}) (newMap *map[string]interface{}, err error) {
 	err = json.Unmarshal(data, &newMap) // Convert to a map
 	glog.Error("StructToMap :", err)
 	return
+}
+
+func getErrorResponse(inputBuff *io.ReadCloser) *containerdomain.ErrorResponse {
+	r := containerdomain.ErrorResponse{}
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(*inputBuff)
+	json.Unmarshal([]byte(buf.String()), &r)
+	return &r
 }
 
 func (s Service) Init(tenantId string) error {
@@ -317,7 +327,7 @@ func (s Service) UpdateContainerState(tenantId string, containerId string, comma
 
 // containerize / decontainerize operations
 
-func (s Service) ContainerizeOperations(tenantId string, parentId string, containerId string, operation string) error {
+func (s Service) ContainerizeOperations(tenantId string, parentId string, containerId string, operation string) *api_v1.ErrorSchema {
 	glog.Info("parent: ", parentId)
 	glog.Info("child: ", containerId)
 	token, _ := domain.GetToken(tenantId)
@@ -338,16 +348,20 @@ func (s Service) ContainerizeOperations(tenantId string, parentId string, contai
 
 	_, r, e := domain.NewContainerClient(tenantId).ContainerApi.ContainerizeContainerByIdExecute(apiContainerizeRequest)
 
+	var err *api_v1.ErrorSchema
 	if e != nil {
 		glog.Error(e)
 		glog.Infof("%v", r)
-		return e
+		err = &api_v1.ErrorSchema{
+			Description: getErrorResponse(&r.Body).Error.Description,
+		}
+		return err
 	}
 
 	if r.StatusCode == 200 || r.StatusCode == 201 || r.StatusCode == 202 {
 		return nil
 	}
 
-	return e
+	return err
 
 }
