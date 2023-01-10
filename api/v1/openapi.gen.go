@@ -183,6 +183,15 @@ type ChangeBagStateParams struct {
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
 }
 
+// InitTenantParams defines parameters for InitTenant.
+type InitTenantParams struct {
+	// XCOREOSREQUESTID Unique request Id
+	XCOREOSREQUESTID RequestId `json:"X-COREOS-REQUEST-ID"`
+
+	// XCOREOSTENANTID Tenant Id
+	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+}
+
 // GetPackagesParams defines parameters for GetPackages.
 type GetPackagesParams struct {
 	// XCOREOSREQUESTID Unique request Id
@@ -245,6 +254,9 @@ type ServerInterface interface {
 	// Operation to perform on a package
 	// (POST /bags/{bagId}/state/{command})
 	ChangeBagState(c *gin.Context, bagId string, command string, params ChangeBagStateParams)
+	// Admin apis for container app management
+	// (POST /initialize)
+	InitTenant(c *gin.Context, params InitTenantParams)
 	// Get list of current configured Packages
 	// (GET /packages)
 	GetPackages(c *gin.Context, params GetPackagesParams)
@@ -697,6 +709,67 @@ func (siw *ServerInterfaceWrapper) ChangeBagState(c *gin.Context) {
 	siw.Handler.ChangeBagState(c, bagId, command, params)
 }
 
+// InitTenant operation middleware
+func (siw *ServerInterfaceWrapper) InitTenant(c *gin.Context) {
+
+	var err error
+
+	// Parameter object where we will unmarshal all parameters from the context
+	var params InitTenantParams
+
+	headers := c.Request.Header
+
+	// ------------- Required header parameter "X-COREOS-REQUEST-ID" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-REQUEST-ID")]; found {
+		var XCOREOSREQUESTID RequestId
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-REQUEST-ID, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-REQUEST-ID", runtime.ParamLocationHeader, valueList[0], &XCOREOSREQUESTID)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-REQUEST-ID: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSREQUESTID = XCOREOSREQUESTID
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-REQUEST-ID is required, but not found: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	// ------------- Required header parameter "X-COREOS-TENANT-ID" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-TENANT-ID")]; found {
+		var XCOREOSTENANTID TenantId
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-TENANT-ID, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-TENANT-ID", runtime.ParamLocationHeader, valueList[0], &XCOREOSTENANTID)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-TENANT-ID: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSTENANTID = XCOREOSTENANTID
+
+	} else {
+		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-TENANT-ID is required, but not found: %s", err), http.StatusBadRequest)
+		return
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		middleware(c)
+	}
+
+	siw.Handler.InitTenant(c, params)
+}
+
 // GetPackages operation middleware
 func (siw *ServerInterfaceWrapper) GetPackages(c *gin.Context) {
 
@@ -1008,6 +1081,8 @@ func RegisterHandlersWithOptions(router *gin.Engine, si ServerInterface, options
 	router.POST(options.BaseURL+"/bags/:bagId/remove/:packageId", wrapper.RemovePackageFromBag)
 
 	router.POST(options.BaseURL+"/bags/:bagId/state/:command", wrapper.ChangeBagState)
+
+	router.POST(options.BaseURL+"/initialize", wrapper.InitTenant)
 
 	router.GET(options.BaseURL+"/packages", wrapper.GetPackages)
 

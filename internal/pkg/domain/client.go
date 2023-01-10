@@ -18,7 +18,7 @@ func NewAAAClient(tenantId string) *aaa.APIClient {
 }
 
 func NewContainerClient(tenantId string) *container.APIClient {
-	glog.Info("NewContainerClient: config.ServiceConf.StackBaseUrl", config.ServiceConf.StackBaseUrl)
+	glog.Info("NewContainerClient: config.ServiceConf.StackBaseUrl: ", config.ServiceConf.StackBaseUrl)
 	cfg := container.NewConfiguration()
 	cfg.Host = fmt.Sprintf("%s.%s", tenantId, config.ServiceConf.StackBaseUrl)
 	cfg.Scheme = "https"

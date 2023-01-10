@@ -10,6 +10,20 @@ servers:
         default: localhost:3000
         description: Subdomain assigned to the service
 paths:
+  /initialize:
+    parameters:
+      - $ref: "#/components/parameters/RequestId"
+      - $ref: "#/components/parameters/TenantId"
+    post:
+      tags:
+        - Admin
+      summary: Admin apis for container app management
+      description: >
+        API to initialize tenant with container types
+      operationId: initTenant
+      responses:
+        "201":
+          $ref: "#/components/responses/DefaultResponse"      
   /packages:
     parameters:
       - $ref: "#/components/parameters/RequestId"

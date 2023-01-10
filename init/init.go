@@ -35,7 +35,7 @@ func Initialize(tenantId string) error {
 	getContainerTypeRequest1 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, common.PackageContainerTypeName)
 	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSACCESS(token)
 	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSTID(tenantId)
-	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSREQUESTID("1234")
+	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSREQUESTID(common.UUIDv4())
 	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSUSERINFO("1234")
 
 	_, getresponse1, _ := containerClient.ContainerTypeApi.GetContainerTypeByIdExecute(getContainerTypeRequest1)
@@ -48,7 +48,7 @@ func Initialize(tenantId string) error {
 			containerTypeRequest := containerClient.ContainerTypeApi.CreateContainerType(ctx)
 			containerTypeRequest = containerTypeRequest.XCOREOSACCESS(token)
 			containerTypeRequest = containerTypeRequest.XCOREOSTID(tenantId)
-			containerTypeRequest = containerTypeRequest.XCOREOSREQUESTID("1234")
+			containerTypeRequest = containerTypeRequest.XCOREOSREQUESTID(common.UUIDv4())
 			containerTypeRequest = containerTypeRequest.XCOREOSUSERINFO("1234")
 
 			PackageCsaContainerTypeCreateRequest := containerdomain.ContainerTypeCreateRequest{
@@ -79,7 +79,7 @@ func Initialize(tenantId string) error {
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSACCESS(token)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSORIGINTOKEN(token)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSTID(tenantId)
-	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSREQUESTID("1234")
+	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSREQUESTID(common.UUIDv4())
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSUSERINFO("1234")
 
 	attributesConfigUpdateRequest := containerdomain.AttributesConfigUpdateRequest{
@@ -212,7 +212,7 @@ func Initialize(tenantId string) error {
 	getContainerTypeRequest2 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, common.BagContainerTypeName)
 	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSACCESS(token)
 	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSTID(tenantId)
-	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSREQUESTID("1234")
+	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSREQUESTID(common.UUIDv4())
 	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSUSERINFO("1234")
 
 	_, getresponse2, _ := containerClient.ContainerTypeApi.GetContainerTypeByIdExecute(getContainerTypeRequest2)
@@ -224,7 +224,7 @@ func Initialize(tenantId string) error {
 			containerTypeRequest := containerClient.ContainerTypeApi.CreateContainerType(ctx)
 			containerTypeRequest = containerTypeRequest.XCOREOSACCESS(token)
 			containerTypeRequest = containerTypeRequest.XCOREOSTID(tenantId)
-			containerTypeRequest = containerTypeRequest.XCOREOSREQUESTID("1234")
+			containerTypeRequest = containerTypeRequest.XCOREOSREQUESTID(common.UUIDv4())
 			containerTypeRequest = containerTypeRequest.XCOREOSUSERINFO("1234")
 
 			BagContainerTypeCreateRequest := containerdomain.ContainerTypeCreateRequest{
@@ -257,7 +257,7 @@ func Initialize(tenantId string) error {
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSACCESS(token)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSORIGINTOKEN(token)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSTID(tenantId)
-	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSREQUESTID("1234")
+	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSREQUESTID(common.UUIDv4())
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSUSERINFO("1234")
 
 	attributesConfigUpdateRequest = containerdomain.AttributesConfigUpdateRequest{

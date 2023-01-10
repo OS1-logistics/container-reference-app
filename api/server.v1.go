@@ -21,6 +21,20 @@ func NewServerV1() ServerV1 {
 	}
 }
 
+// Init
+
+func (s ServerV1) InitTenant(c *gin.Context, params api_v1.InitTenantParams) {
+	e := s.ser.Init(params.XCOREOSTENANTID)
+	if e != nil {
+		Response := &api_v1.CreatedResponse{}
+		Response.ErrorSchema = &api_v1.ErrorSchema{}
+		Response.ErrorSchema.Description = e.Error()
+		c.JSON(http.StatusInternalServerError, Response)
+		return
+	}
+	c.JSON(200, nil)
+}
+
 // Packages
 
 func (s ServerV1) GetPackage(c *gin.Context, packageId string, params api_v1.GetPackageParams) {
