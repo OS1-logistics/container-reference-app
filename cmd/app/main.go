@@ -9,7 +9,6 @@ import (
 	api "github.com/os1-logistics/container-reference-app/api"
 	apiv1 "github.com/os1-logistics/container-reference-app/api/v1"
 	config "github.com/os1-logistics/container-reference-app/configs"
-	inits "github.com/os1-logistics/container-reference-app/init"
 	cache "github.com/os1-logistics/container-reference-app/internal/pkg/cache"
 	"github.com/os1-logistics/container-reference-app/internal/pkg/common"
 )
@@ -29,11 +28,11 @@ func main() {
 	*/
 
 	// TODO: add a api to initialize the container type
-	err := inits.Initialize("alpha")
-	if err != nil {
-		glog.Error(err)
-		panic("Unable to initialize the application. Container type creation failed")
-	}
+	// err := inits.Initialize("alpha")
+	// if err != nil {
+	// 	glog.Error(err)
+	// 	panic("Unable to initialize the application. Container type creation failed")
+	// }
 
 	r := gin.New()
 

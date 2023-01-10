@@ -38,14 +38,21 @@ func GetToken(tenantId string) (string, error) {
 	}
 
 	request := ApiAuthClientCredentialsRequest.ClientCredentialsRequest(ClientCredentialsRequest)
-	request = request.XCOREOSREQUESTID("1234")
-	request = request.XCOREOSTID("alpha")
+	request = request.XCOREOSREQUESTID(common.UUIDv4())
+	request = request.XCOREOSTID(tenantId)
 
-	success, response, _ := aaaClient.AuthenticationApi.AuthClientCredentialsExecute(request)
+	success, response, err := aaaClient.AuthenticationApi.AuthClientCredentialsExecute(request)
+
+	if err != nil {
+		glog.Info("Unable to get token", err)
+		return "", err
+	}
+
 	var accessToken string
 	glog.Info("Generating token for tenant: ", tenantId)
 	if response.StatusCode == 200 && success != nil {
 		accessToken = success.Data.GetAccessToken()
+		fmt.Printf(accessToken)
 		// cache duration is 10 minutes less than the actual token expiry
 		duration := time.Duration(success.Data.GetExpiresIn()-600) * time.Second
 		cache.ServiceCache.SetWithExpiry(tenantTokenKey, accessToken, duration)

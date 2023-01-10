@@ -16,14 +16,13 @@ import (
 
 // ContainerCreateBatchRequest struct for ContainerCreateBatchRequest
 type ContainerCreateBatchRequest struct {
-	// Reference Id received for each container create request
-	RefID string `json:"refID"`
 	// Field to represent tracking ID (such as AWB) for a container which is usually pasted on the container and used for scanning it. There can be multiple tracking IDs for a container, owned by different operators and hence it will be stored as a list.
 	TrackingDetails []ContainerCreateAttributesTrackingDetailsInner `json:"trackingDetails,omitempty"`
 	// A map to provide values for the attributes defined in Container-type configuration APIs.
 	Attributes map[string]interface{} `json:"attributes,omitempty"`
 	// List of itmes can be added into container only if container-type is a leaf.
 	Items []Item `json:"items,omitempty"`
+	ScannableId string `json:"scannableId"`
 	// Represents whether this container can contain hazardous materials or not.
 	IsHazmat *bool `json:"isHazmat,omitempty"`
 	// Defines whether container can be put into other containers or not
@@ -36,9 +35,9 @@ type ContainerCreateBatchRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerCreateBatchRequest(refID string) *ContainerCreateBatchRequest {
+func NewContainerCreateBatchRequest(scannableId string) *ContainerCreateBatchRequest {
 	this := ContainerCreateBatchRequest{}
-	this.RefID = refID
+	this.ScannableId = scannableId
 	var isHazmat bool = false
 	this.IsHazmat = &isHazmat
 	var isContainerizable bool = true
@@ -60,30 +59,6 @@ func NewContainerCreateBatchRequestWithDefaults() *ContainerCreateBatchRequest {
 	var isReusable bool = false
 	this.IsReusable = &isReusable
 	return &this
-}
-
-// GetRefID returns the RefID field value
-func (o *ContainerCreateBatchRequest) GetRefID() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.RefID
-}
-
-// GetRefIDOk returns a tuple with the RefID field value
-// and a boolean to check if the value has been set.
-func (o *ContainerCreateBatchRequest) GetRefIDOk() (*string, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return &o.RefID, true
-}
-
-// SetRefID sets field value
-func (o *ContainerCreateBatchRequest) SetRefID(v string) {
-	o.RefID = v
 }
 
 // GetTrackingDetails returns the TrackingDetails field value if set, zero value otherwise.
@@ -180,6 +155,30 @@ func (o *ContainerCreateBatchRequest) HasItems() bool {
 // SetItems gets a reference to the given []Item and assigns it to the Items field.
 func (o *ContainerCreateBatchRequest) SetItems(v []Item) {
 	o.Items = v
+}
+
+// GetScannableId returns the ScannableId field value
+func (o *ContainerCreateBatchRequest) GetScannableId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ScannableId
+}
+
+// GetScannableIdOk returns a tuple with the ScannableId field value
+// and a boolean to check if the value has been set.
+func (o *ContainerCreateBatchRequest) GetScannableIdOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.ScannableId, true
+}
+
+// SetScannableId sets field value
+func (o *ContainerCreateBatchRequest) SetScannableId(v string) {
+	o.ScannableId = v
 }
 
 // GetIsHazmat returns the IsHazmat field value if set, zero value otherwise.
@@ -280,9 +279,6 @@ func (o *ContainerCreateBatchRequest) SetIsReusable(v bool) {
 
 func (o ContainerCreateBatchRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["refID"] = o.RefID
-	}
 	if !isNil(o.TrackingDetails) {
 		toSerialize["trackingDetails"] = o.TrackingDetails
 	}
@@ -291,6 +287,9 @@ func (o ContainerCreateBatchRequest) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.Items) {
 		toSerialize["items"] = o.Items
+	}
+	if true {
+		toSerialize["scannableId"] = o.ScannableId
 	}
 	if !isNil(o.IsHazmat) {
 		toSerialize["isHazmat"] = o.IsHazmat

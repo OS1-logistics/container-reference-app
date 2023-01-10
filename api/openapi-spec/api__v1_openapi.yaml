@@ -10,6 +10,20 @@ servers:
         default: localhost:3000
         description: Subdomain assigned to the service
 paths:
+  /initialize:
+    parameters:
+      - $ref: "#/components/parameters/RequestId"
+      - $ref: "#/components/parameters/TenantId"
+    post:
+      tags:
+        - Admin
+      summary: Admin apis for container app management
+      description: >
+        API to initialize tenant with container types
+      operationId: initTenant
+      responses:
+        "201":
+          $ref: "#/components/responses/DefaultResponse"      
   /packages:
     parameters:
       - $ref: "#/components/parameters/RequestId"
@@ -282,7 +296,11 @@ components:
           example: false
     PackageCreateRequestSchema:
       type: object
-      properties:
+      properties:        
+        scannableId:
+          type: string
+          description: A scannable container identifier 
+          example: CNT4433TRD
         trackingId:
           type: string
           example: TR223433WD
@@ -303,10 +321,6 @@ components:
           description:
             Represents whether this container can contain hazardous materials
             or not
-          default: false
-        isContainerizable:
-          type: boolean
-          description: Defines whether container can be put into other containers or not.
           default: false
       required:
         - trackingId
@@ -315,6 +329,10 @@ components:
     BagCreateRequestSchema:
       type: object
       properties:
+        scannableId:
+          type: string
+          description: Scannable bag id
+          example: BAGT#23223FNT        
         trackingId:
           type: string
           example: TR223433WD
@@ -335,10 +353,6 @@ components:
           description:
             Represents whether this container can contain hazardous materials
             or not
-          default: false
-        isContainerizable:
-          type: boolean
-          description: Defines whether container can be put into other containers or not.
           default: false
       required:
         - trackingId

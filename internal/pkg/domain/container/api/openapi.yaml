@@ -2062,7 +2062,7 @@ paths:
         code).
       tags:
       - Container Type - State Machine Config
-  /{containerType}/filter:
+  /{containerTypeName}:
     get:
       description: "**API to get information of all containers of container type based\
         \ on the filters specified.**\n |  HEADER/QUERY PARAMETER   |   DESCRIPTION\
@@ -2203,14 +2203,16 @@ paths:
         schema:
           $ref: '#/components/schemas/SortBy'
         style: form
-      - description: Type of container
+      - description: A unique name to represent type of a container.
         explode: false
         in: path
-        name: containerType
+        name: containerTypeName
         required: true
         schema:
           example: bag
-          pattern: "^[a-zA-Z]{3,16}$"
+          maxLength: 64
+          minLength: 3
+          pattern: "^[a-zA-Z]{3,64}$"
           type: string
         style: simple
       responses:
@@ -2247,7 +2249,6 @@ paths:
       summary: Fetch container details based on the filters passed.
       tags:
       - Container
-  /{containerTypeName}:
     post:
       callbacks:
         NotifyContainersApiStatus:
@@ -2381,7 +2382,7 @@ paths:
       summary: Create a container
       tags:
       - Container
-  /{containerId}:
+  /{containerTypeName}/{containerId}:
     get:
       description: |
         **API to get information (base & core attribute values) of a container specified by containerId.**
@@ -2444,8 +2445,18 @@ paths:
         name: containerId
         required: true
         schema:
-          example: container:9c9b1138-7cdd-11eb-9439-0242ac130002
-          pattern: "^[a-zA-Z]{3,16}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        style: simple
+      - description: A unique name to represent type of a container.
+        explode: false
+        in: path
+        name: containerTypeName
+        required: true
+        schema:
+          example: bag
+          maxLength: 64
+          minLength: 3
+          pattern: "^[a-zA-Z]{3,64}$"
           type: string
         style: simple
       responses:
@@ -2569,8 +2580,18 @@ paths:
         name: containerId
         required: true
         schema:
-          example: container:9c9b1138-7cdd-11eb-9439-0242ac130002
-          pattern: "^[a-zA-Z]{3,16}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        style: simple
+      - description: A unique name to represent type of a container.
+        explode: false
+        in: path
+        name: containerTypeName
+        required: true
+        schema:
+          example: bag
+          maxLength: 64
+          minLength: 3
+          pattern: "^[a-zA-Z]{3,64}$"
           type: string
         style: simple
       - description: App requesting for the attributes.
@@ -2823,7 +2844,7 @@ paths:
       summary: Fetch details of container by trackingId
       tags:
       - Container
-  /{containerId}/state:
+  /{containerTypeName}/{containerId}/state:
     get:
       description: "**API to get the current state of a container.**\n\n | HEADER/PATH\
         \ | DESCRIPTION | TYPE |\n | ---- | ---- | ----- |\n | `X-COREOS-REQUEST-ID`*(header)\
@@ -2878,8 +2899,18 @@ paths:
         name: containerId
         required: true
         schema:
-          example: container:9c9b1138-7cdd-11eb-9439-0242ac130002
-          pattern: "^[a-zA-Z]{3,16}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        style: simple
+      - description: A unique name to represent type of a container.
+        explode: false
+        in: path
+        name: containerTypeName
+        required: true
+        schema:
+          example: bag
+          maxLength: 64
+          minLength: 3
+          pattern: "^[a-zA-Z]{3,64}$"
           type: string
         style: simple
       responses:
@@ -2916,7 +2947,7 @@ paths:
       summary: Get the current state of a container
       tags:
       - Container State
-  /{containerId}/state/event:
+  /{containerTypeName}/{containerId}/state/event:
     put:
       callbacks:
         NotifyContainersApiStatus:
@@ -2996,8 +3027,18 @@ paths:
         name: containerId
         required: true
         schema:
-          example: container:9c9b1138-7cdd-11eb-9439-0242ac130002
-          pattern: "^[a-zA-Z]{3,16}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        style: simple
+      - description: A unique name to represent type of a container.
+        explode: false
+        in: path
+        name: containerTypeName
+        required: true
+        schema:
+          example: bag
+          maxLength: 64
+          minLength: 3
+          pattern: "^[a-zA-Z]{3,64}$"
           type: string
         style: simple
       requestBody:
@@ -3887,6 +3928,15 @@ components:
       schema:
         example: container:9c9b1138-7cdd-11eb-9439-0242ac130002
         pattern: "^[a-zA-Z]{3,16}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        type: string
+      style: simple
+    ContainerScanId:
+      description: Unique id of Container
+      explode: false
+      in: path
+      name: containerId
+      required: true
+      schema:
         type: string
       style: simple
     ContainerTypePath:
@@ -5592,7 +5642,6 @@ components:
           type: object
     ContainerCreateBatchRequest:
       allOf:
-      - $ref: '#/components/schemas/ContainerBatchBaseAttributes'
       - $ref: '#/components/schemas/ContainerCreateAttributes'
     ContainerUpdateRequest:
       allOf:
@@ -5819,6 +5868,8 @@ components:
           items:
             $ref: '#/components/schemas/Item'
           type: array
+        scannableId:
+          type: string
         isHazmat:
           default: false
           description: Represents whether this container can contain hazardous materials
@@ -5833,6 +5884,8 @@ components:
           default: false
           description: Defines whether container is re-usable or not
           type: boolean
+      required:
+      - scannableId
       type: object
     ErrorResponse:
       properties:

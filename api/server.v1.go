@@ -21,6 +21,20 @@ func NewServerV1() ServerV1 {
 	}
 }
 
+// Init
+
+func (s ServerV1) InitTenant(c *gin.Context, params api_v1.InitTenantParams) {
+	e := s.ser.Init(params.XCOREOSTENANTID)
+	if e != nil {
+		Response := &api_v1.CreatedResponse{}
+		Response.ErrorSchema = &api_v1.ErrorSchema{}
+		Response.ErrorSchema.Description = e.Error()
+		c.JSON(http.StatusInternalServerError, Response)
+		return
+	}
+	c.JSON(200, nil)
+}
+
 // Packages
 
 func (s ServerV1) GetPackage(c *gin.Context, packageId string, params api_v1.GetPackageParams) {
@@ -74,7 +88,7 @@ func (s ServerV1) CreatePackage(c *gin.Context, params api_v1.CreatePackageParam
 func (s ServerV1) ChangePackageState(c *gin.Context, packageId string, command string, params api_v1.ChangePackageStateParams) {
 	Response := &api_v1.CreatedResponse{}
 
-	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, packageId, command)
+	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, packageId, command, common.PackageContainerTypeName)
 	if e != nil {
 		Response.ErrorSchema = &api_v1.ErrorSchema{}
 		Response.ErrorSchema.Description = e.Error()
@@ -140,7 +154,7 @@ func (s ServerV1) CreateBag(c *gin.Context, params api_v1.CreateBagParams) {
 
 func (s ServerV1) ChangeBagState(c *gin.Context, bagId string, command string, params api_v1.ChangeBagStateParams) {
 
-	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, bagId, command)
+	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, bagId, command, common.BagContainerTypeName)
 	if e != nil {
 		Response := &api_v1.DefaultResponse{}
 		Response.ErrorSchema = &api_v1.ErrorSchema{}

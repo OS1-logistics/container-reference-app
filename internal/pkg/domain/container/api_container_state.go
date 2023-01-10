@@ -30,6 +30,7 @@ type ApiGetContainerStateRequest struct {
 	xCOREOSTID *string
 	xCOREOSACCESS *string
 	containerId string
+	containerTypeName string
 	xCOREOSUSERINFO *string
 }
 
@@ -87,13 +88,15 @@ GetContainerState Get the current state of a container
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param containerId Unique id of Container
+ @param containerTypeName A unique name to represent type of a container.
  @return ApiGetContainerStateRequest
 */
-func (a *ContainerStateApiService) GetContainerState(ctx context.Context, containerId string) ApiGetContainerStateRequest {
+func (a *ContainerStateApiService) GetContainerState(ctx context.Context, containerId string, containerTypeName string) ApiGetContainerStateRequest {
 	return ApiGetContainerStateRequest{
 		ApiService: a,
 		ctx: ctx,
 		containerId: containerId,
+		containerTypeName: containerTypeName,
 	}
 }
 
@@ -112,8 +115,9 @@ func (a *ContainerStateApiService) GetContainerStateExecute(r ApiGetContainerSta
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/{containerId}/state"
+	localVarPath := localBasePath + "/{containerTypeName}/{containerId}/state"
 	localVarPath = strings.Replace(localVarPath, "{"+"containerId"+"}", url.PathEscape(parameterToString(r.containerId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"containerTypeName"+"}", url.PathEscape(parameterToString(r.containerTypeName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -126,6 +130,12 @@ func (a *ContainerStateApiService) GetContainerStateExecute(r ApiGetContainerSta
 	}
 	if r.xCOREOSACCESS == nil {
 		return localVarReturnValue, nil, reportError("xCOREOSACCESS is required and must be specified")
+	}
+	if strlen(r.containerTypeName) < 3 {
+		return localVarReturnValue, nil, reportError("containerTypeName must have at least 3 elements")
+	}
+	if strlen(r.containerTypeName) > 64 {
+		return localVarReturnValue, nil, reportError("containerTypeName must have less than 64 elements")
 	}
 
 	// to determine the Content-Type header
@@ -238,6 +248,7 @@ type ApiUpdateContainerStateRequest struct {
 	xCOREOSTID *string
 	xCOREOSACCESS *string
 	containerId string
+	containerTypeName string
 	containerStateUpdateRequest *ContainerStateUpdateRequest
 	xCOREOSUSERINFO *string
 }
@@ -308,13 +319,15 @@ state. Otherwise it will remain in the existing state.**
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param containerId Unique id of Container
+ @param containerTypeName A unique name to represent type of a container.
  @return ApiUpdateContainerStateRequest
 */
-func (a *ContainerStateApiService) UpdateContainerState(ctx context.Context, containerId string) ApiUpdateContainerStateRequest {
+func (a *ContainerStateApiService) UpdateContainerState(ctx context.Context, containerId string, containerTypeName string) ApiUpdateContainerStateRequest {
 	return ApiUpdateContainerStateRequest{
 		ApiService: a,
 		ctx: ctx,
 		containerId: containerId,
+		containerTypeName: containerTypeName,
 	}
 }
 
@@ -333,8 +346,9 @@ func (a *ContainerStateApiService) UpdateContainerStateExecute(r ApiUpdateContai
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/{containerId}/state/event"
+	localVarPath := localBasePath + "/{containerTypeName}/{containerId}/state/event"
 	localVarPath = strings.Replace(localVarPath, "{"+"containerId"+"}", url.PathEscape(parameterToString(r.containerId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"containerTypeName"+"}", url.PathEscape(parameterToString(r.containerTypeName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -347,6 +361,12 @@ func (a *ContainerStateApiService) UpdateContainerStateExecute(r ApiUpdateContai
 	}
 	if r.xCOREOSACCESS == nil {
 		return localVarReturnValue, nil, reportError("xCOREOSACCESS is required and must be specified")
+	}
+	if strlen(r.containerTypeName) < 3 {
+		return localVarReturnValue, nil, reportError("containerTypeName must have at least 3 elements")
+	}
+	if strlen(r.containerTypeName) > 64 {
+		return localVarReturnValue, nil, reportError("containerTypeName must have less than 64 elements")
 	}
 	if r.containerStateUpdateRequest == nil {
 		return localVarReturnValue, nil, reportError("containerStateUpdateRequest is required and must be specified")

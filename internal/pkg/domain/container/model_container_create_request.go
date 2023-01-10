@@ -23,6 +23,7 @@ type ContainerCreateRequest struct {
 	Attributes map[string]interface{} `json:"attributes,omitempty"`
 	// List of itmes can be added into container only if container-type is a leaf.
 	Items []Item `json:"items,omitempty"`
+	ScannableId string `json:"scannableId"`
 	// Represents whether this container can contain hazardous materials or not.
 	IsHazmat *bool `json:"isHazmat,omitempty"`
 	// Defines whether container can be put into other containers or not
@@ -35,8 +36,9 @@ type ContainerCreateRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerCreateRequest() *ContainerCreateRequest {
+func NewContainerCreateRequest(scannableId string) *ContainerCreateRequest {
 	this := ContainerCreateRequest{}
+	this.ScannableId = scannableId
 	var isHazmat bool = false
 	this.IsHazmat = &isHazmat
 	var isContainerizable bool = true
@@ -188,6 +190,30 @@ func (o *ContainerCreateRequest) SetItems(v []Item) {
 	o.Items = v
 }
 
+// GetScannableId returns the ScannableId field value
+func (o *ContainerCreateRequest) GetScannableId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ScannableId
+}
+
+// GetScannableIdOk returns a tuple with the ScannableId field value
+// and a boolean to check if the value has been set.
+func (o *ContainerCreateRequest) GetScannableIdOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.ScannableId, true
+}
+
+// SetScannableId sets field value
+func (o *ContainerCreateRequest) SetScannableId(v string) {
+	o.ScannableId = v
+}
+
 // GetIsHazmat returns the IsHazmat field value if set, zero value otherwise.
 func (o *ContainerCreateRequest) GetIsHazmat() bool {
 	if o == nil || isNil(o.IsHazmat) {
@@ -297,6 +323,9 @@ func (o ContainerCreateRequest) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.Items) {
 		toSerialize["items"] = o.Items
+	}
+	if true {
+		toSerialize["scannableId"] = o.ScannableId
 	}
 	if !isNil(o.IsHazmat) {
 		toSerialize["isHazmat"] = o.IsHazmat

@@ -8,21 +8,17 @@ import (
 
 	"github.com/golang/glog"
 	api_v1 "github.com/os1-logistics/container-reference-app/api/v1"
+	inits "github.com/os1-logistics/container-reference-app/init"
 	"github.com/os1-logistics/container-reference-app/internal/pkg/common"
 	domain "github.com/os1-logistics/container-reference-app/internal/pkg/domain"
-	container "github.com/os1-logistics/container-reference-app/internal/pkg/domain/container"
 	containerdomain "github.com/os1-logistics/container-reference-app/internal/pkg/domain/container"
 )
 
 type Service struct {
-	containerApiClient container.APIClient
 }
 
 func NewPackageService() Service {
-	containerClient := domain.NewContainerClient("alpha")
-	return Service{
-		containerApiClient: *containerClient,
-	}
+	return Service{}
 }
 
 func StructToMap(obj interface{}) (newMap *map[string]interface{}, err error) {
@@ -34,17 +30,25 @@ func StructToMap(obj interface{}) (newMap *map[string]interface{}, err error) {
 	return
 }
 
+func (s Service) Init(tenantId string) error {
+	e := inits.Initialize(tenantId)
+	if e != nil {
+		return e
+	}
+	return nil
+}
+
 func (s Service) GetPackage(tenantId string, packageId string) (*api_v1.GetPackageResponse, error) {
 	token, _ := domain.GetToken(tenantId)
 	ctx := context.Background()
-	ApiGetContainerByIdRequest := s.containerApiClient.ContainerApi.
-		GetContainerById(ctx, packageId).
+	ApiGetContainerByIdRequest := domain.NewContainerClient(tenantId).ContainerApi.
+		GetContainerById(ctx, packageId, common.PackageContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID("1234").
+		XCOREOSREQUESTID(common.UUIDv4()).
 		XCOREOSUSERINFO("1234")
 
-	d, r, e := s.containerApiClient.ContainerApi.GetContainerByIdExecute(ApiGetContainerByIdRequest)
+	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.GetContainerByIdExecute(ApiGetContainerByIdRequest)
 
 	if e != nil {
 		return nil, e
@@ -66,14 +70,14 @@ func (s Service) GetPackages(tenantId string) (*api_v1.GetPackagesResponse, erro
 
 	token, _ := domain.GetToken(tenantId)
 	ctx := context.Background()
-	ApiGetContainersRequest := s.containerApiClient.ContainerApi.
+	ApiGetContainersRequest := domain.NewContainerClient(tenantId).ContainerApi.
 		GetContainers(ctx, common.PackageContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID("1234").
+		XCOREOSREQUESTID(common.UUIDv4()).
 		XCOREOSUSERINFO("1234")
 
-	d, r, e := s.containerApiClient.ContainerApi.GetContainersExecute(ApiGetContainersRequest)
+	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.GetContainersExecute(ApiGetContainersRequest)
 
 	if e != nil {
 		return nil, e
@@ -97,8 +101,9 @@ func (s Service) CreatePackage(tenantId string, request api_v1.CreatePackageJSON
 	ctx := context.Background()
 
 	containerCreateRequest := containerdomain.ContainerCreateRequest{
+		ScannableId:       *request.ScannableId,
 		IsHazmat:          request.IsHazmat,
-		IsContainerizable: request.IsContainerizable,
+		IsContainerizable: containerdomain.PtrBool(true),
 		IsReusable:        request.IsReusable,
 		TrackingDetails:   []containerdomain.ContainerCreateAttributesTrackingDetailsInner{},
 		Attributes: map[string]interface{}{
@@ -116,18 +121,19 @@ func (s Service) CreatePackage(tenantId string, request api_v1.CreatePackageJSON
 		IsPrimary:  containerdomain.PtrBool(true),
 	})
 
-	ApiCreateContainerRequest := s.containerApiClient.ContainerApi.
+	ApiCreateContainerRequest := domain.NewContainerClient(tenantId).ContainerApi.
 		CreateContainer(ctx, common.PackageContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSORIGINTOKEN(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID("1234").
+		XCOREOSREQUESTID(common.UUIDv4()).
 		XCOREOSUSERINFO("1234").
 		ContainerCreateRequest(containerCreateRequest)
 
-	d, r, e := s.containerApiClient.ContainerApi.CreateContainerExecute(ApiCreateContainerRequest)
+	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.CreateContainerExecute(ApiCreateContainerRequest)
 
 	if e != nil {
+		glog.Error(r)
 		glog.Error(e)
 		return nil, e
 	}
@@ -147,8 +153,9 @@ func (s Service) CreateBag(tenantId string, request api_v1.CreateBagJSONRequestB
 	ctx := context.Background()
 
 	containerCreateRequest := containerdomain.ContainerCreateRequest{
+		ScannableId:       *request.ScannableId,
 		IsHazmat:          request.IsHazmat,
-		IsContainerizable: request.IsContainerizable,
+		IsContainerizable: containerdomain.PtrBool(false),
 		IsReusable:        request.IsReusable,
 		TrackingDetails:   []containerdomain.ContainerCreateAttributesTrackingDetailsInner{},
 		Attributes: map[string]interface{}{
@@ -167,16 +174,16 @@ func (s Service) CreateBag(tenantId string, request api_v1.CreateBagJSONRequestB
 		IsPrimary:  containerdomain.PtrBool(true),
 	})
 
-	ApiCreateContainerRequest := s.containerApiClient.ContainerApi.
+	ApiCreateContainerRequest := domain.NewContainerClient(tenantId).ContainerApi.
 		CreateContainer(ctx, common.BagContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSORIGINTOKEN(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID("1234").
+		XCOREOSREQUESTID(common.UUIDv4()).
 		XCOREOSUSERINFO("1234").
 		ContainerCreateRequest(containerCreateRequest)
 
-	d, r, e := s.containerApiClient.ContainerApi.CreateContainerExecute(ApiCreateContainerRequest)
+	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.CreateContainerExecute(ApiCreateContainerRequest)
 
 	if e != nil {
 		glog.Error(e)
@@ -193,14 +200,14 @@ func (s Service) CreateBag(tenantId string, request api_v1.CreateBagJSONRequestB
 func (s Service) GetBag(tenantId string, bagId string) (*api_v1.GetBagResponse, error) {
 	token, _ := domain.GetToken(tenantId)
 	ctx := context.Background()
-	ApiGetContainerByIdRequest := s.containerApiClient.ContainerApi.
-		GetContainerById(ctx, bagId).
+	ApiGetContainerByIdRequest := domain.NewContainerClient(tenantId).ContainerApi.
+		GetContainerById(ctx, bagId, common.BagContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID("1234").
+		XCOREOSREQUESTID(common.UUIDv4()).
 		XCOREOSUSERINFO("1234")
 
-	d, r, e := s.containerApiClient.ContainerApi.GetContainerByIdExecute(ApiGetContainerByIdRequest)
+	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.GetContainerByIdExecute(ApiGetContainerByIdRequest)
 
 	if e != nil {
 		return nil, e
@@ -222,14 +229,14 @@ func (s Service) GetBags(tenantId string) (*api_v1.GetBagsResponse, error) {
 
 	token, _ := domain.GetToken(tenantId)
 	ctx := context.Background()
-	ApiGetContainersRequest := s.containerApiClient.ContainerApi.
+	ApiGetContainersRequest := domain.NewContainerClient(tenantId).ContainerApi.
 		GetContainers(ctx, common.BagContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID("1234").
+		XCOREOSREQUESTID(common.UUIDv4()).
 		XCOREOSUSERINFO("1234")
 
-	d, r, e := s.containerApiClient.ContainerApi.GetContainersExecute(ApiGetContainersRequest)
+	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.GetContainersExecute(ApiGetContainersRequest)
 
 	if e != nil {
 		return nil, e
@@ -248,7 +255,7 @@ func (s Service) GetBags(tenantId string) (*api_v1.GetBagsResponse, error) {
 }
 
 // container operations
-func (s Service) UpdateContainerState(tenantId string, containerId string, command string) error {
+func (s Service) UpdateContainerState(tenantId string, containerId string, command string, containerTypeName string) error {
 
 	var operation *common.ContainerStateOperation = nil
 
@@ -279,15 +286,15 @@ func (s Service) UpdateContainerState(tenantId string, containerId string, comma
 		},
 	}
 
-	apiUpdateContainerStateRequest := s.containerApiClient.ContainerStateApi.
-		UpdateContainerState(ctx, containerId).
+	apiUpdateContainerStateRequest := domain.NewContainerClient(tenantId).ContainerStateApi.
+		UpdateContainerState(ctx, containerId, containerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID("1234").
+		XCOREOSREQUESTID(common.UUIDv4()).
 		XCOREOSUSERINFO("1234").
 		ContainerStateUpdateRequest(containerStateUpdateRequest)
 
-	_, r, e := s.containerApiClient.ContainerStateApi.UpdateContainerStateExecute(apiUpdateContainerStateRequest)
+	_, r, e := domain.NewContainerClient(tenantId).ContainerStateApi.UpdateContainerStateExecute(apiUpdateContainerStateRequest)
 
 	if e != nil {
 		return e
@@ -314,15 +321,15 @@ func (s Service) ContainerizeOperations(tenantId string, parentId string, contai
 		Action:   operation,
 	}
 
-	apiContainerizeRequest := s.containerApiClient.ContainerApi.
+	apiContainerizeRequest := domain.NewContainerClient(tenantId).ContainerApi.
 		ContainerizeContainerById(ctx, containerId).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID("1234").
+		XCOREOSREQUESTID(common.UUIDv4()).
 		XCOREOSUSERINFO("1234").
 		ParentIdRequest(ParentIdRequest)
 
-	_, r, e := s.containerApiClient.ContainerApi.ContainerizeContainerByIdExecute(apiContainerizeRequest)
+	_, r, e := domain.NewContainerClient(tenantId).ContainerApi.ContainerizeContainerByIdExecute(apiContainerizeRequest)
 
 	if e != nil {
 		glog.Error(e)

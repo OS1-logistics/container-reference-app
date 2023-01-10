@@ -932,7 +932,7 @@ paths:
           $ref: '#/components/responses/NotFoundErrorResponse'
         '503':
           $ref: '#/components/responses/ServerErrorResponse'
-  /{containerType}/filter:
+  /{containerTypeName}:
     get:
       tags:
         - Container
@@ -975,7 +975,7 @@ paths:
         - $ref: '#/components/parameters/Query'
         - $ref: '#/components/parameters/SortKey'
         - $ref: '#/components/parameters/SortBy'
-        - $ref: '#/components/parameters/ContainerType'
+        - $ref: '#/components/parameters/ContainerTypeName'
       responses:
         '200':
           $ref: '#/components/responses/ContainersResponse'
@@ -987,7 +987,6 @@ paths:
           $ref: '#/components/responses/NotFoundErrorResponse'
         '503':
           $ref: '#/components/responses/ServerErrorResponse'
-  /{containerTypeName}:
     post:
       tags:
         - Container
@@ -1057,7 +1056,7 @@ paths:
           $ref: '#/components/responses/UnauthorizedErrorResponse'
         '503':
           $ref: '#/components/responses/ServerErrorResponse'
-  /{containerId}:
+  /{containerTypeName}/{containerId}:
     get:
       tags:
         - Container
@@ -1089,7 +1088,8 @@ paths:
         - $ref: '#/components/parameters/TenantId'
         - $ref: '#/components/parameters/AccessToken'
         - $ref: '#/components/parameters/UserInfoToken'
-        - $ref: '#/components/parameters/ContainerId'
+        - $ref: '#/components/parameters/ContainerScanId'
+        - $ref: '#/components/parameters/ContainerTypeName'
       responses:
         '200':
           $ref: '#/components/responses/ContainerResponse'
@@ -1145,7 +1145,8 @@ paths:
         - $ref: '#/components/parameters/TenantId'
         - $ref: '#/components/parameters/AccessToken'
         - $ref: '#/components/parameters/UserInfoToken'
-        - $ref: '#/components/parameters/ContainerId'
+        - $ref: '#/components/parameters/ContainerScanId'
+        - $ref: '#/components/parameters/ContainerTypeName'
         - $ref: '#/components/parameters/RequestingApp'
       requestBody:
         $ref: '#/components/requestBodies/ContainerUpdateRequest'
@@ -1274,7 +1275,7 @@ paths:
           $ref: '#/components/responses/NotFoundErrorResponse'
         '503':
           $ref: '#/components/responses/ServerErrorResponse'
-  /{containerId}/state:
+  /{containerTypeName}/{containerId}/state:
     get:
       tags:
         - Container State
@@ -1305,7 +1306,8 @@ paths:
         - $ref: '#/components/parameters/TenantId'
         - $ref: '#/components/parameters/AccessToken'
         - $ref: '#/components/parameters/UserInfoToken'
-        - $ref: '#/components/parameters/ContainerId'
+        - $ref: '#/components/parameters/ContainerScanId'
+        - $ref: '#/components/parameters/ContainerTypeName'
       responses:
         '200':
           $ref: '#/components/responses/ContainerStateResponse'
@@ -1317,7 +1319,7 @@ paths:
           $ref: '#/components/responses/NotFoundErrorResponse'
         '503':
           $ref: '#/components/responses/ServerErrorResponse'
-  /{containerId}/state/event:
+  /{containerTypeName}/{containerId}/state/event:
     put:
       tags:
         - Container State
@@ -1369,7 +1371,8 @@ paths:
         - $ref: '#/components/parameters/TenantId'
         - $ref: '#/components/parameters/AccessToken'
         - $ref: '#/components/parameters/UserInfoToken'
-        - $ref: '#/components/parameters/ContainerId'
+        - $ref: '#/components/parameters/ContainerScanId'
+        - $ref: '#/components/parameters/ContainerTypeName'
       requestBody:
         $ref: '#/components/requestBodies/ContainerStateUpdateRequest'
       callbacks:
@@ -2983,7 +2986,6 @@ components:
               type: object
     ContainerCreateBatchRequest:
       allOf:
-        - $ref: '#/components/schemas/ContainerBatchBaseAttributes'
         - $ref: '#/components/schemas/ContainerCreateAttributes'
     ContainerUpdateRequest:
       allOf:
@@ -3186,6 +3188,8 @@ components:
       description: >-
         Attributes that define a container and can be modified after container
         creation.
+      required:
+       - scannableId
       properties:
         trackingDetails:
           description: >-
@@ -3225,6 +3229,8 @@ components:
             configuration APIs.
         items:
           $ref: '#/components/schemas/Items'
+        scannableId:
+         type: string
         isHazmat:
           type: boolean
           description: >-
@@ -4332,6 +4338,13 @@ components:
         pattern: >-
           ^[a-zA-Z]{3,16}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
         example: container:9c9b1138-7cdd-11eb-9439-0242ac130002
+    ContainerScanId:
+      description: Unique id of Container
+      in: path
+      name: containerId
+      required: true
+      schema:
+        type: string
     ContainerTypePath:
       name: containerId
       description: Type of container
