@@ -2062,7 +2062,7 @@ paths:
         code).
       tags:
       - Container Type - State Machine Config
-  /{containerTypeName}:
+  /{containerTypeName}/filter:
     get:
       description: "**API to get information of all containers of container type based\
         \ on the filters specified.**\n |  HEADER/QUERY PARAMETER   |   DESCRIPTION\
