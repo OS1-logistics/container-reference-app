@@ -6,6 +6,7 @@
 - [Go](https://golang.org/doc/install)
 - [Make](https://www.gnu.org/software/make/)
 - [openapi-generator](https://openapi-generator.tech/) install the one which is compatible with your OS.
+- Client credential for Container app from [OS1 Portal](https://portal.os1.delhivery.com)
 
 ### To Run the App
 
