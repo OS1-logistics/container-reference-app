@@ -2249,6 +2249,7 @@ paths:
       summary: Fetch container details based on the filters passed.
       tags:
       - Container
+  /{containerTypeName}:
     post:
       callbacks:
         NotifyContainersApiStatus:

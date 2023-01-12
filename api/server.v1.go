@@ -24,15 +24,15 @@ func NewServerV1() ServerV1 {
 // Init
 
 func (s ServerV1) InitTenant(c *gin.Context, params api_v1.InitTenantParams) {
+	Response := &api_v1.DefaultResponse{}
 	e := s.ser.Init(params.XCOREOSTENANTID)
 	if e != nil {
-		Response := &api_v1.CreatedResponse{}
 		Response.ErrorSchema = &api_v1.ErrorSchema{}
 		Response.ErrorSchema.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
-	c.JSON(200, nil)
+	c.JSON(200, Response)
 }
 
 // Packages
@@ -153,42 +153,39 @@ func (s ServerV1) CreateBag(c *gin.Context, params api_v1.CreateBagParams) {
 }
 
 func (s ServerV1) ChangeBagState(c *gin.Context, bagId string, command string, params api_v1.ChangeBagStateParams) {
-
+	Response := &api_v1.DefaultResponse{}
 	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, bagId, command, common.BagContainerTypeName)
 	if e != nil {
-		Response := &api_v1.DefaultResponse{}
 		Response.ErrorSchema = &api_v1.ErrorSchema{}
 		Response.ErrorSchema.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
 
-	c.JSON(http.StatusOK, nil)
+	c.JSON(http.StatusOK, Response)
 }
 
 func (s ServerV1) AddPackageToBag(c *gin.Context, bagId string, packageId string, params api_v1.AddPackageToBagParams) {
-
+	Response := &api_v1.DefaultResponse{}
 	e := s.ser.ContainerizeOperations(params.XCOREOSTENANTID, bagId, packageId, common.CONTAINER_OPERATION_CONTAINERIZE)
 	if e != nil {
-		Response := &api_v1.DefaultResponse{}
 		Response.ErrorSchema = e
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
 
-	c.JSON(http.StatusOK, nil)
+	c.JSON(http.StatusOK, Response)
 }
 
 func (s ServerV1) RemovePackageFromBag(c *gin.Context, bagId string, packageId string, params api_v1.RemovePackageFromBagParams) {
-
+	Response := &api_v1.DefaultResponse{}
 	e := s.ser.ContainerizeOperations(params.XCOREOSTENANTID, bagId, packageId, common.CONTAINER_OPERATION_DECONTAINERIZE)
 	if e != nil {
-		Response := &api_v1.DefaultResponse{}
 		Response.ErrorSchema = e
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
 
-	c.JSON(http.StatusOK, nil)
+	c.JSON(http.StatusOK, Response)
 
 }

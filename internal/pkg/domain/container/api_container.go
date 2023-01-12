@@ -366,7 +366,7 @@ func (a *ContainerApiService) CreateContainerExecute(r ApiCreateContainerRequest
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/{containerTypeName}/filter"
+	localVarPath := localBasePath + "/{containerTypeName}"
 	localVarPath = strings.Replace(localVarPath, "{"+"containerTypeName"+"}", url.PathEscape(parameterToString(r.containerTypeName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)

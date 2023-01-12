@@ -987,6 +987,7 @@ paths:
           $ref: '#/components/responses/NotFoundErrorResponse'
         '503':
           $ref: '#/components/responses/ServerErrorResponse'
+  /{containerTypeName}:
     post:
       tags:
         - Container
