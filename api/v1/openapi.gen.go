@@ -32,13 +32,13 @@ type BagCreateRequestSchema struct {
 
 // CreatedResponseSchema defines model for CreatedResponseSchema.
 type CreatedResponseSchema struct {
-	DataSchema *DataSchema `json:"data,omitempty"`
+	Data *DataSchema `json:"data,omitempty"`
 
 	// Error Error Information
-	ErrorSchema *ErrorSchema `json:"error,omitempty"`
+	Error *ErrorSchema `json:"error,omitempty"`
 }
 
-// DataSchema defines model for Data.
+// DataSchema defines model for DataSchema.
 type DataSchema struct {
 	Id *string `json:"id,omitempty"`
 }
@@ -48,7 +48,7 @@ type DefaultResponseSchema struct {
 	Data *map[string]interface{} `json:"data,omitempty"`
 
 	// Error Error Information
-	ErrorSchema *ErrorSchema `json:"error,omitempty"`
+	Error *ErrorSchema `json:"error,omitempty"`
 }
 
 // ErrorSchema Error Information
@@ -79,6 +79,12 @@ type PackageCreateRequestSchema struct {
 	TrackingId  string  `json:"trackingId"`
 }
 
+// AccessToken defines model for AccessToken.
+type AccessToken = string
+
+// ApiKey defines model for ApiKey.
+type ApiKey = string
+
 // RequestId defines model for RequestId.
 type RequestId = string
 
@@ -96,7 +102,7 @@ type GetBagResponse struct {
 	Data *map[string]interface{} `json:"data,omitempty"`
 
 	// Error Error Information
-	ErrorSchema *ErrorSchema `json:"error,omitempty"`
+	Error *ErrorSchema `json:"error,omitempty"`
 }
 
 // GetBagsResponse defines model for GetBagsResponse.
@@ -104,7 +110,7 @@ type GetBagsResponse struct {
 	Data *map[string]interface{} `json:"data,omitempty"`
 
 	// Error Error Information
-	ErrorSchema *ErrorSchema `json:"error,omitempty"`
+	Error *ErrorSchema `json:"error,omitempty"`
 }
 
 // GetPackageResponse defines model for GetPackageResponse.
@@ -112,7 +118,7 @@ type GetPackageResponse struct {
 	Data *map[string]interface{} `json:"data,omitempty"`
 
 	// Error Error Information
-	ErrorSchema *ErrorSchema `json:"error,omitempty"`
+	Error *ErrorSchema `json:"error,omitempty"`
 }
 
 // GetPackagesResponse defines model for GetPackagesResponse.
@@ -120,7 +126,7 @@ type GetPackagesResponse struct {
 	Data *map[string]interface{} `json:"data,omitempty"`
 
 	// Error Error Information
-	ErrorSchema *ErrorSchema `json:"error,omitempty"`
+	Error *ErrorSchema `json:"error,omitempty"`
 }
 
 // BagCreateRequest defines model for BagCreateRequest.
@@ -136,6 +142,12 @@ type GetBagsParams struct {
 
 	// XCOREOSTENANTID Tenant Id
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+
+	// XCOREOSACCESS COREOS Access token
+	XCOREOSACCESS *AccessToken `json:"X-COREOS-ACCESS,omitempty"`
+
+	// XAPIKEY Service Api key
+	XAPIKEY *ApiKey `json:"X-API-KEY,omitempty"`
 }
 
 // CreateBagParams defines parameters for CreateBag.
@@ -145,6 +157,12 @@ type CreateBagParams struct {
 
 	// XCOREOSTENANTID Tenant Id
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+
+	// XCOREOSACCESS COREOS Access token
+	XCOREOSACCESS *AccessToken `json:"X-COREOS-ACCESS,omitempty"`
+
+	// XAPIKEY Service Api key
+	XAPIKEY *ApiKey `json:"X-API-KEY,omitempty"`
 }
 
 // GetBagParams defines parameters for GetBag.
@@ -154,6 +172,12 @@ type GetBagParams struct {
 
 	// XCOREOSTENANTID Tenant Id
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+
+	// XCOREOSACCESS COREOS Access token
+	XCOREOSACCESS *AccessToken `json:"X-COREOS-ACCESS,omitempty"`
+
+	// XAPIKEY Service Api key
+	XAPIKEY *ApiKey `json:"X-API-KEY,omitempty"`
 }
 
 // AddPackageToBagParams defines parameters for AddPackageToBag.
@@ -163,6 +187,12 @@ type AddPackageToBagParams struct {
 
 	// XCOREOSTENANTID Tenant Id
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+
+	// XCOREOSACCESS COREOS Access token
+	XCOREOSACCESS *AccessToken `json:"X-COREOS-ACCESS,omitempty"`
+
+	// XAPIKEY Service Api key
+	XAPIKEY *ApiKey `json:"X-API-KEY,omitempty"`
 }
 
 // RemovePackageFromBagParams defines parameters for RemovePackageFromBag.
@@ -172,6 +202,12 @@ type RemovePackageFromBagParams struct {
 
 	// XCOREOSTENANTID Tenant Id
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+
+	// XCOREOSACCESS COREOS Access token
+	XCOREOSACCESS *AccessToken `json:"X-COREOS-ACCESS,omitempty"`
+
+	// XAPIKEY Service Api key
+	XAPIKEY *ApiKey `json:"X-API-KEY,omitempty"`
 }
 
 // ChangeBagStateParams defines parameters for ChangeBagState.
@@ -181,6 +217,12 @@ type ChangeBagStateParams struct {
 
 	// XCOREOSTENANTID Tenant Id
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+
+	// XCOREOSACCESS COREOS Access token
+	XCOREOSACCESS *AccessToken `json:"X-COREOS-ACCESS,omitempty"`
+
+	// XAPIKEY Service Api key
+	XAPIKEY *ApiKey `json:"X-API-KEY,omitempty"`
 }
 
 // InitTenantParams defines parameters for InitTenant.
@@ -190,6 +232,12 @@ type InitTenantParams struct {
 
 	// XCOREOSTENANTID Tenant Id
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+
+	// XCOREOSACCESS COREOS Access token
+	XCOREOSACCESS *AccessToken `json:"X-COREOS-ACCESS,omitempty"`
+
+	// XAPIKEY Service Api key
+	XAPIKEY *ApiKey `json:"X-API-KEY,omitempty"`
 }
 
 // GetPackagesParams defines parameters for GetPackages.
@@ -199,6 +247,12 @@ type GetPackagesParams struct {
 
 	// XCOREOSTENANTID Tenant Id
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+
+	// XCOREOSACCESS COREOS Access token
+	XCOREOSACCESS *AccessToken `json:"X-COREOS-ACCESS,omitempty"`
+
+	// XAPIKEY Service Api key
+	XAPIKEY *ApiKey `json:"X-API-KEY,omitempty"`
 }
 
 // CreatePackageParams defines parameters for CreatePackage.
@@ -208,6 +262,12 @@ type CreatePackageParams struct {
 
 	// XCOREOSTENANTID Tenant Id
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+
+	// XCOREOSACCESS COREOS Access token
+	XCOREOSACCESS *AccessToken `json:"X-COREOS-ACCESS,omitempty"`
+
+	// XAPIKEY Service Api key
+	XAPIKEY *ApiKey `json:"X-API-KEY,omitempty"`
 }
 
 // GetPackageParams defines parameters for GetPackage.
@@ -217,6 +277,12 @@ type GetPackageParams struct {
 
 	// XCOREOSTENANTID Tenant Id
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+
+	// XCOREOSACCESS COREOS Access token
+	XCOREOSACCESS *AccessToken `json:"X-COREOS-ACCESS,omitempty"`
+
+	// XAPIKEY Service Api key
+	XAPIKEY *ApiKey `json:"X-API-KEY,omitempty"`
 }
 
 // ChangePackageStateParams defines parameters for ChangePackageState.
@@ -226,6 +292,12 @@ type ChangePackageStateParams struct {
 
 	// XCOREOSTENANTID Tenant Id
 	XCOREOSTENANTID TenantId `json:"X-COREOS-TENANT-ID"`
+
+	// XCOREOSACCESS COREOS Access token
+	XCOREOSACCESS *AccessToken `json:"X-COREOS-ACCESS,omitempty"`
+
+	// XAPIKEY Service Api key
+	XAPIKEY *ApiKey `json:"X-API-KEY,omitempty"`
 }
 
 // CreateBagJSONRequestBody defines body for CreateBag for application/json ContentType.
@@ -334,6 +406,44 @@ func (siw *ServerInterfaceWrapper) GetBags(c *gin.Context) {
 		return
 	}
 
+	// ------------- Optional header parameter "X-COREOS-ACCESS" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-ACCESS")]; found {
+		var XCOREOSACCESS AccessToken
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-ACCESS, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-ACCESS", runtime.ParamLocationHeader, valueList[0], &XCOREOSACCESS)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-ACCESS: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSACCESS = &XCOREOSACCESS
+
+	}
+
+	// ------------- Optional header parameter "X-API-KEY" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-API-KEY")]; found {
+		var XAPIKEY ApiKey
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-API-KEY, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-API-KEY", runtime.ParamLocationHeader, valueList[0], &XAPIKEY)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-API-KEY: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XAPIKEY = &XAPIKEY
+
+	}
+
 	for _, middleware := range siw.HandlerMiddlewares {
 		middleware(c)
 	}
@@ -393,6 +503,44 @@ func (siw *ServerInterfaceWrapper) CreateBag(c *gin.Context) {
 	} else {
 		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-TENANT-ID is required, but not found: %s", err), http.StatusBadRequest)
 		return
+	}
+
+	// ------------- Optional header parameter "X-COREOS-ACCESS" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-ACCESS")]; found {
+		var XCOREOSACCESS AccessToken
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-ACCESS, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-ACCESS", runtime.ParamLocationHeader, valueList[0], &XCOREOSACCESS)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-ACCESS: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSACCESS = &XCOREOSACCESS
+
+	}
+
+	// ------------- Optional header parameter "X-API-KEY" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-API-KEY")]; found {
+		var XAPIKEY ApiKey
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-API-KEY, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-API-KEY", runtime.ParamLocationHeader, valueList[0], &XAPIKEY)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-API-KEY: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XAPIKEY = &XAPIKEY
+
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -463,6 +611,44 @@ func (siw *ServerInterfaceWrapper) GetBag(c *gin.Context) {
 	} else {
 		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-TENANT-ID is required, but not found: %s", err), http.StatusBadRequest)
 		return
+	}
+
+	// ------------- Optional header parameter "X-COREOS-ACCESS" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-ACCESS")]; found {
+		var XCOREOSACCESS AccessToken
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-ACCESS, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-ACCESS", runtime.ParamLocationHeader, valueList[0], &XCOREOSACCESS)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-ACCESS: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSACCESS = &XCOREOSACCESS
+
+	}
+
+	// ------------- Optional header parameter "X-API-KEY" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-API-KEY")]; found {
+		var XAPIKEY ApiKey
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-API-KEY, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-API-KEY", runtime.ParamLocationHeader, valueList[0], &XAPIKEY)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-API-KEY: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XAPIKEY = &XAPIKEY
+
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -544,6 +730,44 @@ func (siw *ServerInterfaceWrapper) AddPackageToBag(c *gin.Context) {
 		return
 	}
 
+	// ------------- Optional header parameter "X-COREOS-ACCESS" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-ACCESS")]; found {
+		var XCOREOSACCESS AccessToken
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-ACCESS, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-ACCESS", runtime.ParamLocationHeader, valueList[0], &XCOREOSACCESS)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-ACCESS: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSACCESS = &XCOREOSACCESS
+
+	}
+
+	// ------------- Optional header parameter "X-API-KEY" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-API-KEY")]; found {
+		var XAPIKEY ApiKey
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-API-KEY, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-API-KEY", runtime.ParamLocationHeader, valueList[0], &XAPIKEY)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-API-KEY: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XAPIKEY = &XAPIKEY
+
+	}
+
 	for _, middleware := range siw.HandlerMiddlewares {
 		middleware(c)
 	}
@@ -621,6 +845,44 @@ func (siw *ServerInterfaceWrapper) RemovePackageFromBag(c *gin.Context) {
 	} else {
 		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-TENANT-ID is required, but not found: %s", err), http.StatusBadRequest)
 		return
+	}
+
+	// ------------- Optional header parameter "X-COREOS-ACCESS" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-ACCESS")]; found {
+		var XCOREOSACCESS AccessToken
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-ACCESS, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-ACCESS", runtime.ParamLocationHeader, valueList[0], &XCOREOSACCESS)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-ACCESS: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSACCESS = &XCOREOSACCESS
+
+	}
+
+	// ------------- Optional header parameter "X-API-KEY" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-API-KEY")]; found {
+		var XAPIKEY ApiKey
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-API-KEY, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-API-KEY", runtime.ParamLocationHeader, valueList[0], &XAPIKEY)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-API-KEY: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XAPIKEY = &XAPIKEY
+
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -702,6 +964,44 @@ func (siw *ServerInterfaceWrapper) ChangeBagState(c *gin.Context) {
 		return
 	}
 
+	// ------------- Optional header parameter "X-COREOS-ACCESS" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-ACCESS")]; found {
+		var XCOREOSACCESS AccessToken
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-ACCESS, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-ACCESS", runtime.ParamLocationHeader, valueList[0], &XCOREOSACCESS)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-ACCESS: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSACCESS = &XCOREOSACCESS
+
+	}
+
+	// ------------- Optional header parameter "X-API-KEY" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-API-KEY")]; found {
+		var XAPIKEY ApiKey
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-API-KEY, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-API-KEY", runtime.ParamLocationHeader, valueList[0], &XAPIKEY)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-API-KEY: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XAPIKEY = &XAPIKEY
+
+	}
+
 	for _, middleware := range siw.HandlerMiddlewares {
 		middleware(c)
 	}
@@ -761,6 +1061,44 @@ func (siw *ServerInterfaceWrapper) InitTenant(c *gin.Context) {
 	} else {
 		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-TENANT-ID is required, but not found: %s", err), http.StatusBadRequest)
 		return
+	}
+
+	// ------------- Optional header parameter "X-COREOS-ACCESS" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-ACCESS")]; found {
+		var XCOREOSACCESS AccessToken
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-ACCESS, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-ACCESS", runtime.ParamLocationHeader, valueList[0], &XCOREOSACCESS)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-ACCESS: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSACCESS = &XCOREOSACCESS
+
+	}
+
+	// ------------- Optional header parameter "X-API-KEY" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-API-KEY")]; found {
+		var XAPIKEY ApiKey
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-API-KEY, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-API-KEY", runtime.ParamLocationHeader, valueList[0], &XAPIKEY)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-API-KEY: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XAPIKEY = &XAPIKEY
+
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -824,6 +1162,44 @@ func (siw *ServerInterfaceWrapper) GetPackages(c *gin.Context) {
 		return
 	}
 
+	// ------------- Optional header parameter "X-COREOS-ACCESS" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-ACCESS")]; found {
+		var XCOREOSACCESS AccessToken
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-ACCESS, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-ACCESS", runtime.ParamLocationHeader, valueList[0], &XCOREOSACCESS)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-ACCESS: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSACCESS = &XCOREOSACCESS
+
+	}
+
+	// ------------- Optional header parameter "X-API-KEY" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-API-KEY")]; found {
+		var XAPIKEY ApiKey
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-API-KEY, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-API-KEY", runtime.ParamLocationHeader, valueList[0], &XAPIKEY)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-API-KEY: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XAPIKEY = &XAPIKEY
+
+	}
+
 	for _, middleware := range siw.HandlerMiddlewares {
 		middleware(c)
 	}
@@ -883,6 +1259,44 @@ func (siw *ServerInterfaceWrapper) CreatePackage(c *gin.Context) {
 	} else {
 		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-TENANT-ID is required, but not found: %s", err), http.StatusBadRequest)
 		return
+	}
+
+	// ------------- Optional header parameter "X-COREOS-ACCESS" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-ACCESS")]; found {
+		var XCOREOSACCESS AccessToken
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-ACCESS, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-ACCESS", runtime.ParamLocationHeader, valueList[0], &XCOREOSACCESS)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-ACCESS: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSACCESS = &XCOREOSACCESS
+
+	}
+
+	// ------------- Optional header parameter "X-API-KEY" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-API-KEY")]; found {
+		var XAPIKEY ApiKey
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-API-KEY, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-API-KEY", runtime.ParamLocationHeader, valueList[0], &XAPIKEY)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-API-KEY: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XAPIKEY = &XAPIKEY
+
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -953,6 +1367,44 @@ func (siw *ServerInterfaceWrapper) GetPackage(c *gin.Context) {
 	} else {
 		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-TENANT-ID is required, but not found: %s", err), http.StatusBadRequest)
 		return
+	}
+
+	// ------------- Optional header parameter "X-COREOS-ACCESS" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-ACCESS")]; found {
+		var XCOREOSACCESS AccessToken
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-ACCESS, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-ACCESS", runtime.ParamLocationHeader, valueList[0], &XCOREOSACCESS)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-ACCESS: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSACCESS = &XCOREOSACCESS
+
+	}
+
+	// ------------- Optional header parameter "X-API-KEY" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-API-KEY")]; found {
+		var XAPIKEY ApiKey
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-API-KEY, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-API-KEY", runtime.ParamLocationHeader, valueList[0], &XAPIKEY)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-API-KEY: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XAPIKEY = &XAPIKEY
+
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1032,6 +1484,44 @@ func (siw *ServerInterfaceWrapper) ChangePackageState(c *gin.Context) {
 	} else {
 		siw.ErrorHandler(c, fmt.Errorf("Header parameter X-COREOS-TENANT-ID is required, but not found: %s", err), http.StatusBadRequest)
 		return
+	}
+
+	// ------------- Optional header parameter "X-COREOS-ACCESS" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-COREOS-ACCESS")]; found {
+		var XCOREOSACCESS AccessToken
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-COREOS-ACCESS, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-COREOS-ACCESS", runtime.ParamLocationHeader, valueList[0], &XCOREOSACCESS)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-COREOS-ACCESS: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XCOREOSACCESS = &XCOREOSACCESS
+
+	}
+
+	// ------------- Optional header parameter "X-API-KEY" -------------
+	if valueList, found := headers[http.CanonicalHeaderKey("X-API-KEY")]; found {
+		var XAPIKEY ApiKey
+		n := len(valueList)
+		if n != 1 {
+			siw.ErrorHandler(c, fmt.Errorf("Expected one value for X-API-KEY, got %d", n), http.StatusBadRequest)
+			return
+		}
+
+		err = runtime.BindStyledParameterWithLocation("simple", false, "X-API-KEY", runtime.ParamLocationHeader, valueList[0], &XAPIKEY)
+		if err != nil {
+			siw.ErrorHandler(c, fmt.Errorf("Invalid format for parameter X-API-KEY: %s", err), http.StatusBadRequest)
+			return
+		}
+
+		params.XAPIKEY = &XAPIKEY
+
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
