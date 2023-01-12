@@ -14,6 +14,8 @@ paths:
     parameters:
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
+      - $ref: "#/components/parameters/AccessToken"
+      - $ref: "#/components/parameters/ApiKey"
     post:
       tags:
         - Admin
@@ -28,6 +30,8 @@ paths:
     parameters:
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
+      - $ref: "#/components/parameters/AccessToken"
+      - $ref: "#/components/parameters/ApiKey"      
     post:
       tags:
         - Packages
@@ -64,6 +68,8 @@ paths:
         required: true
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
+      - $ref: "#/components/parameters/AccessToken"
+      - $ref: "#/components/parameters/ApiKey"      
     get:
       tags:
         - Packages
@@ -98,6 +104,8 @@ paths:
         example: open
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
+      - $ref: "#/components/parameters/AccessToken"
+      - $ref: "#/components/parameters/ApiKey"      
     post:
       tags:
         - Package Operations
@@ -112,6 +120,8 @@ paths:
     parameters:
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
+      - $ref: "#/components/parameters/AccessToken"
+      - $ref: "#/components/parameters/ApiKey"      
     post:
       tags:
         - Bags
@@ -149,6 +159,8 @@ paths:
         required: true
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
+      - $ref: "#/components/parameters/AccessToken"
+      - $ref: "#/components/parameters/ApiKey"      
     get:
       tags:
         - Bags
@@ -184,6 +196,8 @@ paths:
         example: open
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
+      - $ref: "#/components/parameters/AccessToken"
+      - $ref: "#/components/parameters/ApiKey"      
     post:
       tags:
         - Bag Operations
@@ -210,6 +224,8 @@ paths:
         required: true
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
+      - $ref: "#/components/parameters/AccessToken"
+      - $ref: "#/components/parameters/ApiKey"      
     post:
       tags:
         - Bag Operations
@@ -236,6 +252,8 @@ paths:
         required: true
       - $ref: "#/components/parameters/RequestId"
       - $ref: "#/components/parameters/TenantId"
+      - $ref: "#/components/parameters/AccessToken"
+      - $ref: "#/components/parameters/ApiKey"      
     post:
       tags:
         - Bag Operations
@@ -248,10 +266,9 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 components:
   schemas:
-    Error:
+    ErrorSchema:
       description: Error Information
       type: object
-      x-go-name: ErrorSchema
       required:
         - description
       properties:
@@ -261,9 +278,8 @@ components:
         additionalInfo:
           type: object
           description: Additional information related to the error
-    Data:
+    DataSchema:
       type: object
-      x-go-name: DataSchema
       properties:
         id:
           type: string
@@ -271,19 +287,18 @@ components:
       type: object
       properties:
         error:
-          $ref: "#/components/schemas/Error"
+          $ref: "#/components/schemas/ErrorSchema"
         data:
-          $ref: "#/components/schemas/Data"
+          $ref: "#/components/schemas/DataSchema"
     DefaultResponseSchema:
       type: object
       properties:
         error:
-          $ref: "#/components/schemas/Error"
+          $ref: "#/components/schemas/ErrorSchema"
         data:
           type: object
     TrackingDetailSchema:
       type: object
-      x-go-name: TrackingDetailSchema
       properties:
         operator:
           type: string
@@ -381,6 +396,20 @@ components:
       schema:
         type: string
       required: true
+    AccessToken:
+      description: COREOS Access token
+      in: header
+      name: X-COREOS-ACCESS
+      schema:
+        type: string
+      required: false
+    ApiKey:
+      description: Service Api key
+      in: header
+      name: X-API-KEY
+      schema:
+        type: string
+      required: false
   requestBodies:
     PackageCreateRequest:
       description: Request consisting attributes to create a new package
@@ -415,7 +444,7 @@ components:
             type: object
             properties:
               error:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/ErrorSchema"
               data:
                 type: object
     GetPackagesResponse:
@@ -426,7 +455,7 @@ components:
             type: object
             properties:
               error:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/ErrorSchema"
               data:
                 type: object
     GetBagsResponse:
@@ -437,7 +466,7 @@ components:
             type: object
             properties:
               error:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/ErrorSchema"
               data:
                 type: object
     GetBagResponse:
@@ -448,6 +477,6 @@ components:
             type: object
             properties:
               error:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/ErrorSchema"
               data:
                 type: object

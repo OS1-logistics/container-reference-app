@@ -37,6 +37,11 @@ openapi-codegen-client:
 ```
 - Run `make openapi-codegen-client` to generate the client code.
 
+### Authorization
+
+Add an APP_API_KEY toekn in the environment variable. This API key needs to be sent in `X-API-KEY` header to all API calls to the service. 
+
+// TODO: Add coreos token authroization by using coreos external authroizer apis in the service middleware
 
 ## Sample App Features 
 

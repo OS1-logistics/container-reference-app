@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 )
 
@@ -10,29 +11,43 @@ var (
 
 func LoadConfig() (*ServiceConfig, error) {
 
+	const (
+		Env             = "ENV"
+		StackBaseUrl    = "STACK_BASE_URL"
+		AppClientId     = "APP_CLIENT_ID"
+		AppClientSecret = "APP_CLIENT_SECRET"
+		AppApiKey       = "APP_API_KEY"
+	)
+
 	ServiceConf = &ServiceConfig{}
-	if _, t := os.LookupEnv("ENV"); t {
-		ServiceConf.Env = os.Getenv("ENV")
+	if _, t := os.LookupEnv(Env); t {
+		ServiceConf.Env = os.Getenv(Env)
 	} else {
-		panic("ENV not set")
+		panic(fmt.Sprintf("Environment variable %s not set", Env))
 	}
 
-	if _, t := os.LookupEnv("STACK_BASE_URL"); t {
-		ServiceConf.StackBaseUrl = os.Getenv("STACK_BASE_URL")
+	if _, t := os.LookupEnv(StackBaseUrl); t {
+		ServiceConf.StackBaseUrl = os.Getenv(StackBaseUrl)
 	} else {
-		panic("STACK_BASE_URL not set")
+		panic(fmt.Sprintf("Environment variable %s not set", AppApiKey))
 	}
 
-	if _, t := os.LookupEnv("APP_CLIENT_ID"); t {
-		ServiceConf.APP.ClientId = os.Getenv("APP_CLIENT_ID")
+	if _, t := os.LookupEnv(AppClientId); t {
+		ServiceConf.APP.ClientId = os.Getenv(AppClientId)
 	} else {
-		panic("APP_CLIENT_ID not set")
+		panic(fmt.Sprintf("Environment variable %s not set", AppClientId))
 	}
 
-	if _, t := os.LookupEnv("APP_CLIENT_SECRET"); t {
-		ServiceConf.APP.ClientSecret = os.Getenv("APP_CLIENT_SECRET")
+	if _, t := os.LookupEnv(AppClientSecret); t {
+		ServiceConf.APP.ClientSecret = os.Getenv(AppClientSecret)
 	} else {
-		panic("APP_CLIENT_SECRET not set")
+		panic(fmt.Sprintf("Environment variable %s not set", AppClientSecret))
+	}
+
+	if _, t := os.LookupEnv(AppApiKey); t {
+		ServiceConf.APP.ApiKey = os.Getenv(AppApiKey)
+	} else {
+		panic(fmt.Sprintf("Environment variable %s not set", AppApiKey))
 	}
 
 	// TODO: use viper to mape enviornment variables/ config yaml to ServiceConf
@@ -48,4 +63,5 @@ type ServiceConfig struct {
 type app struct {
 	ClientId     string
 	ClientSecret string
+	ApiKey       string
 }

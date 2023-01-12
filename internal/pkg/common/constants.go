@@ -4,10 +4,10 @@ type key int
 
 const (
 	AppName                            = "container-reference-app"
-	TenantIDHeaderName                 = "X-Coreos-Tid"
-	RequestIDHeaderName                = "X-Coreos-Request-Id"
-	UserInfoHeaderName                 = "X-Coreos-Userinfo"
-	AcessHeaderName                    = "X-Coreos-Access"
+	TenantIDHeaderName                 = "X-COREOS-TID"
+	RequestIDHeaderName                = "X-COREOS-REQUEST-ID"
+	AcessHeaderName                    = "X-COREOS-ACCESS"
+	ApiKeyHeaderName                   = "X-API-KEY"
 	BasePath                           = "/api/v1"
 	PackageContainerTypeName           = "PackageCsa"
 	BagContainerTypeName               = "BagT"

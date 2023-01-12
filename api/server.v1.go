@@ -27,8 +27,8 @@ func (s ServerV1) InitTenant(c *gin.Context, params api_v1.InitTenantParams) {
 	Response := &api_v1.DefaultResponse{}
 	e := s.ser.Init(params.XCOREOSTENANTID)
 	if e != nil {
-		Response.ErrorSchema = &api_v1.ErrorSchema{}
-		Response.ErrorSchema.Description = e.Error()
+		Response.Error = &api_v1.ErrorSchema{}
+		Response.Error.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
@@ -42,8 +42,8 @@ func (s ServerV1) GetPackage(c *gin.Context, packageId string, params api_v1.Get
 	r, e := s.ser.GetPackage(params.XCOREOSTENANTID, packageId)
 	if e != nil {
 		Response := &api_v1.CreatedResponse{}
-		Response.ErrorSchema = &api_v1.ErrorSchema{}
-		Response.ErrorSchema.Description = e.Error()
+		Response.Error = &api_v1.ErrorSchema{}
+		Response.Error.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
@@ -56,8 +56,8 @@ func (s ServerV1) GetPackages(c *gin.Context, params api_v1.GetPackagesParams) {
 	r, e := s.ser.GetPackages(params.XCOREOSTENANTID)
 	if e != nil {
 		Response := &api_v1.CreatedResponse{}
-		Response.ErrorSchema = &api_v1.ErrorSchema{}
-		Response.ErrorSchema.Description = e.Error()
+		Response.Error = &api_v1.ErrorSchema{}
+		Response.Error.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
@@ -74,14 +74,14 @@ func (s ServerV1) CreatePackage(c *gin.Context, params api_v1.CreatePackageParam
 	json.Unmarshal([]byte(buf.String()), &r)
 	id, e := s.ser.CreatePackage(params.XCOREOSTENANTID, r)
 	if e != nil {
-		Response.ErrorSchema = &api_v1.ErrorSchema{}
-		Response.ErrorSchema.Description = e.Error()
+		Response.Error = &api_v1.ErrorSchema{}
+		Response.Error.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
 
-	Response.DataSchema = &api_v1.DataSchema{}
-	Response.DataSchema.Id = id
+	Response.Data = &api_v1.DataSchema{}
+	Response.Data.Id = id
 	c.JSON(http.StatusAccepted, Response)
 }
 
@@ -90,8 +90,8 @@ func (s ServerV1) ChangePackageState(c *gin.Context, packageId string, command s
 
 	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, packageId, command, common.PackageContainerTypeName)
 	if e != nil {
-		Response.ErrorSchema = &api_v1.ErrorSchema{}
-		Response.ErrorSchema.Description = e.Error()
+		Response.Error = &api_v1.ErrorSchema{}
+		Response.Error.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
@@ -106,8 +106,8 @@ func (s ServerV1) GetBag(c *gin.Context, bagId string, params api_v1.GetBagParam
 	r, e := s.ser.GetBag(params.XCOREOSTENANTID, bagId)
 	if e != nil {
 		Response := &api_v1.CreatedResponse{}
-		Response.ErrorSchema = &api_v1.ErrorSchema{}
-		Response.ErrorSchema.Description = e.Error()
+		Response.Error = &api_v1.ErrorSchema{}
+		Response.Error.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
@@ -121,8 +121,8 @@ func (s ServerV1) GetBags(c *gin.Context, params api_v1.GetBagsParams) {
 	r, e := s.ser.GetBags(params.XCOREOSTENANTID)
 	if e != nil {
 		Response := &api_v1.CreatedResponse{}
-		Response.ErrorSchema = &api_v1.ErrorSchema{}
-		Response.ErrorSchema.Description = e.Error()
+		Response.Error = &api_v1.ErrorSchema{}
+		Response.Error.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
@@ -140,14 +140,14 @@ func (s ServerV1) CreateBag(c *gin.Context, params api_v1.CreateBagParams) {
 	json.Unmarshal([]byte(buf.String()), &r)
 	id, e := s.ser.CreateBag(params.XCOREOSTENANTID, r)
 	if e != nil {
-		Response.ErrorSchema = &api_v1.ErrorSchema{}
-		Response.ErrorSchema.Description = e.Error()
+		Response.Error = &api_v1.ErrorSchema{}
+		Response.Error.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
 
-	Response.DataSchema = &api_v1.DataSchema{}
-	Response.DataSchema.Id = id
+	Response.Data = &api_v1.DataSchema{}
+	Response.Data.Id = id
 	c.JSON(http.StatusAccepted, Response)
 
 }
@@ -156,8 +156,8 @@ func (s ServerV1) ChangeBagState(c *gin.Context, bagId string, command string, p
 	Response := &api_v1.DefaultResponse{}
 	e := s.ser.UpdateContainerState(params.XCOREOSTENANTID, bagId, command, common.BagContainerTypeName)
 	if e != nil {
-		Response.ErrorSchema = &api_v1.ErrorSchema{}
-		Response.ErrorSchema.Description = e.Error()
+		Response.Error = &api_v1.ErrorSchema{}
+		Response.Error.Description = e.Error()
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
@@ -169,7 +169,7 @@ func (s ServerV1) AddPackageToBag(c *gin.Context, bagId string, packageId string
 	Response := &api_v1.DefaultResponse{}
 	e := s.ser.ContainerizeOperations(params.XCOREOSTENANTID, bagId, packageId, common.CONTAINER_OPERATION_CONTAINERIZE)
 	if e != nil {
-		Response.ErrorSchema = e
+		Response.Error = e
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
@@ -181,7 +181,7 @@ func (s ServerV1) RemovePackageFromBag(c *gin.Context, bagId string, packageId s
 	Response := &api_v1.DefaultResponse{}
 	e := s.ser.ContainerizeOperations(params.XCOREOSTENANTID, bagId, packageId, common.CONTAINER_OPERATION_DECONTAINERIZE)
 	if e != nil {
-		Response.ErrorSchema = e
+		Response.Error = e
 		c.JSON(http.StatusInternalServerError, Response)
 		return
 	}
