@@ -55,6 +55,8 @@ This is the default authorization mechanism. This authorization is activated whe
 
 ## Sample App Features 
 
+![image](https://user-images.githubusercontent.com/102122264/213291929-b62fbcd9-6932-4ac2-a15b-695843b12d9a.png)
+
 ### Ability to initialize the tenant with container types
 
 The server is initialized with a list of container types that it needs to create for the service to operate. As part of this reference app, we are creating two container types `Package` and `Bag`.
