@@ -6,6 +6,7 @@ import (
 	"github.com/golang/glog"
 	config "github.com/os1-logistics/container-reference-app/configs"
 	aaa "github.com/os1-logistics/container-reference-app/internal/pkg/domain/aaa"
+	authorizer "github.com/os1-logistics/container-reference-app/internal/pkg/domain/authorizer"
 	container "github.com/os1-logistics/container-reference-app/internal/pkg/domain/container"
 )
 
@@ -15,6 +16,14 @@ func NewAAAClient(tenantId string) *aaa.APIClient {
 	cfg.Host = fmt.Sprintf("%s.%s", tenantId, config.ServiceConf.StackBaseUrl)
 	cfg.Scheme = "https"
 	return aaa.NewAPIClient(cfg)
+}
+
+func NewAuthorizerClient(tenantId string) *authorizer.APIClient {
+	glog.Info("NewAuthorizerClient: config.ServiceConf.StackBaseUrl ", config.ServiceConf.StackBaseUrl)
+	cfg := authorizer.NewConfiguration()
+	cfg.Host = fmt.Sprintf("%s.%s", tenantId, config.ServiceConf.StackBaseUrl)
+	cfg.Scheme = "https"
+	return authorizer.NewAPIClient(cfg)
 }
 
 func NewContainerClient(tenantId string) *container.APIClient {

@@ -1,0 +1,281 @@
+openapi: 3.0.3
+info:
+  title: AAA - External Authorizer
+  description:
+    This swagger documentation provides all Authorization api details. External Authorizer
+    service provides authentication and authorization capabilities for users and machines.
+  license:
+    name: License
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: https://{tenantSubdomain}.fxtrt.io/core/api/v1/ext-auth
+    variables:
+      tenantSubdomain:
+        default: delhivery.dev
+        description: Subdomain assigned to the tenant
+paths:
+  /token/validate:
+    post:
+      tags:
+        - Authorization
+      operationId: validateToken
+      summary: Validate the input token.
+      description: "This endpoint authorizes the input request. If the token is valid and it has valid permissions to access the specified method then it returns the success response."
+      parameters:
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/OriginAppToken"
+        - $ref: "#/components/parameters/RequestId"
+      # requestBody:
+      #   $ref: "#/components/requestBodies/AuthorizationRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessAuthResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+  /token/authorize:
+    post:
+      tags:
+        - Authorization
+      operationId: authorizeToken
+      summary: Authorizes the input request.
+      description: "This endpoint validates the input token. Tokens should be parsed and validated in regular web, native, and single-page applications to make sure the token isn’t compromised and the signature is authentic. Tokens should be verified to decrease security risks if the token has been, for example, tampered with, misused, or has expired. JWT validation checks the structure, claims, and signature to assure the least amount of risk."
+      parameters:
+        - $ref: "#/components/parameters/TenantId"
+        - $ref: "#/components/parameters/AccessToken"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/AuthenticationToken"
+        - $ref: "#/components/parameters/OriginAppToken"
+      requestBody:
+        $ref: "#/components/requestBodies/AuthorizationRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SuccessAuthResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestErrorResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedErrorResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenErrorResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableErrorResponse"
+components:
+  schemas:
+    AuthorizationRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - path
+        - method
+      properties:
+        path:
+          type: string
+        method:
+          type: string
+          enum:
+            - get
+            - put
+            - post
+            - delete
+            - patch
+    Error:
+      description: Information of error occurred during operation
+      type: object
+      properties:
+        code:
+          type: string
+          description:
+            12 digits long code that is assigned to each error. It contains
+            service code, method code and error code.
+        description:
+          type: string
+          description: Error description that provides summary of error.
+        additionalInfo:
+          type: object
+          description: Additional information related to the error.
+    Request:
+      type: object
+      properties:
+        uri:
+          description: The API end point where the request was received
+          type: string
+        method:
+          description: HTTP method requested on the API endpoint
+          type: string
+          enum:
+            - POST
+            - GET
+            - PUT
+            - DELETE
+        queryString:
+          description: Query string received by the server
+          type: string
+        body:
+          description: Request body data received by the server
+          type: object
+    SuccessAuthResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            response:
+              type: string
+              description: Status of operation.
+              enum:
+                - success
+        error:
+          $ref: "#/components/schemas/Error"
+        request:
+          $ref: "#/components/schemas/Request"
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/Error"
+        request:
+          $ref: "#/components/schemas/Request"
+  requestBodies:
+    AuthorizationRequest:
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthorizationRequest"
+  responses:
+    SuccessAuthResponse:
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request id that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SuccessAuthResponse"
+    BadRequestErrorResponse:
+      description: Bad request - The server is unable to process the request due to something that is perceived to be a client error
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request id that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    UnauthorizedErrorResponse:
+      description: Unauthorized -  The client's identity is unknown to the server. Verify that you are accessing the correct tenant and that your client ID and client secret are valid on that tenant.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request id that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          example:
+            error:
+              code: "401"
+              description: Expired token.
+              additionalInfo:
+            request:
+              url: "/core/api/v1/ext-auth"
+              method: GET
+              queryString: ?name=example
+              body: null
+
+    ForbiddenErrorResponse:
+      description: Forbidden - The client's identity is known to the server, but it does not have access rights to the requested resource. Verify that you're using the correct client ID and client secret or grant the client the necessary roles to access the resource.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request id that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          example:
+            error:
+              code: "403"
+              description: Insufficient Permissions.
+              additionalInfo:
+            request:
+              url: "/core/api/v1/ext-auth"
+              method: GET
+              queryString: ?name=example
+              body: null
+    NotFoundErrorResponse:
+      description: Not found - The server can not find the requested resource.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request id that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    ServiceUnavailableErrorResponse:
+      description: Server error - The server is not ready to handle the request. This could be due to maintenance downtime or system resource constraints.
+      headers:
+        X-COREOS-REQUEST-ID:
+          schema:
+            type: string
+          description: Unique request id that was passed as header parameter in the request.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+  parameters:
+    RequestId:
+      description: Unique request id
+      in: header
+      name: X-Coreos-Request-Id
+      schema:
+        type: string
+      required: true
+    AccessToken:
+      description: core-os access token
+      in: header
+      name: X-Coreos-Access
+      schema:
+        type: string
+      required: true
+    AuthenticationToken:
+      description: core-os authentication token
+      in: header
+      name: X-Coreos-Auth
+      schema:
+        type: string
+      required: false
+    OriginAppToken:
+      description: Token sent from originating app requesting access.
+      in: header
+      name: X-Coreos-Origin-Token
+      schema:
+        type: string
+      required: false
+    TenantId:
+      description: Tenant id
+      in: header
+      name: X-COREOS-TID
+      schema:
+        type: string
+      required: TRUE

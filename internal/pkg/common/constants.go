@@ -3,12 +3,13 @@ package common
 type key int
 
 const (
-	AppName                            = "container-reference-app"
-	TenantIDHeaderName                 = "X-COREOS-TID"
+	TenantIDHeaderName                 = "X-COREOS-TENANT-ID"
 	RequestIDHeaderName                = "X-COREOS-REQUEST-ID"
 	AcessHeaderName                    = "X-COREOS-ACCESS"
+	UserInfoHeaderName                 = "X-COREOS-USERINFO"
 	ApiKeyHeaderName                   = "X-API-KEY"
 	BasePath                           = "/api/v1"
+	OS1AuthBasePath                    = "/core/api/v1/ext-auth/token/validate"
 	PackageContainerTypeName           = "PackageCsa"
 	BagContainerTypeName               = "BagT"
 	CONTAINER_OPERATION_CONTAINERIZE   = "CONTAINERIZE"

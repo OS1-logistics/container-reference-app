@@ -10,6 +10,7 @@ import (
 
 	"github.com/golang/glog"
 	api_v1 "github.com/os1-logistics/container-reference-app/api/v1"
+	config "github.com/os1-logistics/container-reference-app/configs"
 	inits "github.com/os1-logistics/container-reference-app/init"
 	"github.com/os1-logistics/container-reference-app/internal/pkg/common"
 	domain "github.com/os1-logistics/container-reference-app/internal/pkg/domain"
@@ -297,9 +298,9 @@ func (s Service) UpdateContainerState(tenantId string, containerId string, comma
 		Timestamp:  int32(time.Now().UTC().UnixMicro()),
 		Data:       map[string]interface{}{},
 		Source: containerdomain.EventSource{
-			AppId:  common.AppName,
+			AppId:  config.ServiceConf.APP.AppId,
 			UserId: containerdomain.PtrString("1234"),
-			LocId:  containerdomain.PtrString("1234"),
+			LocId:  containerdomain.PtrString("default"),
 		},
 	}
 
