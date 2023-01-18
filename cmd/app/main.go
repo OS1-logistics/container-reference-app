@@ -41,6 +41,7 @@ func main() {
 	r.Use(gin.Recovery())
 	r.Use(api.CORS())
 	r.Use(api.Authorize)
+	r.Use(api.ContextMiddlewareToken)
 
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"message": "ok"})

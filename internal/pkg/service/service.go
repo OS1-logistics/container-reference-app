@@ -43,23 +43,26 @@ func getErrorResponse(inputBuff *io.ReadCloser) *containerdomain.ErrorResponse {
 	return &r
 }
 
-func (s Service) Init(tenantId string) error {
-	e := inits.Initialize(tenantId)
+func (s Service) Init(ctx context.Context) error {
+	e := inits.Initialize(ctx, ctx.Value(common.ContextTenantId).(string))
 	if e != nil {
 		return e
 	}
 	return nil
 }
 
-func (s Service) GetPackage(tenantId string, packageId string) (*api_v1.GetPackageResponse, error) {
-	token, _ := domain.GetToken(tenantId)
-	ctx := context.Background()
+func (s Service) GetPackage(ctx context.Context, packageId string) (*api_v1.GetPackageResponse, error) {
+	tenantId := ctx.Value(common.ContextTenantId).(string)
+	token := ctx.Value(common.ContextMiddlewareAccessToken).(string)
+	requestId := ctx.Value(common.ContextRequestID).(string)
+	userinfo := ctx.Value(common.ContextUserinfo).(string)
+
 	ApiGetContainerByIdRequest := domain.NewContainerClient(tenantId).ContainerApi.
 		GetContainerById(ctx, packageId, common.PackageContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID(common.UUIDv4()).
-		XCOREOSUSERINFO("1234")
+		XCOREOSREQUESTID(requestId).
+		XCOREOSUSERINFO(userinfo)
 
 	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.GetContainerByIdExecute(ApiGetContainerByIdRequest)
 
@@ -81,16 +84,18 @@ func (s Service) GetPackage(tenantId string, packageId string) (*api_v1.GetPacka
 
 }
 
-func (s Service) GetPackages(tenantId string) (*api_v1.GetPackagesResponse, error) {
+func (s Service) GetPackages(ctx context.Context) (*api_v1.GetPackagesResponse, error) {
+	tenantId := ctx.Value(common.ContextTenantId).(string)
+	token := ctx.Value(common.ContextMiddlewareAccessToken).(string)
+	requestId := ctx.Value(common.ContextRequestID).(string)
+	userinfo := ctx.Value(common.ContextUserinfo).(string)
 
-	token, _ := domain.GetToken(tenantId)
-	ctx := context.Background()
 	ApiGetContainersRequest := domain.NewContainerClient(tenantId).ContainerApi.
 		GetContainers(ctx, common.PackageContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID(common.UUIDv4()).
-		XCOREOSUSERINFO("1234")
+		XCOREOSREQUESTID(requestId).
+		XCOREOSUSERINFO(userinfo)
 
 	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.GetContainersExecute(ApiGetContainersRequest)
 
@@ -111,10 +116,11 @@ func (s Service) GetPackages(tenantId string) (*api_v1.GetPackagesResponse, erro
 
 }
 
-func (s Service) CreatePackage(tenantId string, request api_v1.CreatePackageJSONRequestBody) (*string, error) {
-
-	token, _ := domain.GetToken(tenantId)
-	ctx := context.Background()
+func (s Service) CreatePackage(ctx context.Context, request api_v1.CreatePackageJSONRequestBody) (*string, error) {
+	tenantId := ctx.Value(common.ContextTenantId).(string)
+	token := ctx.Value(common.ContextMiddlewareAccessToken).(string)
+	requestId := ctx.Value(common.ContextRequestID).(string)
+	userinfo := ctx.Value(common.ContextUserinfo).(string)
 
 	containerCreateRequest := containerdomain.ContainerCreateRequest{
 		ScannableId:       *request.ScannableId,
@@ -142,8 +148,8 @@ func (s Service) CreatePackage(tenantId string, request api_v1.CreatePackageJSON
 		XCOREOSACCESS(token).
 		XCOREOSORIGINTOKEN(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID(common.UUIDv4()).
-		XCOREOSUSERINFO("1234").
+		XCOREOSREQUESTID(requestId).
+		XCOREOSUSERINFO(userinfo).
 		ContainerCreateRequest(containerCreateRequest)
 
 	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.CreateContainerExecute(ApiCreateContainerRequest)
@@ -163,10 +169,11 @@ func (s Service) CreatePackage(tenantId string, request api_v1.CreatePackageJSON
 
 // bag
 
-func (s Service) CreateBag(tenantId string, request api_v1.CreateBagJSONRequestBody) (*string, error) {
-
-	token, _ := domain.GetToken(tenantId)
-	ctx := context.Background()
+func (s Service) CreateBag(ctx context.Context, request api_v1.CreateBagJSONRequestBody) (*string, error) {
+	tenantId := ctx.Value(common.ContextTenantId).(string)
+	token := ctx.Value(common.ContextMiddlewareAccessToken).(string)
+	requestId := ctx.Value(common.ContextRequestID).(string)
+	userinfo := ctx.Value(common.ContextUserinfo).(string)
 
 	containerCreateRequest := containerdomain.ContainerCreateRequest{
 		ScannableId:       *request.ScannableId,
@@ -195,8 +202,8 @@ func (s Service) CreateBag(tenantId string, request api_v1.CreateBagJSONRequestB
 		XCOREOSACCESS(token).
 		XCOREOSORIGINTOKEN(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID(common.UUIDv4()).
-		XCOREOSUSERINFO("1234").
+		XCOREOSREQUESTID(requestId).
+		XCOREOSUSERINFO(userinfo).
 		ContainerCreateRequest(containerCreateRequest)
 
 	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.CreateContainerExecute(ApiCreateContainerRequest)
@@ -213,15 +220,18 @@ func (s Service) CreateBag(tenantId string, request api_v1.CreateBagJSONRequestB
 	return nil, e
 }
 
-func (s Service) GetBag(tenantId string, bagId string) (*api_v1.GetBagResponse, error) {
-	token, _ := domain.GetToken(tenantId)
-	ctx := context.Background()
+func (s Service) GetBag(ctx context.Context, bagId string) (*api_v1.GetBagResponse, error) {
+	tenantId := ctx.Value(common.ContextTenantId).(string)
+	token := ctx.Value(common.ContextMiddlewareAccessToken).(string)
+	requestId := ctx.Value(common.ContextRequestID).(string)
+	userinfo := ctx.Value(common.ContextUserinfo).(string)
+
 	ApiGetContainerByIdRequest := domain.NewContainerClient(tenantId).ContainerApi.
 		GetContainerById(ctx, bagId, common.BagContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID(common.UUIDv4()).
-		XCOREOSUSERINFO("1234")
+		XCOREOSREQUESTID(requestId).
+		XCOREOSUSERINFO(userinfo)
 
 	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.GetContainerByIdExecute(ApiGetContainerByIdRequest)
 
@@ -241,16 +251,18 @@ func (s Service) GetBag(tenantId string, bagId string) (*api_v1.GetBagResponse, 
 
 }
 
-func (s Service) GetBags(tenantId string) (*api_v1.GetBagsResponse, error) {
+func (s Service) GetBags(ctx context.Context) (*api_v1.GetBagsResponse, error) {
+	tenantId := ctx.Value(common.ContextTenantId).(string)
+	token := ctx.Value(common.ContextMiddlewareAccessToken).(string)
+	requestId := ctx.Value(common.ContextRequestID).(string)
+	userinfo := ctx.Value(common.ContextUserinfo).(string)
 
-	token, _ := domain.GetToken(tenantId)
-	ctx := context.Background()
 	ApiGetContainersRequest := domain.NewContainerClient(tenantId).ContainerApi.
 		GetContainers(ctx, common.BagContainerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID(common.UUIDv4()).
-		XCOREOSUSERINFO("1234")
+		XCOREOSREQUESTID(requestId).
+		XCOREOSUSERINFO(userinfo)
 
 	d, r, e := domain.NewContainerClient(tenantId).ContainerApi.GetContainersExecute(ApiGetContainersRequest)
 
@@ -273,7 +285,12 @@ func (s Service) GetBags(tenantId string) (*api_v1.GetBagsResponse, error) {
 }
 
 // container operations
-func (s Service) UpdateContainerState(tenantId string, containerId string, command string, containerTypeName string) error {
+func (s Service) UpdateContainerState(ctx context.Context, containerId string, command string, containerTypeName string) error {
+
+	tenantId := ctx.Value(common.ContextTenantId).(string)
+	token := ctx.Value(common.ContextMiddlewareAccessToken).(string)
+	requestId := ctx.Value(common.ContextRequestID).(string)
+	userinfo := ctx.Value(common.ContextUserinfo).(string)
 
 	var operation *common.ContainerStateOperation = nil
 
@@ -288,9 +305,6 @@ func (s Service) UpdateContainerState(tenantId string, containerId string, comma
 	} else {
 		return fmt.Errorf("Command %s is not supported", command)
 	}
-
-	token, _ := domain.GetToken(tenantId)
-	ctx := context.Background()
 
 	containerStateUpdateRequest := containerdomain.ContainerStateUpdateRequest{
 		EventCode:  operation.EventCode,
@@ -308,8 +322,8 @@ func (s Service) UpdateContainerState(tenantId string, containerId string, comma
 		UpdateContainerState(ctx, containerId, containerTypeName).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID(common.UUIDv4()).
-		XCOREOSUSERINFO("1234").
+		XCOREOSREQUESTID(requestId).
+		XCOREOSUSERINFO(userinfo).
 		ContainerStateUpdateRequest(containerStateUpdateRequest)
 
 	_, r, e := domain.NewContainerClient(tenantId).ContainerStateApi.UpdateContainerStateExecute(apiUpdateContainerStateRequest)
@@ -328,11 +342,11 @@ func (s Service) UpdateContainerState(tenantId string, containerId string, comma
 
 // containerize / decontainerize operations
 
-func (s Service) ContainerizeOperations(tenantId string, parentId string, containerId string, operation string) *api_v1.ErrorSchema {
-	glog.Info("parent: ", parentId)
-	glog.Info("child: ", containerId)
-	token, _ := domain.GetToken(tenantId)
-	ctx := context.Background()
+func (s Service) ContainerizeOperations(ctx context.Context, parentId string, containerId string, operation string) *api_v1.ErrorSchema {
+	tenantId := ctx.Value(common.ContextTenantId).(string)
+	token := ctx.Value(common.ContextMiddlewareAccessToken).(string)
+	requestId := ctx.Value(common.ContextRequestID).(string)
+	userinfo := ctx.Value(common.ContextUserinfo).(string)
 
 	ParentIdRequest := containerdomain.ParentIdRequest{
 		ParentId: parentId,
@@ -343,8 +357,8 @@ func (s Service) ContainerizeOperations(tenantId string, parentId string, contai
 		ContainerizeContainerById(ctx, containerId).
 		XCOREOSACCESS(token).
 		XCOREOSTID(tenantId).
-		XCOREOSREQUESTID(common.UUIDv4()).
-		XCOREOSUSERINFO("1234").
+		XCOREOSREQUESTID(requestId).
+		XCOREOSUSERINFO(userinfo).
 		ParentIdRequest(ParentIdRequest)
 
 	_, r, e := domain.NewContainerClient(tenantId).ContainerApi.ContainerizeContainerByIdExecute(apiContainerizeRequest)

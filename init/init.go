@@ -21,22 +21,22 @@ func getErrorResponse(inputBuff *io.ReadCloser) containerdomain.ErrorResponse {
 	return r
 }
 
-func Initialize(tenantId string) error {
+func Initialize(ctx context.Context, tenantId string) error {
 
 	glog.Info("Initializing the application with container types")
 
 	containerClient := domain.NewContainerClient(tenantId)
-	ctx := context.Background()
-
-	token, _ := domain.GetToken(tenantId)
+	requestId := ctx.Value(common.ContextRequestID).(string)
+	token := ctx.Value(common.ContextMiddlewareAccessToken).(string)
+	userinfo := ctx.Value(common.ContextUserinfo).(string)
 
 	// Package type
 
-	getContainerTypeRequest1 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, common.PackageContainerTypeName)
-	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSACCESS(token)
-	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSTID(tenantId)
-	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSREQUESTID(common.UUIDv4())
-	getContainerTypeRequest1 = getContainerTypeRequest1.XCOREOSUSERINFO("1234")
+	getContainerTypeRequest1 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, common.PackageContainerTypeName).
+		XCOREOSACCESS(token).
+		XCOREOSTID(tenantId).
+		XCOREOSREQUESTID(requestId).
+		XCOREOSUSERINFO(userinfo)
 
 	_, getresponse1, _ := containerClient.ContainerTypeApi.GetContainerTypeByIdExecute(getContainerTypeRequest1)
 
@@ -45,11 +45,11 @@ func Initialize(tenantId string) error {
 		// The container type you are searching/updating undefined doesnt exists
 		if getErrResponse.Error.Code == "100920043304" {
 			// create container type PackageCsa
-			containerTypeRequest := containerClient.ContainerTypeApi.CreateContainerType(ctx)
-			containerTypeRequest = containerTypeRequest.XCOREOSACCESS(token)
-			containerTypeRequest = containerTypeRequest.XCOREOSTID(tenantId)
-			containerTypeRequest = containerTypeRequest.XCOREOSREQUESTID(common.UUIDv4())
-			containerTypeRequest = containerTypeRequest.XCOREOSUSERINFO("1234")
+			containerTypeRequest := containerClient.ContainerTypeApi.CreateContainerType(ctx).
+				XCOREOSACCESS(token).
+				XCOREOSTID(tenantId).
+				XCOREOSREQUESTID(requestId).
+				XCOREOSUSERINFO("1234")
 
 			PackageCsaContainerTypeCreateRequest := containerdomain.ContainerTypeCreateRequest{
 				Name:   common.PackageContainerTypeName,
@@ -75,12 +75,12 @@ func Initialize(tenantId string) error {
 	glog.Info("====================PackageCsa Type Created Idempotently=====================")
 
 	glog.Info("====================Create PackageCsa Type attributes=====================")
-	ApiUpdateAttributesConfigRequest := containerClient.ContainerTypeAttributesConfigApi.UpdateAttributesConfig(ctx, common.PackageContainerTypeName)
-	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSACCESS(token)
-	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSORIGINTOKEN(token)
-	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSTID(tenantId)
-	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSREQUESTID(common.UUIDv4())
-	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSUSERINFO("1234")
+	ApiUpdateAttributesConfigRequest := containerClient.ContainerTypeAttributesConfigApi.UpdateAttributesConfig(ctx, common.PackageContainerTypeName).
+		XCOREOSACCESS(token).
+		XCOREOSORIGINTOKEN(token).
+		XCOREOSTID(tenantId).
+		XCOREOSREQUESTID(requestId).
+		XCOREOSUSERINFO(userinfo)
 
 	attributesConfigUpdateRequest := containerdomain.AttributesConfigUpdateRequest{
 		Attributes: []containerdomain.AttributeConfig{
@@ -209,11 +209,11 @@ func Initialize(tenantId string) error {
 
 	// Bag type
 
-	getContainerTypeRequest2 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, common.BagContainerTypeName)
-	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSACCESS(token)
-	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSTID(tenantId)
-	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSREQUESTID(common.UUIDv4())
-	getContainerTypeRequest2 = getContainerTypeRequest2.XCOREOSUSERINFO("1234")
+	getContainerTypeRequest2 := containerClient.ContainerTypeApi.GetContainerTypeById(ctx, common.BagContainerTypeName).
+		XCOREOSACCESS(token).
+		XCOREOSTID(tenantId).
+		XCOREOSREQUESTID(requestId).
+		XCOREOSUSERINFO(userinfo)
 
 	_, getresponse2, _ := containerClient.ContainerTypeApi.GetContainerTypeByIdExecute(getContainerTypeRequest2)
 
@@ -221,11 +221,11 @@ func Initialize(tenantId string) error {
 		errResponse := getErrorResponse(&getresponse2.Body)
 		if errResponse.Error.Description == "The container type you are searching/updating undefined doesnt exists" {
 			// create container type BagCsa
-			containerTypeRequest := containerClient.ContainerTypeApi.CreateContainerType(ctx)
-			containerTypeRequest = containerTypeRequest.XCOREOSACCESS(token)
-			containerTypeRequest = containerTypeRequest.XCOREOSTID(tenantId)
-			containerTypeRequest = containerTypeRequest.XCOREOSREQUESTID(common.UUIDv4())
-			containerTypeRequest = containerTypeRequest.XCOREOSUSERINFO("1234")
+			containerTypeRequest := containerClient.ContainerTypeApi.CreateContainerType(ctx).
+				XCOREOSACCESS(token).
+				XCOREOSTID(tenantId).
+				XCOREOSREQUESTID(requestId).
+				XCOREOSUSERINFO(userinfo)
 
 			BagContainerTypeCreateRequest := containerdomain.ContainerTypeCreateRequest{
 				Name:   common.BagContainerTypeName,
@@ -257,7 +257,7 @@ func Initialize(tenantId string) error {
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSACCESS(token)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSORIGINTOKEN(token)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSTID(tenantId)
-	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSREQUESTID(common.UUIDv4())
+	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSREQUESTID(requestId)
 	ApiUpdateAttributesConfigRequest = ApiUpdateAttributesConfigRequest.XCOREOSUSERINFO("1234")
 
 	attributesConfigUpdateRequest = containerdomain.AttributesConfigUpdateRequest{

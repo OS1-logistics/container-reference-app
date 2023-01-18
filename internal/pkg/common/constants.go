@@ -14,6 +14,10 @@ const (
 	BagContainerTypeName               = "BagT"
 	CONTAINER_OPERATION_CONTAINERIZE   = "CONTAINERIZE"
 	CONTAINER_OPERATION_DECONTAINERIZE = "DECONTAINERIZE"
+	ContextTenantId                    = "tenantId"
+	ContextUserinfo                    = "userinfo"
+	ContextRequestID                   = "requestId"
+	ContextMiddlewareAccessToken       = "middlewareAccessToken"
 )
 
 type ContainerStateOperation struct {

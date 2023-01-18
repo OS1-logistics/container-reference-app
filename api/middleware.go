@@ -1,9 +1,6 @@
 package api
 
 import (
-	"encoding/base64"
-	"encoding/json"
-
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
 	config "github.com/os1-logistics/container-reference-app/configs"
@@ -29,13 +26,18 @@ func CORS() gin.HandlerFunc {
 }
 
 func Authorize(c *gin.Context) {
-
 	glog.Info("Authenticating request")
 	tenantId := c.Request.Header.Get(common.TenantIDHeaderName)
+	requestId := c.Request.Header.Get(common.RequestIDHeaderName)
 	apiKey := c.Request.Header.Get(common.ApiKeyHeaderName)
+
 	user := Userinfo{}
 	user.AppID = config.ServiceConf.APP.AppId
 	user.Name = config.ServiceConf.APP.AppName
+
+	c.Set(common.ContextTenantId, tenantId)
+	c.Set(common.ContextUserinfo, user)
+	c.Set(common.ContextRequestID, requestId)
 
 	if apiKey != "" {
 		if apiKey == config.ServiceConf.APP.ApiKey {
@@ -78,23 +80,21 @@ func Authorize(c *gin.Context) {
 
 }
 
-func decodeJWT(token string) *JWTTokenSchema {
-	data, err := base64.StdEncoding.DecodeString(token)
+func ContextMiddlewareToken(c *gin.Context) {
+	tenantId := c.GetString(common.ContextTenantId)
+	token, err := domain.GetToken(tenantId)
 	if err != nil {
-		glog.Info("Error in decoding token", err)
+		glog.Error(err)
+		c.JSON(500, gin.H{"error": "Error Generating middleware token"})
+		c.Abort()
+		return
 	}
-	jwtToken := new(JWTTokenSchema)
-	json.Unmarshal(data, &jwtToken)
-	return jwtToken
+	c.Set(common.ContextMiddlewareAccessToken, token)
+	c.Next()
 }
 
 type Userinfo struct {
 	ID    string `json:"id,omitempty"`
 	Name  string `json:"name,omitempty"`
 	AppID string `json:"appID,omitempty"`
-}
-
-type JWTTokenSchema struct {
-	Sub string `json:"sub,omitempty"`
-	Aud string `json:"aud,omitempty"`
 }
