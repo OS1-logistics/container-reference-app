@@ -19,7 +19,7 @@ func GetToken(tenantId string) (string, error) {
 		tenantId = "alpha"
 	}
 
-	tenantTokenKey := fmt.Sprintf("%s:%s:os1:token", common.AppName, tenantId)
+	tenantTokenKey := fmt.Sprintf("%s:%s:os1:token", config.ServiceConf.APP.AppName, tenantId)
 	token, isPresent := cache.ServiceCache.Get(tenantTokenKey)
 	if isPresent && token != nil {
 		glog.Info("Token found in cache")

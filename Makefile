@@ -4,7 +4,8 @@ openapi-codegen-server:
 openapi-codegen-client:
 	openapi-generator generate -g go -i internal/pkg/domain/openapi-spec/api__v2_container-api.yaml -o internal/pkg/domain/container -p packageName=containerdomain -p enumClassPrefix=true --global-property skipFormModel=false,modelDocs=false,apiTests=false,apiDocs=false
 	openapi-generator generate -g go -i internal/pkg/domain/openapi-spec/api__v1_aaa-api.yaml -o internal/pkg/domain/aaa -p packageName=aaadomain -p enumClassPrefix=true --global-property skipFormModel=false,modelTests=false,modelDocs=false,apiTests=false,apiDocs=false
- 
+	openapi-generator generate -g go -i internal/pkg/domain/openapi-spec/api__v1_external-authorizer.yaml -o internal/pkg/domain/authorizer -p packageName=authorizerdomain -p enumClassPrefix=true --global-property skipFormModel=false,modelTests=false,modelDocs=false,apiTests=false,apiDocs=false
+
 .PHONY: install
 install:
 	@brew install openapi-generator

@@ -14,6 +14,8 @@ func LoadConfig() (*ServiceConfig, error) {
 	const (
 		Env             = "ENV"
 		StackBaseUrl    = "STACK_BASE_URL"
+		AppName         = "APP_NAME"
+		AppId           = "APP_ID"
 		AppClientId     = "APP_CLIENT_ID"
 		AppClientSecret = "APP_CLIENT_SECRET"
 		AppApiKey       = "APP_API_KEY"
@@ -30,6 +32,18 @@ func LoadConfig() (*ServiceConfig, error) {
 		ServiceConf.StackBaseUrl = os.Getenv(StackBaseUrl)
 	} else {
 		panic(fmt.Sprintf("Environment variable %s not set", AppApiKey))
+	}
+
+	if _, t := os.LookupEnv(AppName); t {
+		ServiceConf.APP.AppName = os.Getenv(AppName)
+	} else {
+		panic(fmt.Sprintf("Environment variable %s not set", AppName))
+	}
+
+	if _, t := os.LookupEnv(AppId); t {
+		ServiceConf.APP.AppId = os.Getenv(AppId)
+	} else {
+		panic(fmt.Sprintf("Environment variable %s not set", AppId))
 	}
 
 	if _, t := os.LookupEnv(AppClientId); t {
@@ -61,6 +75,8 @@ type ServiceConfig struct {
 }
 
 type app struct {
+	AppName      string
+	AppId        string
 	ClientId     string
 	ClientSecret string
 	ApiKey       string

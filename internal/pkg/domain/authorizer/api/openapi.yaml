@@ -1,0 +1,614 @@
+openapi: 3.0.3
+info:
+  description: This swagger documentation provides all Authorization api details.
+    External Authorizer service provides authentication and authorization capabilities
+    for users and machines.
+  license:
+    name: License
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: AAA - External Authorizer
+  version: 1.0.0
+servers:
+- url: "https://{tenantSubdomain}.fxtrt.io/core/api/v1/ext-auth"
+  variables:
+    tenantSubdomain:
+      default: delhivery.dev
+      description: Subdomain assigned to the tenant
+paths:
+  /token/validate:
+    post:
+      description: This endpoint authorizes the input request. If the token is valid
+        and it has valid permissions to access the specified method then it returns
+        the success response.
+      operationId: validateToken
+      parameters:
+      - description: Tenant id
+        explode: false
+        in: header
+        name: X-COREOS-TID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: core-os access token
+        explode: false
+        in: header
+        name: X-Coreos-Access
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: core-os authentication token
+        explode: false
+        in: header
+        name: X-Coreos-Auth
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Token sent from originating app requesting access.
+        explode: false
+        in: header
+        name: X-Coreos-Origin-Token
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Unique request id
+        explode: false
+        in: header
+        name: X-Coreos-Request-Id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessAuthResponse'
+          description: OK - The request succeeded.
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request - The server is unable to process the request due
+            to something that is perceived to be a client error
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: "401"
+                  description: Expired token.
+                  additionalInfo: null
+                request:
+                  url: /core/api/v1/ext-auth
+                  method: GET
+                  queryString: ?name=example
+                  body: null
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized -  The client's identity is unknown to the server.
+            Verify that you are accessing the correct tenant and that your client
+            ID and client secret are valid on that tenant.
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  code: "403"
+                  description: Insufficient Permissions.
+                  additionalInfo: null
+                request:
+                  url: /core/api/v1/ext-auth
+                  method: GET
+                  queryString: ?name=example
+                  body: null
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Forbidden - The client's identity is known to the server,\
+            \ but it does not have access rights to the requested resource. Verify\
+            \ that you're using the correct client ID and client secret or grant the\
+            \ client the necessary roles to access the resource."
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found - The server can not find the requested resource.
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server error - The server is not ready to handle the request.
+            This could be due to maintenance downtime or system resource constraints.
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      summary: Validate the input token.
+      tags:
+      - Authorization
+  /token/authorize:
+    post:
+      description: "This endpoint validates the input token. Tokens should be parsed\
+        \ and validated in regular web, native, and single-page applications to make\
+        \ sure the token isn’t compromised and the signature is authentic. Tokens\
+        \ should be verified to decrease security risks if the token has been, for\
+        \ example, tampered with, misused, or has expired. JWT validation checks the\
+        \ structure, claims, and signature to assure the least amount of risk."
+      operationId: authorizeToken
+      parameters:
+      - description: Tenant id
+        explode: false
+        in: header
+        name: X-COREOS-TID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: core-os access token
+        explode: false
+        in: header
+        name: X-Coreos-Access
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Unique request id
+        explode: false
+        in: header
+        name: X-Coreos-Request-Id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: core-os authentication token
+        explode: false
+        in: header
+        name: X-Coreos-Auth
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: Token sent from originating app requesting access.
+        explode: false
+        in: header
+        name: X-Coreos-Origin-Token
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/AuthorizationRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessAuthResponse'
+          description: OK - The request succeeded.
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request - The server is unable to process the request due
+            to something that is perceived to be a client error
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content:
+            application/json:
+              example:
+                error:
+                  code: "401"
+                  description: Expired token.
+                  additionalInfo: null
+                request:
+                  url: /core/api/v1/ext-auth
+                  method: GET
+                  queryString: ?name=example
+                  body: null
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized -  The client's identity is unknown to the server.
+            Verify that you are accessing the correct tenant and that your client
+            ID and client secret are valid on that tenant.
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "403":
+          content:
+            application/json:
+              example:
+                error:
+                  code: "403"
+                  description: Insufficient Permissions.
+                  additionalInfo: null
+                request:
+                  url: /core/api/v1/ext-auth
+                  method: GET
+                  queryString: ?name=example
+                  body: null
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Forbidden - The client's identity is known to the server,\
+            \ but it does not have access rights to the requested resource. Verify\
+            \ that you're using the correct client ID and client secret or grant the\
+            \ client the necessary roles to access the resource."
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found - The server can not find the requested resource.
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Server error - The server is not ready to handle the request.
+            This could be due to maintenance downtime or system resource constraints.
+          headers:
+            X-COREOS-REQUEST-ID:
+              description: Unique request id that was passed as header parameter in
+                the request.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      summary: Authorizes the input request.
+      tags:
+      - Authorization
+components:
+  parameters:
+    RequestId:
+      description: Unique request id
+      explode: false
+      in: header
+      name: X-Coreos-Request-Id
+      required: true
+      schema:
+        type: string
+      style: simple
+    AccessToken:
+      description: core-os access token
+      explode: false
+      in: header
+      name: X-Coreos-Access
+      required: true
+      schema:
+        type: string
+      style: simple
+    AuthenticationToken:
+      description: core-os authentication token
+      explode: false
+      in: header
+      name: X-Coreos-Auth
+      required: false
+      schema:
+        type: string
+      style: simple
+    OriginAppToken:
+      description: Token sent from originating app requesting access.
+      explode: false
+      in: header
+      name: X-Coreos-Origin-Token
+      required: false
+      schema:
+        type: string
+      style: simple
+    TenantId:
+      description: Tenant id
+      explode: false
+      in: header
+      name: X-COREOS-TID
+      required: true
+      schema:
+        type: string
+      style: simple
+  requestBodies:
+    AuthorizationRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthorizationRequest'
+      description: ""
+  responses:
+    SuccessAuthResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessAuthResponse'
+      description: OK - The request succeeded.
+      headers:
+        X-COREOS-REQUEST-ID:
+          description: Unique request id that was passed as header parameter in the
+            request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    BadRequestErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+      description: Bad request - The server is unable to process the request due to
+        something that is perceived to be a client error
+      headers:
+        X-COREOS-REQUEST-ID:
+          description: Unique request id that was passed as header parameter in the
+            request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    UnauthorizedErrorResponse:
+      content:
+        application/json:
+          example:
+            error:
+              code: "401"
+              description: Expired token.
+              additionalInfo: null
+            request:
+              url: /core/api/v1/ext-auth
+              method: GET
+              queryString: ?name=example
+              body: null
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+      description: Unauthorized -  The client's identity is unknown to the server.
+        Verify that you are accessing the correct tenant and that your client ID and
+        client secret are valid on that tenant.
+      headers:
+        X-COREOS-REQUEST-ID:
+          description: Unique request id that was passed as header parameter in the
+            request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    ForbiddenErrorResponse:
+      content:
+        application/json:
+          example:
+            error:
+              code: "403"
+              description: Insufficient Permissions.
+              additionalInfo: null
+            request:
+              url: /core/api/v1/ext-auth
+              method: GET
+              queryString: ?name=example
+              body: null
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+      description: "Forbidden - The client's identity is known to the server, but\
+        \ it does not have access rights to the requested resource. Verify that you're\
+        \ using the correct client ID and client secret or grant the client the necessary\
+        \ roles to access the resource."
+      headers:
+        X-COREOS-REQUEST-ID:
+          description: Unique request id that was passed as header parameter in the
+            request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    NotFoundErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+      description: Not found - The server can not find the requested resource.
+      headers:
+        X-COREOS-REQUEST-ID:
+          description: Unique request id that was passed as header parameter in the
+            request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+    ServiceUnavailableErrorResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+      description: Server error - The server is not ready to handle the request. This
+        could be due to maintenance downtime or system resource constraints.
+      headers:
+        X-COREOS-REQUEST-ID:
+          description: Unique request id that was passed as header parameter in the
+            request.
+          explode: false
+          schema:
+            type: string
+          style: simple
+  schemas:
+    AuthorizationRequest:
+      additionalProperties: false
+      example:
+        path: path
+        method: get
+      properties:
+        path:
+          type: string
+        method:
+          enum:
+          - get
+          - put
+          - post
+          - delete
+          - patch
+          type: string
+      required:
+      - method
+      - path
+      type: object
+    Error:
+      description: Information of error occurred during operation
+      example:
+        code: code
+        additionalInfo: "{}"
+        description: description
+      properties:
+        code:
+          description: "12 digits long code that is assigned to each error. It contains\
+            \ service code, method code and error code."
+          type: string
+        description:
+          description: Error description that provides summary of error.
+          type: string
+        additionalInfo:
+          description: Additional information related to the error.
+          type: object
+      type: object
+    Request:
+      example:
+        method: POST
+        queryString: queryString
+        body: "{}"
+        uri: uri
+      properties:
+        uri:
+          description: The API end point where the request was received
+          type: string
+        method:
+          description: HTTP method requested on the API endpoint
+          enum:
+          - POST
+          - GET
+          - PUT
+          - DELETE
+          type: string
+        queryString:
+          description: Query string received by the server
+          type: string
+        body:
+          description: Request body data received by the server
+          type: object
+      type: object
+    SuccessAuthResponse:
+      example:
+        request:
+          method: POST
+          queryString: queryString
+          body: "{}"
+          uri: uri
+        data:
+          response: success
+        error:
+          code: code
+          additionalInfo: "{}"
+          description: description
+      properties:
+        data:
+          $ref: '#/components/schemas/SuccessAuthResponse_data'
+        error:
+          $ref: '#/components/schemas/Error'
+        request:
+          $ref: '#/components/schemas/Request'
+      type: object
+    ErrorResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        request:
+          $ref: '#/components/schemas/Request'
+      type: object
+    SuccessAuthResponse_data:
+      example:
+        response: success
+      properties:
+        response:
+          description: Status of operation.
+          enum:
+          - success
+          type: string
+      type: object

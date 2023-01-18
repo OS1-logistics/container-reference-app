@@ -8,6 +8,7 @@ import (
 	"github.com/golang/glog"
 	config "github.com/os1-logistics/container-reference-app/configs"
 	"github.com/os1-logistics/container-reference-app/internal/pkg/common"
+	domain "github.com/os1-logistics/container-reference-app/internal/pkg/domain"
 )
 
 func CORS() gin.HandlerFunc {
@@ -30,7 +31,11 @@ func CORS() gin.HandlerFunc {
 func Authorize(c *gin.Context) {
 
 	glog.Info("Authenticating request")
+	tenantId := c.Request.Header.Get(common.TenantIDHeaderName)
 	apiKey := c.Request.Header.Get(common.ApiKeyHeaderName)
+	user := Userinfo{}
+	user.AppID = config.ServiceConf.APP.AppId
+	user.Name = config.ServiceConf.APP.AppName
 
 	if apiKey != "" {
 		if apiKey == config.ServiceConf.APP.ApiKey {
@@ -53,7 +58,21 @@ func Authorize(c *gin.Context) {
 	}
 
 	glog.Info("Validating access token")
-	// TODO: validate access token against coreos authorizer
+	ApiValidateTokenRequest := domain.NewAuthorizerClient(tenantId).AuthorizationApi.ValidateToken(c.Request.Context()).
+		XCOREOSTID(tenantId).
+		XCoreosRequestId(c.Request.Header.Get(common.RequestIDHeaderName)).
+		XCoreosAccess(requestAccessToken)
+	_, r, e := domain.NewAuthorizerClient(tenantId).AuthorizationApi.ValidateTokenExecute(ApiValidateTokenRequest)
+
+	if e != nil {
+		glog.Info("Access token validation failed")
+		glog.Error(r)
+		glog.Error(e)
+		c.JSON(401, gin.H{"error": e.Error()})
+		c.Abort()
+		return
+	}
+
 	c.Next()
 	return
 
