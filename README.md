@@ -194,3 +194,13 @@ curl --location --request GET 'http://localhost:3000/api/v1/bags/BagT:7a635074-c
 --header 'X-COREOS-TENANT-ID: alpha' \
 --header 'Accept: application/json'
 ```
+
+
+## TODO
+
+[ ] - Develop a API key based access for the API calls
+[ ] - Develop a CoreOS access token based access for the API calls
+[ ] - Develop a CoreOS access token based access for the API calls 
+[ ] - CoreOS domain api calls to use request ID sent from `X-COREOS-REQUEST-ID` headers
+[ ] - CoreOS domain api calls to use user info from the access token sent on `X-COREOS-ACCESS` headers
+[ ] - Developer a context based utility to pass tenant id and user info to domain api calls instead of tenant id/ user info function parameter in the services
