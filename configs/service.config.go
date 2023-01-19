@@ -1,12 +1,15 @@
 package config
 
 import (
+	"errors"
 	"fmt"
 	"os"
+	"strconv"
 )
 
 var (
-	ServiceConf *ServiceConfig //exported Configuration that all packages can use
+	ServiceConf    *ServiceConfig //exported Configuration that all packages can use
+	ErrEnvVarEmpty = errors.New("getenv: environment variable empty")
 )
 
 func LoadConfig() (*ServiceConfig, error) {
@@ -19,6 +22,7 @@ func LoadConfig() (*ServiceConfig, error) {
 		AppClientId     = "APP_CLIENT_ID"
 		AppClientSecret = "APP_CLIENT_SECRET"
 		AppApiKey       = "APP_API_KEY"
+		AuthEnabled     = "AUTH_ENABLED"
 	)
 
 	ServiceConf = &ServiceConfig{}
@@ -64,6 +68,12 @@ func LoadConfig() (*ServiceConfig, error) {
 		panic(fmt.Sprintf("Environment variable %s not set", AppApiKey))
 	}
 
+	if _, t := os.LookupEnv(AuthEnabled); t {
+		ServiceConf.APP.AuthEnabled, _ = strconv.ParseBool(os.Getenv(AuthEnabled))
+	} else {
+		panic(fmt.Sprintf("Environment variable %s not set", AuthEnabled))
+	}
+
 	// TODO: use viper to mape enviornment variables/ config yaml to ServiceConf
 	return ServiceConf, nil
 }
@@ -80,4 +90,5 @@ type app struct {
 	ClientId     string
 	ClientSecret string
 	ApiKey       string
+	AuthEnabled  bool
 }

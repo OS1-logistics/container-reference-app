@@ -39,7 +39,10 @@ openapi-codegen-client:
 
 ### Authorization
 
-There are two types of authorization supported by the service.
+Sample app provides authorization for the APIs by intercepting all the API requests using [gin middleware](https://gin-gonic.com/zh-tw/docs/examples/using-middleware/) and validating the authorization header. This process can be offloaded to the istio ingress interceptor while deploying the service into the CoreOS platform. While developing on the local machine or while deploying onto the CoreOS infrastructure, the service can be run without authorization by setting the `AUTH_ENABLED` environment variable to `false`.
+
+Sample app supports two types of authorization mechanisms when `AUTH_ENABLED` is set to `true`.
+
 - CoreOS token based authorization
 - API key based authorization
 
