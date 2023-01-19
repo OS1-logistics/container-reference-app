@@ -39,6 +39,13 @@ func Authorize(c *gin.Context) {
 	c.Set(common.ContextUserinfo, user)
 	c.Set(common.ContextRequestID, requestId)
 
+	// skip authorization if AUTH_ENABLED environment variable is set to false
+	if config.ServiceConf.APP.AuthEnabled == false {
+		glog.Info("App authorization is disabled")
+		c.Next()
+		return
+	}
+
 	if apiKey != "" {
 		if apiKey == config.ServiceConf.APP.ApiKey {
 			glog.Info("Valid API key")
